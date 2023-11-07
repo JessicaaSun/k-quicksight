@@ -1,7 +1,10 @@
 import Providers from "@/store/Provider";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import NavBar from "@/components/navbar";
+import Provider from "./provider";
+import Navbar_UI from "@/components/navbar/Navbar";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +17,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <NavBar />
-          {children}
-          </Providers>
+      <body className="bg-background-color">
+        <Provider>
+          <Suspense fallback={<Loading />}>
+            <Providers>
+              <Navbar_UI />
+              {children}
+            </Providers>
+          </Suspense>
+        </Provider>
       </body>
     </html>
   );

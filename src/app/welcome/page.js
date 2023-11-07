@@ -26,7 +26,7 @@ export default function Welcome() {
   // removeRefreshToken()
 
   let content = null;
-  
+
   if (isLoading) {
     content = (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -42,7 +42,7 @@ export default function Welcome() {
     );
   } else if (isError) {
     const errorMessage = error?.data?.detail || error?.message || 'An unknown error occurred';
-    console.log("error : ",error)
+    console.log("error : ", error)
     content = (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
         {errorMessage}

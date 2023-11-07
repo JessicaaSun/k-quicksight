@@ -41,7 +41,7 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
           // Refreshing the token failed, log out the user
           api.dispatch(logout());
           // Consider using a more user-friendly notification system than alert
-          console.error("Session expired. Please log in again. 1");
+          console.error("Session expired. Please login again. 1");
         }
       } catch (error) {
         console.error("Failed to refresh access token", error);
@@ -49,7 +49,7 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
       }
     } else {
       api.dispatch(logout());
-      console.error("Session expired. Please log in again. 2");
+      console.error("Session expired. Please login again. 2");
     }
   }
   return result;

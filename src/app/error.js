@@ -3,22 +3,24 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-import img404 from "@assets/images/404.png";
+import errorImg from "@assets/images/errorpage.svg";
 
 export default function NotFound() {
   const router = useRouter();
   return (
-    <div className="flex flex-col pt-[107px] justify-center h-screen items-center p-3">
-      <Image src={img404} className="lg:w-1/3 md:w-2/3" alt="notfound" />
-      <div className="flex text-center text-text-color  pt-7 flex-col">
-        <h1 className="pb-5 max-sm:text-[24px]">
-          Oppsie! Something&apos;s missing...
-        </h1>
-        <h4 className="max-sm:text-[18px]">
-          The page you&apos;re looking for doesn&apos;t exist, isn&apos;t
-          available or loading incorrectly.
-        </h4>
-      </div>
+    <div className="flex flex-col justify-center h-screen items-center p-3">
+      <Image
+        src={errorImg}
+        className="lg:w-1/3 md:w-2/3"
+        alt="error-notfound-page"
+      />
+      <h1 className="lg:text-5xl text-text-color text-center md:text-3xl text-2xl font-bold">
+        Something has gone seriously wrong
+      </h1>
+      <p className="text-lg text-center mt-4 text-description-color">
+        It&apos;s always time for a coffee break. We should be back by the time
+        you finish your coffee.
+      </p>
       <button
         onClick={() => router.back()}
         type="button"

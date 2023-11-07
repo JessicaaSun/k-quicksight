@@ -6,7 +6,6 @@ import Navbar_UI from "@/components/navbar/Navbar";
 import { Suspense } from "react";
 import Loading from "./loading";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

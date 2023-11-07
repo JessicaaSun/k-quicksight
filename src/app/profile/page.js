@@ -28,7 +28,7 @@ export default function Profile() {
   } else {
     content = (
       <div className="flex min-h-screen flex-col items-center justify-center p-24">
-        <h1 className="text-3xl">Profile</h1>
+        <h2>Profile</h2>
         <div className="my-3">
           <p className="text-xl">Name: {user.data.name}</p>
           <p className="text-xl">Gender: {user.data.gender}</p>

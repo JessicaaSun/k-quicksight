@@ -29,7 +29,7 @@ export default function LoginQuick() {
   }, [email]);
 
   const styleInput = {
-    inputWrapper: ["border-2", "border-primary-color"],
+    inputWrapper: ["border-2", "border-primary-color", "h-[46px]"],
   };
 
   const handleSubmitGoogle = () => {
@@ -83,7 +83,7 @@ export default function LoginQuick() {
           </defs>
         </svg>
       </a>
-      <div className="lg:w-1/3 md:w-1/2 shadow-lg w-full rounded-2xl bg-white flex flex-col gap-[28px] border-2 border-primary-color py-10 px-10">
+      <div className="lg:w-1/3 md:w-1/2 shadow-lg w-full rounded-2xl bg-white flex flex-col gap-[20px] border-2 border-primary-color py-10 px-10">
         <h2 className="font-semibold text-text-color text-2xl">
           Welcome back!
         </h2>
@@ -124,7 +124,7 @@ export default function LoginQuick() {
         <Button
           type="submit"
           onClick={handleSubmitGoogle}
-          className="bg-white text-text-color h-[54px] border-1 border-primary-color font-semibold flex gap-5"
+          className="bg-white text-text-color h-[46px] border-1 border-primary-color font-semibold flex gap-5"
         >
           <Image
             src="/assets/images/google_logo.png"
@@ -143,7 +143,7 @@ export default function LoginQuick() {
           <Button
             type="submit"
             onClick={handleSubmit}
-            className="bg-primary-color text-white h-[54px] font-semibold"
+            className="bg-primary-color text-white h-[46px] font-semibold"
           >
             Login
           </Button>

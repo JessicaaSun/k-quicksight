@@ -117,8 +117,7 @@ export default function NavbarKQuick() {
                   <Avatar
                     isBordered
                     as="button"
-                    className="transition-transform bg-background-color"
-                    name="Jason Hughes"
+                    className="transition-transform py-[0.3rem] bg-background-color"
                     size="sm"
                     src="/assets/logos/logo.png"
                   />
@@ -126,8 +125,8 @@ export default function NavbarKQuick() {
                     <Image
                       src="/assets/logos/name.png"
                       alt="K-QuickSight"
-                      height={216}
-                      width={216}
+                      height={200}
+                      width={200}
                     />
                   </span>
                 </Link>

@@ -96,7 +96,7 @@ export default function LoginQuick() {
           type={isVisible ? "text" : "password"}
         />
         <Button type='submit' onClick={handlesubmitGoogle} className='bg-white text-text-color h-[54px] border-1 border-primary-color font-semibold flex gap-5'>
-          <img src='/asset/google_logo.png' width={20} />
+          <img src='/essets/google_logo.png' width={20} />
           <p>Continue with google</p>
         </Button>
         <div className='flex justify-center items-center gap-5'>

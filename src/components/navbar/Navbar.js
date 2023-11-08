@@ -37,13 +37,13 @@ export default function NavbarKQuick() {
     },
     {
       id: 3,
-      path: "/pages/aboutus",
-      page: "About us",
+      path: "/aboutus",
+      page: "AboutUs",
     },
     {
       id: 4,
       path: "/pages/contactus",
-      page: "Contact us",
+      page: "ContactUs",
     },
   ];
   const router = useRouter();
@@ -133,15 +133,16 @@ export default function NavbarKQuick() {
                 </Link>
               </NavbarBrand>
             </NavbarContent>
-            <NavbarMenu className="py-[50px]">
-              {menuItems.map((item) => (
-                <Link
-                  href={item.path}
-                  key={item.id}
-                  className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
-                >
-                  {item.page}
-                </Link>
+            <NavbarMenu className="py-[50px] mt-[50px]">
+              {
+                menuItems.map(item => (
+                  <Link
+                    href={item.path}
+                    key={item.id}
+                    className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
+                  >
+                    {item.page}
+                  </Link>
               ))}
             </NavbarMenu>
           </Navbar>
@@ -151,7 +152,7 @@ export default function NavbarKQuick() {
                 href={item.path}
                 key={item.id}
                 className={
-                  pathname == item.path
+                  pathname === item.path
                     ? "hover:bg-background-color hover:text-primary-color text-primary-color hover:font-semibold bg-blue-300 px-3 py-1 rounded-lg font-semibold hover:px-3 hover:py-1 hover:rounded-lg transition-all"
                     : "hover:text-primary-color font-normal hover:font-semibold hover:bg-background-color hover:px-3 hover:py-1 hover:rounded-lg transition-all"
                 }

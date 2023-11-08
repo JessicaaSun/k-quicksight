@@ -6,7 +6,7 @@ import vision from '@assets/images/vision_(2).png'
 import Reksmey from '@assets/images/reksmey.png'
 import tara from '@assets/images/kitTara.jpg'
 import jessica from '@assets/images/jessica.png'
-import ChanTo from '@assets/images/chento.png'
+import ChenTo from '@assets/images/chento.png'
 import SoBun from '@assets/images/sobon.png'
 import SeangLeng from '@assets/images/seangleng.png'
 import Sophearum from '@assets/images/phearum.png'
@@ -28,14 +28,14 @@ export default function AboutUs(){
     const members = [
         {
             profile: jessica,
-            name: "jesscica",
-            position: "Backend",
-            facebook: '',
-            instagram: '',
-            github: ''
+            name: "Sun Jesscica",
+            position: "Fullstack",
+            facebook: 'https://www.facebook.com/profile.php?id=100010500511225',
+            instagram: 'https://www.instagram.com/jessblueo3o/',
+            github: 'https://github.com/JessicaaSun'
         },
         {
-            profile: ChanTo,
+            profile: ChenTo,
             name: "Chea Chento",
             position: "Backend",
             facebook: '',
@@ -44,15 +44,15 @@ export default function AboutUs(){
         },{
             profile: SoBun,
             name: "Phon Sobon",
-            position: "Backend",
+            position: "Frontend",
             facebook: '',
             instagram: '',
             github: ''
         },
         {
             profile: SeangLeng,
-            name: "Seng Seang Leng",
-            position: "Front-end",
+            name: "Seng SeangLeng",
+            position: "Frontend",
             facebook: 'https://www.facebook.com/profile.php?id=100086488516436',
             instagram: 'https://www.instagram.com/chheng_jenzy/',
             github: 'https://github.com/SeangLeng'

@@ -37,7 +37,7 @@ export default function NavbarKQuick() {
     },
     {
       id: 3,
-      path: "/pages/aboutus",
+      path: "/about",
       page: "About us",
     },
     {

@@ -2,7 +2,6 @@
 import {Button, Input} from "@nextui-org/react";
 import Image from "next/image";
 import {useState} from "react";
-import {TextInput } from 'flowbite-react';
 
 export default function authentication() {
     const [code, setCode] = useState('');

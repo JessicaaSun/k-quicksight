@@ -5,7 +5,7 @@ import Provider from "./provider";
 import Navbar_UI from "@/components/navbar/Navbar";
 import { Suspense } from "react";
 import Loading from "./loading";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 

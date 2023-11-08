@@ -65,7 +65,7 @@ export default function NavbarKQuick() {
     }
   }, [dispatch, isSuccess, user]);
 
-  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error"];
+  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error", "/testing"];
 
   if (validNavPath.includes(pathname)) return null;
   else
@@ -95,7 +95,8 @@ export default function NavbarKQuick() {
             />
           </svg>
           <div>
-            Join Our Supportive Community and Connect with Like-Minded
+            <Link href={"/"} className="text-primary-color font-semibold"> Join our community, support </Link>
+            and Connect with Like-Minded
             Individuals for Assistance and Guidance.
           </div>
         </div>

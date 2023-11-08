@@ -9,9 +9,9 @@ import Loading from "./loading";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Authenticating with Next.js, RTK Query, and JWTs",
+  title: "K-QuickSight",
   description:
-    "A demo of how to authenticate with Next.js, RTK Query, and JWTs",
+    "Catalyze your data journey with our powerful tools for discovery, analysis, and informed decision-making. Explore your data's full potential and drive success with confidence.",
 };
 
 export default function RootLayout({ children }) {

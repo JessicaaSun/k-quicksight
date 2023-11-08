@@ -27,22 +27,22 @@ export default function NavbarKQuick() {
   const menuItems = [
     {
       id: 1,
-      path: "/pages/features",
+      path: "/features",
       page: "Features",
     },
     {
       id: 2,
-      path: "/pages/tutorials",
+      path: "/tutorials",
       page: "Tutorials",
     },
     {
       id: 3,
-      path: "/pages/aboutus",
+      path: "/about-us",
       page: "About us",
     },
     {
       id: 4,
-      path: "/pages/contactus",
+      path: "/contact-us",
       page: "Contact us",
     },
   ];

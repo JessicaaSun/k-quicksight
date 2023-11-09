@@ -4,9 +4,11 @@ import { Button, Input } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import axios from "axios";
 
-export default function Verify() {
+export default function Verify({params}) {
   const [code, setCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -15,25 +17,29 @@ export default function Verify() {
     setCode(newCode.join(""));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     // Send the code to the server using an HTTP request
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ code }),
+    e.preventDefault();
+    setErrorMessage('');
+
+    const data = {
+      email: decodeURIComponent(params.email),
+      verification_code: code,
     };
 
-    fetch("/api/register", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          console.log("Registration successful!");
-        } else {
-          console.error("Registration failed:", data.error);
-        }
-      });
+    axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/verify/`, data)
+        .then(function (response) {
+          console.log(response);
+          router.push("/auth/login")
+        })
+        .catch(function (error) {
+          console.log(error);
+          if (error.response && error.response.data) {
+            setErrorMessage(error.response.data.message);
+          } else {
+            setErrorMessage('An error occurred. Please try again.');
+          }
+        });
   };
 
   return (

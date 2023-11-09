@@ -11,4 +11,4 @@ git commit -m '$commit'
 # shellcheck disable=SC2034
 read -p "Enter your repository name: " name
 # shellcheck disable=SC2016
-git push -u origin '$name'
+git push origin '$name'

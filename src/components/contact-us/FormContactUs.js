@@ -1,8 +1,5 @@
 import React from 'react';
-import {Button, Input, Link, Textarea} from "@nextui-org/react";
-import {EyeSlashFilledIcon} from "@/components/icons/EyeSlashFilledIcon";
-import {EyeFilledIcon} from "@/components/icons/EyeFilledIcon";
-import Image from "next/image";
+import {Input, Textarea} from "@nextui-org/react";
 
 const FormContactUs = () => {
     const styleInput = {
@@ -14,6 +11,8 @@ const FormContactUs = () => {
             <Input
                 type="email"
                 label="Email"
+                placeholder="you@example.com"
+                labelPlacement={"outside"}
                 isRequired
                 required
                 variant="bordered"
@@ -22,6 +21,7 @@ const FormContactUs = () => {
             <Textarea
                 label="Description"
                 variant="bordered"
+                labelPlacement="outside"
                 required
                 classNames={styleInput}
             />

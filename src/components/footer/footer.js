@@ -1,10 +1,13 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 import quickSight from "@assets/logos/logo-square.png";
 import istad_logo from "@assets/logos/istad_logo.png";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname()
   const data_link = [
     {
       name: "Feature",
@@ -37,6 +40,11 @@ export default function Footer() {
       url: "/auth/login",
     },
   ];
+
+  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error", "/testing"];
+
+  if (validNavPath.includes(pathname)) return null;
+
   return (
     <div
       className={

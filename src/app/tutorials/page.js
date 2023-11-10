@@ -59,7 +59,7 @@ const Tutorial = () => {
                     {
                         resources.map((item, index) => (
                             <li key={index} className={'my-3 text-lg font-medium'}>
-                                <a className={'hover:underline hover:text-primary-color'} href={item.url}>{item.name}</a>
+                                <a target={"_blank"} className={'hover:underline hover:text-primary-color'} href={item.url}>{item.name}</a>
                             </li>
                         ))
                     }

@@ -30,10 +30,10 @@ export default function SignUp() {
   return (
     <div
       className={
-        "min-h-screen bg-white lg:p-auto md:p-auto px-3 flex justify-center items-center"
+        "min-h-screen bg-background-color lg:p-auto md:p-auto px-3 flex justify-center items-center"
       }
     >
-      <button onClick={() => router.back()} className="fixed top-5 right-10">
+      <button onClick={() => router.push("/")} className="fixed top-5 right-10">
         <svg
           width="46"
           height="46"
@@ -49,7 +49,7 @@ export default function SignUp() {
       </button>
       <div
         className={
-          "lg:w-1/3 md:w-2/3 w-full border-2 border-primary-color rounded-3xl p-10"
+          "lg:w-1/3 md:w-2/3 w-full border-2 bg-white shadow-lg border-primary-color rounded-3xl p-10"
         }
       >
         <h2 className={"mb-10 text-text-color"}>Hello, dear!</h2>
@@ -113,7 +113,7 @@ export default function SignUp() {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className={"flex flex-col gap-[20px] w-full"}>
+            <Form className={"flex bg-white flex-col gap-[20px] w-full"}>
               <div>
                 <Field
                   className={inputStyle}
@@ -221,9 +221,9 @@ export default function SignUp() {
                 </Button>
               )}
               <div className={"flex gap-5 justify-center items-center"}>
-                <div className={"w-full h-0.5 bg-text-color"}></div>
-                <div className={"font-bold text-text-color"}>OR</div>
-                <div className={"w-full h-0.5 bg-text-color"}></div>
+                <div className={"w-full h-0.5 bg-description-color"}></div>
+                <div className={"font-semibold text-description-color"}>OR</div>
+                <div className={"w-full h-0.5 bg-description-color"}></div>
               </div>
               <Button
                 type="submit"

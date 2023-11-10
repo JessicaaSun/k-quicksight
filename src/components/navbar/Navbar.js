@@ -42,7 +42,7 @@ export default function NavbarKQuick() {
     },
     {
       id: 4,
-      path: "/contactus",
+      path: "/contact-us",
       page: "Contact Us",
     },
   ];

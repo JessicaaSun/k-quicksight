@@ -6,7 +6,7 @@ import box_2 from "@assets/images/guideline.png";
 import box_3 from "@assets/images/community.png";
 import userbase from "@assets/images/userbase.png";
 import Image from "next/image";
-import jessi_profile from "@assets/images/jessi_profile.jpg";
+import jessi_profile from "@assets/teams/jessi_profile.jpg";
 import { Button } from "@nextui-org/react";
 export default function GetStart_boxs() {
   const data = [

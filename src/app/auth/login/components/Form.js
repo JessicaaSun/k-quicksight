@@ -94,24 +94,7 @@ export default function LoginQuick() {
           }
           type={isVisible ? "text" : "password"}
         />
-        <Button
-          type="submit"
-          onClick={handleSubmitGoogle}
-          className="bg-white text-text-color h-[46px] border-1 border-primary-color font-semibold flex gap-5"
-        >
-          <Image
-            src="/assets/images/google_logo.png"
-            alt="google"
-            width={20}
-            height={20}
-          />
-          <p>Continue with google</p>
-        </Button>
-        <div className="flex justify-center items-center gap-5">
-          <div className="w-full h-0.5 bg-text-color rounded-md"></div>
-          <div>or</div>
-          <div className="w-full h-0.5 bg-text-color rounded-md"></div>
-        </div>
+
         {!isLoading ? (
           <Button
             type="submit"
@@ -130,8 +113,26 @@ export default function LoginQuick() {
             Login
           </Button>
         )}
+        <div className="flex justify-center items-center gap-5">
+          <div className="w-full h-0.5 bg-text-color rounded-md"></div>
+          <div>or</div>
+          <div className="w-full h-0.5 bg-text-color rounded-md"></div>
+        </div>
+        <Button
+          type="submit"
+          onClick={handleSubmitGoogle}
+          className="bg-white text-text-color h-[46px] border-1 border-primary-color font-semibold flex gap-5"
+        >
+          <Image
+            src="/assets/images/google_logo.png"
+            alt="google"
+            width={20}
+            height={20}
+          />
+          <p className="text-text-color">Continue with google</p>
+        </Button>
 
-        <span className="text-text-color">
+        <span className="pt-[20px] text-text-color">
           Does not have an account?{" "}
           <Link
             href={"/auth/signup"}

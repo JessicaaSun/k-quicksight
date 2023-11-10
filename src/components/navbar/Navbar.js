@@ -27,23 +27,23 @@ export default function NavbarKQuick() {
   const menuItems = [
     {
       id: 1,
-      path: "/pages/features",
+      path: "/features",
       page: "Features",
     },
     {
       id: 2,
-      path: "/pages/tutorials",
+      path: "/tutorials",
       page: "Tutorials",
     },
     {
       id: 3,
       path: "/aboutus",
-      page: "AboutUs",
+      page: "About Us",
     },
     {
       id: 4,
-      path: "/pages/contactus",
-      page: "ContactUs",
+      path: "/contactus",
+      page: "Contact Us",
     },
   ];
   const router = useRouter();

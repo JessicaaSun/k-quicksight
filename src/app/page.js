@@ -16,7 +16,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between py-36">
       <section className="flex gap-5 justify-between items-center px-[10%] mt-10">
         <div className="flex flex-col gap-5">
-          <h2 className="text-5xl font-bold leading-snug">
+          <h2 className="text-5xl font-bold">
             Discover, Analyze and Decide With{" "}
             <span className="text-primary-color">K-QuickSight</span>
           </h2>

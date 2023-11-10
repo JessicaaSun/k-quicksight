@@ -19,9 +19,9 @@ module.exports = {
         "background-color": "#FAFAFA",
         "primary-color": "#0346A5",
         "secondary-color": "#800080",
-        "thirt-color": "#FFA500",
+        "third-color": "#FFA500",
         "text-color": "#363636",
-        "descriptive-color": "#636363"
+        "description-color": "#636363"
       }
     },
   },

@@ -6,6 +6,8 @@ import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
+import Card_Why from "@/components/cards/Card";
+import GetStart_boxs, { SwapperTest, User_base } from "@/components/cards/HomeBoxs";
 
 export default function Home() {
   const router = useRouter();
@@ -13,19 +15,19 @@ export default function Home() {
   const { data: user } = useGetUserQuery();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-36">
-      <section className="flex gap-5 justify-between items-center px-[10%] mt-10">
-        <div className="flex flex-col gap-5">
-          <h2 className="text-5xl font-bold">
+    <main className="flex min-h-screen flex-col items-center justify-between pt-24">
+      <section className="flex gap-5 justify-between items-center px-[10%] mt-10 py-14">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-5xl font-bold leading-snug">
             Discover, Analyze and Decide With{" "}
             <span className="text-primary-color">K-QuickSight</span>
-          </h2>
-          <p>
+          </h1>
+          <p className="text-description-color text-lg">
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.
           </p>
-          <div className="w-full flex gap-5">
+          <div className="w-full pt-6 flex gap-5">
             <Button
               onClick={() => router.push("/auth/login")}
               className="w-[174px] font-bold bg-primary-color text-white"
@@ -54,7 +56,31 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <Image src={heroImg} alt="hero" className="w-1/2" />
+        <div className="w-full">
+        <Image src={heroImg} alt="hero" className="homepage_image w-full" /></div>
+      </section>
+      <section className="bg-secondary-color min-w-full px-10 py-20">
+        <h2 className="text-third-color text-center">
+          Why <span className="text-background-color">K-QuickSight</span>
+        </h2>
+        <Card_Why />
+      </section>
+      <section className="w-full py-20 px-[10%]">
+        <h2 className="text-primary-color font-bold text-center">Getting started with K-QuickSight</h2>
+        <GetStart_boxs />
+      </section>
+      <section className="pb-32 w-full lg:px-[10%] md:px-[5%] px-3">
+        <h2 className="text-primary-color mt-10 mb-16">Empowering a Diverse User Base</h2>
+        <User_base />
+      </section>
+      <section className="bg-secondary-color px-3 flex flex-col justify-center items-center py-20 w-full">
+        <h2 className="text-background-color">
+          What Our Users Say
+        </h2>
+       
+        <p className="text-background-color font-normal lg:w-1/3 md:w-2/3 w-full mt-3 text-center">At K-QuickSight, we&apos;re dedicated to exceptional business analytics. But you don&apos;t have to take our word for it hear from our delighted users.</p>
+        {/* <FeedBackCard /> */}
+        {/* <SwapperTest /> */}
       </section>
     </main>
   );

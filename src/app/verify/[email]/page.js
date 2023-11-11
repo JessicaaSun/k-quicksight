@@ -2,96 +2,148 @@
 
 import { Button, Input } from "@nextui-org/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import axios from "axios";
+import React, { useRef, useState, useEffect } from 'react';
+import {FaTimes} from "react-icons/fa";
 
-export default function Verify({params}) {
-  const [code, setCode] = useState("");
-  const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+export default function Verify({ callback, reset, isLoading }) {
+  const [code, setCode] = useState('');
 
-  const handleInputChange = (e) => {
+  // Refs to control each digit input element
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
+
+  // Reset all inputs and clear state
+  const resetCode = () => {
+    inputRefs.forEach(ref => {
+      ref.current.value = '';
+    });
+    inputRefs[0].current.focus();
+    setCode('');
+  }
+
+  // Call our callback when code = 6 chars
+  useEffect(() => {
+    if (code.length === 6) {
+      if (typeof callback === 'function') callback(code);
+      resetCode();
+    }
+  }, [code]); //eslint-disable-line
+
+  // Listen for external reset toggle
+  useEffect(() => {
+    resetCode();
+  }, [reset]); //eslint-disable-line
+
+  // Handle input
+  function handleInput(e, index) {
+    const input = e.target;
+    const previousInput = inputRefs[index - 1];
+    const nextInput = inputRefs[index + 1];
+
+    // Update code state with single digit
     const newCode = [...code];
-    newCode[e.target.id] = e.target.value;
-    setCode(newCode.join(""));
+    // Convert lowercase letters to uppercase
+    if (/^[a-z]+$/.test(input.value)) {
+      const uc = input.value.toUpperCase();
+      newCode[index] = uc;
+      inputRefs[index].current.value = uc;
+    } else {
+      newCode[index] = input.value;
+    }
+    setCode(newCode.join(''));
+
+    input.select();
+
+    if (input.value === '') {
+      // If the value is deleted, select previous input, if exists
+      if (previousInput) {
+        previousInput.current.focus();
+      }
+    } else if (nextInput) {
+      // Select next input on entry, if exists
+      nextInput.current.select();
+    }
+  }
+
+  // Select the contents on focus
+  function handleFocus(e) {
+    e.target.select();
+  }
+
+  // Handle backspace key
+  function handleKeyDown(e, index) {
+    const input = e.target;
+    const previousInput = inputRefs[index - 1];
+    const nextInput = inputRefs[index + 1];
+
+    if ((e.keyCode === 8 || e.keyCode === 46) && input.value === '') {
+      e.preventDefault();
+      setCode((prevCode) => prevCode.slice(0, index) + prevCode.slice(index + 1));
+      if (previousInput) {
+        previousInput.current.focus();
+      }
+    }
+  }
+
+  // Capture pasted characters
+  const handlePaste = (e) => {
+    const pastedCode = e.clipboardData.getData('text');
+    if (pastedCode.length === 6) {
+      setCode(pastedCode);
+      inputRefs.forEach((inputRef, index) => {
+        inputRef.current.value = pastedCode.charAt(index);
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
-    // Send the code to the server using an HTTP request
-    e.preventDefault();
-    setErrorMessage('');
-
-    const data = {
-      email: decodeURIComponent(params.email),
-      verification_code: code,
-    };
-
-    axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/verify/`, data)
-        .then(function (response) {
-          console.log(response);
-          router.push("/auth/login")
-        })
-        .catch(function (error) {
-          console.log(error);
-          if (error.response && error.response.data) {
-            setErrorMessage(error.response.data.message);
-          } else {
-            setErrorMessage('An error occurred. Please try again.');
-          }
-        });
-  };
-
+  // Clear button deletes all inputs and selects the first input for entry
+  const ClearButton = () => {
+    return (
+        <button
+            onClick={resetCode}
+            className="text-2xl absolute right-[-30px] top-3 bg-primary-color"
+        >
+           <FaTimes />
+        </button>
+    )
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-56">
-      <div className={"grid grid-cols-2 place-items-center gap-16"}>
-        <div className={"grid grid-cols-1 place-items-center"}>
-          <h1 className={"text-primary-color text-center"}>
+      <div className={"grid md:grid-cols-2 place-items-center md:gap-16"}>
+        <div className={"grid grid-cols-1 place-items-center px-3 md:px-0"}>
+          <h1 className={"text-primary-color text-center lg:text-[32px]"}>
             Verify your email address
           </h1>
           <div className={"grid grid-cols-6 gap-4 mt-14 mb-8 text-center"}>
-            <Input
-              isRequired
-              id="0"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
-            <Input
-              isRequired
-              id="1"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
-            <Input
-              isRequired
-              id="2"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
-            <Input
-              isRequired
-              id="3"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
-            <Input
-              isRequired
-              id="4"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
-            <Input
-              isRequired
-              id="5"
-              className={"w-14 shadow-md rounded-2xl"}
-              onChange={handleInputChange}
-            />
+            {
+              [0,1,2,3,4,5].map((index) =>(
+                  <Input key={index}
+                      isRequired
+                      id="0"
+                      className={"md:w-14 shadow-md rounded-2xl"} style={{textAlign: "center"}}
+                         type="text"
+                         maxLength={1}
+                         onChange={(e) => handleInput(e, index)}
+                         ref={inputRefs[index]}
+                         autoFocus={index === 0}
+                         onFocus={handleFocus}
+                         onKeyDown={(e) => handleKeyDown(e, index)}
+                         onPaste={handlePaste}
+                         disabled={isLoading}
+                  />
+              ))
+            }
           </div>
-
           <Button
             radius="md"
             className={"w-full text-[18px] bg-primary-color text-white"}
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
           >
             Register
           </Button>
@@ -125,6 +177,13 @@ export default function Verify({params}) {
           />
         </div>
       </div>
+      {
+        code.length
+            ?
+            <ClearButton />
+            :
+            <></>
+      }
     </main>
   );
 }

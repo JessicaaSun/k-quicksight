@@ -126,7 +126,7 @@ export default function Verify({ callback, reset, isLoading }) {
                   <Input key={index}
                       isRequired
                       id="0"
-                      className={"md:w-14 shadow-md rounded-2xl"} style={{textAlign: "center"}}
+                      className={"md:w-14 shadow-md rounded-2xl"} style={{textAlign: "center", fontSize: "20px"}}
                          type="text"
                          maxLength={1}
                          onChange={(e) => handleInput(e, index)}

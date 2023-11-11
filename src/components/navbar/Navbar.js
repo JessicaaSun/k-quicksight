@@ -27,23 +27,23 @@ export default function NavbarKQuick() {
   const menuItems = [
     {
       id: 1,
-      path: "/pages/features",
+      path: "/features",
       page: "Features",
     },
     {
       id: 2,
-      path: "/pages/tutorials",
+      path: "/tutorials",
       page: "Tutorials",
     },
     {
       id: 3,
-      path: "/pages/aboutus",
-      page: "About us",
+      path: "/about-us",
+      page: "About Us",
     },
     {
       id: 4,
-      path: "/pages/contactus",
-      page: "Contact us",
+      path: "/contact-us",
+      page: "Contact Us",
     },
   ];
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function NavbarKQuick() {
     }
   }, [dispatch, isSuccess, user]);
 
-  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error"];
+  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error", "/testing"];
 
   if (validNavPath.includes(pathname)) return null;
   else
@@ -95,7 +95,8 @@ export default function NavbarKQuick() {
             />
           </svg>
           <div>
-            Join Our Supportive Community and Connect with Like-Minded
+            <Link href={"/"} className="text-primary-color font-semibold"> Join our community, support </Link>
+            and Connect with Like-Minded
             Individuals for Assistance and Guidance.
           </div>
         </div>
@@ -132,15 +133,16 @@ export default function NavbarKQuick() {
                 </Link>
               </NavbarBrand>
             </NavbarContent>
-            <NavbarMenu className="py-[50px]">
-              {menuItems.map((item) => (
-                <Link
-                  href={item.path}
-                  key={item.id}
-                  className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
-                >
-                  {item.page}
-                </Link>
+            <NavbarMenu className="py-[50px] mt-[50px]">
+              {
+                menuItems.map(item => (
+                  <Link
+                    href={item.path}
+                    key={item.id}
+                    className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
+                  >
+                    {item.page}
+                  </Link>
               ))}
             </NavbarMenu>
           </Navbar>
@@ -150,7 +152,7 @@ export default function NavbarKQuick() {
                 href={item.path}
                 key={item.id}
                 className={
-                  pathname == item.path
+                  pathname === item.path
                     ? "hover:bg-background-color hover:text-primary-color text-primary-color hover:font-semibold bg-blue-300 px-3 py-1 rounded-lg font-semibold hover:px-3 hover:py-1 hover:rounded-lg transition-all"
                     : "hover:text-primary-color font-normal hover:font-semibold hover:bg-background-color hover:px-3 hover:py-1 hover:rounded-lg transition-all"
                 }

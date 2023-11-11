@@ -21,8 +21,10 @@ export default function Home() {
           <h1 className="text-5xl font-bold leading-snug">
             Discover, Analyze and Decide With{" "}
             <span className="text-primary-color">K-QuickSight</span>
+
           </h1>
           <p className="text-description-color text-lg">
+
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.

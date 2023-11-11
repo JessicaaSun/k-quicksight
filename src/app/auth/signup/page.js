@@ -6,7 +6,7 @@ import Image from "next/image";
 import google from "@assets/images/google_logo.png";
 import { EyeFilledIcon } from "@/components/icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
-import { Button } from "@nextui-org/react";
+import {Button, Checkbox} from "@nextui-org/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -17,6 +17,12 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
   const router = useRouter();
+  const [checkBox, setCheckbox] = useState(false)
+
+  const handleCheckbox = () => {
+    setCheckbox(e => !e)
+  }
+
   const inputStyle =
     "w-full px-5 py-2 rounded-xl border-2 border-primary-color";
   const togglePasswordVisibility = () => {
@@ -84,6 +90,9 @@ export default function SignUp() {
             } else if (values.password !== values.confirm_password) {
               errors.confirm_password = "password not matched";
             }
+            if (!values.confirm_privacy === false) {
+              errors.confirm_privacy = 'You should check the privacy terms.'
+            }
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
@@ -91,6 +100,7 @@ export default function SignUp() {
               username: values.username,
               email: values.email,
               password: values.password,
+              isConfirm: checkBox
             };
             setIsLoading(true);
             axios
@@ -99,12 +109,9 @@ export default function SignUp() {
                 data
               )
               .then(function (response) {
-                // console.log(response);
-                console.log(response.data.data);
                 router.push(`/verify/${response.data.data.email}`);
               })
               .catch(function (error) {
-                console.log(error);
                 setErrorMessage(error?.response?.data?.errors);
                 setIsLoading(false);
               });
@@ -199,6 +206,10 @@ export default function SignUp() {
                   name="confirm_password"
                   component="div"
                 />
+              </div>
+              <div>
+                <Checkbox onClick={handleCheckbox} radius="md"></Checkbox>
+                <span>Check <Link href={'/'} target={'_blank'} className={'text-primary-color font-semibold hover:underline'}> and read Term and Privacy</Link> </span>
               </div>
               {!isLoading ? (
                 <Button

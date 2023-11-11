@@ -101,7 +101,7 @@ export default function Footer() {
       <div className={"lg:w-1/4 md:w-2/3 "}>
         <span className={"font-[600] text-text-color text-[28px]"}>
           Unlocking Insights, Empowering Decisions with{" "}
-          <span className={"text-secondary-color font-bold"}>K-QuickSight</span>
+          <span className={"text-primary-color font-bold"}>K-QuickSight</span>
         </span>
       </div>
       <div className={"h-0.5 mt-10 w-full bg-description-color"}></div>

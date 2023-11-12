@@ -181,7 +181,7 @@ export default function NavbarKQuick() {
                       <p className="font-semibold">Signed in as</p>
                       <p className="font-semibold">{user?.data?.username}</p>
                     </DropdownItem>
-                    <DropdownItem key="settings">Profile</DropdownItem>
+                    <DropdownItem onClick={() => router.push('/profile')} key="settings">Profile</DropdownItem>
                     <DropdownItem key="team_settings">Board</DropdownItem>
                     <DropdownItem
                       onClick={() => {

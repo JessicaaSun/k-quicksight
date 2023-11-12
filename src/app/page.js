@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
 import Card_Why from "@/components/cards/Card";
-import GetStart_boxs, { SwapperTest, User_base } from "@/components/cards/HomeBoxs";
+import GetStart_boxs, {
+  SwapperTest,
+  User_base,
+} from "@/components/cards/HomeBoxs";
+import DeckCard from "@/components/cards/deck-card/DeckCard";
 
 export default function Home() {
   const router = useRouter();
@@ -21,10 +25,8 @@ export default function Home() {
           <h1 className="text-5xl font-bold leading-snug">
             Discover, Analyze and Decide With{" "}
             <span className="text-primary-color">K-QuickSight</span>
-
           </h1>
           <p className="text-description-color text-lg">
-
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.
@@ -59,7 +61,8 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full">
-        <Image src={heroImg} alt="hero" className="homepage_image w-full" /></div>
+          <Image src={heroImg} alt="hero" className="homepage_image w-full" />
+        </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">
         <h2 className="text-third-color text-center">
@@ -68,21 +71,26 @@ export default function Home() {
         <Card_Why />
       </section>
       <section className="w-full py-20 px-[10%]">
-        <h2 className="text-primary-color font-bold text-center">Getting started with K-QuickSight</h2>
+        <h2 className="text-primary-color font-bold text-center">
+          Getting started with K-QuickSight
+        </h2>
         <GetStart_boxs />
       </section>
       <section className="pb-32 w-full lg:px-[10%] md:px-[5%] px-3">
-        <h2 className="text-primary-color mt-10 mb-16">Empowering a Diverse User Base</h2>
+        <h2 className="text-primary-color mt-10 mb-16">
+          Empowering a Diverse User Base
+        </h2>
         <User_base />
       </section>
       <section className="bg-secondary-color px-3 flex flex-col justify-center items-center py-20 w-full">
-        <h2 className="text-background-color">
-          What Our Users Say
-        </h2>
-       
-        <p className="text-background-color font-normal lg:w-1/3 md:w-2/3 w-full mt-3 text-center">At K-QuickSight, we&apos;re dedicated to exceptional business analytics. But you don&apos;t have to take our word for it hear from our delighted users.</p>
-        {/* <FeedBackCard /> */}
-        {/* <SwapperTest /> */}
+        <h2 className="text-background-color">What Our Users Say</h2>
+
+        <p className="text-background-color mb-12 font-normal lg:w-[40%] md:w-2/3 w-full mt-4 text-center">
+          At K-QuickSight, we&apos;re dedicated to exceptional business
+          analytics. But you don&apos;t have to take our word for it hear from
+          our delighted users.
+        </p>
+        <DeckCard></DeckCard>
       </section>
     </main>
   );

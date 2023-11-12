@@ -1,19 +1,19 @@
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "../../../app/globals.css";
 import { EffectCards } from "swiper/modules";
-import styles from "./DeckCard.module.css"; // Import the module-level styles
+import styles from "./DeckCard.module.css";
 import { data } from "./mockdata";
-import Image from "next/image";
 
 export default function DeckCard() {
   return (
     <Swiper
       modules={[EffectCards]}
       grabCursor={true}
-      className="md:w-[600px]  max-sm:w-[370px] sm:w-[450px] h-auto " // Use the module-level style
+      className="md:w-[600px] max-sm:w-[370px] sm:w-[450px] h-auto" 
       effect="cards"
     >
       {data.map((feedback, index) => (

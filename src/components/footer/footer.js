@@ -10,31 +10,32 @@ export default function Footer() {
   const pathname = usePathname()
   const data_link = [
     {
-      name: "Feature",
-      url: "/",
+      name: "Features",
+      url: "/features",
     },
     {
       name: "Tutorials",
-      url: "/",
+      url: "/tutorials",
     },
     {
       name: "About us",
-      url: "/",
+      url: "/about-us",
     },
     {
       name: "Contact Us",
-      url: "/",
+      url: "/contact-us",
     },
   ];
   const guide = [
     {
-      name: "Sign Up",
-      url: "/",
+      name: "FAQs",
+      url: "/faqs",
     },
     {
-      name: "FAQs",
-      url: "/",
+      name: "Sign Up",
+      url: "/auth/signup",
     },
+   
     {
       name: "Login",
       url: "/auth/login",

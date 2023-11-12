@@ -4,7 +4,7 @@ import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Button} from "@nextui-org/react";
 import Image from "next/image";
-import recommand from '@assets/images/Recommendation_image.png'
+import recommend from '@assets/images/recommend.png'
 
 const Tutorial = () => {
 
@@ -54,7 +54,7 @@ const Tutorial = () => {
             </div>
             <h2 className={'text-primary-color font-bold mt-20'}>Recommendation learning resources</h2>
             <div className={'lg:flex md:flex justify-start gap-32 items-center py-20'}>
-                <Image src={recommand} alt={'recommendation'} className={'lg:w-1/2 md:w-2/3 w-full h-[400px] object-contain'} />
+                <Image src={recommend} alt={'recommendation'} className={'lg:w-1/2 md:w-2/3 w-full h-[400px] object-contain'} />
                 <ul className={'list-disc'}>
                     {
                         resources.map((item, index) => (
@@ -66,7 +66,7 @@ const Tutorial = () => {
                 </ul>
             </div>
             <div>
-                <h2 className={'text-primary-color font-bold mt-40'}>
+                <h2 className={'text-primary-color font-bold mt-10'}>
                     Request Tutorials
                 </h2>
                 <Formik

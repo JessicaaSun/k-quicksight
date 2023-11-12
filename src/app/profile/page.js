@@ -147,7 +147,7 @@ export default function Profile() {
           </div>
           <div className={'lg:flex md:flex justify-center items-start lg:w-3/4 md:w-full w-full gap-5'}>
               <div className={'bg-white border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col'}>
-                <div className={'flex justify-center items-center'}>
+                <div className={'flex justify-center items-center relative'}>
                     <label htmlFor="upload-input" className={'absolute cursor-pointer top-5 bg-white p-3 rounded-full right-5'}>
                         <span>
                             <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -278,11 +278,5 @@ export default function Profile() {
     );
   }
 
-  return (
-      <>
-          <div className={"bg-primary-color w-96 h-full"}>
-              User Profile
-          </div>
-      </>
-  )
+  return content;
 }

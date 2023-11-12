@@ -194,7 +194,7 @@ export default function NavbarKQuick() {
                       key="logout"
                       color="danger"
                     >
-                      log out
+                      logout
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

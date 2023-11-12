@@ -60,7 +60,7 @@ export default function AboutUs(){
         {
             profile: Sophearum,
             name: "Sorn Sophearum",
-            position: "Backend",
+            position: "Frontend",
             facebook: 'https://web.facebook.com/sophearum.sorn',
             instagram: 'https://www.instagram.com/rum_sorn/?hl=en',
             github: 'https://github.com/sirbluee'

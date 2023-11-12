@@ -38,5 +38,11 @@ export default function Profile() {
     );
   }
 
-  return content;
+  return (
+      <>
+          <div className={"bg-primary-color w-96 h-full"}>
+              User Profile
+          </div>
+      </>
+  )
 }

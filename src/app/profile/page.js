@@ -4,17 +4,16 @@ import Image from "next/image";
 import authenticated from '@assets/images/403.png'
 import {Button, Input, Textarea} from "@nextui-org/react";
 import {useRouter} from "next/navigation";
-import test_profile from '@assets/teams/jessi_profile.jpg'
 import {useEffect, useState} from "react";
 import axios from "axios";
-import placeholder from '@assets/images/placeholder_image.png'
-import {useSelector} from "react-redux";
 import {useUpdateUserMutation} from "@/store/features/user/userInfoApiSlice";
+import {useDispatch} from "react-redux";
+import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 
 export default function Profile() {
   const { data: user } = useGetUserQuery();
   const router = useRouter();
-  const [updateProfile, {isLoading}] = useUpdateUserMutation()
+  const [updateProfile] = useUpdateUserMutation();
 
   const [username, setUsername] = useState('');
   const [UpdateUsername, setUpdateUsername] = useState(false);
@@ -28,16 +27,20 @@ export default function Profile() {
   const [description, setDescription] = useState('');
   const [update_description, set_updateDescription] = useState(false);
 
+  const [url, setUrl] = useState('')
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setUsername(user?.data.username)
         setEmail((user?.data.email))
         setPhone_number(user?.data.phone_number)
         setDescription(user?.data.biography)
+        setUrl(user?.data?.avatar)
     }, [user]);
 
     const update_info = async (phone_number, address, biography, avatar, username, gender) => {
-        const id = user?.data.id
+        const id = user?.data.uuid
         const dataUpdate = {
             phone_number: phone_number,
             address: address, // Update the address parameter
@@ -47,41 +50,40 @@ export default function Profile() {
             gender: 'Male',
         };
         const updateUser = await updateProfile({id, data: dataUpdate})
-        console.log(updateUser)
+        dispatch(setCurrentImage(avatar))
     };
 
     const updateUserName = () => {
         setUpdateUsername(false);
-        // Pass the required parameters to the update_info function
         update_info(
-            phone_number, // Provide the phone number parameter
-            "address", // Provide the address parameter
-            description, // Provide the biography parameter
-            'https://storage.needpix.com/rsynced_images/avatar-1577909_1280.png', // Provide the avatar parameter
-            username// Provide the gender parameter
-        ).then(r => console.log(r));
+            phone_number,
+            "address",
+            description,
+            url,
+            username
+        );
     };
   const updateEmail = () => {
       set_updateEmail(false)
       update_info(
-          phone_number, // Provide the phone number parameter
-          "address", // Provide the address parameter
-          description, // Provide the biography parameter
-          `${placeholder}`, // Provide the avatar parameter
-          username, // Provide the new username parameter
-          "male" // Provide the gender parameter
+          phone_number,
+          "address",
+          description,
+          url,
+          username,
+          "male"
       );
   }
 
   const updatePhoneNumber = () => {
       set_update_Phone_number(false)
       update_info(
-          phone_number, // Provide the phone number parameter
-          "address", // Provide the address parameter
-          description, // Provide the biography parameter
-          `${placeholder}`, // Provide the avatar parameter
-          username, // Provide the new username parameter
-          "male" // Provide the gender parameter
+          phone_number,
+          "address",
+          description,
+          url,
+          username,
+          "male"
       );
 
   }
@@ -89,15 +91,38 @@ export default function Profile() {
   const updateBio = () => {
       set_updateDescription(false)
       update_info(
-          phone_number, // Provide the phone number parameter
-          "address", // Provide the address parameter
-          description, // Provide the biography parameter
-          `${placeholder}`, // Provide the avatar parameter
-          username, // Provide the new username parameter
-          "male" // Provide the gender parameter
+          phone_number,
+          "address",
+          description,
+          url,
+          username,
+          "male"
       );
   }
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
 
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            setUrl(response.data.url)
+            update_info(
+                phone_number,
+                "address",
+                description,
+                response.data.url,
+                username,
+                "male"
+            );
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
   if (!user)
     return (
@@ -123,13 +148,22 @@ export default function Profile() {
           <div className={'lg:flex md:flex justify-center items-start lg:w-3/4 md:w-full w-full gap-5'}>
               <div className={'bg-white border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col'}>
                 <div className={'flex justify-center items-center'}>
+                    <label htmlFor="upload-input" className={'absolute cursor-pointer top-5 bg-white p-3 rounded-full right-5'}>
+                        <span>
+                            <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24.3104 6.93481L22.0594 9.18579C21.8299 9.41528 21.4588 9.41528 21.2293 9.18579L15.8094 3.76587C15.5799 3.53638 15.5799 3.16528 15.8094 2.93579L18.0604 0.684814C18.9735 -0.228271 20.4578 -0.228271 21.3758 0.684814L24.3104 3.61938C25.2283 4.53247 25.2283 6.01685 24.3104 6.93481ZM13.8758 4.86939L1.05353 17.6916L0.0183743 23.6243C-0.123227 24.425 0.575015 25.1184 1.3758 24.9817L7.30841 23.9416L20.1307 11.1194C20.3602 10.8899 20.3602 10.5188 20.1307 10.2893L14.7108 4.86939C14.4764 4.63989 14.1053 4.63989 13.8758 4.86939ZM6.05841 16.593C5.78986 16.3245 5.78986 15.8948 6.05841 15.6262L13.5779 8.10669C13.8465 7.83814 14.2762 7.83814 14.5447 8.10669C14.8133 8.37524 14.8133 8.80493 14.5447 9.07349L7.02521 16.593C6.75666 16.8616 6.32697 16.8616 6.05841 16.593ZM4.29572 20.6995H6.63947V22.4719L3.49005 23.0237L1.9715 21.5051L2.52326 18.3557H4.29572V20.6995Z" fill="#0346A5"/>
+                            </svg>
+                        </span>
+                        <input
+                            id="upload-input"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            style={{ display: 'none' }}
+                        />
+                    </label>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={'https://storage.needpix.com/rsynced_images/avatar-1577909_1280.png'} width={100} height={100} alt={'profile_image'} className={'w-1/2 rounded-full'} />
-                    <button className={'absolute top-5 bg-white p-3 rounded-full right-5'} >
-                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M24.3104 6.93481L22.0594 9.18579C21.8299 9.41528 21.4588 9.41528 21.2293 9.18579L15.8094 3.76587C15.5799 3.53638 15.5799 3.16528 15.8094 2.93579L18.0604 0.684814C18.9735 -0.228271 20.4578 -0.228271 21.3758 0.684814L24.3104 3.61938C25.2283 4.53247 25.2283 6.01685 24.3104 6.93481ZM13.8758 4.86939L1.05353 17.6916L0.0183743 23.6243C-0.123227 24.425 0.575015 25.1184 1.3758 24.9817L7.30841 23.9416L20.1307 11.1194C20.3602 10.8899 20.3602 10.5188 20.1307 10.2893L14.7108 4.86939C14.4764 4.63989 14.1053 4.63989 13.8758 4.86939ZM6.05841 16.593C5.78986 16.3245 5.78986 15.8948 6.05841 15.6262L13.5779 8.10669C13.8465 7.83814 14.2762 7.83814 14.5447 8.10669C14.8133 8.37524 14.8133 8.80493 14.5447 9.07349L7.02521 16.593C6.75666 16.8616 6.32697 16.8616 6.05841 16.593ZM4.29572 20.6995H6.63947V22.4719L3.49005 23.0237L1.9715 21.5051L2.52326 18.3557H4.29572V20.6995Z" fill="#0346A5"/>
-                        </svg>
-                    </button>
+                    <img src={url} width={100} height={100} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                 </div>
                   <div className={'border-1 shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>
                       <div className={'flex flex-col justify-between gap-5 items-start w-full'}>

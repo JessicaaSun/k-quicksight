@@ -18,7 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {unstable_ClassNameGenerator} from "@mui/material";
+import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -55,13 +57,14 @@ export default function NavbarKQuick() {
     isError,
     error,
   } = useGetUserQuery();
+  const state = useSelector(state => state.image)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(user);
       dispatch(setCurrentUser(user));
+      dispatch(setCurrentImage(user.data.avatar))
     }
   }, [dispatch, isSuccess, user]);
 
@@ -173,13 +176,13 @@ export default function NavbarKQuick() {
                       color="primary"
                       name="Jason Hughes"
                       size="sm"
-                      src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                      src={state.image}
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <p className="font-semibold">Signed in as</p>
-                      <p className="font-semibold">{user?.data?.username}</p>
+                      <p className="font-semibold">{user?.data.username}</p>
                     </DropdownItem>
                     <DropdownItem onClick={() => router.push('/profile')} key="settings">Profile</DropdownItem>
                     <DropdownItem key="team_settings">Board</DropdownItem>

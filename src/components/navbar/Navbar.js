@@ -129,8 +129,9 @@ export default function NavbarKQuick() {
                     <Image
                       src="/assets/logos/name.png"
                       alt="K-QuickSight"
-                      height={200}
+                      height={100}
                       width={200}
+                      className={'w-[200px] h-[72px] object-cover'}
                     />
                   </span>
                 </Link>

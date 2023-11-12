@@ -147,24 +147,26 @@ export default function Profile() {
           </div>
           <div className={'lg:flex md:flex justify-center items-start lg:w-3/4 md:w-full w-full gap-5'}>
               <div className={'bg-white border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col'}>
-                <div className={'flex justify-center items-center relative'}>
-                    <label htmlFor="upload-input" className={'absolute cursor-pointer top-5 bg-white p-3 rounded-full right-5'}>
-                        <span>
-                            <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24.3104 6.93481L22.0594 9.18579C21.8299 9.41528 21.4588 9.41528 21.2293 9.18579L15.8094 3.76587C15.5799 3.53638 15.5799 3.16528 15.8094 2.93579L18.0604 0.684814C18.9735 -0.228271 20.4578 -0.228271 21.3758 0.684814L24.3104 3.61938C25.2283 4.53247 25.2283 6.01685 24.3104 6.93481ZM13.8758 4.86939L1.05353 17.6916L0.0183743 23.6243C-0.123227 24.425 0.575015 25.1184 1.3758 24.9817L7.30841 23.9416L20.1307 11.1194C20.3602 10.8899 20.3602 10.5188 20.1307 10.2893L14.7108 4.86939C14.4764 4.63989 14.1053 4.63989 13.8758 4.86939ZM6.05841 16.593C5.78986 16.3245 5.78986 15.8948 6.05841 15.6262L13.5779 8.10669C13.8465 7.83814 14.2762 7.83814 14.5447 8.10669C14.8133 8.37524 14.8133 8.80493 14.5447 9.07349L7.02521 16.593C6.75666 16.8616 6.32697 16.8616 6.05841 16.593ZM4.29572 20.6995H6.63947V22.4719L3.49005 23.0237L1.9715 21.5051L2.52326 18.3557H4.29572V20.6995Z" fill="#0346A5"/>
-                            </svg>
-                        </span>
-                        <input
-                            id="upload-input"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            style={{ display: 'none' }}
-                        />
-                    </label>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={url} width={100} height={100} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
-                </div>
+                  <div className={'flex justify-center items-center relative'}>
+                      <div className={'relative'}>
+                          <input
+                              id="upload-input"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageChange}
+                              style={{ display: 'none' }}
+                          />
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={url} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                          <label htmlFor="upload-input" className={'absolute cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
+                              <span>
+                                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fillRule="evenodd" clipRule="evenodd" d="M14.1208 6.96758L15.9168 5.17157L15.9168 5.17156C16.462 4.62632 16.7346 4.3537 16.8804 4.0596C17.1577 3.50005 17.1577 2.8431 16.8804 2.28354C16.7346 1.98945 16.462 1.71683 15.9168 1.17158L15.9168 1.17157C15.3715 0.626323 15.0989 0.353698 14.8048 0.207962C14.2452 -0.0693207 13.5883 -0.0693207 13.0287 0.207962C12.7346 0.353698 12.462 0.626323 11.9168 1.17157L10.0981 2.99023C11.062 4.64083 12.4481 6.01639 14.1208 6.96758ZM8.64366 4.44469L1.78825 11.3001C1.3558 11.7325 1.13958 11.9488 0.998787 12.215C0.857996 12.4811 0.800957 12.7816 0.686879 13.3824L0.134002 16.2943C0.0731047 16.6151 0.0426559 16.7755 0.134028 16.8687C0.225398 16.962 0.386364 16.9349 0.708293 16.8807H0.708301L3.65659 16.3839C4.28158 16.2786 4.59407 16.2259 4.87112 16.0831C5.14817 15.9402 5.37225 15.7161 5.82041 15.2679L5.82042 15.2679L12.6626 8.42579C11.0409 7.41014 9.6692 6.04785 8.64366 4.44469Z" fill="#ffffff"/>
+                                </svg>
+                              </span>
+                          </label>
+                      </div>
+                  </div>
                   <div className={'border-1 shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>
                       <div className={'flex flex-col justify-between gap-5 items-start w-full'}>
                           <div className={'flex flex-col gap-1 w-full'}>

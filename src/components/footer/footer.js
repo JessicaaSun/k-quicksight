@@ -42,7 +42,7 @@ export default function Footer() {
     },
   ];
 
-  const validNavPath = ["/auth/login", "/auth/signup", "/handle_error", "/testing"];
+  const validNavPath = ["/auth/login", "/auth/confirmation",  "/auth/signup", "/handle_error", "/testing"];
 
   if (validNavPath.includes(pathname)) return null;
 

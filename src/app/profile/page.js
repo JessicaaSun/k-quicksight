@@ -10,6 +10,7 @@ import {useUpdateUserMutation} from "@/store/features/user/userInfoApiSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 import {setUserInfo} from "@/store/features/user/userInfo";
+import {Select} from "antd";
 
 export default function Profile() {
     const { data: user } = useGetUserQuery();
@@ -28,6 +29,9 @@ export default function Profile() {
     const [description, setDescription] = useState('');
     const [update_description, set_updateDescription] = useState(false);
 
+    const [gender, setGender] = useState('');
+    const [updateGender, set_updateGender] = useState(false);
+
     const [url, setUrl] = useState('')
 
     const dispatch = useDispatch();
@@ -38,6 +42,7 @@ export default function Profile() {
         setPhone_number(user?.data.phone_number)
         setDescription(user?.data.biography)
         setUrl(user?.data?.avatar)
+        setGender(user?.data?.gender)
     }, [user]);
 
     const update_info = async (phone_number, address, biography, avatar, username, gender) => {
@@ -48,7 +53,7 @@ export default function Profile() {
             biography: biography,
             avatar: avatar, // Update the avatar parameter
             username: username,
-            gender: 'Male',
+            gender: gender,
         };
         const updateUser = await updateProfile({id, data: dataUpdate})
         dispatch(setCurrentImage(avatar))
@@ -56,7 +61,7 @@ export default function Profile() {
             username,
             phone_number,
             biography,
-
+            gender
         }))
     };
 
@@ -70,17 +75,6 @@ export default function Profile() {
             username
         );
     };
-    const updateEmail = () => {
-        set_updateEmail(false)
-        update_info(
-            phone_number,
-            "address",
-            description,
-            url,
-            username,
-            "male"
-        );
-    }
 
     const updatePhoneNumber = () => {
         set_update_Phone_number(false)
@@ -90,7 +84,7 @@ export default function Profile() {
             description,
             url,
             username,
-            "male"
+            gender
         );
 
     }
@@ -103,9 +97,25 @@ export default function Profile() {
             description,
             url,
             username,
-            "male"
+            gender
         );
     }
+    const updateGender_fun = () => {
+        set_updateGender(false)
+        update_info(
+            phone_number,
+            "address",
+            description,
+            url,
+            username,
+            gender
+        );
+    }
+
+    const handleChange = (value) => {
+        setGender(value)
+    };
+    
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
         const formData = new FormData();
@@ -124,7 +134,7 @@ export default function Profile() {
                 description,
                 response.data.url,
                 username,
-                "male"
+                gender
             );
         } catch (error) {
             console.error(error);
@@ -165,12 +175,12 @@ export default function Profile() {
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={url} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
-                                <label htmlFor="upload-input" className={'absolute cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
-                              <span>
-                                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path fillRule="evenodd" clipRule="evenodd" d="M14.1208 6.96758L15.9168 5.17157L15.9168 5.17156C16.462 4.62632 16.7346 4.3537 16.8804 4.0596C17.1577 3.50005 17.1577 2.8431 16.8804 2.28354C16.7346 1.98945 16.462 1.71683 15.9168 1.17158L15.9168 1.17157C15.3715 0.626323 15.0989 0.353698 14.8048 0.207962C14.2452 -0.0693207 13.5883 -0.0693207 13.0287 0.207962C12.7346 0.353698 12.462 0.626323 11.9168 1.17157L10.0981 2.99023C11.062 4.64083 12.4481 6.01639 14.1208 6.96758ZM8.64366 4.44469L1.78825 11.3001C1.3558 11.7325 1.13958 11.9488 0.998787 12.215C0.857996 12.4811 0.800957 12.7816 0.686879 13.3824L0.134002 16.2943C0.0731047 16.6151 0.0426559 16.7755 0.134028 16.8687C0.225398 16.962 0.386364 16.9349 0.708293 16.8807H0.708301L3.65659 16.3839C4.28158 16.2786 4.59407 16.2259 4.87112 16.0831C5.14817 15.9402 5.37225 15.7161 5.82041 15.2679L5.82042 15.2679L12.6626 8.42579C11.0409 7.41014 9.6692 6.04785 8.64366 4.44469Z" fill="#ffffff"/>
-                                </svg>
-                              </span>
+                                <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
+                                  <span>
+                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path fillRule="evenodd" clipRule="evenodd" d="M14.1208 6.96758L15.9168 5.17157L15.9168 5.17156C16.462 4.62632 16.7346 4.3537 16.8804 4.0596C17.1577 3.50005 17.1577 2.8431 16.8804 2.28354C16.7346 1.98945 16.462 1.71683 15.9168 1.17158L15.9168 1.17157C15.3715 0.626323 15.0989 0.353698 14.8048 0.207962C14.2452 -0.0693207 13.5883 -0.0693207 13.0287 0.207962C12.7346 0.353698 12.462 0.626323 11.9168 1.17157L10.0981 2.99023C11.062 4.64083 12.4481 6.01639 14.1208 6.96758ZM8.64366 4.44469L1.78825 11.3001C1.3558 11.7325 1.13958 11.9488 0.998787 12.215C0.857996 12.4811 0.800957 12.7816 0.686879 13.3824L0.134002 16.2943C0.0731047 16.6151 0.0426559 16.7755 0.134028 16.8687C0.225398 16.962 0.386364 16.9349 0.708293 16.8807H0.708301L3.65659 16.3839C4.28158 16.2786 4.59407 16.2259 4.87112 16.0831C5.14817 15.9402 5.37225 15.7161 5.82041 15.2679L5.82042 15.2679L12.6626 8.42579C11.0409 7.41014 9.6692 6.04785 8.64366 4.44469Z" fill="#ffffff"/>
+                                    </svg>
+                                  </span>
                                 </label>
                             </div>
                         </div>
@@ -191,6 +201,39 @@ export default function Profile() {
                                                 <button onClick={updateUserName} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
                                             ) : (
                                                 <button onClick={() => setUpdateUsername(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                                <div className={'flex flex-col gap-1 w-full'}>
+                                    <p className={'font-medium w-full text-lg text-description-color'}>Your Gender</p>
+                                    <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
+                                        {!updateGender ? (
+                                            <p className={'font-medium text-text-color text-lg'}>{userInfo ? userInfo.gender : gender}</p>
+                                        ):(
+                                            <Select
+                                                defaultValue={gender}
+                                                style={{
+                                                    width: '100%',
+                                                }}
+                                                onChange={handleChange}
+                                                options={[
+                                                    {
+                                                        value: "Male",
+                                                        label: "Male",
+                                                    },
+                                                    {
+                                                        value: 'Female',
+                                                        label: 'Female',
+                                                    },
+                                                ]}
+                                            />
+                                        )}
+                                        {
+                                            updateGender ? (
+                                                <button onClick={updateGender_fun} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
+                                            ) : (
+                                                <button onClick={() => set_updateGender(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
                                             )
                                         }
                                     </div>
@@ -259,7 +302,7 @@ export default function Profile() {
                             </div>
                             <div className={'w-full flex justify-between items-center mt-5'}>
                                 <p className={'font-semibold text-lg text-text-color'}>Used</p>
-                                <div className={'text-md text-text-color bg-gray-100 px-6 rounded-full py-0.5'}>20 KB</div>
+                                <div className={'text-md text-text-color bg-gray-100 px-6 rounded-full py-0.5'}>{user?.data.storage_data} KB</div>
                             </div>
                         </div>
                     </div>

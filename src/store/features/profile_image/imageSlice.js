@@ -11,7 +11,6 @@ const imageSlice = createSlice({
         setCurrentImage: (state, action) => {
             state.image = action.payload;
         },
-
     },
 });
 

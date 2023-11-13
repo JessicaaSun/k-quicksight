@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice"
 import imageSlice from "@/store/features/profile_image/imageSlice";
+import userInfo from "@/store/features/user/userInfo";
 
 const store = configureStore({
     reducer: {
@@ -9,6 +10,7 @@ const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth : authReducer,
         image: imageSlice,
+        userInfo: userInfo
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

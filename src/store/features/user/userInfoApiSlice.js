@@ -9,12 +9,11 @@ export const userInfo = apiSlice.injectEndpoints({
                 method: 'put',
                 body: data,
             }),
-            keepUnusedDataFor: 5, // keep unused data in cache for 5 seconds
-            providesTags: ["User"], // provideTags are used for updating cache
+            keepUnusedDataFor: 5,
+            providesTags: ["User"],
         }),
 
     }),
 });
 
-// auto generated hooks for getUser query (GET)
 export const { useUpdateUserMutation } = userApiSlice;

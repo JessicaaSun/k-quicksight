@@ -58,6 +58,7 @@ export default function NavbarKQuick() {
     error,
   } = useGetUserQuery();
   const state = useSelector(state => state.image)
+  const userInfo = useSelector(state => state.userInfo.userInfo)
 
   const dispatch = useDispatch();
 
@@ -183,7 +184,7 @@ export default function NavbarKQuick() {
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <p className="font-semibold">Signed in as</p>
-                      <p className="font-semibold">{user?.data.username}</p>
+                      <p className="font-semibold">{userInfo ? userInfo.username : user?.data.username}</p>
                     </DropdownItem>
                     <DropdownItem onClick={() => router.push('/profile')} key="settings">Profile</DropdownItem>
                     <DropdownItem key="team_settings">Board</DropdownItem>

@@ -45,9 +45,9 @@ export default function AboutUs(){
             profile: SoBun,
             name: "Phon Sobon",
             position: "Frontend",
-            facebook: '',
+            facebook: 'https://www.facebook.com/sobon.phon/?_rdc=1&_rdr',
             instagram: '',
-            github: ''
+            github: 'https://github.com/PhonSobon?tab=repositories'
         },
         {
             profile: SeangLeng,

@@ -5,7 +5,7 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Button} from "@nextui-org/react";
 import Image from "next/image";
 import recommend from '@assets/images/recommend.png'
-import {useCreateRequestTutorialMutation} from "@/store/features/request_tutorial/requestTutorialApiSlice";
+import {useCreateRequestTutorialMutation} from "@/store/features/request-tutorial/requestTutorialApiSlice";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

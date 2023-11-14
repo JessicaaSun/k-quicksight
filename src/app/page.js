@@ -36,7 +36,7 @@ export default function Home() {
               onClick={() => router.push("/auth/login")}
               className="w-[174px] font-bold bg-primary-color text-white"
             >
-              Get start
+              Get started
             </Button>
             <Button
               onClick={() => router.push("/")}

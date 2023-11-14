@@ -1,7 +1,5 @@
-import NextAuth from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import {getFullName} from "@/lib/siteConfig";
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -10,7 +8,6 @@ export const authOptions = {
       profile: async (profile) => {
         try {
           // Log the received profile for debugging
-          console.log('Received profile:', profile);
           return {
             id: profile.sub,
             name: profile.name,
@@ -18,24 +15,32 @@ export const authOptions = {
             image: profile.picture,
           };
         } catch (error) {
-          console.error('Error in profile function:', error);
-          throw new Error('Error parsing profile data');
+          console.error("Error in profile function:", error);
+          throw new Error("Error parsing profile data");
         }
       },
-      
     }),
-    
   ],
-  
-  
-  // Other options...
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+    async session({ session, user, token }) {
+      session.accessToken = token.accessToken;
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-
-
-
-

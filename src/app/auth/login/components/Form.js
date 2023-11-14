@@ -9,6 +9,7 @@ import { setCredentials } from "@/store/features/auth/authSlice";
 import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/icons/EyeFilledIcon";
 import GoogleSignInBtn from "@/components/buttons/GoogleSignInBtn";
+import { useSession } from "next-auth/react";
 
 export default function LoginQuick() {
   const [email, setEmail] = useState("");
@@ -31,9 +32,7 @@ export default function LoginQuick() {
     inputWrapper: ["border-2", "border-primary-color", "h-[46px]"],
   };
 
-  const handleSubmitGoogle = () => {
-    alert("Hehe not google yet");
-  };
+
 
   const handleSubmit = async () => {
     try {
@@ -52,6 +51,9 @@ export default function LoginQuick() {
       }
     }
   };
+  const handleLoginWithGoogle = async()=>{
+
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-5 p-3">

@@ -69,9 +69,16 @@ export default function NavbarKQuick() {
     }
   }, [dispatch, isSuccess, user]);
 
-  const validNavPath = ["/auth/login", "/auth/signup", "/auth/confirmation", "/handle_error", "/testing"];
+  const validNavPath = [
+    "/auth/login",
+    "/auth/signup",
+    "/auth/confirmation",
+    "/handle_error",
+    "/testing",
+    "/board",
+  ];
 
-  if (validNavPath.includes(pathname)) return null;
+  if (validNavPath.some(path => pathname.startsWith(path))) return null;
   else
     return (
       <nav className="flex flex-col fixed z-40 w-full">
@@ -160,7 +167,7 @@ export default function NavbarKQuick() {
                       <p className="font-semibold text-primary-color">{userInfo ? userInfo.username : user?.data.username}</p>
                     </DropdownItem>
                     <DropdownItem onClick={() => router.push('/profile')} key="settings">Profile</DropdownItem>
-                    <DropdownItem key="team_settings">Board</DropdownItem>
+                    <DropdownItem onClick={() => router.push('/board')} key="team_settings">Board</DropdownItem>
                     <DropdownItem
                       onClick={() => {
                         dispatch(logout());

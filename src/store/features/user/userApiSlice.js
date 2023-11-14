@@ -12,3 +12,5 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
 // auto generated hooks for getUser query (GET)
 export const { useGetUserQuery } = userApiSlice;
+
+

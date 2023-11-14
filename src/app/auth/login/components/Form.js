@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/store/features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/features/auth/authSlice";
-import Image from "next/image";
 import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/icons/EyeFilledIcon";
+import GoogleSignInBtn from "@/components/buttons/GoogleSignInBtn";
 
 export default function LoginQuick() {
   const [email, setEmail] = useState("");
@@ -117,19 +117,7 @@ export default function LoginQuick() {
           <div>or</div>
           <div className="w-full h-0.5 bg-text-color rounded-md"></div>
         </div>
-        <Button
-          type="submit"
-          onClick={handleSubmitGoogle}
-          className="bg-white text-text-color h-[46px] border-1 border-primary-color font-semibold flex gap-5"
-        >
-          <Image
-            src="/assets/images/google_logo.png"
-            alt="google"
-            width={20}
-            height={20}
-          />
-          <p className="text-text-color">Continue with google</p>
-        </Button>
+        <GoogleSignInBtn></GoogleSignInBtn>
 
         <span className="pt-[20px] text-text-color">
           Does not have an account?{" "}

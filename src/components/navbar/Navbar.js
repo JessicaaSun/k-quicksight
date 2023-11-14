@@ -151,7 +151,7 @@ export default function NavbarKQuick() {
                       color="primary"
                       name="Jason Hughes"
                       size="sm"
-                      src={state.image}
+                      src={state.image ? state.image : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'}
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">

@@ -51,7 +51,7 @@ export default function Profile() {
             phone_number: phone_number,
             address: address, // Update the address parameter
             biography: biography,
-            avatar: avatar, // Update the avatar parameter
+            avatar: avatar,
             username: username,
             gender: gender,
         };
@@ -175,7 +175,7 @@ export default function Profile() {
                                     style={{ display: 'none' }}
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={url} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                                <img src={url ? url : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                                 <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
                                   <span>
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">

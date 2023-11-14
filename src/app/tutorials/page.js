@@ -55,15 +55,6 @@ const Tutorial = () => {
             toast.success("Request Tutorial successfully.")
         }
     }
-    // toast message
-    // const notify = (values) => {
-    //     if (values && values.subject && values.message){
-    //         return true
-    //     }else {
-    //         toast.error("Please input the field!");
-    //         return false
-    //     }
-    // }
 
     return (
         <section className={'py-44 px-[10%]'}>
@@ -79,12 +70,12 @@ const Tutorial = () => {
                 </div>
             </div>
             <h2 className={'text-primary-color font-bold mt-20'}>Recommendation learning resources</h2>
-            <div className={'lg:flex md:flex justify-start gap-32 items-center py-20'}>
-                <Image src={recommend} alt={'recommendation'} className={'lg:w-1/2 md:w-2/3 w-full h-[400px] object-contain'} />
+            <div className={'lg:flex md:block justify-start gap-32 items-center py-20'}>
+                <Image src={recommend} alt={'recommendation'} className={'lg:w-1/2 md:w-3/3 w-full h-[400px] object-contain'} />
                 <ul className={'list-disc'}>
                     {
                         resources.map((item, index) => (
-                            <li key={index} className={'my-3 text-lg font-medium'}>
+                            <li key={index} className={'my-3 ml-10 text-lg font-medium'}>
                                 <a target={"_blank"} className={'hover:underline hover:text-primary-color'} href={item.url}>{item.name}</a>
                             </li>
                         ))

@@ -32,12 +32,24 @@ export default function Home() {
             potential and drive success with confidence.
           </p>
           <div className="w-full pt-6 flex gap-5">
-            <Button
-              onClick={() => router.push("/auth/login")}
-              className="w-[174px] font-bold bg-primary-color text-white"
-            >
-              Get started
-            </Button>
+            {
+              !user ? (
+                  <Button
+                      onClick={() => router.push("/auth/login")}
+                      className="w-[174px] font-bold bg-primary-color text-white"
+                  >
+                    Get started
+                  </Button>
+              ) : (
+                  <Button
+                      onClick={() => router.push("/board")}
+                      className="w-[174px] font-bold bg-primary-color text-white"
+                  >
+                    Go To Board
+                  </Button>
+              )
+            }
+
             <Button
               onClick={() => router.push("/")}
               className="w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"

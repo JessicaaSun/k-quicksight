@@ -209,7 +209,7 @@ export default function SignUp() {
               </div>
               <div>
                 <Checkbox onClick={handleCheckbox} radius="md"></Checkbox>
-                <span>Check <Link href={'/'} target={'_blank'} className={'text-primary-color font-semibold hover:underline'}> and read Term and Privacy</Link> </span>
+                <span>Check <Link href={'/auth/confirmation'} target={'_blank'} className={'text-primary-color font-semibold hover:underline'}> and read Term and Privacy</Link> </span>
               </div>
               {!isLoading ? (
                 <Button

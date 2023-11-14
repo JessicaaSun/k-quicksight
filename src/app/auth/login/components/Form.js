@@ -65,16 +65,16 @@ export default function LoginQuick() {
           color={isInvalid ? "danger" : ""}
           errorMessage={isInvalid && "Please enter a valid email"}
           onValueChange={setEmail}
-          label="Email"
           isRequired
+          placeholder={'Email'}
           required
           variant="bordered"
           classNames={styleInput}
         />
         <Input
-          label="Password"
           variant="bordered"
           required
+          placeholder={'Password'}
           classNames={styleInput}
           value={password}
           onValueChange={setPassword}

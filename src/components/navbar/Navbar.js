@@ -40,12 +40,12 @@ export default function NavbarKQuick() {
     {
       id: 3,
       path: "/about-us",
-      page: "About Us",
+      page: "About",
     },
     {
       id: 4,
       path: "/contact-us",
-      page: "Contact Us",
+      page: "Contact",
     },
   ];
   const router = useRouter();
@@ -74,15 +74,15 @@ export default function NavbarKQuick() {
   if (validNavPath.includes(pathname)) return null;
   else
     return (
-      <div className="flex flex-col fixed z-40 w-full">
+      <nav className="flex flex-col fixed z-40 w-full">
         <Community_navbar />
 
-        <nav className="w-full bg-primary-color shadow-sm lg:px-[50px] md:px-[10px] px-[10px] flex justify-between items-center">
+        <section className="w-full bg-primary-color shadow-sm lg:px-[50px] md:px-[10px] px-[10px] flex justify-between items-center">
           <Navbar
             onMenuOpenChange={setIsMenuOpen}
             className="w-auto bg-primary-color"
           >
-            <NavbarContent>
+            <NavbarContent >
               <NavbarMenuToggle
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 className="sm:hidden text-white"
@@ -95,7 +95,7 @@ export default function NavbarKQuick() {
                   <Avatar
                     isBordered
                     as="button"
-                    className="transition-transform py-[0.3rem] bg-background-color"
+                    className="transition-transform py-[0.3rem] object-cover bg-background-color"
                     size="sm"
                     src="/assets/logos/logo.png"
                   />
@@ -151,13 +151,13 @@ export default function NavbarKQuick() {
                       color="primary"
                       name="Jason Hughes"
                       size="sm"
-                      src={state.image}
+                      src={state.image ? state.image : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'}
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <p className="font-semibold">Signed in as</p>
-                      <p className="font-semibold">{userInfo ? userInfo.username : user?.data.username}</p>
+                      <p className="font-semibold text-primary-color">{userInfo ? userInfo.username : user?.data.username}</p>
                     </DropdownItem>
                     <DropdownItem onClick={() => router.push('/profile')} key="settings">Profile</DropdownItem>
                     <DropdownItem key="team_settings">Board</DropdownItem>
@@ -183,8 +183,8 @@ export default function NavbarKQuick() {
               Login
             </Button>
           )}
-        </nav>
-      </div>
+        </section>
+      </nav>
     );
 }
 

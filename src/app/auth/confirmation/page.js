@@ -5,7 +5,7 @@ import logoImage from "@assets/logos/logo-square.png";
 
 const Confirmation = () => {
   return (
-    <main className="md:min-h-screen md:max-h-screen bg-white ">
+    <main className="md:min-h-screen md:max-h-screen bg-white py-10">
       <Community_navbar />
       <div className="flex border-t-1 border-gray-200 w-full flex-col ">
         <div className={" w-full md:flex "}>
@@ -44,10 +44,10 @@ const Confirmation = () => {
             </p>
             <div>
               <h3 className={"text-text-color"}>No credit card required</h3>
-              <h4 className={"text-text-color pt-2"}>
+              <h4 className={"text-text-color pt-2 pb-10"}>
                 Try K-QuickSight today, It’s total free.
               </h4>
-              <div className={"flex flex-row gap-5 pt-4"}>
+              <div className={"flex ml-5 flex-row gap-5 pt-4"}>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const Confirmation = () => {
                   Always-free developer
                 </p>
               </div>
-              <div className={"flex flex-row gap-5 py-4"}>
+              <div className={"flex ml-5 flex-row gap-5 py-4"}>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

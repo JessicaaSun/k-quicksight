@@ -10,6 +10,7 @@ import { setCredentials } from "@/store/features/auth/authSlice";
 import Image from "next/image";
 import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/icons/EyeFilledIcon";
+import { useSession, signIn } from "next-auth/react";
 
 export default function LoginQuick() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export default function LoginQuick() {
   };
 
   const handleSubmitGoogle = () => {
-    alert("Hehe not google yet");
+    signIn("google");
   };
 
   const handleSubmit = async () => {

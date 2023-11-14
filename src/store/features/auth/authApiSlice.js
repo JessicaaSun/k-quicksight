@@ -11,7 +11,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    loginWithGoogle: builder.mutation({
+      query: (credentials) => ({
+        url: "/social_auth/google/",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
   }),
+  
 });
 // auto generated hooks for login mutation
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useLoginWithGoogleMutation } = authApiSlice;

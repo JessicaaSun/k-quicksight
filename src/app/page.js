@@ -6,11 +6,48 @@ import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
+import { useSession, signIn, signOut } from 'next-auth/react';
+
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/store/features/auth/authSlice";
+import { useLoginMutation, useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
+
 
 export default function Home() {
   const router = useRouter();
 
   const { data: user } = useGetUserQuery();
+  const dispatch = useDispatch();
+  const [loginWithGoogle, { isLoading }] = useLoginWithGoogleMutation();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+
+    if (session) {
+
+      const fetchData = async () => {
+        try {
+          const { data } = await loginWithGoogle({ auth_token: session.auth_token }).unwrap();
+          console.log(data)
+          dispatch(setCredentials(data));
+          // Navigate to the welcome page
+        } catch (error) {
+          // Handle any errors that occur during the API call
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [session]);
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+
+
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-36">

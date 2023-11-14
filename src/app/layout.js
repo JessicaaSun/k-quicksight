@@ -5,6 +5,7 @@ import Provider from "./provider";
 import Navbar_UI from "@/components/navbar/Navbar";
 import { Suspense } from "react";
 import Loading from "./loading";
+import AuthProvider from "./AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,12 @@ export default function RootLayout({ children }) {
         <Provider>
           <Suspense fallback={<Loading />}>
             <Providers>
-              <Navbar_UI />
-              {children}
+              <AuthProvider>
+
+                <Navbar_UI />
+                {children}
+              </AuthProvider>
+
             </Providers>
           </Suspense>
         </Provider>

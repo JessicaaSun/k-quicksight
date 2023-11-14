@@ -6,7 +6,7 @@ import Image from "next/image";
 import authenticated from "@assets/images/403.png";
 import {Button} from "@nextui-org/react";
 
-export default function userBoard (){
+export default function UserBoard (){
 
     const {
         data: user,
@@ -19,7 +19,7 @@ export default function userBoard (){
     setTimeout(() => {
         if (!user)
             return (
-                <div className="flex min-h-screen flex-col items-center justify-center p-28">
+                <div className="flex min-h-screen flex-col items-center justify-center py-10">
                     <Image src={authenticated} alt={"authorize"} className={'lg:w-1/4 md:w-2/3 w-full'} />
                     <p className={'lg:text-2xl md:text-xl text-lg text-primary-color font-bold text-center'}>This page has been not authenticated</p>
                     <Button onClick={() => router.push('/')} className={'mt-10 bg-primary-color text-background-color'}>
@@ -32,7 +32,7 @@ export default function userBoard (){
     }, 2000);
 
     return (
-        <div className={'py-28'}>
+        <div className={'py-10 px-5'}>
             <div className={'flex min-h-screen justify-center items-center'}>
                 Hello world!
             </div>

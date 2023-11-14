@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Page = () => {
+const Dataset = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default Dataset;

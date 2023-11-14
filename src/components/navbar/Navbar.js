@@ -40,12 +40,12 @@ export default function NavbarKQuick() {
     {
       id: 3,
       path: "/about-us",
-      page: "About Us",
+      page: "About",
     },
     {
       id: 4,
       path: "/contact-us",
-      page: "Contact Us",
+      page: "Contact",
     },
   ];
   const router = useRouter();

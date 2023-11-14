@@ -72,7 +72,8 @@ export default function Profile() {
             "address",
             description,
             url,
-            username
+            username,
+            gender
         );
     };
 
@@ -212,7 +213,7 @@ export default function Profile() {
                                             <p className={'font-medium text-text-color text-lg'}>{userInfo ? userInfo.gender : gender}</p>
                                         ):(
                                             <Select
-                                                defaultValue={gender}
+                                                defaultValue={userInfo ? userInfo.gender : gender}
                                                 style={{
                                                     width: '100%',
                                                 }}

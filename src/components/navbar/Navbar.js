@@ -74,15 +74,15 @@ export default function NavbarKQuick() {
   if (validNavPath.includes(pathname)) return null;
   else
     return (
-      <div className="flex flex-col fixed z-40 w-full">
+      <nav className="flex flex-col fixed z-40 w-full">
         <Community_navbar />
 
-        <nav className="w-full bg-primary-color shadow-sm lg:px-[50px] md:px-[10px] px-[10px] flex justify-between items-center">
+        <section className="w-full bg-primary-color shadow-sm lg:px-[50px] md:px-[10px] px-[10px] flex justify-between items-center">
           <Navbar
             onMenuOpenChange={setIsMenuOpen}
             className="w-auto bg-primary-color"
           >
-            <NavbarContent>
+            <NavbarContent >
               <NavbarMenuToggle
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 className="sm:hidden text-white"
@@ -95,7 +95,7 @@ export default function NavbarKQuick() {
                   <Avatar
                     isBordered
                     as="button"
-                    className="transition-transform py-[0.3rem] bg-background-color"
+                    className="transition-transform py-[0.3rem] object-cover bg-background-color"
                     size="sm"
                     src="/assets/logos/logo.png"
                   />
@@ -183,8 +183,8 @@ export default function NavbarKQuick() {
               Login
             </Button>
           )}
-        </nav>
-      </div>
+        </section>
+      </nav>
     );
 }
 

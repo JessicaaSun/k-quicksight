@@ -71,8 +71,8 @@ export default function Feature(){
 
                 {
                     feature.map((data,index)=>(
-                        <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} gap-10`}>
-                            <div className="lg:w-2/3 md:1/2 w-full" data-aos="zoom-out-right">
+                        <div key={index} className={`lg:flex md:block justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} gap-10`}>
+                            <div className="lg:w-2/3 md:1/2 w-full">
                                 <Button size="sm" variant="flat" className={'text-primary-color bg-primary-color/10 mb-6 font-medium rounded-xl'}>
                                     {data.bagde}
                                 </Button>

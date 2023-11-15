@@ -56,7 +56,7 @@ export default function Profile() {
             gender: gender,
         };
         const updateUser = await updateProfile({id, data: dataUpdate})
-        dispatch(setCurrentImage(avatar))
+
         dispatch(setUserInfo({
             username,
             phone_number,
@@ -129,11 +129,12 @@ export default function Profile() {
                 },
             });
             setUrl(response.data.url)
+            dispatch(setCurrentImage(response.data.url))
             update_info(
                 phone_number,
                 "address",
                 description,
-                response.data.url,
+                response.data.filename,
                 username,
                 gender
             );

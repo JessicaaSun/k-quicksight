@@ -7,23 +7,54 @@ import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
 import Card_Why from "@/components/cards/Card";
-import GetStart_boxs, {
-  SwapperTest,
-  User_base,
-} from "@/components/cards/HomeBoxs";
+import GetStart_boxs, { User_base } from "@/components/cards/HomeBoxs";
 import DeckCard from "@/components/cards/deck-card/DeckCard";
+import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/store/features/auth/authSlice";
+import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
+import Loading from "./loading";
 
 export default function Home() {
   const router = useRouter();
-  const { data: user, isSuccess } = useGetUserQuery();
 
+  const { data: user } = useGetUserQuery();
+  const dispatch = useDispatch();
+  const [loginWithGoogle, { isLoading }] = useLoginWithGoogleMutation();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      const fetchData = async () => {
+        try {
+          const { data } = await loginWithGoogle({
+            auth_token: session.auth_token,
+          }).unwrap();
+          console.log("data", data);
+          dispatch(setCredentials(data));
+          // Navigate to the welcome page
+        } catch (error) {
+          // Handle any errors that occur during the API call
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [dispatch, loginWithGoogle, session]);
+  console.log(session)
+  if (status === "loading" || isLoading) {
+    return <Loading />;
+  }
   return (
     <main className="pt-24 flex flex-col gap-20 overflow-x-hidden">
       <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14">
         <div className="flex flex-col gap-3 lg:w-2/3 md:w-1/2 w-full">
-          <h1  className="lg:text-5xl md:text-3xl text-2xl font-bold">
+          <h1 className="lg:text-5xl md:text-3xl text-2xl font-bold">
             Discover, Analyze and Decide With{" "}
-            <span className="lg:leading-[100px] mg:leading-normal text-primary-color">K-QuickSight</span>
+            <span className="lg:leading-[100px] mg:leading-normal text-primary-color">
+              K-QuickSight
+            </span>
           </h1>
           <p className="text-description-color text-lg">
             Catalyze your data journey with our powerful tools for discovery,
@@ -31,23 +62,21 @@ export default function Home() {
             potential and drive success with confidence.
           </p>
           <div className="w-full pt-6 flex gap-5">
-            {
-              !user ? (
-                  <Button
-                      onClick={() => router.push("/auth/login")}
-                      className="w-[174px] font-bold bg-primary-color text-white"
-                  >
-                    Get started
-                  </Button>
-              ) : (
-                  <Button
-                      onClick={() => router.push("/board")}
-                      className="w-[174px] font-bold bg-primary-color text-white"
-                  >
-                    Go To Board
-                  </Button>
-              )
-            }
+            {!user ? (
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="w-[174px] font-bold bg-primary-color text-white"
+              >
+                Get started
+              </Button>
+            ) : (
+              <Button
+                onClick={() => router.push("/board")}
+                className="w-[174px] font-bold bg-primary-color text-white"
+              >
+                Go To Board
+              </Button>
+            )}
 
             <Button
               onClick={() => router.push("/")}

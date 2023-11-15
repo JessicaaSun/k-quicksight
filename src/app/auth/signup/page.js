@@ -12,12 +12,6 @@ export default function SignUp() {
 
   const { data: session, status } = useSession();
 
-  useEffect(() => {
-    if (session) {
-      redirect("/");
-    }
-  }, [session, status]);
-
   if (status === "loading") {
     return <Loading />;
   }
@@ -38,7 +32,7 @@ export default function SignUp() {
           />
         </svg>
       </button>
-      <div className="justify-center min-h-screen flex items-center">
+      <div className="justify-center min-h-screen flex items-center w-full">
         <SignUpForm />
       </div>
     </Outlet>

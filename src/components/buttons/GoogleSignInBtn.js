@@ -40,7 +40,6 @@ const GoogleSignInBtn = () => {
   };
 
   return (
-    <div>
       <Button
         type="submit"
         onClick={handleLoginWithGoogle}
@@ -54,7 +53,6 @@ const GoogleSignInBtn = () => {
         />
         <p className="font-semibold text-text-color">Continue with google</p>
       </Button>
-    </div>
   );
 };
 

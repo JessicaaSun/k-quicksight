@@ -7,24 +7,54 @@ import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
 import Card_Why from "@/components/cards/Card";
-import GetStart_boxs, {
-  SwapperTest,
-  User_base,
-} from "@/components/cards/HomeBoxs";
+import GetStart_boxs, { User_base } from "@/components/cards/HomeBoxs";
 import DeckCard from "@/components/cards/deck-card/DeckCard";
+import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/store/features/auth/authSlice";
+import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
+import Loading from "./loading";
 
 export default function Home() {
   const router = useRouter();
 
   const { data: user } = useGetUserQuery();
+  const dispatch = useDispatch();
+  const [loginWithGoogle, { isLoading }] = useLoginWithGoogleMutation();
+  const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (session) {
+      const fetchData = async () => {
+        try {
+          const { data } = await loginWithGoogle({
+            auth_token: session.auth_token,
+          }).unwrap();
+          console.log("data", data);
+          dispatch(setCredentials(data));
+          // Navigate to the welcome page
+        } catch (error) {
+          // Handle any errors that occur during the API call
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [dispatch, loginWithGoogle, session]);
+  console.log(session)
+  if (status === "loading" || isLoading) {
+    return <Loading />;
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between pt-24">
-      <section className="flex gap-5 justify-between items-center px-[10%] mt-10 py-14">
-        <div className="flex flex-col gap-3">
-          <h1 className="text-5xl font-bold leading-snug">
+    <main className="pt-24 flex flex-col gap-20 overflow-x-hidden">
+      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14">
+        <div className="flex flex-col gap-3 lg:w-2/3 md:w-1/2 w-full">
+          <h1 className="lg:text-5xl md:text-3xl text-2xl font-bold">
             Discover, Analyze and Decide With{" "}
-            <span className="text-primary-color">K-QuickSight</span>
+            <span className="lg:leading-[100px] mg:leading-normal text-primary-color">
+              K-QuickSight
+            </span>
           </h1>
           <p className="text-description-color text-lg">
             Catalyze your data journey with our powerful tools for discovery,
@@ -32,15 +62,25 @@ export default function Home() {
             potential and drive success with confidence.
           </p>
           <div className="w-full pt-6 flex gap-5">
-            <Button
-              onClick={() => router.push("/auth/login")}
-              className="w-[174px] font-bold bg-primary-color text-white"
-            >
-              Get started
-            </Button>
+            {!user ? (
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="w-[174px] font-bold bg-primary-color text-white"
+              >
+                Get started
+              </Button>
+            ) : (
+              <Button
+                onClick={() => router.push("/board")}
+                className="w-[174px] font-bold bg-primary-color text-white"
+              >
+                Go To Board
+              </Button>
+            )}
+
             <Button
               onClick={() => router.push("/")}
-              className="w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
+              className="min-w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
             >
               <svg
                 width="20"
@@ -60,7 +100,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="w-full">
+        <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
           <Image src={heroImg} alt="hero" className="homepage_image w-full" />
         </div>
       </section>
@@ -77,9 +117,6 @@ export default function Home() {
         <GetStart_boxs />
       </section>
       <section className="pb-32 w-full lg:px-[10%] md:px-[5%] px-3">
-        <h2 className="text-primary-color mt-10 mb-16">
-          Empowering a Diverse User Base
-        </h2>
         <User_base />
       </section>
       <section className="bg-secondary-color px-3 flex flex-col justify-center items-center py-20 w-full">
@@ -90,7 +127,7 @@ export default function Home() {
           analytics. But you don&apos;t have to take our word for it hear from
           our delighted users.
         </p>
-        <DeckCard></DeckCard>
+        <DeckCard />
       </section>
     </main>
   );

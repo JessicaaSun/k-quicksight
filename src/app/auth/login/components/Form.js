@@ -9,7 +9,8 @@ import { setCredentials } from "@/store/features/auth/authSlice";
 import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/icons/EyeFilledIcon";
 import GoogleSignInBtn from "@/components/buttons/GoogleSignInBtn";
-import { useSession } from "next-auth/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LoginQuick() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,6 @@ export default function LoginQuick() {
     value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   const isInvalid = React.useMemo(() => {
     if (email === "") return false;
-
     return !validateEmail(email);
   }, [email]);
 
@@ -32,31 +32,27 @@ export default function LoginQuick() {
     inputWrapper: ["border-2", "border-primary-color", "h-[46px]"],
   };
 
-
-
   const handleSubmit = async () => {
     try {
       // .unwrap() is a utility function that will return either the fulfilled value or throw the rejected value as an error.
       const { data } = await login({ email, password }).unwrap();
       dispatch(setCredentials(data));
-      router.push("/");
+      toast.success("Login Success.")
+      setTimeout(() => router.push("/"), 2000);
     } catch (error) {
       if (!error.response) {
-        alert("No Server Response");
-        console.log(error);
+        toast.error("Bad credential please try again.")
       } else if (error.response.status === 400) {
-        alert("Missing email or password");
+        toast.warn("Missing email or password");
       } else if (error.response.status === 403) {
-        alert("Forbidden - You don't have permission to access this resource");
+        toast.error("Forbidden - You don't have permission to access this resource");
       }
     }
   };
-  const handleLoginWithGoogle = async()=>{
-
-  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-5 p-3">
+      <ToastContainer />
       <div className="lg:w-1/3 md:w-1/2 shadow-lg w-full rounded-2xl bg-white flex flex-col gap-[20px] border-2 border-primary-color py-10 px-10">
         <h2 className="font-semibold text-text-color text-2xl">
           Welcome back!
@@ -67,16 +63,16 @@ export default function LoginQuick() {
           color={isInvalid ? "danger" : ""}
           errorMessage={isInvalid && "Please enter a valid email"}
           onValueChange={setEmail}
-          label="Email"
           isRequired
+          placeholder={'Email'}
           required
           variant="bordered"
           classNames={styleInput}
         />
         <Input
-          label="Password"
           variant="bordered"
           required
+          placeholder={'Password'}
           classNames={styleInput}
           value={password}
           onValueChange={setPassword}

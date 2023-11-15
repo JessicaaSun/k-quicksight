@@ -121,7 +121,7 @@ export default function GetStart_boxs() {
   ];
 
   return (
-    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col gap-20 ">
+    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col gap-36">
       {data.map((item, index) => (
         <div
           key={index}
@@ -131,7 +131,7 @@ export default function GetStart_boxs() {
         >
           <div className="mb-5">{item.out_number}</div>
           <div
-            className={` lg:min-w-[980px] relative px-10 py-5 gap-10 bg-primary-color lg:min-h-[183px] ${
+            className={`lg:min-w-[980px] relative px-10 py-5 gap-10 bg-primary-color lg:min-h-[183px] ${
               index === 1 ? " flex-row-reverse text-right" : ""
             } rounded-3xl lg:flex justify-start items-center`}
           >
@@ -142,7 +142,7 @@ export default function GetStart_boxs() {
                   : index === 0
                   ? "-right-32 -top-40 w-[420px]"
                   : "-right-32 top-20 w-[320px]"
-              } lg:absolute md:absolute lg:block md:block hidden `}
+              } lg:absolute md:hidden lg:block hidden`}
             >
               <Image src={item.out_image} alt={item.out_image} />
             </div>
@@ -177,14 +177,17 @@ export function User_base() {
     },
   ];
   return (
-    <div className="lg:flex md:flex w-full block gap-20 justify-between items-center">
-      <div className="flex flex-col gap-12 lg:w-1/2 md:w-1/2 w-full">
+    <div className="lg:flex md:block w-full block gap-20 justify-between items-center">
+      <div className="flex flex-col gap-12 lg:w-1/2 md:w-full w-full">
+        <h2 className="text-primary-color my-8">
+          Empowering a Diverse User Base
+        </h2>
         {data.map((item, index) => (
           <div
             key={index}
-            className={`lg:min-w-[649.856px] relative p-5 rounded-xl ${
+            className={`lg:w-1/2 md:w-2/3 w-full relative p-5 rounded-xl ${
               index === 1 && "text-right"
-            } md:min-w-[449.856px] min-w-full bg-background-color border-2 border-primary-color`}
+            } lg:w-1/2 md:w-full min-w-full bg-background-color border-2 border-primary-color`}
           >
             <h3
               className={`text-primary-color absolute ${
@@ -202,7 +205,7 @@ export function User_base() {
       <Image
         src={userbase}
         alt="userbase"
-        className="lg:w-1/3 md:md-1/2 w-full -scale-x-100"
+        className="lg:w-1/2 md:lg-w-1/2 w-full mt-10"
       />
     </div>
   );

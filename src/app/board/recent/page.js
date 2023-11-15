@@ -44,11 +44,11 @@ export default function UserBoard (){
                     <div className={'flex flex-col gap-5'}>
                         {
                             mockData.dataset.map((item, index) => (
-                                <Link href={item.url} key={index} className={'hover:bg-primary-color hover:text-white transition-all shadow-lg flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-2 border-primary-color'}>
-                                    <p className={'w-1/4'}>{item.filename}</p>
-                                    <p className={'w-1/4'}>{item.fileType}</p>
-                                    <p className={'w-1/4'}>{item.createDate}</p>
-                                    <p className={'w-1/4'}>{item.fileSize}</p>
+                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
+                                    <p className={'w-1/4 text-left'}>{item.filename}</p>
+                                    <p className={'w-1/4 text-center'}>{item.fileType}</p>
+                                    <p className={'w-1/4 text-center'}>{item.createDate}</p>
+                                    <p className={'w-1/4 text-right'}>{item.fileSize}</p>
                                 </Link>
                             ))
                         }
@@ -59,10 +59,10 @@ export default function UserBoard (){
                     <div className={'flex flex-col gap-5'}>
                         {
                             mockData.analysis.map((item, index) => (
-                                <Link href={item.url} key={index} className={'hover:bg-primary-color hover:text-white transition-all shadow-lg flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-2 border-primary-color'}>
+                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
                                     <p className={'w-1/3'}>{item.filename}</p>
-                                    <p className={'w-1/3'}>{item.createDate}</p>
-                                    <p className={'w-1/3'}>{item.fileSize}</p>
+                                    <p className={'w-1/3 text-center'}>{item.createDate}</p>
+                                    <p className={'w-1/3 text-right'}>{item.fileSize}</p>
                                 </Link>
                             ))
                         }
@@ -73,11 +73,11 @@ export default function UserBoard (){
                     <div className={'flex flex-row gap-5'}>
                         {
                             mockData.dashboard.map((item, index) => (
-                                <Link href={item.url} key={index} className={'flex flex-col gap-5 p-2 hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all'}>
+                                <Link href={item.url} key={index} className={'active:scale-105 flex flex-col gap-5 p-2 hover:bg-blue-100 hover:shadow-lg rounded-xl hover:ring-1 hover:ring-primary-color transition-all'}>
                                     <Image src={item.thumbnail} alt={item.name} className={'max-w-[265px] max-h-[157px] rounded-xl object-cover'} />
                                     <div className={'flex flex-col'}>
-                                        <p >{item.name}</p>
-                                        <p >{item.createdAt}</p>
+                                        <p className={'text-description-color font-semibold'}>{item.name}</p>
+                                        <p className={'text-description-color font-semibold'}>{item.createdAt}</p>
                                     </div>
                                 </Link>
                             ))

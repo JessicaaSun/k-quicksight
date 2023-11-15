@@ -2,9 +2,11 @@
 
 import React from 'react';
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {Button, Input} from "@nextui-org/react";
+import {SearchIcon} from "@/app/board/recent/searchIcons";
+import {mockData} from "@/app/board/mockData/mockData";
+import Link from "next/link";
 import Image from "next/image";
-import authenticated from "@assets/images/403.png";
-import {Button} from "@nextui-org/react";
 
 export default function UserBoard (){
 
@@ -16,25 +18,72 @@ export default function UserBoard (){
         error,
     } = useGetUserQuery();
 
-    setTimeout(() => {
-        if (!user)
-            return (
-                <div className="flex min-h-screen flex-col items-center justify-center py-10">
-                    <Image src={authenticated} alt={"authorize"} className={'lg:w-1/4 md:w-2/3 w-full'} />
-                    <p className={'lg:text-2xl md:text-xl text-lg text-primary-color font-bold text-center'}>This page has been not authenticated</p>
-                    <Button onClick={() => router.push('/')} className={'mt-10 bg-primary-color text-background-color'}>
-                        <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.155 13.2996L16.2245 18.4558C16.3223 18.5519 16.4003 18.6669 16.454 18.794C16.5076 18.921 16.5359 19.0577 16.5371 19.196C16.5383 19.3344 16.5123 19.4715 16.4608 19.5995C16.4094 19.7276 16.3333 19.8439 16.2371 19.9417C16.141 20.0395 16.0266 20.1168 15.9008 20.1692C15.7749 20.2216 15.6401 20.2479 15.5041 20.2467C15.3681 20.2455 15.2337 20.2168 15.1088 20.1622C14.9838 20.1076 14.8708 20.0282 14.7763 19.9288L8.98283 14.036C8.79083 13.8407 8.68298 13.5758 8.68298 13.2996C8.68298 13.0234 8.79083 12.7585 8.98283 12.5631L14.7763 6.67043C14.8708 6.57094 14.9838 6.49158 15.1088 6.43699C15.2337 6.38239 15.3681 6.35366 15.5041 6.35246C15.6401 6.35125 15.7749 6.37761 15.9008 6.42999C16.0266 6.48236 16.141 6.55971 16.2371 6.65751C16.3333 6.75532 16.4094 6.87162 16.4608 6.99964C16.5123 7.12766 16.5383 7.26482 16.5371 7.40314C16.5359 7.54145 16.5076 7.67813 16.454 7.80522C16.4003 7.93231 16.3223 8.04725 16.2245 8.14334L11.155 13.2996Z" fill="white"/>
-                        </svg>
-                        Back to homepage</Button>
-                </div>
-            );
-    }, 2000);
-
     return (
         <div className={'py-10 px-5'}>
-            <div className={'flex min-h-screen justify-center items-center'}>
-                Hello world!
+            <div className={'flex min-h-screen flex-col'}>
+                <div className={'flex justify-between items-center'}>
+                    <div className={'text-xl text-primary-color font-semibold'}>Recent</div>
+                    <Input
+                        startContent={<SearchIcon />}
+                        classNames={{
+                            input: [
+                                'px-10'
+                            ],
+                            inputWrapper: [
+                                'h-[42px] w-[384px] '
+                            ]
+                        }}
+                        placeholder={'Search file...'}
+                        className={'w-[384px]'}
+                        variant="bordered"
+                        color={'primary'}
+                    />
+                </div>
+                <div className={'my-10'}>
+                    <p className={'text-xl mb-5 text-primary-color font-semibold'}>Dataset</p>
+                    <div className={'flex flex-col gap-5'}>
+                        {
+                            mockData.dataset.map((item, index) => (
+                                <Link href={item.url} key={index} className={'hover:bg-primary-color hover:text-white transition-all shadow-lg flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-2 border-primary-color'}>
+                                    <p className={'w-1/4'}>{item.filename}</p>
+                                    <p className={'w-1/4'}>{item.fileType}</p>
+                                    <p className={'w-1/4'}>{item.createDate}</p>
+                                    <p className={'w-1/4'}>{item.fileSize}</p>
+                                </Link>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className={'mb-10'}>
+                    <p className={'text-xl mb-5 text-primary-color font-semibold'}>Analysis</p>
+                    <div className={'flex flex-col gap-5'}>
+                        {
+                            mockData.analysis.map((item, index) => (
+                                <Link href={item.url} key={index} className={'hover:bg-primary-color hover:text-white transition-all shadow-lg flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-2 border-primary-color'}>
+                                    <p className={'w-1/3'}>{item.filename}</p>
+                                    <p className={'w-1/3'}>{item.createDate}</p>
+                                    <p className={'w-1/3'}>{item.fileSize}</p>
+                                </Link>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className={'mb-10'}>
+                    <p className={'text-xl mb-5 text-primary-color font-semibold'}>Dashboard</p>
+                    <div className={'flex flex-row gap-5'}>
+                        {
+                            mockData.dashboard.map((item, index) => (
+                                <Link href={item.url} key={index} className={'flex flex-col gap-5 p-2 hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all'}>
+                                    <Image src={item.thumbnail} alt={item.name} className={'max-w-[265px] max-h-[157px] rounded-xl object-cover'} />
+                                    <div className={'flex flex-col'}>
+                                        <p >{item.name}</p>
+                                        <p >{item.createdAt}</p>
+                                    </div>
+                                </Link>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     );

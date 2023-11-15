@@ -21,6 +21,7 @@ import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {unstable_ClassNameGenerator} from "@mui/material";
 import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
+import {configSchema} from "next/dist/server/config-schema";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

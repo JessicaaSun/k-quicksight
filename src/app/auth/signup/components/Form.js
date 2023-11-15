@@ -184,7 +184,7 @@ const SignUpForm = () => {
               <span>
                 Check{" "}
                 <Link
-                  href={"/"}
+                  href={"/auth/confirmation"}
                   target={"_blank"}
                   className={"text-primary-color font-semibold hover:underline"}
                 >

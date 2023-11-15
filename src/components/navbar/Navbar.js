@@ -22,10 +22,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {unstable_ClassNameGenerator} from "@mui/material";
 import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 import {configSchema} from "next/dist/server/config-schema";
+import {useSession,signOut} from "next-auth/react";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
+
 
   const menuItems = [
     {
@@ -50,7 +52,7 @@ export default function NavbarKQuick() {
     },
   ];
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const {
     data: user,
     isLoading,
@@ -61,14 +63,13 @@ export default function NavbarKQuick() {
   const state = useSelector(state => state.image)
   const userInfo = useSelector(state => state.userInfo.userInfo)
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     if (isSuccess) {
       dispatch(setCurrentUser(user));
       dispatch(setCurrentImage(user.data.avatar))
     }
   }, [dispatch, isSuccess, user]);
+
 
   const validNavPath = [
     "/auth/login",
@@ -171,8 +172,8 @@ export default function NavbarKQuick() {
                     <DropdownItem onClick={() => router.push('/board/recent')} key="team_settings">Board</DropdownItem>
                     <DropdownItem
                       onClick={() => {
-                        dispatch(logout());
-                        window.location.reload();
+                        signOut()
+                        dispatch(logout())
                       }}
                       key="logout"
                       color="danger"

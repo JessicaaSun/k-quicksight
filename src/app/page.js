@@ -41,7 +41,7 @@ export default function Home() {
 
       fetchData();
     }
-  }, [dispatch, loginWithGoogle, session]);
+  }, [dispatch, loginWithGoogle, session,]);
   console.log(session)
   if (status === "loading" || isLoading) {
     return <Loading />;

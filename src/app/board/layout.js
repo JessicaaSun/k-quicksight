@@ -27,7 +27,7 @@ export default function BoardRootLayout ({children}){
         return (
             <section>
                 <Navbar />
-                <div id={'board'} className={'lg:pl-[355px] lg:pt-[87px] md:p-10 bg-background-color min-h-screen'}>
+                <div id={'board'} className={'lg:pl-[355px] py-28 bg-background-color min-h-screen'}>
                     {children}
                 </div>
             </section>

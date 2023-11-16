@@ -89,7 +89,7 @@ const Sidebar = ({toggleSidebar}) => {
     const {data:user, isSuccess} = useGetUserQuery()
     const pathname = usePathname();
     return (
-        <div className={`${toggleSidebar ? 'ml-[-1000px]' : ''} bg-white transition-all text-description-color z-20 left-0 px-5 py-10 fixed flex flex-col gap-10 top-[87px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[278px] min-h-screen`}>
+        <div className={`${toggleSidebar ? 'ml-[-1000px]' : ''} bg-white transition-all text-description-color z-20 left-0 px-5 py-10 fixed flex flex-col gap-10 top-[63px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[278px] min-h-screen`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <div className={'flex gap-5 justify-center items-center'}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -110,8 +110,8 @@ const Sidebar = ({toggleSidebar}) => {
             <div className={'flex flex-col gap-5'}>
                 <p className={'text-2xl font-semibold text-primary-color text-bold'}>{contentRoute.visualization._name}</p>
                 <div className={'flex flex-col gap-2'}>
-                    <Link className={`${pathname === contentRoute.visualization.analysis.route}font-semibold text-text-color text-xl pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`} href={contentRoute.visualization.analysis.route}>{contentRoute.visualization.analysis.icon}{contentRoute.visualization.analysis.name}</Link>
-                    <Link className={`${pathname === contentRoute.visualization.dashboard.route}font-semibold text-text-color text-xl pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`} href={contentRoute.visualization.dashboard.route}>{contentRoute.visualization.dashboard.icon}{contentRoute.visualization.dashboard.name}</Link>
+                    <Link className={`font-semibold text-text-color text-xl pl-5 py-2 hover:bg-primary-color ${pathname === contentRoute.visualization.analysis.route ? 'bg-primary-color text-white' : 'bg-white'} hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}  href={contentRoute.visualization.analysis.route}>{contentRoute.visualization.analysis.icon}{contentRoute.visualization.analysis.name}</Link>
+                    <Link className={`font-semibold text-text-color text-xl pl-5 py-2 hover:bg-primary-color ${pathname === contentRoute.visualization.dashboard.route ? 'bg-primary-color text-white' : 'bg-white'} hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`} href={contentRoute.visualization.dashboard.route}>{contentRoute.visualization.dashboard.icon}{contentRoute.visualization.dashboard.name}</Link>
                 </div>
             </div>
         </div>

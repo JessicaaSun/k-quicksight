@@ -30,7 +30,6 @@ export default function Home() {
           const { data } = await loginWithGoogle({
             auth_token: session.auth_token,
           }).unwrap();
-          console.log("data", data);
           dispatch(setCredentials(data));
           // Navigate to the welcome page
         } catch (error) {
@@ -41,8 +40,7 @@ export default function Home() {
 
       fetchData();
     }
-  }, [dispatch, loginWithGoogle, session,]);
-  console.log(session)
+  }, [dispatch, loginWithGoogle, session, ]);
   if (status === "loading" || isLoading) {
     return <Loading />;
   }
@@ -71,7 +69,7 @@ export default function Home() {
               </Button>
             ) : (
               <Button
-                onClick={() => router.push("/board")}
+                onClick={() => router.push("/board/recent")}
                 className="w-[174px] font-bold bg-primary-color text-white"
               >
                 Go To Board

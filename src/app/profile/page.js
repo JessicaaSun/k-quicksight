@@ -123,7 +123,7 @@ export default function Profile() {
         formData.append('file', file);
 
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/`, formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/images/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

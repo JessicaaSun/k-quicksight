@@ -6,7 +6,6 @@ import userInfo from "@/store/features/user/userInfo";
 
 const store = configureStore({
     reducer: {
-        // reducerPath is the name of the slice default is "api"
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth : authReducer,
         image: imageSlice,

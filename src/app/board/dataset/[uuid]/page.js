@@ -3,10 +3,11 @@
 import React, {useState} from 'react';
 import ShareMember from "@/app/board/dataset/component/shareMember";
 import {Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
+import Overview from "@/app/board/dataset/component/cleaning/Overview";
 import CleanModal from "@/app/board/dataset/component/cleaning/CleanModal";
 
 const DetailDataset = ({params}) => {
-
+    let id = params.id
     const [tableData, setTableData] = useState([
         {
             "username": "JohnDoe",
@@ -118,7 +119,7 @@ const DetailDataset = ({params}) => {
                 <ShareMember />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
-                <Button className={'bg-primary-color text-md font-medium text-background-color'} >Overview</Button>
+                <Overview />
                 <CleanModal />
             </div>
 

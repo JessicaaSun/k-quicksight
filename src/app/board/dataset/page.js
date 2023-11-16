@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ModalImport from "@/app/board/dataset/component/modal";
 import NewDataset from "@/app/board/dataset/component/newDataset";
 import {Button, Input} from "@nextui-org/react";
@@ -8,15 +8,26 @@ import {SearchIcon} from "@/app/board/recent/searchIcons";
 import DropDown from "@/app/board/dataset/component/DropDown";
 import {file_dataset, sample_dataset} from "@/app/board/mockData/mockData";
 import Link from "next/link";
+import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 
 
 const Dataset = () => {
+
+    const {data:user, isLoading} = useGetUserQuery();
 
     const [isSample, setSample] = useState(false)
 
     const handleDatasetSample = () => {
         setSample(event => !event)
     }
+
+    const [file, setFiles] = useState([])
+
+    const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery(user?.data.id)
+    useEffect(() => {
+        setFiles(allFile)
+    }, [allFile])
 
     return (
         <div className={'px-5 py-5'}>
@@ -41,9 +52,7 @@ const Dataset = () => {
                     }} placeholder={'Search'} className={'w-fit'} />
                     <DropDown />
                     <Button onClick={handleDatasetSample} className={`flex justify-center items-center ${isSample ? 'bg-primary-color text-white' : 'bg-white text-text-color'} border-1 border-gray-300`}>
-                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 16.6236V18.375C0 19.8229 3.52734 21 7.875 21C12.2227 21 15.75 19.8229 15.75 18.375V16.6236C14.0561 17.8172 10.9594 18.375 7.875 18.375C4.79063 18.375 1.69395 17.8172 0 16.6236ZM13.125 5.25C17.4727 5.25 21 4.07285 21 2.625C21 1.17715 17.4727 0 13.125 0C8.77734 0 5.25 1.17715 5.25 2.625C5.25 4.07285 8.77734 5.25 13.125 5.25ZM0 12.3211V14.4375C0 15.8854 3.52734 17.0625 7.875 17.0625C12.2227 17.0625 15.75 15.8854 15.75 14.4375V12.3211C14.0561 13.7156 10.9553 14.4375 7.875 14.4375C4.79473 14.4375 1.69395 13.7156 0 12.3211ZM17.0625 12.7723C19.4127 12.317 21 11.4721 21 10.5V8.74863C20.0484 9.42129 18.6498 9.88066 17.0625 10.1637V12.7723ZM7.875 6.5625C3.52734 6.5625 0 8.03086 0 9.84375C0 11.6566 3.52734 13.125 7.875 13.125C12.2227 13.125 15.75 11.6566 15.75 9.84375C15.75 8.03086 12.2227 6.5625 7.875 6.5625ZM16.8697 8.87168C19.3307 8.42871 21 7.55918 21 6.5625V4.81113C19.5439 5.84063 17.042 6.39434 14.4088 6.52559C15.6187 7.11211 16.5088 7.89961 16.8697 8.87168Z" fill="#636363"/>
-                        </svg>
+                        <i className="text-lg fa-solid fa-database"></i>
                         <p>Sample Dataset</p>
                     </Button>
                 </div>
@@ -58,12 +67,12 @@ const Dataset = () => {
                     <div className={'flex flex-col gap-3'}>
                         {
                             !isSample ? (
-                                file_dataset.map((item, index) => (
+                                file?.map((item, index) => (
                                     <div key={index} className={'flex gap-5 justify-start items-center'}>
-                                        <Link href={item.url} className={'hover:text-white w-[85%] hover:bg-primary-color active:scale-105 transition-all px-5 h-[56px] py-3 shadow-md border-2 border-gray-100 flex font-medium rounded-xl justify-between items-center'}>
-                                            <p className={'w-[300px]'}>{item.title}</p>
-                                            <p className={'w-[300px]'}>{item.fileType}</p>
-                                            <p className={'w-[300px]'}>{item.createAt}</p>
+                                        <Link href={`/board/dataset/${item.id}`} className={'hover:text-white w-[85%] hover:bg-primary-color active:scale-105 transition-all px-5 h-[56px] py-3 shadow-md border-2 border-gray-100 flex font-medium rounded-xl justify-between items-center'}>
+                                            <p className={'w-[300px]'}>{item.filename}</p>
+                                            <p className={'w-[300px]'}>{item.type}</p>
+                                            <p className={'w-[300px]'}>{item.created_at}</p>
                                             <p className={'w-[80px]'}>{item.size}</p>
                                         </Link>
                                         <button>

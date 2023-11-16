@@ -3,13 +3,15 @@ import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice"
 import imageSlice from "@/store/features/profile_image/imageSlice";
 import userInfo from "@/store/features/user/userInfo";
+import allFiles from "@/store/features/files/allFileByuserId";
 
 const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth : authReducer,
         image: imageSlice,
-        userInfo: userInfo
+        userInfo: userInfo,
+        allFiles: allFiles,
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

@@ -1,11 +1,21 @@
 'use client'
 
-import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
+import React, {useEffect, useState} from "react";
+import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Button,
+    useDisclosure,
+    Checkbox, Radio, RadioGroup, cn, CheckboxGroup
+} from "@nextui-org/react";
 
 export default function CleanModal() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [select, setSelect] = useState('autoClean');
+    const [option, setOption] = useState(["Delete row with missing values", "Delete duplicated row"])
 
     return (
         <>
@@ -16,53 +26,44 @@ export default function CleanModal() {
 
                 Clean
             </Button>
-            <Modal
-                size={'5xl'}
-                backdrop="opaque"
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                motionProps={{
-                    variants: {
-                        enter: {
-                            y: 0,
-                            opacity: 1,
-                            transition: {
-                                duration: 0.3,
-                                ease: "easeOut",
-                            },
-                        },
-                        exit: {
-                            y: -20,
-                            opacity: 0,
-                            transition: {
-                                duration: 0.2,
-                                ease: "easeIn",
-                            },
-                        },
-                    }
-                }}
-            >
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">Data Overview</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-3xl">Cleansing Options</ModalHeader>
                             <ModalBody>
-                                <ul className={'list-disc ml-10 leading-8'}>
-                                    <li>Duplicate row = 0</li>
-                                    <li>Outlier = 0</li>
-                                    <li>Number of columns = 0</li>
-                                    <li>Number of rows = 0</li>
-                                    <li>Label names = [username, age, salary]</li>
-                                </ul>
-                                <p className={'text-text-color font-medium'}>Missing values</p>
-                                <TableMissingValue />
+                                <div className={'mt-5'}>
+                                    <RadioGroup
+                                        value={select}
+                                        orientation="horizontal"
+                                        onValueChange={setSelect}
+                                    >
+                                        <Radio value="autoClean" className={'bg-third-color rounded-xl mr-3 h-[47px]'} color={'primary'}><span className={'text-white font-normal px-2'}>Auto Clean</span></Radio>
+                                        <Radio value="byOption" className={'bg-primary-color rounded-xl h-[47px]'} color={'warning'} ><span className={'text-white font-normal px-2'}>By Options</span></Radio>
+                                    </RadioGroup>
+                                </div>
+
+                                <div className={'mt-8'}>
+                                    <CheckboxGroup
+                                        value={option}
+                                        onValueChange={setOption}
+                                    >
+                                        <Checkbox value="Delete row with missing values">Delete row with missing values</Checkbox>
+                                        <Checkbox value="Delete duplicated row">Delete duplicated row</Checkbox>
+                                        <Checkbox value="Data type conversion">Data type conversion</Checkbox>
+                                        <Checkbox value="Delete row with outliers">Delete row with outliers</Checkbox>
+                                    </CheckboxGroup>
+                                </div>
+
                             </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
+                            <ModalFooter className={'flex  gap-5'}>
+                                <Button className={'border-1 border-primary-color bg-white text-md text-primary-color'} onPress={onClose}>
+                                    Cancel
                                 </Button>
-                                <Button color="primary" onPress={onClose}>
-                                    Action
+                                <Button
+                                    className={'bg-primary-color text-background-color'}
+                                    onPress={onClose}>
+                                    Proceed
                                 </Button>
                             </ModalFooter>
                         </>

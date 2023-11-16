@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import AuthProvider from "./AuthProvider";
 import Footer from "@/components/footer/footer";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
             </Providers>
           </Suspense>
         </Provider>
+        <Script src="https://kit.fontawesome.com/dfbc5788ab.js" crossOrigin="anonymous"></Script>
       </body>
     </html>
   );

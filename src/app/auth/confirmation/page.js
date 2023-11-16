@@ -5,7 +5,7 @@ import logoImage from "@assets/logos/logo-square.png";
 
 const Confirmation = () => {
   return (
-    <main className="md:min-h-screen md:max-h-screen bg-white py-10">
+    <main className="md:min-h-screen md:max-h-screen bg-white">
       <Community_navbar />
       <div className="flex border-t-1 border-gray-200 w-full flex-col ">
         <div className={" w-full md:flex "}>

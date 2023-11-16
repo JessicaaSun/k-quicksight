@@ -42,7 +42,7 @@ const Navbar = () => {
                     )
                 }
                 <Link href={'/'} >
-                    <Image src={logo} alt={'logo'} className={'bg-white rounded-full w-[60px] h-[60px] object-contain'} />
+                    <Image src={logo} alt={'logo'} className={'bg-white rounded-full w-[36px] h-[36px] object-contain'} />
                 </Link>
             </div>
 

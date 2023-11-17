@@ -14,6 +14,7 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "@/store/features/auth/authSlice";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
+import {useRouter} from "next/navigation";
 
 export default function NewDataset() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -21,6 +22,7 @@ export default function NewDataset() {
     const dispatch = useDispatch();
     const [fileInfo, setFileInfo] = useState({});
     const [ importFile ] = useFileImportMutation();
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(setCurrentUser(user));
@@ -32,9 +34,8 @@ export default function NewDataset() {
         formData.append('file', file);
         const response = await importFile({ file: formData, userId: user?.data.id });
         setFileInfo(response);
+        window.location.reload();
     };
-
-    console.log(fileInfo);
 
     return (
         <>

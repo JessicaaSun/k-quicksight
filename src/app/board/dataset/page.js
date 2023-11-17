@@ -39,14 +39,12 @@ const Dataset = () => {
     const handleDatasetSample = () => {
         setSample(event => !event)
     }
-
     const [file, setFilesRecord] = useState([])
-    const filType = useSelector(state => state);
-    console.log(filType)
+    const filType = useSelector(state => state.fileType.fileType);
     const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery({id:user?.data.id, type:filType})
     const dispatch = useDispatch()
-
-    // const files = useSelector(state => state.)
+    const state = useSelector(state => state);
+    console.log(state);
 
     useEffect(() => {
         setFilesRecord(allFile)

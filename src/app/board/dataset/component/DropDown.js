@@ -9,7 +9,7 @@ import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 
 export default function DropDown() {
-    const [currentValue, setCurrentValue] = useState(null)
+    const [currentValue, setCurrentValue] = useState('')
     const [value, setValue] = useState(['All Files']);
     const dispatch = useDispatch()
     const state = useSelector(state => state.fileType)
@@ -17,7 +17,7 @@ export default function DropDown() {
 
     useEffect(() => {
         setCurrentValue(value.currentKey)
-        dispatch(setFilesType(currentValue?currentValue:null))
+        dispatch(setFilesType(currentValue?currentValue:''))
     }, [currentValue, dispatch, value])
 
     return (

@@ -44,28 +44,28 @@ export const mockData = {
 export const dataType = [
     {
         id: 1,
-        value: null,
+        value: '',
         label: 'All Files'
     },
     {
         id: 2,
-        value: 'TXT',
-        label: 'TXT'
+        value: 'txt',
+        label: 'txt'
     },
     {
         id: 3,
-        value: 'XLSX',
-        label: 'EXCEL'
+        value: 'xlsx',
+        label: 'xlsx'
     },
     {
         id: 4,
-        value: 'JSON',
-        label: 'JSON'
+        value: 'json',
+        label: 'json'
     },
     {
         id: 5,
-        value: 'CSV',
-        label: 'CSV'
+        value: 'csv',
+        label: 'csv'
     },
 ]
 

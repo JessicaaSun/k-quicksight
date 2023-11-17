@@ -8,7 +8,7 @@ const allFiles = createSlice({
     reducers: {
         setFiles: (state, action) => {
             state.allFiles = action.payload;
-        }
+        },
     }
 })
 

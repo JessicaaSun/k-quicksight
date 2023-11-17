@@ -14,7 +14,8 @@ import {
 
 export default function App() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [linkScrap, setLinkScrap] = useState('')
+    const [linkScrap, setLinkScrap] = useState('');
+
 
     return (
         <>

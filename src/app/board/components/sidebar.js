@@ -13,17 +13,17 @@ const contentRoute =
     file: {
         _name: 'Files',
         recent: {
-            icon: <i class="fa-solid fa-clock"></i>,
+            icon: <i className="fa-solid fa-clock"></i>,
             name: 'Recent',
             route: '/board/recent'
         },
         dataset: {
-            icon:<i class="fa-solid fa-folder"></i>,
+            icon:<i className="fa-solid fa-folder"></i>,
             name: 'Dataset',
             route: '/board/dataset'
         },
         sample: {
-            icon: <i class="fa-solid fa-book"></i>
+            icon: <i className="fa-solid fa-book"></i>
 
             ,
             name: 'Sample',
@@ -34,12 +34,12 @@ const contentRoute =
     visualization: {
         _name: 'visualization',
         analysis: {
-            icon:<i class="fa-solid fa-square-poll-vertical"></i>,
+            icon:<i className="fa-solid fa-square-poll-vertical"></i>,
             name: 'Analysis',
             route: "/board/analysis",
         },
         dashboard: {
-            icon: <i class="fa-solid fa-table-columns"></i>,
+            icon: <i className="fa-solid fa-table-columns"></i>,
             name: 'dashboard',
             route: '/board/dashboard'
         },

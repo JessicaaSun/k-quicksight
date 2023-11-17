@@ -5,15 +5,11 @@ import {Select, SelectItem} from "@nextui-org/react";
 import {dataType} from "@/app/board/mockData/mockData";
 import {useDispatch, useSelector} from "react-redux";
 import {setFilesType} from "@/store/features/files/fileType";
-import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
-import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 
 export default function DropDown() {
     const [currentValue, setCurrentValue] = useState('')
-    const [value, setValue] = useState(['All Files']);
+    const [value, setValue] = useState(['']);
     const dispatch = useDispatch()
-    const state = useSelector(state => state.fileType)
-    console.log(state)
 
     useEffect(() => {
         setCurrentValue(value.currentKey)

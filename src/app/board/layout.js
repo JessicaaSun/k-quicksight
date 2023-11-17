@@ -7,10 +7,14 @@ import Image from "next/image";
 import {Button} from "@nextui-org/react";
 import authenticated from '@assets/images/authentication.png'
 import {useRouter} from "next/navigation";
+import Loading from "@/app/loading";
 export default function BoardRootLayout ({children}){
-    const {data:user} = useGetUserQuery()
+    const {data:user, isLoading} = useGetUserQuery()
     const router = useRouter();
-    if (!user) {
+    if (isLoading) {
+        return <Loading />
+    }
+    else if (!user) {
        return (
            <div className="flex min-h-screen flex-col items-center justify-center p-28">
                <Image src={authenticated} alt={"authorize"} className={'lg:w-1/4 md:w-2/3 w-full'} />
@@ -23,7 +27,8 @@ export default function BoardRootLayout ({children}){
                </Button>
            </div>
        )
-    } else if (user){
+    }
+    else if (user){
         return (
             <section>
                 <Navbar />

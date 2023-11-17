@@ -34,7 +34,6 @@ export default function NewDataset() {
         formData.append('file', file);
         const response = await importFile({ file: formData, userId: user?.data.id });
         setFileInfo(response);
-        window.location.reload();
     };
 
     return (

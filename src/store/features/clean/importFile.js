@@ -6,10 +6,6 @@ export const fileApiSlice = apiSlice.injectEndpoints({
                 url: `files/file-upload/${userId}/`,
                 method: "POST",
                 body: file,
-                // prepareHeaders: (headers) => {
-                //     headers.set('Content-Type', 'multipart/form-data')
-                //     return headers
-                // },
                 prepareHeaders: (headers) => {
                     headers.set('Content-Type', `multipart/form-data; boundary=${generateBoundary()}`);
                     return headers;

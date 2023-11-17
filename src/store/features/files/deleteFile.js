@@ -2,14 +2,6 @@ import {apiSlice} from "@/store/api/apiSlice";
 
 export const allFileByUserid = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getAllFiles: builder.query({
-            query: ({id, filename, type}) => ({
-                url: `files/user/${id}/?filename=${filename ? filename : ""}&type=${type}`,
-                method: 'GET'
-            }),
-            keepUnusedDataFor: 5,
-            providesTags: ["files"],
-        }),
         deleteFileById: builder.mutation({
             query: ({id, uuid}) => ({
                 url: `files/user/${id}/${uuid}/`,
@@ -22,6 +14,6 @@ export const allFileByUserid = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetAllFilesQuery, useDeleteFileByIdMutation } = allFileByUserid;
+export const { useDeleteFileByIdMutation } = allFileByUserid;
 
 export default allFileByUserid;

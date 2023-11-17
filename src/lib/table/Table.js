@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import {
     Table,
     TableHeader,
@@ -15,12 +15,27 @@ import {
 } from "@nextui-org/react";
 import {getTrimIntoColumnOnlyDate} from "@/utils/getTrimDateTIme";
 import {formatBytes} from "@/utils/convertByte";
-import {router} from "next/client";
 import {useRouter} from "next/navigation";
-import Loading from "@/app/loading";
+import {useDeleteFileByIdMutation, useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {useDispatch} from "react-redux";
+import {setFiles} from "@/store/features/files/fileSlice";
 
 export default function TableData({file, isSample, isFileLoading, sample_dataset, headers}) {
-    const router = useRouter()
+    const router = useRouter();
+    const [deleteFileById] = useDeleteFileByIdMutation();
+    const {data:user} = useGetUserQuery();
+    const dispatch = useDispatch();
+    const {data:allFiles, refetch: refetchAllFiles} = useGetAllFilesQuery({id:user?.data.id, filename: '', type: ''})
+    const [actual, setActual] = useState([])
+    const handleDeleteFile = async (uuid) => {
+        await deleteFileById({ uuid: uuid, id: user?.data.id });
+        const updatedFiles = allFiles.filter((file) => file.uuid !== uuid);
+        setActual(updatedFiles);
+        console.log(updatedFiles);
+        dispatch(setFiles(updatedFiles));
+        refetchAllFiles(); // Optional: Refetch the updated list of files
+    };
     return (
         <Table
             aria-label="Example table with client async pagination">
@@ -49,7 +64,7 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                             <button onClick={() => router.push(`/board/dataset/${item.uuid}`)}><i className="fa-regular fa-eye"></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'Delete'}>
-                                            <button><i className="fa-solid fa-trash"></i></button>
+                                            <button onClick={() => handleDeleteFile(item.uuid)} ><i className="fa-solid fa-trash"></i></button>
                                         </Tooltip>
 
                                     </TableCell>

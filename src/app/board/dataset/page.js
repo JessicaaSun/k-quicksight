@@ -3,20 +3,15 @@
 import React, {useEffect, useState} from 'react';
 import ModalImport from "@/app/board/dataset/component/modal";
 import NewDataset from "@/app/board/dataset/component/newDataset";
-import {Button, Input, SelectItem} from "@nextui-org/react";
-import {SearchIcon} from "@/app/board/recent/searchIcons";
+import {Button} from "@nextui-org/react";
 import DropDown from "@/app/board/dataset/component/DropDown";
-import {dataType, file_dataset, sample_dataset} from "@/app/board/mockData/mockData";
-import Link from "next/link";
+import {sample_dataset} from "@/app/board/mockData/mockData";
 import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import TableData from "@/lib/table/Table";
 import {useDispatch, useSelector} from "react-redux";
 import {setFiles} from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
-
-
-
 const Dataset = () => {
 
     const headers = [
@@ -44,7 +39,7 @@ const Dataset = () => {
         setSample(event => !event)
     }
     const filType = useSelector(state => state.fileType.fileType);
-    const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery({id:user?.data.id, type:filType})
+    const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery({id:user?.data.id, filename: '', type:filType})
     const dispatch = useDispatch();
     const state = useSelector(state => state.allFiles.allFiles)
 

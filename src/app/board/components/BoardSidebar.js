@@ -5,7 +5,7 @@ import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useDispatch} from "react-redux";
 import {setCurrentUser} from "@/store/features/auth/authSlice";
 import Link from "next/link";
-import Navbar from "@/app/board/components/navbar";
+import Navbar from './BoardNavbar';
 import {usePathname} from "next/navigation";
 
 const contentRoute =

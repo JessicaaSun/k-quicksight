@@ -30,7 +30,7 @@ export default function Home() {
           const { data } = await loginWithGoogle({
             auth_token: session.auth_token,
           }).unwrap();
-          console.log("data", data);
+          // console.log("data", data);
           dispatch(setCredentials(data));
           // Navigate to the welcome page
         } catch (error) {
@@ -42,7 +42,7 @@ export default function Home() {
       fetchData();
     }
   }, [dispatch, loginWithGoogle, session,]);
-  console.log(session)
+  // console.log(session)
   if (status === "loading" || isLoading) {
     return <Loading />;
   }

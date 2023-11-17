@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import logo from '@assets/logos/logo.png'
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
-import Sidebar from "@/app/board/components/sidebar";
+import Sidebar from "@/app/board/components/BoardSidebar";
 import {Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/react";
 import {logout} from "@/store/features/auth/authSlice";
 import {useDispatch} from "react-redux";

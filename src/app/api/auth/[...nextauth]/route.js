@@ -7,7 +7,7 @@ export const authOptions = {
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
       profile: async (profile) => {
-        console.log("profile, ", profile)
+        // console.log("profile, ", profile)
         return {
           id: profile.sub,
           name: profile.name,
@@ -29,7 +29,7 @@ export const authOptions = {
     async jwt({ token, account, profile }) {
       if (account) {
         token.auth_token = account.id_token;
-        console.log("account    ", account.id_token)
+        // console.log("account    ", account.id_token)
       }
       return token;
     }, },

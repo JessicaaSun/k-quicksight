@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
-import Sidebar from "@/app/board/components/sidebar";
-import Navbar from "@/app/board/components/navbar";
+import Sidebar from "@/app/board/components/BoardSidebar";
+import Navbar from "@/app/board/components/BoardNavbar";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import Image from "next/image";
 import {Button} from "@nextui-org/react";

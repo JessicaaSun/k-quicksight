@@ -8,22 +8,20 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    Pagination,
     Spinner,
-    getKeyValue,
     Tooltip
 } from "@nextui-org/react";
 import {getTrimIntoColumnOnlyDate} from "@/utils/getTrimDateTIme";
 import {formatBytes} from "@/utils/convertByte";
 import {useRouter} from "next/navigation";
-import {useDeleteFileByIdMutation, useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
-import {useGetUserQuery} from "@/store/features/user/userApiSlice";
-import {useDispatch} from "react-redux";
-import {setFiles} from "@/store/features/files/fileSlice";
+import {useDispatch, useSelector} from "react-redux";
 import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 
 export default function TableData({file, isSample, isFileLoading, sample_dataset, headers}) {
     const router = useRouter();
+    const handleView = (uuid) => {
+        router.push(`/board/dataset/${uuid}`)
+    }
     return (
         <Table
             aria-label="Example table with client async pagination"
@@ -51,10 +49,10 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                             <button><i className="fa-regular fa-pen-to-square "></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'View'}>
-                                            <button onClick={() => router.push(`/board/dataset/${item.uuid}`)}><i className="fa-regular fa-eye"></i></button>
+                                            <button onClick={() => handleView(item.uuid)}><i className="fa-regular fa-eye"></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'Delete'}>
-                                            <DeleteButton uuid={item.uuid} filename={item.file} />
+                                            <DeleteButton uuid={item.uuid} filename={item.file} type={item.type} createAt={item.created_at} size={item.size} />
                                         </Tooltip>
 
                                     </TableCell>
@@ -81,7 +79,7 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                 <TableCell>{item.size}</TableCell>
                                 <TableCell>
                                     <Tooltip showArrow={true} content={'View'}>
-                                        <button onClick={() => router.push(`/board/dataset/${item.uuid}`)}><i className="fa-regular fa-eye"></i></button>
+                                        <button onClick={() => handleView(item.uuid)}><i className="fa-regular fa-eye"></i></button>
                                     </Tooltip>
                                 </TableCell>
                             </TableRow>

@@ -52,7 +52,7 @@ export default function NewDataset() {
                     <div className={'flex p-5 flex-col gap-5'}>
                         <ModalHeader className="flex flex-col gap-1 text-center text-2xl">Import Dataset</ModalHeader>
                         <ModalBody className={'flex flex-row gap-5 w-full'}>
-                            <input id="importFile" style={{ display: "none" }} type="file" onChange={handleImportFile} />
+                            <input id="importFile" style={{ display: "none" }} type="file" accept=".csv, application/json, .xlsx, .txt" onChange={handleImportFile} />
                             <label htmlFor="importFile" className={'text-white rounded-xl flex justify-center items-center hover:bg-secondary-color/80 cursor-pointer transition-all w-1/2 bg-secondary-color border-2 border-white shadow-lg'}>
                                 <div>
                                     Import

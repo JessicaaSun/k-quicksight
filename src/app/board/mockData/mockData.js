@@ -99,14 +99,16 @@ export const sample_dataset = [
         fileType: 'CSV',
         createAt: '01/11/2023',
         size: '10.89KB',
-        url: '/board/dataset/564837b6-838c-11ee-b962-0242ac120002'
+        url: '/board/dataset/564837b6-838c-11ee-b962-0242ac120002',
+        uuid: '3ca0e936-85e2-11ee-b9d1-0242ac120002'
     },
     {
         title: 'cambodia income',
         fileType: 'XLSX',
         createAt: '02/10/2023',
         size: '10.49KB',
-        url: '/board/dataset/5c13419a-838c-11ee-b962-0242ac120002'
+        url: '/board/dataset/5c13419a-838c-11ee-b962-0242ac120002',
+        uuid: '33b77182-85e2-11ee-b9d1-0242ac120002'
     },
 ]
 export const analysis_sample = [

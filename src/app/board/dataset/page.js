@@ -12,26 +12,25 @@ import TableData from "@/lib/table/Table";
 import {useDispatch, useSelector} from "react-redux";
 import {setFiles} from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
+import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
+export const headers = [
+    {
+        header: 'Title'
+    },
+    {
+        header: 'File Type'
+    },
+    {
+        header: 'Create At'
+    },
+    {
+        header: 'Size'
+    },
+    {
+        header: 'Actions'
+    }
+]
 const Dataset = () => {
-
-    const headers = [
-        {
-            header: 'Title'
-        },
-        {
-            header: 'File Type'
-        },
-        {
-            header: 'Create At'
-        },
-        {
-            header: 'Size'
-        },
-        {
-            header: 'Actions'
-        }
-    ]
-
     const {data:user, isLoading} = useGetUserQuery();
     const [isSample, setSample] = useState(false);
 
@@ -58,6 +57,9 @@ const Dataset = () => {
                     <NewDataset />
                 </div>
             </div>
+            <div>
+
+            </div>
             <div className={'mt-14 flex flex-col gap-8'}>
                 <div className={'flex justify-between items-center'}>
                     <p className={'text-2xl text-primary-color font-semibold'}>All files</p>
@@ -73,7 +75,9 @@ const Dataset = () => {
                     </Button>
                 </div>
 
-                <TableData isSample={isSample} file={state} isFileLoading={isFileLoading} sample_dataset={sample_dataset} headers={headers}/>
+                <div className={'lg:w-[85%] md:w-[90%] w-full'}>
+                    <TableData isSample={isSample} file={state} isFileLoading={isFileLoading} sample_dataset={sample_dataset} headers={headers}/>
+                </div>
 
             </div>
         </div>

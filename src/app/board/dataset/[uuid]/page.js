@@ -5,6 +5,7 @@ import ShareMember from "@/app/board/dataset/component/shareMember";
 import {Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import Overview from "@/app/board/dataset/component/cleaning/Overview";
 import CleanModal from "@/app/board/dataset/component/cleaning/CleanModal";
+import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
 
 const DetailDataset = ({params}) => {
     let id = params.id
@@ -121,6 +122,9 @@ const DetailDataset = ({params}) => {
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
                 <Overview />
                 <CleanModal />
+            </div>
+            <div className={'flex justify-end items-center'}>
+                <HistoryDrawer />
             </div>
 
             <div className={'rounded-2xl shadow-lg h-[500px] overflow-y-scroll'}>

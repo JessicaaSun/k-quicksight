@@ -20,25 +20,15 @@ import {useDeleteFileByIdMutation, useGetAllFilesQuery} from "@/store/features/f
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useDispatch} from "react-redux";
 import {setFiles} from "@/store/features/files/fileSlice";
+import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 
 export default function TableData({file, isSample, isFileLoading, sample_dataset, headers}) {
     const router = useRouter();
-    const [deleteFileById] = useDeleteFileByIdMutation();
-    const {data:user} = useGetUserQuery();
-    const dispatch = useDispatch();
-    const {data:allFiles, refetch: refetchAllFiles} = useGetAllFilesQuery({id:user?.data.id, filename: '', type: ''})
-    const [actual, setActual] = useState([])
-    const handleDeleteFile = async (uuid) => {
-        await deleteFileById({ uuid: uuid, id: user?.data.id });
-        const updatedFiles = allFiles.filter((file) => file.uuid !== uuid);
-        setActual(updatedFiles);
-        console.log(updatedFiles);
-        dispatch(setFiles(updatedFiles));
-        refetchAllFiles(); // Optional: Refetch the updated list of files
-    };
     return (
         <Table
-            aria-label="Example table with client async pagination">
+            aria-label="Example table with client async pagination"
+            className={'w-full'}
+        >
             <TableHeader>
                 {
                     headers.map((item, index) => (
@@ -58,13 +48,13 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                     <TableCell>{formatBytes(item.size)}</TableCell>
                                     <TableCell className={'flex gap-5'}>
                                         <Tooltip showArrow={true} content="Edit">
-                                            <button ><i className="fa-regular fa-pen-to-square"></i></button>
+                                            <button><i className="fa-regular fa-pen-to-square "></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'View'}>
                                             <button onClick={() => router.push(`/board/dataset/${item.uuid}`)}><i className="fa-regular fa-eye"></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'Delete'}>
-                                            <button onClick={() => handleDeleteFile(item.uuid)} ><i className="fa-solid fa-trash"></i></button>
+                                            <DeleteButton uuid={item.uuid} filename={item.file} />
                                         </Tooltip>
 
                                     </TableCell>
@@ -89,7 +79,11 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>{getTrimIntoColumnOnlyDate(item.createAt)}</TableCell>
                                 <TableCell>{item.size}</TableCell>
-                                <TableCell>No actions</TableCell>
+                                <TableCell>
+                                    <Tooltip showArrow={true} content={'View'}>
+                                        <button onClick={() => router.push(`/board/dataset/${item.uuid}`)}><i className="fa-regular fa-eye"></i></button>
+                                    </Tooltip>
+                                </TableCell>
                             </TableRow>
                         ))
                     )

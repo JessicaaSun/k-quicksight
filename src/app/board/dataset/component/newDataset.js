@@ -15,6 +15,7 @@ import { setCurrentUser } from "@/store/features/auth/authSlice";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
 import { useRouter } from "next/navigation";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
+import SampleDataset from "@/app/board/dataset/component/SampleDataset";
 
 export default function NewDataset() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -57,11 +58,7 @@ export default function NewDataset() {
                                     Import
                                 </div>
                             </label>
-                            <Button
-                                className={'text-white w-1/2 bg-primary-color border-2 border-white shadow-lg'}
-                            >
-                                Sample Dataset
-                            </Button>
+                            <SampleDataset />
                         </ModalBody>
                     </div>
                 </ModalContent>

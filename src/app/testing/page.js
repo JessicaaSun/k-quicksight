@@ -1,12 +1,7 @@
 "use client";
 
-import Test from "@/lib/editor/Test";
+import KQSEditor from "@/lib/editor/Editor";
 
 export default function Testing() {
-
-  return (
-  
-      <Test/>
-  
-  );
+  return <div></div>;
 }

@@ -10,19 +10,19 @@ import AppLayerSettings from "./layout/AppLayerSettings";
 import { Editor, PageControl } from "@lidojs/editor";
 import styled from "styled-components";
 import Loading from "@/app/loading";
+import { useHandlePreview } from "@/context/EditorPreviewContext";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   max-height: auto;
 `;
 
-const Test = () => {
+const KQSEditor = ({ isSidebarHidden }) => {
   const leftSidebarRef = useRef(null);
-  const [openPreview, setOpenPreview] = useState(false);
   const [viewPortHeight, setViewPortHeight] = useState(0);
+  const {handleOnClickPreview, isOpenPreview} = useHandlePreview();
 
   const getFonts = useCallback(async (query) => {
     const buildParams = (data) => {
@@ -47,7 +47,6 @@ const Test = () => {
     try {
       const height = window?.innerHeight;
       setViewPortHeight(height);
-      console.log("-->", height);
     } catch (error) {
       console.log("-->", error);
     }
@@ -63,8 +62,9 @@ const Test = () => {
     }
   }, [viewPortHeight]);
 
+
   if (viewPortHeight === 0) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
@@ -81,9 +81,8 @@ const Test = () => {
       }}
       getFonts={getFonts}
     >
-      <Container>
-        {/* <HeaderLayout openPreview={() => setOpenPreview(true)} /> */}
-        {openPreview && <PreviewModal onClose={() => setOpenPreview(false)} />}
+    <Container className={` ${isSidebarHidden ? 'w-full' : 'w-[calc(100vw-255px)]'} h-[calc(100vh-60px)] max-h-auto`}>
+        {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{
             display: "flex",
@@ -147,4 +146,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default KQSEditor;

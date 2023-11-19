@@ -84,7 +84,8 @@ const SignUpForm = () => {
           axios
             .post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/register/`, data)
             .then((response) => {
-              router.push(`/auth/verify/${response.data.data.email}`);
+              console.log("data register", data)
+              router.push(`/auth/verify/${response.data.email}`);
             })
             .catch(function (error) {
               setErrorMessage(error?.response?.data?.errors);

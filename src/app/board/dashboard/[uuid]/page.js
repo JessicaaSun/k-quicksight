@@ -1,11 +1,15 @@
-import React from 'react';
+"use client"
+import { useSidebar } from "@/context/BoardSideBarContext";
+import KQSEditor from "@/lib/editor/Editor";
+import React from "react";
 
-const Page = ({params}) => {
-    return (
-        <div>
-            Hello world
-        </div>
-    );
+const Page = ({ params }) => {
+  const { isSidebarHidden } = useSidebar();
+  return (
+    <div>
+      <KQSEditor isSidebarHidden={isSidebarHidden} />
+    </div>
+  );
 };
 
 export default Page;

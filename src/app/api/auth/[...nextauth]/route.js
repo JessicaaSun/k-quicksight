@@ -29,7 +29,6 @@ export const authOptions = {
     async jwt({ token, account, profile }) {
       if (account) {
         token.auth_token = account.id_token;
-        // console.log("account    ", account.id_token)
       }
       return token;
     }, },

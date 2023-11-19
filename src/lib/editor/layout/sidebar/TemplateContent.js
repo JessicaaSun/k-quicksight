@@ -5,6 +5,7 @@ import { useAsync } from "react-use";
 import axios from "axios";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
+import Image from "next/image";
 
 const TemplateContent = ({ onClose }) => {
   const [templates, setTemplates] = useState([]);
@@ -93,7 +94,7 @@ const TemplateContent = ({ onClose }) => {
               style={{ cursor: "pointer" }}
               onClick={() => addPage(JSON.parse(item.data))}
             >
-              <img src={item.img} loading="lazy" alt={`Template ${index}`} />
+              <Image src={item.img} loading="lazy" alt={`Template ${index}`} />
             </div>
           ))}
         </div>

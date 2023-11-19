@@ -14,7 +14,7 @@ const ImageContent = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useAsync(async () => {
-    const response = await axios.get("/images");
+    const response = await axios.get("https://api-gilt-one.vercel.app/images");
     setImages(response.data);
     setIsLoading(false);
   }, []);

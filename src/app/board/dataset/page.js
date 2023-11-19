@@ -82,7 +82,7 @@ const Dataset = () => {
                     </Button>
                 </div>
 
-                <div className={'lg:w-[85%] md:w-[90%] w-full max-h-[550px] overflow-y-scroll'}>
+                <div className={'lg:w-[85%] md:w-full w-full max-h-[550px] overflow-y-scroll'}>
                     <TableData isSample={isSample} file={state} isFileLoading={isFileLoading} sample_dataset={sample_dataset} headers={headers}/>
                 </div>
 

@@ -45,10 +45,10 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                     <TableCell>{formatBytes(item.size)}</TableCell>
                                     <TableCell className={'flex gap-5'}>
                                         <Tooltip showArrow={true} content="Edit">
-                                            <button><i className="fa-regular fa-pen-to-square "></i></button>
+                                            <button><i className="fa-regular fa-pen-to-square "  style={{color: '#b3008c'}}></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'View'}>
-                                            <button onClick={() => handleView(item.uuid)}><i className="fa-regular fa-eye"></i></button>
+                                            <button onClick={() => handleView(item.uuid)}><i className="fa-regular fa-eye" style={{color: '#0300b8'}}></i></button>
                                         </Tooltip>
                                         <Tooltip showArrow={true} content={'Delete'}>
                                             <DeleteButton uuid={item.uuid} filename={item.file} type={item.type} createAt={item.created_at} size={item.size} />

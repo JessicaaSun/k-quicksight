@@ -23,7 +23,7 @@ export default function DeleteButton({uuid, filename, type, createAt, size}) {
 
     return (
         <>
-            <Button onPress={onOpen} className={'p-0 min-w-fit bg-white'}><i className="fa-solid fa-trash"></i></Button>
+            <Button onPress={onOpen} className={'p-0 min-w-fit bg-white'}><i className="fa-solid fa-trash" style={{color: '#db0000'}}></i></Button>
             <Modal
                 size={'2xl'}
                 backdrop="opaque"

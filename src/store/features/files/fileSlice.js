@@ -1,6 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {}
+const initialState = {
+    allFiles: [],
+    total: ''
+}
 
 const allFiles = createSlice({
     name: 'allFiles',
@@ -10,8 +13,11 @@ const allFiles = createSlice({
             // console.log(action.payload)
             state.allFiles = action.payload;
         },
+        setTotalSize: (state , action) => {
+            state.total = action.payload
+        }
     }
 })
 
-export const {setFiles} = allFiles.actions;
+export const {setFiles, setTotalSize} = allFiles.actions;
 export default allFiles.reducer;

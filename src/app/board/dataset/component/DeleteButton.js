@@ -17,7 +17,6 @@ export default function DeleteButton({uuid, filename, type, createAt, size}) {
     const handleDeleteFile = async (uuid) => {
         await deleteFileById({ uuid: uuid, id: user?.data.id });
         const updatedFiles = allFiles.filter((file) => file.uuid !== uuid);
-        console.log(updatedFiles);
         dispatch(setFiles(updatedFiles));
         refetchAllFiles();
     };

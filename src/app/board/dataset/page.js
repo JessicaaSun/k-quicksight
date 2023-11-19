@@ -10,9 +10,10 @@ import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import TableData from "@/lib/table/Table";
 import {useDispatch, useSelector} from "react-redux";
-import {setFiles} from "@/store/features/files/fileSlice";
+import {setFiles, setTotalSize} from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
+import {formatBytes} from "@/utils/convertByte";
 export const headers = [
     {
         header: 'Title'
@@ -40,13 +41,19 @@ const Dataset = () => {
     const filType = useSelector(state => state.fileType.fileType);
     const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery({id:user?.data.id, filename: '', type:filType})
     const dispatch = useDispatch();
-    const state = useSelector(state => state.allFiles.allFiles)
-
+    const state = useSelector(state => state.allFiles.allFiles);
+    const totalFree = useSelector(state => state.allFiles.total)
+    const [isFull, setStorage] = useState(false);
     useEffect(() => {
         dispatch(setFiles(allFile))
-    }, [allFile, dispatch])
-
-    // console.log(user)
+        if (allFile) {
+            const totalSize = allFile.reduce((accumulator, currentValue) => accumulator + currentValue.size, 0);
+            dispatch(setTotalSize(1000000000 - totalSize))
+        }
+        if (totalFree >= 1000000000){
+            setStorage(true)
+        }
+    }, [allFile, dispatch, totalFree])
 
     return (
         <div className={'px-5 py-5'}>
@@ -54,7 +61,7 @@ const Dataset = () => {
                 <p className={'text-primary-color font-semibold text-2xl'}>Dataset</p>
                 <div className={'flex justify-center items-center gap-5'}>
                     <ModalImport />
-                    <NewDataset />
+                    <NewDataset isFull={isFull} />
                 </div>
             </div>
             <div>
@@ -63,7 +70,7 @@ const Dataset = () => {
             <div className={'mt-14 flex flex-col gap-8'}>
                 <div className={'flex justify-between items-center'}>
                     <p className={'text-2xl text-primary-color font-semibold'}>All files</p>
-                    <p className={'text-primary-color font-semibold text-lg'}>Free <span className={'text-secondary-color'}>{1000 - user?.data.storage_data} KB</span> / 1 GB</p>
+                    <p className={'text-primary-color font-semibold text-lg'}>Free <span className={'text-secondary-color'}>{formatBytes(totalFree)}</span> / 1 GB</p>
                 </div>
 
                 <div className={'flex flex-row gap-5'}>
@@ -75,7 +82,7 @@ const Dataset = () => {
                     </Button>
                 </div>
 
-                <div className={'lg:w-[85%] md:w-[90%] w-full'}>
+                <div className={'lg:w-[85%] md:w-[90%] w-full max-h-[550px] overflow-y-scroll'}>
                     <TableData isSample={isSample} file={state} isFileLoading={isFileLoading} sample_dataset={sample_dataset} headers={headers}/>
                 </div>
 

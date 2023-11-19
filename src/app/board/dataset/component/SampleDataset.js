@@ -28,7 +28,7 @@ export default function SampleDataset() {
                             <ModalBody>
                                 <div className={'flex justify-between items-center w-full'}>
                                     <p className={'text-2xl text-primary-color font-medium'}>All Dataset</p>
-                                    <SearchDataset />
+                                    {/*<SearchDataset />*/}
                                 </div>
                                 <SampleDatasetTable />
                             </ModalBody>

@@ -14,7 +14,6 @@ import {
 import {getTrimIntoColumnOnlyDate} from "@/utils/getTrimDateTIme";
 import {formatBytes} from "@/utils/convertByte";
 import {useRouter} from "next/navigation";
-import {useDispatch, useSelector} from "react-redux";
 import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 
 export default function TableData({file, isSample, isFileLoading, sample_dataset, headers}) {
@@ -24,13 +23,13 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
     }
     return (
         <Table
+            isHeaderSticky
             aria-label="Example table with client async pagination"
-            className={'w-full'}
         >
             <TableHeader>
                 {
                     headers.map((item, index) => (
-                        <TableColumn key={index}>{item.header}</TableColumn>
+                        <TableColumn className={'bg-blue-50'} key={index}>{item.header}</TableColumn>
                     ))
                 }
             </TableHeader>
@@ -65,9 +64,7 @@ export default function TableData({file, isSample, isFileLoading, sample_dataset
                                     <TableCell><Spinner color="default"/></TableCell>
                                     <TableCell><Spinner color="default"/></TableCell>
                                     <TableCell><Spinner color="default"/></TableCell>
-
                                 </TableRow>
-
                             )
                         ))
                     ) : (

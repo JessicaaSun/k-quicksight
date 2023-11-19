@@ -25,6 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
+      console.log("session:", session)
       const fetchData = async () => {
         try {
           const { data } = await loginWithGoogle({
@@ -41,19 +42,22 @@ export default function Home() {
       fetchData();
     }
   }, [dispatch, loginWithGoogle, session]);
-  // if (status === "loading" || isLoading) {
-  //   return <Loading />;
-  // }
+ 
+  if (status === "loading" || isLoading) {
+    return <Loading />;
+  }
   return (
-    <main className="pt-24 flex flex-col gap-20 overflow-x-hidden">
-      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14">
-        <div className="flex flex-col gap-3 lg:w-2/3 md:w-1/2 w-full">
-          <h1 className="lg:text-5xl md:text-3xl text-2xl font-bold">
+    <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
+      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
+        <div className="flex flex-col gap-3 w-full">
+          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
+            <p className="leading-[65px] max-sm:leading-normal sm:leading-normal">
             Discover, Analyze and Decide With{" "}
-            <span className="lg:leading-[100px] mg:leading-normal text-primary-color">
+            <span className=" text-primary-color">
               K-QuickSight
             </span>
-          </h1>
+            </p>
+          </div>
           <p className="text-description-color text-lg">
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
@@ -99,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} alt="hero" className="homepage_image w-full" />
+          <Image src={heroImg} priority={false} alt="hero" className="homepage_image w-full" />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">

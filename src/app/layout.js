@@ -7,7 +7,8 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import AuthProvider from "./AuthProvider";
 import Footer from "@/components/footer/footer";
-import Script from "next/script";
+import { SidebarProvider } from "../context/BoardSideBarContext";
+import { PreviewProvider } from "@/context/EditorPreviewContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,22 +22,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-background-color">
-        <Provider>
-          <Suspense fallback={<Loading />}>
-            <Providers>
-              <AuthProvider>
+        <SidebarProvider>
+          <PreviewProvider>
+            <Provider>
+              <Suspense fallback={<Loading />}>
+                <Providers>
+                  <AuthProvider>
+                    <Navbar_UI />
+                    {children}
 
-                <Navbar_UI />
-                {children}
-
-                <Footer />
-              </AuthProvider>
-
-
-            </Providers>
-          </Suspense>
-        </Provider>
-        <Script src="https://kit.fontawesome.com/dfbc5788ab.js" crossOrigin="anonymous"></Script>
+                    <Footer />
+                  </AuthProvider>
+                </Providers>
+              </Suspense>
+            </Provider>
+          </PreviewProvider>
+        </SidebarProvider>
       </body>
     </html>
   );

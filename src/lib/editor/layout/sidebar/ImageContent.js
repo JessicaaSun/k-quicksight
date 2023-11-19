@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState } from "react";
@@ -7,7 +8,6 @@ import { getThumbnail } from "../../utils/thumbnail";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
-import Image from "next/image";
 
 const ImageContent = ({ onClose }) => {
   const [images, setImages] = useState([]);
@@ -23,18 +23,17 @@ const ImageContent = ({ onClose }) => {
 
   const addImage = async (thumb, url) => {
     const img = new Image();
-  
     img.src = url;
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      actions.addImageLayer(
-        { thumb, url },
-        { width: img.naturalWidth, height: img.naturalHeight }
-      );
-      if (isMobile) {
-        onClose();
-      }
-    };
+    await img.decode();
+
+    actions.addImageLayer(
+      { thumb, url },
+      { width: img.width, height: img.height }
+    );
+
+    if (isMobile) {
+      onClose();
+    }
   };
 
   return (
@@ -109,7 +108,7 @@ const ImageContent = ({ onClose }) => {
               }}
               onClick={() => addImage(getThumbnail(item.img), item.img)}
             >
-              <Image
+              <img
                 src={getThumbnail(item.img)}
                 loading="lazy"
                 style={{

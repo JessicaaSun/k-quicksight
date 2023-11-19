@@ -82,7 +82,7 @@ const Test = () => {
       getFonts={getFonts}
     >
       <Container>
-        <HeaderLayout openPreview={() => setOpenPreview(true)} />
+        {/* <HeaderLayout openPreview={() => setOpenPreview(true)} /> */}
         {openPreview && <PreviewModal onClose={() => setOpenPreview(false)} />}
         <div
           style={{

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from "@/app/board/components/BoardSidebar";
 import Navbar from "@/app/board/components/BoardNavbar";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
@@ -9,6 +9,7 @@ import authenticated from '@assets/images/authentication.png'
 import {useRouter} from "next/navigation";
 export default function BoardRootLayout ({children}){
     const {data:user} = useGetUserQuery()
+    const [openPreview, setOpenPreview] = useState(false);
     const router = useRouter();
     if (!user) {
        return (
@@ -26,7 +27,7 @@ export default function BoardRootLayout ({children}){
     } else if (user){
         return (
             <section>
-                <Navbar />
+                <Navbar openPreview={() => setOpenPreview(true)} />
                 <div id={'board'} className={'lg:pl-[355px] lg:pt-[87px] md:p-10 bg-background-color min-h-screen'}>
                     {children}
                 </div>

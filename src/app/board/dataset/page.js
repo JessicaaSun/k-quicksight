@@ -14,6 +14,7 @@ import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
 import { formatBytes } from "@/utils/convertByte";
+import { FaDatabase } from "react-icons/fa";
 export const headers = [
   {
     header: "Title",
@@ -48,6 +49,7 @@ const Dataset = () => {
   const state = useSelector((state) => state.allFiles.allFiles);
   const totalFree = useSelector((state) => state.allFiles.total);
   const [isFull, setStorage] = useState(false);
+
   useEffect(() => {
     dispatch(setFiles(allFile));
     if (allFile) {
@@ -71,7 +73,6 @@ const Dataset = () => {
           <NewDataset isFull={isFull} />
         </div>
       </div>
-      <div></div>
       <div className={"mt-14 flex flex-col gap-8"}>
         <div className={"flex justify-between items-center"}>
           <p className={"text-2xl text-primary-color font-semibold"}>
@@ -97,7 +98,9 @@ const Dataset = () => {
                 : "bg-white text-text-color"
             } border-1 border-gray-300`}
           >
-            <i className="text-lg fa-solid fa-database"></i>
+            <i className="text-lg">
+              <FaDatabase />
+            </i>
             <p>Sample Dataset</p>
           </Button>
         </div>

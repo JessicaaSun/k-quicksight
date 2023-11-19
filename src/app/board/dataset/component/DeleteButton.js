@@ -24,6 +24,7 @@ import { setFiles } from "@/store/features/files/fileSlice";
 import { headers } from "@/app/board/dataset/page";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
+import { FaTrash } from "react-icons/fa6";
 
 export default function DeleteButton({ uuid, filename, type, createAt, size }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -50,7 +51,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
           "min-w-fit bg-transparent hover:text-danger gap-4 inline-flex justify-start h-unit-6 px-unit-0"
         }
       >
-        <i className="fa-solid fa-trash"></i>Delete
+        <i><FaTrash/></i>Delete
       </Button>
       <Modal
         size={"2xl"}

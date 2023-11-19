@@ -7,6 +7,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import axios from "axios";
 
 const SignUpForm = () => {
   const [showPassword, setPassword] = useState(false);
@@ -77,13 +78,13 @@ const SignUpForm = () => {
             username: values.username,
             email: values.email,
             password: values.password,
-            isConfirm: checkBox,
+            is_confirmed: checkBox,
           };
           setIsLoading(true);
           axios
             .post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/register/`, data)
-            .then(function (response) {
-              router.push(`/verify/${response.data.data.email}`);
+            .then((response) => {
+              router.push(`/auth/verify/${response.data.data.email}`);
             })
             .catch(function (error) {
               setErrorMessage(error?.response?.data?.errors);

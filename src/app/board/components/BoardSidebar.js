@@ -2,10 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "@/store/features/auth/authSlice";
 import Link from "next/link";
-import Navbar from "./BoardNavbar";
 import { usePathname } from "next/navigation";
 
 const contentRoute = {
@@ -152,7 +149,7 @@ const contentRoute = {
   },
 };
 
-const Sidebar = ({ toggleSidebar }) => {
+const BoardSidebar = ({ toggleSidebar }) => {
   console.log(toggleSidebar);
   const { data: user, isSuccess } = useGetUserQuery();
   const pathname = usePathname();
@@ -254,4 +251,4 @@ const Sidebar = ({ toggleSidebar }) => {
   );
 };
 
-export default Sidebar;
+export default BoardSidebar;

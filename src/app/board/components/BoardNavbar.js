@@ -5,7 +5,7 @@ import Image from "next/image";
 import logo from "@assets/logos/logo.png";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import Sidebar from "@/app/board/components/BoardSidebar";
+import BoardSidebar from "@/app/board/components/BoardSidebar";
 import {
   Avatar,
   Button,
@@ -18,7 +18,6 @@ import { logout } from "@/store/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import PlayCircleIcon from "@duyank/icons/regular/PlayCircle";
 
 const Navbar = ({ openPreview }) => {
   const { data: user, isSuccess, isLoading } = useGetUserQuery();
@@ -151,7 +150,7 @@ const Navbar = ({ openPreview }) => {
         )}
       </div>
 
-      <Sidebar toggleSidebar={isSidebarHidden} />
+      <BoardSidebar toggleSidebar={isSidebarHidden} />
     </div>
   );
 };

@@ -30,7 +30,6 @@ export default function Home() {
           const { data } = await loginWithGoogle({
             auth_token: session.auth_token,
           }).unwrap();
-          // console.log("data", data);
           dispatch(setCredentials(data));
           // Navigate to the welcome page
         } catch (error) {
@@ -65,14 +64,14 @@ export default function Home() {
             {!user ? (
               <Button
                 onClick={() => router.push("/auth/login")}
-                className="w-[174px] font-bold bg-primary-color text-white"
+                className="w-[184px] font-bold bg-primary-color text-white"
               >
                 Get started
               </Button>
             ) : (
               <Button
-                onClick={() => router.push("/board")}
-                className="w-[174px] font-bold bg-primary-color text-white"
+                onClick={() => router.push("/board/recent")}
+                className="w-[184px] font-bold bg-primary-color text-white"
               >
                 Go To Board
               </Button>

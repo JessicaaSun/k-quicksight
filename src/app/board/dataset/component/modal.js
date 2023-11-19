@@ -14,7 +14,8 @@ import {
 
 export default function App() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [linkScrap, setLinkScrap] = useState('')
+    const [linkScrap, setLinkScrap] = useState('');
+
 
     return (
         <>
@@ -31,11 +32,11 @@ export default function App() {
                                     ]
                                 }} value={linkScrap} onValueChange={setLinkScrap} />
                             </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
+                            <ModalFooter className={'flex gap-5'}>
+                                <Button className={'bg-white border-1 border-primary-color text-primary-color font-medium'} variant="light" onPress={onClose}>
                                     Cancel
                                 </Button>
-                                <Button color="primary" onPress={onClose}>
+                                <Button className={'bg-primary-color text-white font-medium'} onPress={onClose}>
                                     Import
                                 </Button>
                             </ModalFooter>

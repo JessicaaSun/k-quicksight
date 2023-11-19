@@ -46,11 +46,11 @@ const HeaderLayout = ({ openPreview }, ref) => {
         }}
       >
         <div style={{ color: "white", height: 46 }}>
-          <img
+          {/* <img
             src={"./assets/logo.png"}
             style={{ maxHeight: "100%" }}
             alt="Logo"
-          />
+          /> */}
         </div>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>

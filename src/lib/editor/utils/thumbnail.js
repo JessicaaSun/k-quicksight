@@ -1,4 +1,4 @@
-const getThumbnail = function(url) {
+export const getThumbnail = function(url) {
     const parts = url.split('/');
 
     // get the filename

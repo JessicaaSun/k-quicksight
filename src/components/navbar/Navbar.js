@@ -23,6 +23,7 @@ import {unstable_ClassNameGenerator} from "@mui/material";
 import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 import {configSchema} from "next/dist/server/config-schema";
 import {useSession,signOut} from "next-auth/react";
+import Loading from "@/app/loading";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -81,6 +82,7 @@ export default function NavbarKQuick() {
   ];
 
   if (validNavPath.some(path => pathname.startsWith(path))) return null;
+  else if (isLoading) return (<Loading />)
   else
     return (
       <nav className="flex flex-col fixed z-40 w-full">

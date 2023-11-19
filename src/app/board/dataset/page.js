@@ -50,7 +50,7 @@ const Dataset = () => {
             const totalSize = allFile.reduce((accumulator, currentValue) => accumulator + currentValue.size, 0);
             dispatch(setTotalSize(1000000000 - totalSize))
         }
-        if (totalFree >= 1000000000){
+        if (totalFree > 1000000000){
             setStorage(true)
         }
     }, [allFile, dispatch, totalFree])
@@ -82,7 +82,7 @@ const Dataset = () => {
                     </Button>
                 </div>
 
-                <div className={'lg:w-[85%] md:w-full w-full max-h-[550px] overflow-y-scroll'}>
+                <div className={'w-full max-h-[550px] overflow-y-scroll'}>
                     <TableData isSample={isSample} file={state} isFileLoading={isFileLoading} sample_dataset={sample_dataset} headers={headers}/>
                 </div>
 

@@ -42,8 +42,9 @@ const Dataset = () => {
     const {data: allFile, isLoading: isFileLoading}  = useGetAllFilesQuery({id:user?.data.id, filename: '', type:filType})
     const dispatch = useDispatch();
     const state = useSelector(state => state.allFiles.allFiles);
-    const totalFree = useSelector(state => state.allFiles.total)
+    const totalFree = useSelector(state => state.allFiles.total);
     const [isFull, setStorage] = useState(false);
+
     useEffect(() => {
         dispatch(setFiles(allFile))
         if (allFile) {
@@ -63,9 +64,6 @@ const Dataset = () => {
                     <ModalImport />
                     <NewDataset isFull={isFull} />
                 </div>
-            </div>
-            <div>
-
             </div>
             <div className={'mt-14 flex flex-col gap-8'}>
                 <div className={'flex justify-between items-center'}>

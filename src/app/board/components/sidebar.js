@@ -50,13 +50,13 @@ const Sidebar = ({toggleSidebar}) => {
     const {data:user, isSuccess} = useGetUserQuery()
     const pathname = usePathname();
     return (
-        <div className={`${toggleSidebar ? 'ml-[-1000px]' : ''} bg-white transition-all text-description-color z-20 left-0 px-5 py-10 fixed flex flex-col gap-10 top-[63px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[278px] min-h-screen`}>
+        <div className={`${toggleSidebar ? 'ml-[-1000px]' : ''} bg-white transition-all text-description-color z-20 left-0 px-5 py-10 fixed flex flex-col gap-10 top-[63px] lg:overflow-y-hidden md:overflow-y-scroll max-w-[278px] min-h-screen`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <div className={'flex gap-5 justify-center items-center'}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className={'border-2 border-primary w-[70px] h-[70px] object-cover rounded-full'} src={user?.data.avatar ? user.data.avatar : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'}  alt={'profile'}/>
                 <div>
-                    <p className={'text-primary-color text-2xl font-semibold'}>{user?.data.username}</p>
+                    <p className={'text-primary-color text-2xl truncate w-[130px] font-semibold'}>{user?.data.username}</p>
                     <p className={'text-description-color truncate w-[130px]'}>{user?.data.email}</p>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { useAsync } from "react-use";
@@ -96,11 +97,9 @@ const TextContent = ({ onClose }) => {
                 paddingBottom: "100%",
                 width: "100%",
               }}
-              onClick={() => handleAddText(JSON.parse(data))}
+              onClick={() => {handleAddText(JSON.parse(data), console.log("text data:",JSON.parse(data)))}}
             >
-              <Image
-                width={100}
-                height={100}
+              <img
                 alt="text"
                 src={getThumbnail(img)}
                 style={{

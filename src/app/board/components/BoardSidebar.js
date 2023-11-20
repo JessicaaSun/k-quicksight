@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,6 +45,7 @@ const contentRoute = {
 const BoardSidebar = ({ toggleSidebar }) => {
   const { data: user, isSuccess } = useGetUserQuery();
   const pathname = usePathname();
+
   return (
     <div
       className={`${

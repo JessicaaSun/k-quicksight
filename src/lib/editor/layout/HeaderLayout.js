@@ -1,12 +1,42 @@
 "use client";
 import React, { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import PlayCircleIcon from "@duyank/icons/regular/PlayCircle";
 import { downloadObjectAsJson } from "../utils/download";
 import { useEditor } from "@lidojs/editor";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import { useDispatch } from "react-redux";
+import { usePathname } from "next/navigation";
+import { useSidebar } from "@/context/BoardSideBarContext";
+import { useHandlePreview } from "@/context/EditorPreviewContext";
+
+import {
+  AiFillPlayCircle,
+  AiOutlineCaretLeft,
+  AiOutlineCaretRight,
+} from "react-icons/ai";
+import logo from "@assets/logos/logo.png";
+import BoardSidebar from "@/app/board/components/BoardSidebar";
 
 const HeaderLayout = ({ openPreview }, ref) => {
   const uploadRef = useRef(null);
   const { actions, query } = useEditor();
+  const { data: user, isSuccess, isLoading } = useGetUserQuery();
+  const dispatch = useDispatch();
+  const pathname = usePathname();
+
+  const displayPreviewBtn = pathname.includes("dashboard/", "analysis/");
+  const { isSidebarHidden, toggleSidebar } = useSidebar();
+  const { handleOnClickPreview } = useHandlePreview();
 
   const handleExport = () => {
     downloadObjectAsJson("file", query.serialize());
@@ -28,89 +58,133 @@ const HeaderLayout = ({ openPreview }, ref) => {
   return (
     <div
       ref={ref}
-      style={{
-        background: "#1E1E2D",
-        padding: "12px 32px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        "@media (maxWidth: 900px)": {
-          padding: 12,
-        },
-      }}
+      className={
+        "fixed z-40 top-0 right-0 w-full bg-primary-color flex justify-between items-center px-[3%] py-3"
+      }
     >
-      <div
-        style={{
-          color: "#3d8eff",
-          fontSize: 36,
-        }}
-      >
-        <div style={{ color: "white", height: 46 }}>
-          {/* <img
-            src={"./assets/logo.png"}
-            style={{ maxHeight: "100%" }}
-            alt="Logo"
-          /> */}
-        </div>
-      </div>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{
-            margin: "0 16px",
-            cursor: "pointer",
-            color: "#fff",
-            fontWeight: 700,
-            ":hover": {
-              textDecoration: "underline",
-            },
-          }}
-          onClick={() => uploadRef.current?.click()}
-        >
-          <input
-            ref={uploadRef}
-            type="file"
-            accept="application/json"
-            onChange={handleImport}
-            style={{ display: "none" }}
+      <div className={"flex justify-center items-center gap-5"}>
+        {isSidebarHidden ? (
+          <button
+            onClick={toggleSidebar}
+            className="text-white text-[20px] md:block block"
+          >
+            <AiOutlineCaretRight />
+          </button>
+        ) : (
+          <button
+            onClick={toggleSidebar}
+            className="text-white text-[20px] md:block block"
+          >
+            <AiOutlineCaretLeft />
+          </button>
+        )}
+        <Link href={"/"}>
+          <Image
+            src={logo}
+            alt={"logo"}
+            className={"bg-white rounded-full w-[36px] h-[36px] object-contain"}
           />
-          Import
-        </div>
-        <div
-          style={{
-            margin: "0 16px",
-            cursor: "pointer",
-            color: "#fff",
-            fontWeight: 700,
-            ":hover": {
-              textDecoration: "underline",
-            },
-          }}
-          onClick={() => handleExport()}
-        >
-          Export
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            color: "#fff",
-            lineHeight: 1,
-            background: "#3a3a4c",
-            padding: "8px 14px",
-            borderRadius: 8,
-            cursor: "pointer",
-            ":hover": {
-              background: "rgba(58,58,76,0.5)",
-            },
-          }}
-          onClick={openPreview}
-        >
-          <div style={{ marginRight: 4, fontSize: 20 }}>
-            <PlayCircleIcon />
-          </div>{" "}
-          Preview
-        </div>
+        </Link>
       </div>
+      <div className="flex gap-5 items-center">
+        {displayPreviewBtn ? (
+          <div className="flex items-center gap-4">
+            <div
+              style={{
+                cursor: "pointer",
+                color: "#fff",
+                fontWeight: 700,
+                ":hover": {
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={() => uploadRef.current?.click()}
+            >
+              <input
+                ref={uploadRef}
+                type="file"
+                accept="application/json"
+                onChange={handleImport}
+                style={{ display: "none" }}
+              />
+              Import
+            </div>
+            <div
+              style={{
+                cursor: "pointer",
+                color: "#fff",
+                fontWeight: 700,
+                ":hover": {
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={handleExport}
+            >
+              Export
+            </div>
+            <div
+              className="flex items-center text-primary-color leading-1 bg-white p-2 rounded-lg cursor-pointer hover:bg-slate-200"
+              onClick={handleOnClickPreview}
+            >
+              <div style={{ fontSize: 20 }}>
+                <AiFillPlayCircle />
+              </div>{" "}
+              Preview
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <Dropdown>
+          <DropdownTrigger>
+            <Avatar
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="secondary"
+              name="Jason Hughes"
+              size="sm"
+              src={
+                user?.data.avatar
+                  ? user.data.avatar
+                  : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+              }
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Dynamic Actions">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold text-primary-color">
+                {user?.data.username}
+              </p>
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => router.push("/profile")}
+              key="settings"
+            >
+              Profile
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => router.push("/board")}
+              key="team_settings"
+            >
+              Board
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                dispatch(logout());
+                window.location.reload();
+              }}
+              key="logout"
+              color="danger"
+            >
+              logout
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+
+      <BoardSidebar toggleSidebar={isSidebarHidden} />
     </div>
   );
 };

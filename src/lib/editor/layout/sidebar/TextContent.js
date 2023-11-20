@@ -96,11 +96,9 @@ const TextContent = ({ onClose }) => {
                 paddingBottom: "100%",
                 width: "100%",
               }}
-              onClick={() => handleAddText(JSON.parse(data))}
+              onClick={() => {handleAddText(JSON.parse(data))}}
             >
               <Image
-                width={100}
-                height={100}
                 alt="text"
                 src={getThumbnail(img)}
                 style={{

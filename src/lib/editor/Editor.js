@@ -1,6 +1,5 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import HeaderLayout from "./layout/HeaderLayout";
 import Sidebar from "./layout/Sidebar";
 import EditorContent from "./pages/EditorContent";
 import PreviewModal from "./PreviewModal";
@@ -22,7 +21,7 @@ const Container = styled.div`
 const KQSEditor = ({ isSidebarHidden }) => {
   const leftSidebarRef = useRef(null);
   const [viewPortHeight, setViewPortHeight] = useState(0);
-  const {handleOnClickPreview, isOpenPreview} = useHandlePreview();
+  const { handleOnClickPreview, isOpenPreview } = useHandlePreview();
 
   const getFonts = useCallback(async (query) => {
     const buildParams = (data) => {
@@ -39,7 +38,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
       return params;
     };
 
-    const res = await axios.get(`/fonts?${buildParams(query)}`);
+    const res = await axios.get(`https://api-gilt-one.vercel.app/fonts?${buildParams(query)}`);
     return res.data;
   }, []);
 
@@ -62,7 +61,6 @@ const KQSEditor = ({ isSidebarHidden }) => {
     }
   }, [viewPortHeight]);
 
-
   if (viewPortHeight === 0) {
     return <Loading />;
   }
@@ -70,10 +68,10 @@ const KQSEditor = ({ isSidebarHidden }) => {
   return (
     <Editor
       config={{
-        assetPath: "./assets",
+        assetPath: "http://localhost:3000/assets/",
         frame: {
           defaultImage: {
-            url: `./assets/images/frame-placeholder.png`,
+            url: `http://localhost:3000/assets/images/frame-placeholder.png`,
             width: 1200,
             height: 800,
           },
@@ -81,7 +79,11 @@ const KQSEditor = ({ isSidebarHidden }) => {
       }}
       getFonts={getFonts}
     >
-    <Container className={` ${isSidebarHidden ? 'w-full' : 'w-[calc(100vw-255px)]'} h-[calc(100vh-60px)] max-h-auto`}>
+      <Container
+        className={` ${
+          isSidebarHidden ? "w-full" : "w-[calc(100vw-255px)]"
+        } h-[calc(100vh-64px)] max-h-auto`}
+      >
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{

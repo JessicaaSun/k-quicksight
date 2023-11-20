@@ -81,7 +81,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
         <div className={"flex flex-col gap-2"}>
           <Link
             className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
-              pathname === contentRoute.file.recent.route
+              pathname.startsWith(contentRoute.file.recent.route)
                 ? "bg-primary-color text-white"
                 : "bg-white"
             } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
@@ -92,7 +92,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           </Link>
           <Link
             className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
-              pathname === contentRoute.file.dataset.route
+              pathname.startsWith(contentRoute.file.dataset.route)
                 ? "bg-primary-color text-white"
                 : "bg-white"
             } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
@@ -103,7 +103,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           </Link>
           <Link
             className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
-              pathname === contentRoute.file.sample.route
+              pathname.startsWith(contentRoute.file.sample.route)
                 ? "bg-primary-color text-white"
                 : "bg-white"
             } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
@@ -123,7 +123,8 @@ const BoardSidebar = ({ toggleSidebar }) => {
         <div className={"flex flex-col gap-2"}>
           <Link
             className={`${
-              pathname === contentRoute.visualization.analysis.route
+              pathname.startsWith(contentRoute.visualization.analysis.route)  ? "bg-primary-color text-white"
+                  : "bg-white"
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.analysis.route}
           >
@@ -132,7 +133,8 @@ const BoardSidebar = ({ toggleSidebar }) => {
           </Link>
           <Link
             className={`${
-              pathname === contentRoute.visualization.dashboard.route
+              pathname.startsWith(contentRoute.visualization.dashboard.route)  ? "bg-primary-color text-white"
+                  : "bg-white"
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.dashboard.route}
           >

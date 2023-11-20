@@ -3,6 +3,7 @@ import { Button, Dropdown, Space } from "antd";
 import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 import { useRouter } from "next/navigation";
 import { FaEllipsis, FaEye, FaPen } from "react-icons/fa6";
+import EditDataset from "@/lib/table/componentTable/editDataset";
 
 const Dropdown_table = ({ uuid, filename, type, createAt, size }) => {
   const router = useRouter();
@@ -13,16 +14,8 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size }) => {
     {
       key: "1",
       label: (
-        <button
-          className={
-            "hover:text-secondary-color text-medium flex gap-3 justify-start items-center"
-          }
-        >
-          <i>
-            <FaPen />
-          </i>{" "}
-          Edit{" "}
-        </button>
+        <EditDataset title_dataset={filename} uuid={uuid} />
+
       ),
     },
     {

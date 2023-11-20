@@ -18,10 +18,30 @@ export const allFileByUserid = apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor: 5,
             providesTags: ["files"],
-        })
+        }),
+        getFileDetail: builder.query({
+            query: ({uuid, size}) => ({
+                url: `files/details/${uuid}/?size=${size}`,
+                method: 'GET',
+            }),
+            keepUnusedDataFor: 5,
+            providesTags: ["files"],
+        }),
+        updateFileName: builder.mutation({
+            query: ({uuid, data}) => ({
+                url: `files/files-detail-dataset/${uuid}/`,
+                method: 'PUT',
+                body: data,
+            })
+        }),
     }),
 });
 
-export const { useGetAllFilesQuery, useDeleteFileByIdMutation } = allFileByUserid;
+export const {
+    useGetAllFilesQuery,
+    useDeleteFileByIdMutation,
+    useGetFileDetailQuery,
+    useUpdateFileNameMutation
+} = allFileByUserid;
 
 export default allFileByUserid;

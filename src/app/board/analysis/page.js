@@ -12,12 +12,12 @@ const Page = () => {
     }
     return (
         <div>
-            <div className={"flex flex-row py-10 w-full justify-between"}>
+            <div className={"flex flex-row py-10 w-full px-10 justify-between"}>
                 <div className={"flex flex-col"}>
                     <h1 className={"text-primary-color pb-2"}>Analysis</h1>
                     <p className={"text-xl text-primary-color"}>K-QucikSight</p>
                 </div>
-                <div className={"flex justify-end pt-3 text-primary-color"}>
+                <div className={" pt-3 text-primary-color"}>
                     <Link href={link.route}>
                         <Button className={"bg-primary-color text-background-color"} >
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -58,7 +58,7 @@ const Page = () => {
                 )}
             </div>
         </div>
-    );
-};
+    )}
+
 
 export default Page;

@@ -4,16 +4,17 @@ import Image from "next/image";
 import authenticated from '@assets/images/403.png'
 import {Button, Input, Textarea} from "@nextui-org/react";
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useUpdateUserMutation} from "@/store/features/user/userInfoApiSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 import {setUserInfo} from "@/store/features/user/userInfo";
 import {Select} from "antd";
+import Loading from "@/app/loading";
 
 export default function Profile() {
-    const { data: user } = useGetUserQuery();
+    const { data: user, isLoading } = useGetUserQuery();
     const router = useRouter();
     const [updateProfile] = useUpdateUserMutation();
     const userInfo = useSelector(state => state?.userInfo?.userInfo)
@@ -123,7 +124,7 @@ export default function Profile() {
         formData.append('file', file);
 
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/`, formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/images/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -143,7 +144,9 @@ export default function Profile() {
         }
     };
 
-    if (!user)
+    if(isLoading) {
+        return (<Loading />)
+    } else if (!user)
         return (
             <div className="flex min-h-screen flex-col items-center justify-center p-28">
                 <Image src={authenticated} alt={"authorize"} className={'lg:w-1/4 md:w-2/3 w-full'} />

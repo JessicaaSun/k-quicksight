@@ -4,9 +4,13 @@ import { Button, Input } from "@nextui-org/react";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from 'react';
 import {FaTimes} from "react-icons/fa";
+import axios from "axios";
+import {useRouter} from "next/navigation";
 
-export default function Verify({ callback, reset, isLoading }) {
+export default function Verify({params, callback, reset, isLoading }) {
   const [code, setCode] = useState('');
+  const [loading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   // Refs to control each digit input element
   const inputRefs = [
@@ -27,18 +31,33 @@ export default function Verify({ callback, reset, isLoading }) {
     setCode('');
   }
 
+  const dataCode = (code) => {
+    const data = {
+      email: decodeURIComponent(params.email),
+      verification_code: code
+    }
+    axios
+        .post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/verify/`, data)
+        .then((response) => {
+          router.push(`/auth/login`);
+        })
+        .catch(function (error) {
+          setIsLoading(false);
+        });
+  }
+
   // Call our callback when code = 6 chars
   useEffect(() => {
-    if (code.length === 6) {
+    if (code.length === 10) {
       if (typeof callback === 'function') callback(code);
       resetCode();
     }
   }, [code]); //eslint-disable-line
 
   // Listen for external reset toggle
-  useEffect(() => {
-    resetCode();
-  }, [reset]); //eslint-disable-line
+  // useEffect(() => {
+  //   resetCode();
+  // }, [reset]); //eslint-disable-line
 
   // Handle input
   function handleInput(e, index) {
@@ -113,6 +132,7 @@ export default function Verify({ callback, reset, isLoading }) {
         </button>
     )
   }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-56">
       <div className={"grid md:grid-cols-2 place-items-center md:gap-16"}>
@@ -143,7 +163,9 @@ export default function Verify({ callback, reset, isLoading }) {
           <Button
             radius="md"
             className={"w-full text-[18px] bg-primary-color text-white"}
-            // onClick={handleSubmit}
+            onClick={() => {
+              dataCode(code)
+            }}
           >
             Register
           </Button>

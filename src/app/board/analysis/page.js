@@ -8,7 +8,7 @@ import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
 const Page = () => {
     const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
     const link={
-        route: '/board/analysis/board'
+        route: '/board/analysis/new-data'
     }
     return (
         <div>

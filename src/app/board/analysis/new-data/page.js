@@ -1,40 +1,37 @@
+"use client"
 import React from 'react';
-import Image from "next/image";
 import AnalysisStep from "@/app/board/components/AnalysisStep";
-import TableImage from "@assets/images/analysis/table.png"
-import UploadData from "@assets/images/analysis/uploadData.png"
-const AnalysisBoard = () => {
+import ShareMember from "@/app/board/dataset/component/shareMember";
+import UploadDataSet from "@/app/board/analysis/components/UploadDataSet";
+import ExistingDataset from "@/app/board/analysis/components/ExistingDataset";
+const NewData = () => {
+
+
     return (
         <div>
             <div className={"flex flex-row py-10 w-full justify-between"}>
                 <div className={"flex flex-col"}>
-                    <h1 className={"text-primary-color"}>Analysis / Board</h1>
+                    <h1 className={"text-primary-color pb-5"}>Analysis / Board</h1>
                     <div className={"flex flex-row gap-5"}>
                         <p className={"text-primary-color"}>
                             Predict future courses
                         </p>
-                        <p className={""}>member</p>
+                        <ShareMember/>
                     </div>
                 </div>
                 <div className={"flex justify-end text-primary-color"}>
-                    <AnalysisStep/>
+                    <AnalysisStep step={0}/>
                 </div>
             </div>
             <div className={"flex flex-col justify-center items-center pt-28"}>
                 <h2 className={"text-primary-color"}>Add data to start building an analysis</h2>
                 <div className={"flex flex-row pt-10 gap-10"}>
-                    <div className={"flex flex-col"}>
-                        <Image src={UploadData} alt={""} className={"w-40  border-solid border-2 bg-cyan-500 shadow-lg"}/>
-                        <p>Upload new dataset</p>
-                    </div>
-                    <div className={"flex flex-col"}>
-                        <Image src={TableImage} alt={""} className={"w-40 "}/>
-                        <p>Pick existing dataset</p>
-                    </div>
+                    <UploadDataSet/>
+                    <ExistingDataset/>
                 </div>
             </div>
         </div>
     );
 };
 
-export default AnalysisBoard;
+export default NewData;

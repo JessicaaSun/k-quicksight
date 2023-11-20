@@ -1,4 +1,4 @@
-const downloadObjectAsJson = (exportName, data) => {
+export const downloadObjectAsJson = (exportName, data) => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);

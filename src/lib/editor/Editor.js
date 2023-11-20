@@ -10,6 +10,7 @@ import { Editor, PageControl } from "@lidojs/editor";
 import styled from "styled-components";
 import Loading from "@/app/loading";
 import { useHandlePreview } from "@/context/EditorPreviewContext";
+import HeaderLayout from "./layout/HeaderLayout";
 
 const Container = styled.div`
   display: flex;
@@ -84,6 +85,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
           isSidebarHidden ? "w-full" : "w-[calc(100vw-255px)]"
         } h-[calc(100vh-64px)] max-h-auto`}
       >
+        <HeaderLayout/>
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{

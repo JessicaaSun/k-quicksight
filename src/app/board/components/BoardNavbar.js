@@ -23,18 +23,13 @@ import {
 } from "@nextui-org/react";
 import { logout } from "@/store/features/auth/authSlice";
 import { useSidebar } from "@/context/BoardSideBarContext";
-import { useHandlePreview } from "@/context/EditorPreviewContext";
 
 const Navbar = () => {
   const { data: user, isSuccess, isLoading } = useGetUserQuery();
   const dispatch = useDispatch();
   const router = useRouter();
-  const pathname = usePathname();
-
-  const displayPreviewBtn = pathname.includes("dashboard/", "analysis/");
 
   const { isSidebarHidden, toggleSidebar } = useSidebar();
-  const { handleOnClickPreview} = useHandlePreview()
 
   return (
     <div
@@ -114,21 +109,6 @@ const Navbar = () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        {displayPreviewBtn ? (
-          <div className="ms-4">
-            <div
-              className="flex items-center text-primary-color leading-1 bg-white p-2 rounded-lg cursor-pointer hover:bg-slate-200"
-              onClick={handleOnClickPreview}
-            >
-              <div style={{ marginRight: 4, fontSize: 20 }}>
-                <AiFillPlayCircle />
-              </div>{" "}
-              Preview
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
 
       <BoardSidebar toggleSidebar={isSidebarHidden} />

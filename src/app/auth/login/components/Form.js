@@ -52,7 +52,18 @@ export default function LoginQuick() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-5 p-3">
-      <ToastContainer />
+      <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+      />
       <div className="lg:w-1/3 md:w-1/2 shadow-lg w-full rounded-2xl bg-white flex flex-col gap-[20px] border-2 border-primary-color py-10 px-10">
         <h2 className="font-semibold text-text-color text-2xl">
           Welcome back!

@@ -130,7 +130,18 @@ const Tutorial = () => {
                                     component={"div"}
                                 />
                             </div>
-                            <ToastContainer/>
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme="light"
+                            />
                             <Button type={"submit"} disabled={isSubmitting} className={'font-bold text-white bg-primary-color absolute right-0 -bottom-5 rounded-xl w-fit py-2 px-12'}>Send</Button>
                         </Form>
                     )}

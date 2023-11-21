@@ -18,11 +18,12 @@ import CleanModal from "@/app/board/dataset/component/cleaning/CleanModal";
 import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
 import {useGetFileDetailQuery} from "@/store/features/files/allFileByuserId";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 
 const DetailDataset = ({params}) => {
-    let uuid = params.uuid
-    const [headers, setHeader] = useState([])
-    const [data, setData] = useState([])
+    let uuid = params.uuid;
+    const [headers, setHeader] = useState([]);
+    const [data, setData] = useState([]);
     const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0});
 
     useEffect(() => {
@@ -40,7 +41,7 @@ const DetailDataset = ({params}) => {
                 <ShareMember />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
-                <Overview />
+                <Overview filename={fileDetail?.file} uuid={uuid} />
                 <CleanModal />
             </div>
             <div className={'flex justify-end items-center'}>
@@ -48,7 +49,6 @@ const DetailDataset = ({params}) => {
             </div>
             <p className={'text-primary-color font-semibold text-medium my-3'}>Total records: {fileDetail?.total} </p>
             <FileDetail dataFile={data} uuid={uuid} headers={headers} isLoading={isLoading} size={30} />
-
         </div>
     );
 };

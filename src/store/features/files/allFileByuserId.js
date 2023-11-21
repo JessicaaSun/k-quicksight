@@ -34,6 +34,12 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 body: data,
             })
         }),
+        getFileOverview: builder.query({
+            query: ({uuid, userId}) => ({
+                url: `data-clean/cleansing/${userId}/${uuid}/`,
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
@@ -41,7 +47,8 @@ export const {
     useGetAllFilesQuery,
     useDeleteFileByIdMutation,
     useGetFileDetailQuery,
-    useUpdateFileNameMutation
+    useUpdateFileNameMutation,
+    useGetFileOverviewQuery,
 } = allFileByUserid;
 
 export default allFileByUserid;

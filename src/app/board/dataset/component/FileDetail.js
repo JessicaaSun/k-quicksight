@@ -61,22 +61,6 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
                             ))}
                         </TableBody>
                     </Table>
-                    // <table className={'max-h-[500px] overflow-y-scroll'} aria-label="Example static collection table">
-                    //     <tr>
-                    //         {headers?.map((header, index) => (
-                    //             <th key={index}>{header}</th>
-                    //         ))}
-                    //     </tr>
-                    //     <tbody>
-                    //         {dataFile?.map((row, index) => (
-                    //             <tr key={index}>
-                    //                 {headers.map((header, index) => (
-                    //                     <td key={index}>{row[header]}</td>
-                    //                 ))}
-                    //             </tr>
-                    //         ))}
-                    //     </tbody>
-                    // </table>
                 ) : (
                     <Spinner label={'Loading your dataFile'} />
                 )

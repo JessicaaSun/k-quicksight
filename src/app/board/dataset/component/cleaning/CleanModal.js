@@ -17,6 +17,14 @@ export default function CleanModal() {
     const [select, setSelect] = useState('autoClean');
     const [option, setOption] = useState(["Delete row with missing values", "Delete duplicated row"])
 
+    useEffect(() => {
+        if (select === 'autoClean') {
+            setOption(['Delete row with outliers', 'Data type conversion', 'Delete row with missing values', 'Delete duplicated row'])
+        } else {
+            setOption(["Delete row with missing values", "Delete duplicated row"])
+        }
+    }, [])
+
     return (
         <>
             <Button className={'bg-background-color border-1 border-primary-color text-md font-medium text-primary-color'} onPress={onOpen}>
@@ -48,10 +56,10 @@ export default function CleanModal() {
                                         value={option}
                                         onValueChange={setOption}
                                     >
-                                        <Checkbox value="Delete row with missing values">Delete row with missing values</Checkbox>
-                                        <Checkbox value="Delete duplicated row">Delete duplicated row</Checkbox>
-                                        <Checkbox value="Data type conversion">Data type conversion</Checkbox>
-                                        <Checkbox value="Delete row with outliers">Delete row with outliers</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete row with missing values">Delete row with missing values</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete duplicated row">Delete duplicated row</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="Data type conversion">Data type conversion</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete row with outliers">Delete row with outliers</Checkbox>
                                     </CheckboxGroup>
                                 </div>
 

@@ -15,7 +15,7 @@ import HeaderLayout from "./layout/HeaderLayout";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 64px);
   max-height: auto;
 `;
 
@@ -83,7 +83,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
       <Container
         className={` ${
           isSidebarHidden ? "w-full" : "w-[calc(100vw-255px)]"
-        } h-[calc(100vh-64px)] max-h-auto`}
+        } h-[calc(100vh-64px)] max-h-auto overflow-y-hidden`}
       >
         <HeaderLayout/>
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}

@@ -34,7 +34,7 @@ const HeaderLayout = ({ openPreview }, ref) => {
   const dispatch = useDispatch();
   const pathname = usePathname();
 
-  const displayPreviewBtn = pathname.includes("dashboard/", "analysis/");
+  const displayPreviewBtn = pathname.includes("dashboard/**", "analysis/**", "editor");
   const { isSidebarHidden, toggleSidebar } = useSidebar();
   const { handleOnClickPreview } = useHandlePreview();
 

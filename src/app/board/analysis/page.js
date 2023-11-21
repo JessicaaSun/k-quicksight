@@ -5,10 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import {MockDataAnalysis} from "@/app/board/mockData/mockDataAnalysis";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
+import AnalysisStep from "@/app/board/components/AnalysisStep";
 const Page = () => {
     const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
     const link={
-        route: '/board/analysis/board'
+        route: '/board/analysis/new-data'
     }
     return (
         <div>

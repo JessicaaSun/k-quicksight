@@ -11,10 +11,10 @@ const steps = [
     'Finishing'
 ];
 
-export default function HorizontalLinearAlternativeLabelStepper() {
+export default function AnalysisStep({ step, handleStepChange }) {
     return (
         <Box className={"w-full"}>
-            <Stepper alternativeLabel>
+            <Stepper activeStep={step}  alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>

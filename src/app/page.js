@@ -6,35 +6,83 @@ import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import heroImg from "@assets/images/home_hero.png";
+import Card_Why from "@/components/cards/Card";
+import GetStart_boxs, { User_base } from "@/components/cards/HomeBoxs";
+import DeckCard from "@/components/cards/deck-card/DeckCard";
+import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/store/features/auth/authSlice";
+import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
+import Loading from "./loading";
 
 export default function Home() {
   const router = useRouter();
 
   const { data: user } = useGetUserQuery();
+  const dispatch = useDispatch();
+  const [loginWithGoogle, { isLoading }] = useLoginWithGoogleMutation();
+  const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (session) {
+      console.log("session:", session)
+      const fetchData = async () => {
+        try {
+          const { data } = await loginWithGoogle({
+            auth_token: session.auth_token,
+          }).unwrap();
+          dispatch(setCredentials(data));
+          // Navigate to the welcome page
+        } catch (error) {
+          // Handle any errors that occur during the API call
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [dispatch, loginWithGoogle, session]);
+ 
+  if (status === "loading" || isLoading) {
+    return <Loading />;
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-36">
-      <section className="flex gap-5 justify-between items-center px-[10%] mt-10">
-        <div className="flex flex-col gap-5">
-          <h2 className="text-5xl font-bold leading-snug">
+    <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
+      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
+        <div className="flex flex-col gap-3 w-full">
+          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
+            <p className="leading-[65px] max-sm:leading-normal sm:leading-normal">
             Discover, Analyze and Decide With{" "}
-            <span className="text-primary-color">K-QuickSight</span>
-          </h2>
-          <p>
+            <span className=" text-primary-color">
+              K-QuickSight
+            </span>
+            </p>
+          </div>
+          <p className="text-description-color text-lg">
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.
           </p>
-          <div className="w-full flex gap-5">
-            <Button
-              onClick={() => router.push("/auth/login")}
-              className="w-[174px] font-bold bg-primary-color text-white"
-            >
-              Get start
-            </Button>
+          <div className="w-full pt-6 flex gap-5">
+            {!user ? (
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="w-[184px] font-bold bg-primary-color text-white"
+              >
+                Get started
+              </Button>
+            ) : (
+              <Button
+                onClick={() => router.push("/board/recent")}
+                className="w-[184px] font-bold bg-primary-color text-white"
+              >
+                Go To Board
+              </Button>
+            )}
+
             <Button
               onClick={() => router.push("/")}
-              className="w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
+              className="min-w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
             >
               <svg
                 width="20"
@@ -54,7 +102,34 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <Image src={heroImg} alt="hero" className="w-1/2" />
+        <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
+          <Image src={heroImg} priority={false} alt="hero" className="homepage_image w-full" />
+        </div>
+      </section>
+      <section className="bg-secondary-color min-w-full px-10 py-20">
+        <h2 className="text-third-color text-center">
+          Why <span className="text-background-color">K-QuickSight</span>
+        </h2>
+        <Card_Why />
+      </section>
+      <section className="w-full py-20 px-[10%]">
+        <h2 className="text-primary-color font-bold text-center">
+          Getting started with K-QuickSight
+        </h2>
+        <GetStart_boxs />
+      </section>
+      <section className="pb-32 w-full lg:px-[10%] md:px-[5%] px-3">
+        <User_base />
+      </section>
+      <section className="bg-secondary-color px-3 flex flex-col justify-center items-center py-20 w-full">
+        <h2 className="text-background-color">What Our Users Say</h2>
+
+        <p className="text-background-color mb-12 font-normal lg:w-[40%] md:w-2/3 w-full mt-4 text-center">
+          At K-QuickSight, we&apos;re dedicated to exceptional business
+          analytics. But you don&apos;t have to take our word for it hear from
+          our delighted users.
+        </p>
+        <DeckCard />
       </section>
     </main>
   );

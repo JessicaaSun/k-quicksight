@@ -9,7 +9,7 @@ const SidebarContext = createContext();
 
 export const SidebarProvider = ({ children }) => {
   const pathname = usePathname();
-  const shouldHideSidebar = pathname.includes("dashboard/") || pathname.includes("analysis/");
+  const shouldHideSidebar = pathname.includes("dashboard/**") || pathname.includes("analysis/**")|| pathname.includes("editor");
   const isScreenSmall = useMedia('(max-width: 768px)', {
     defaultState: true,
   });

@@ -1,12 +1,24 @@
 'use client'
 
-import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import React, {useEffect} from "react";
+import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Button,
+    useDisclosure,
+    Spinner
+} from "@nextui-org/react";
 import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
+import {useGetFileOverviewQuery} from "@/store/features/files/allFileByuserId";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 
-export default function Overview() {
+export default function Overview({filename, uuid}) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+    const {data:user} = useGetUserQuery();
+    const {data:fileOverview, isLoading} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id})
     return (
         <>
             <Button className={'bg-primary-color border-1 border-background-color shadow-md text-md font-normal text-background-color'} onPress={onOpen}>
@@ -41,16 +53,27 @@ export default function Overview() {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">Data Overview</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">
+                                <h2>Data Overview</h2>
+                                <p className={'text-lg font-medium'}>{filename}</p>
+                            </ModalHeader>
                             <ModalBody>
-                                <ul className={'list-disc ml-10 leading-8'}>
-                                    <li>Duplicate row = 0</li>
-                                    <li>Outlier = 0</li>
-                                    <li>Number of columns = 0</li>
-                                    <li>Number of rows = 0</li>
-                                    <li>Label names = [username, age, salary]</li>
-                                </ul>
-                                <p className={'text-text-color font-medium'}>Missing values</p>
+                                {
+                                    !isLoading ? (
+                                        <>
+                                            <ul className={'list-disc ml-10 leading-8'}>
+                                                <li>Duplicate row = []</li>
+                                                <li>Outlier = 0</li>
+                                                <li>Number of columns = 0</li>
+                                                <li>Number of rows = 0</li>
+                                                <li className={'flex flex-wrap'}>Label names = []</li>
+                                            </ul>
+                                            <p className={'text-text-color font-medium'}>Missing values</p>
+                                        </>
+                                    ) : (
+                                        <Spinner size='md' color='primary' />
+                                    )
+                                }
                                 <TableMissingValue />
                             </ModalBody>
                         </>

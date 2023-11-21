@@ -16,6 +16,7 @@ export default function LoginQuick() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [isPasswordDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
   const toggleVisibility = () => setIsVisible(!isVisible);
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export default function LoginQuick() {
     try {
       // .unwrap() is a utility function that will return either the fulfilled value or throw the rejected value as an error.
       const { data } = await login({ email, password }).unwrap();
+      setIsDisabled(true)
       dispatch(setCredentials(data));
       toast.success("Login Success.")
       setTimeout(() => router.push("/"), 2000);
@@ -81,6 +83,7 @@ export default function LoginQuick() {
           classNames={styleInput}
         />
         <Input
+          isDisabled={isPasswordDisabled}
           variant="bordered"
           required
           placeholder={'Password'}

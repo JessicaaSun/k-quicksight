@@ -31,8 +31,8 @@ export default function TableData({
   };
   return (
     <Table
-      isHeaderSticky
-      aria-label="Example table with client async pagination"
+        isHeaderSticky
+        aria-label="Example table with client async pagination"
     >
       <TableHeader>
         {headers.map((item, index) => (
@@ -58,15 +58,6 @@ export default function TableData({
                   </TableCell>
                   <TableCell>{formatBytes(item.size)}</TableCell>
                   <TableCell className={"flex gap-5 justify-center"}>
-                    {/*<Tooltip showArrow={true} content="Edit">*/}
-                    {/*    <button><i class="fa-solid fa-file-pen" style={{color: '#b3008c'}}></i></button>*/}
-                    {/*</Tooltip>*/}
-                    {/*<Tooltip showArrow={true} content={'View'}>*/}
-                    {/*    <button onClick={() => handleView(item.uuid)}><i class="fa-solid fa-eye" style={{color: '#0300b8'}}></i></button>*/}
-                    {/*</Tooltip>*/}
-                    {/*<Tooltip showArrow={true} content={'Delete'}>*/}
-                    {/*    <DeleteButton uuid={item.uuid} filename={item.file} type={item.type} createAt={item.created_at} size={item.size} />*/}
-                    {/*</Tooltip>*/}
                     <Dropdown_table
                       uuid={item.uuid}
                       filename={item.file}

@@ -92,7 +92,7 @@ const Navbar = () => {
               Profile
             </DropdownItem>
             <DropdownItem
-              onClick={() => router.push("/board")}
+              onClick={() => router.push("/board/recent")}
               key="team_settings"
             >
               Board

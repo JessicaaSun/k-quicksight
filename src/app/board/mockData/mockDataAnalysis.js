@@ -1,6 +1,7 @@
 import summaryAnalysis from "@assets/images/analysis/summaryAnalysis.png";
 
 export const MockDataAnalysis={
+
     listAnalysis: [
         {
             thumbnail: summaryAnalysis,

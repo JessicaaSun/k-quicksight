@@ -1,55 +1,51 @@
 "use client"
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import UploadData from "@assets/images/analysis/add-task.png";
+import {Button, useDisclosure} from "@nextui-org/react";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {useDispatch} from "react-redux";
+import {useFileImportMutation} from "@/store/features/clean/importFile";
+import {useRouter} from "next/navigation";
+import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
+import {setCurrentUser} from "@/store/features/auth/authSlice";
 
 const UploadDataSet = () => {
-    const generateMockUUID = () => {
-        // This is a simple function to generate a mock UUID
-        return 'mock-' + Math.random().toString(36).substring(2, 15);
-    };
-    const handleFileUpload = (event) => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { data: user } = useGetUserQuery();
+    const dispatch = useDispatch();
+    const [fileInfo, setFileInfo] = useState({});
+    const [importFile] = useFileImportMutation();
+    const router = useRouter();
+    const {data:allFiles, refetch: refetchAllFiles, isLoading: importLoading} = useGetAllFilesQuery({id:user?.data.id, filename: '', type: ''})
+
+    useEffect(() => {
+        dispatch(setCurrentUser(user));
+    }, [user, dispatch]);
+
+    const handleImportFile = async (event) => {
         const file = event.target.files[0];
-
-        // Check if a file is selected
-        if (file) {
-            // Generate a mock UUID
-            const mockUUID = generateMockUUID();
-
-            // Handle the file based on its type (CSV, XLSX, TXT, JSON)
-            if (file.type === 'application/vnd.ms-excel' || file.type === 'text/csv') {
-                // Handle CSV file
-                console.log('CSV file selected:', file, 'Mock UUID:', mockUUID);
-            } else if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-                // Handle XLSX file
-                console.log('XLSX file selected:', file, 'Mock UUID:', mockUUID);
-            } else if (file.type === 'text/plain') {
-                // Handle TXT file
-                console.log('TXT file selected:', file, 'Mock UUID:', mockUUID);
-            } else if (file.type === 'application/json') {
-                // Handle JSON file
-                console.log('JSON file selected:', file, 'Mock UUID:', mockUUID);
-            } else {
-                // Unsupported file type
-                console.error('Unsupported file type:', file.type);
-            }
-        }
+        const formData = new FormData();
+        formData.append('file', file);
+        const response = await importFile({ file: formData, userId: user?.data.id });
+        onOpenChange(false)
+        refetchAllFiles();
     };
     return (
         <div>
-            <div className={"flex flex-col"}>
+            <Button className={"flex flex-col w-full h-full"}>
                 <input
                     type="file"
                     accept=".csv, .xlsx, .txt, .json"
-                    onChange={handleFileUpload}
+                    onChange={handleImportFile}
                     style={{ display: 'none' }}
                     id="uploadInput"
                 />
                 <label htmlFor="uploadInput">
                     <Image src={UploadData} alt={""} className={"w-40 "} />
-                    <p>Upload new dataset</p>
+                    <p className={"font-bold"}>Upload new dataset</p>
                 </label>
-            </div>
+            </Button>
         </div>
     );
 };

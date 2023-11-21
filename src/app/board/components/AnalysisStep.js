@@ -11,7 +11,7 @@ const steps = [
     'Finishing'
 ];
 
-export default function HorizontalLinearAlternativeLabelStepper({step}) {
+export default function AnalysisStep({ step, handleStepChange }) {
     return (
         <Box className={"w-full"}>
             <Stepper activeStep={step}  alternativeLabel>

@@ -2,36 +2,39 @@
 
 import React, {useEffect, useState} from 'react';
 import ShareMember from "@/app/board/dataset/component/shareMember";
-import {
-    Button,
-    getKeyValue,
-    Spinner,
-    Table,
-    TableBody,
-    TableCell,
-    TableColumn,
-    TableHeader,
-    TableRow
-} from "@nextui-org/react";
 import Overview from "@/app/board/dataset/component/cleaning/Overview";
 import CleanModal from "@/app/board/dataset/component/cleaning/CleanModal";
 import HistoryDrawer from "@/app/board/dataset/component/HistoryDrawer";
-import {useGetFileDetailQuery} from "@/store/features/files/allFileByuserId";
+import {useGetFileDetailQuery, useGetFileOverviewQuery} from "@/store/features/files/allFileByuserId";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {useDispatch} from "react-redux";
+import {setFileAccurate} from "@/store/features/files/filesDetail";
 
 const DetailDataset = ({params}) => {
     let uuid = params.uuid;
+    const {data:user} = useGetUserQuery();
     const [headers, setHeader] = useState([]);
     const [data, setData] = useState([]);
-    const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0});
+    const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0})
+    const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
+    const dispatch = useDispatch();
+    const [overview_data, setOverview] = useState([])
+
 
     useEffect(() => {
-        setHeader(fileDetail?.header)
-        setData(fileDetail?.data)
-        refetchDetail();
-    }, [fileDetail?.data, fileDetail?.header, refetchDetail]);
-
+        const fileOverview = async () => {
+            const overview = await refetchOverview();
+            setOverview(overview.data)
+            dispatch(setFileAccurate(overview.data))
+        }
+        fileOverview()
+    }, [refetchOverview]);
+    
+    useEffect(() => {
+        setHeader(fileDetail?.header);
+        setData(fileDetail?.data);
+    }, [dispatch, fileDetail?.data, fileDetail?.header, refetchDetail, refetchOverview]);
 
     return (
         <div className={'p-5'} >

@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    fileDetail: []
+    fileDetail: [],
+    fileAccurate: [],
 }
 
 const allRecord = createSlice({
@@ -11,8 +12,11 @@ const allRecord = createSlice({
         setFileDetail: (state, action) => {
             state.fileDetail = action.payload;
         },
+        setFileAccurate: (state, action) => {
+            state.fileAccurate = action.payload
+        }
     }
 })
 
-export const {setFileDetail} = allRecord.actions;
+export const {setFileDetail, setFileAccurate} = allRecord.actions;
 export default allRecord.reducer;

@@ -38,14 +38,9 @@ export default function Home() {
           console.error("Error fetching user data:", error);
         }
       };
-
       fetchData();
     }
   }, [dispatch, loginWithGoogle, session]);
- 
-  if (status === "loading" || isLoading) {
-    return <Loading />;
-  }
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
       <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">

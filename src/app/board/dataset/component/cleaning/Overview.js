@@ -20,14 +20,11 @@ import {setFileAccurate} from "@/store/features/files/filesDetail";
 export default function Overview() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const fileoverview = useSelector(state => state.allRecord.fileAccurate)
-    // console.log(fileoverview)
-
     const [outlier, setOutlier] = useState([])
 
     useEffect(() => {
         setOutlier(fileoverview?.outlier)
-    }, [fileoverview?.outlier]);
-
+    }, [fileoverview?.outlier, fileoverview]);
 
     return (
         <>
@@ -60,7 +57,7 @@ export default function Overview() {
                     }
                 }}
             >
-                <ModalContent>
+                <ModalContent className={'overflow-y-scroll max-h-[600px]'}>
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">
@@ -69,16 +66,16 @@ export default function Overview() {
                             </ModalHeader>
                             <ModalBody>
                                 <ul className={'list-disc ml-10 leading-8'}>
-                                    <li>Duplicate row = {fileoverview?.duplicate_rows.length? fileoverview.duplicate_rows.length : 0}</li>
+                                    <li>Duplicate row = {fileoverview?.duplicate_rows?.length? fileoverview.duplicate_rows?.length : 0}</li>
                                     <li>
                                         Outlier
                                         {
                                             outlier?.map((item, index) => (
-                                                <div className={'flex gap-5'} key={index}>{item.column_name} : {item.outlier_range[0]} - {item.outlier_range[1]}
-                                                    <p>outlier: [
+                                                <div className={'flex gap-5 flex-wrap'} key={index}>Column: {item.column_name} : ( {item.outlier_range[0]}, {item.outlier_range[1]} )
+                                                    <p>Founded: [
                                                         {
                                                             item.outliers.map((item, index)=> (
-                                                                <span key={index}> {item.value}, </span>
+                                                                <span key={index}>{item.value}, </span>
                                                             ))
                                                         } ]</p>
                                                 </div>
@@ -89,7 +86,9 @@ export default function Overview() {
                                     <li>Number of rows = {fileoverview?.total}</li>
                                     <li className={'flex flex-wrap'}>Label names = [
                                         {
-
+                                            fileoverview?.headers.map((item, index) => (
+                                                <span key={index} className={'font-medium text-description-color'}>{item} , </span>
+                                            ))
                                         }]</li>
                                 </ul>
                                 <p className={'text-text-color font-medium'}>Missing values</p>

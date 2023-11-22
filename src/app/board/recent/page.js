@@ -7,6 +7,7 @@ import {SearchIcon} from "@/app/board/recent/searchIcons";
 import {mockData} from "@/app/board/mockData/mockData";
 import Link from "next/link";
 import Image from "next/image";
+import {IoSearchSharp} from "react-icons/io5";
 
 export default function UserBoard (){
 
@@ -24,7 +25,7 @@ export default function UserBoard (){
                 <div className={'flex justify-between items-center'}>
                     <div className={'text-xl text-primary-color font-semibold'}>Recent</div>
                     <Input
-                        startContent={<SearchIcon />}
+                        startContent={<IoSearchSharp />}
                         classNames={{
                             input: [
                                 'px-10'
@@ -44,7 +45,7 @@ export default function UserBoard (){
                     <div className={'flex flex-col gap-5'}>
                         {
                             mockData.dataset.map((item, index) => (
-                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
+                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
                                     <p className={'w-1/4 text-left'}>{item.filename}</p>
                                     <p className={'w-1/4 text-center'}>{item.fileType}</p>
                                     <p className={'w-1/4 text-center'}>{item.createDate}</p>
@@ -59,7 +60,7 @@ export default function UserBoard (){
                     <div className={'flex flex-col gap-5'}>
                         {
                             mockData.analysis.map((item, index) => (
-                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
+                                <Link href={item.url} key={index} className={'active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200'}>
                                     <p className={'w-1/3'}>{item.filename}</p>
                                     <p className={'w-1/3 text-center'}>{item.createDate}</p>
                                     <p className={'w-1/3 text-right'}>{item.fileSize}</p>

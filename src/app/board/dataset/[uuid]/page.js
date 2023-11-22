@@ -45,7 +45,7 @@ const DetailDataset = ({params}) => {
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
                 <Overview filename={fileDetail?.file} uuid={uuid} />
-                <CleanModal />
+                <CleanModal filename={fileDetail?.filename} />
             </div>
             <div className={'flex justify-end items-center'}>
                 <HistoryDrawer />

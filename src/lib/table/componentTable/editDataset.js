@@ -29,7 +29,7 @@ export default function EditDataset({title_dataset, uuid}) {
         }
         const response = await updateFileName({uuid: uuid, data: body});
         refecthFiles();
-       toast.success('update Success!')
+        toast.success('update Success!')
         setTimeout(() => {
             onOpenChange(false)
         }, 2000)

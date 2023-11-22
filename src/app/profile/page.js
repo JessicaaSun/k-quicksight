@@ -12,6 +12,7 @@ import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
 import {setUserInfo} from "@/store/features/user/userInfo";
 import {Select} from "antd";
 import Loading from "@/app/loading";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Profile() {
     const { data: user, isLoading } = useGetUserQuery();
@@ -33,37 +34,48 @@ export default function Profile() {
     const [gender, setGender] = useState('');
     const [updateGender, set_updateGender] = useState(false);
 
-    const [url, setUrl] = useState('')
+    const [url, setUrl] = useState('');
+    const [imageName, setNameImage] = useState('');
 
     const dispatch = useDispatch();
+
+    const [ErrorUpdate, setError] = useState([]);
+
+
+    const state = useSelector(state => state)
 
     useEffect(() => {
         setUsername(user?.data.username)
         setEmail((user?.data.email))
         setPhone_number(user?.data.phone_number)
         setDescription(user?.data.biography)
-        setUrl(user?.data?.avatar)
-        setGender(user?.data?.gender)
+        setUrl(user?.data.avatar)
+        setNameImage(user?.data.avatar)
+        setGender(user?.data.gender)
     }, [user]);
 
-    const update_info = async (phone_number, address, biography, avatar, username, gender) => {
+    const update_info = async (phone_number, address, biography, username, gender) => {
         const id = user?.data.uuid
         const dataUpdate = {
             phone_number: phone_number,
-            address: address, // Update the address parameter
+            address: address,
             biography: biography,
-            avatar: avatar,
             username: username,
             gender: gender,
         };
+        console.log(dataUpdate)
         const updateUser = await updateProfile({id, data: dataUpdate})
-
-        dispatch(setUserInfo({
-            username,
-            phone_number,
-            biography,
-            gender
-        }))
+        if (updateUser?.error?.status === 400) {
+            setError(updateUser?.error.data.username)
+        } else if (updateUser.data.username) {
+            setError(null)
+            dispatch(setUserInfo({
+                phone_number,
+                description,
+                username,
+                gender
+            }))
+        }
     };
 
     const updateUserName = () => {
@@ -72,7 +84,6 @@ export default function Profile() {
             phone_number,
             "address",
             description,
-            url,
             username,
             gender
         );
@@ -84,7 +95,6 @@ export default function Profile() {
             phone_number,
             "address",
             description,
-            url,
             username,
             gender
         );
@@ -97,7 +107,6 @@ export default function Profile() {
             phone_number,
             "address",
             description,
-            url,
             username,
             gender
         );
@@ -108,7 +117,6 @@ export default function Profile() {
             phone_number,
             "address",
             description,
-            url,
             username,
             gender
         );
@@ -130,6 +138,7 @@ export default function Profile() {
                 },
             });
             setUrl(response.data.url)
+            setNameImage(response.data.filename)
             dispatch(setCurrentImage(response.data.url))
             update_info(
                 phone_number,
@@ -179,7 +188,7 @@ export default function Profile() {
                                     style={{ display: 'none' }}
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={url ? url : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                                <img src={url} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                                 <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
                                   <span>
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,7 +204,7 @@ export default function Profile() {
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Name</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
                                         {!UpdateUsername ? (
-                                            <p className={'font-medium text-text-color text-lg'}>{userInfo ? userInfo.username : username}</p>
+                                                <p className={`font-medium text-lg text-text-color`}>{userInfo ? userInfo.username : username}</p>
                                         ):(
                                             <Input classNames={{
                                                 inputWrapper: 'h-[46px]'
@@ -207,6 +216,14 @@ export default function Profile() {
                                             ) : (
                                                 <button onClick={() => setUpdateUsername(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
                                             )
+                                        }
+
+                                    </div>
+                                    <div>
+                                        {
+                                            ErrorUpdate? ErrorUpdate.map((item, index) => (
+                                                <p key={index} className={'text-red-500'}>{item} </p>
+                                            )) : null
                                         }
                                     </div>
                                 </div>

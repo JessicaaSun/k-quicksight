@@ -11,19 +11,48 @@ import {
     useDisclosure,
     Checkbox, Radio, RadioGroup, cn, CheckboxGroup
 } from "@nextui-org/react";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {toast, ToastContainer} from "react-toastify";
+import {useRouter} from "next/navigation";
+import {useCleaningProcessMutation} from "@/store/features/clean/cleaning";
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function CleanModal() {
+export default function CleanModal({filename}) {
+    const router = useRouter();
+    const {data:user} = useGetUserQuery();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [select, setSelect] = useState('autoClean');
-    const [option, setOption] = useState(["Delete row with missing values", "Delete duplicated row"])
+    const [option, setOption] = useState(["delete_missing_row", "delete_duplicate_row"])
+    const [cleanProcess] = useCleaningProcessMutation();
 
     useEffect(() => {
         if (select === 'autoClean') {
-            setOption(['Delete row with outliers', 'Data type conversion', 'Delete row with missing values', 'Delete duplicated row'])
-        } else {
-            setOption(["Delete row with missing values", "Delete duplicated row"])
+            setOption(['delete_row_outlier', 'data_type_conversion', 'delete_missing_row', 'delete_duplicate_row'])
+        } else if (select === 'byOption') {
+            setOption(["delete_missing_row", "delete_duplicate_row"])
         }
-    }, [])
+    }, [select])
+
+
+    const handleClean = () => {
+        const body = {
+            process: option,
+            created_by: user?.data.id,
+            filename: filename
+        }
+        console.log(body)
+        try {
+            const response = cleanProcess({body: body});
+            console.log(response.error)
+            // toast.success('success!')
+            setTimeout(() => {
+                // router.push('/board/dataset')
+            }, 2000)
+        } catch (error) {
+            toast.error('Error clean!')
+        }
+    }
+
 
     return (
         <>
@@ -40,6 +69,18 @@ export default function CleanModal() {
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-primary-color text-3xl">Cleansing Options</ModalHeader>
                             <ModalBody>
+                                <ToastContainer
+                                    position="top-center"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme="light"
+                                />
                                 <div className={'mt-5'}>
                                     <RadioGroup
                                         value={select}
@@ -56,10 +97,10 @@ export default function CleanModal() {
                                         value={option}
                                         onValueChange={setOption}
                                     >
-                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete row with missing values">Delete row with missing values</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete duplicated row">Delete duplicated row</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="Data type conversion">Data type conversion</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="Delete row with outliers">Delete row with outliers</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_missing_row">delete_missing_row</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_duplicate_row">delete_duplicate_row</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="data_type_conversion">data_type_conversion</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_row_outlier">delete_row_outlier</Checkbox>
                                     </CheckboxGroup>
                                 </div>
 
@@ -70,7 +111,8 @@ export default function CleanModal() {
                                 </Button>
                                 <Button
                                     className={'bg-primary-color text-background-color'}
-                                    onPress={onClose}>
+                                    onClick={handleClean}
+                                >
                                     Proceed
                                 </Button>
                             </ModalFooter>

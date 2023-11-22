@@ -43,8 +43,13 @@ const contentRoute = {
 };
 
 const BoardSidebar = ({ toggleSidebar }) => {
-  const { data: user, isSuccess } = useGetUserQuery();
+  const { data: user, isSuccess, refetch: refetchUser } = useGetUserQuery();
   const pathname = usePathname();
+
+  useEffect(() => {
+    refetchUser();
+  }, [refetchUser, user]);
+  
   return (
     <div
       className={`${

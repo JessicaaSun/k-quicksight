@@ -9,11 +9,9 @@ export const userInfo = apiSlice.injectEndpoints({
                 method: 'put',
                 body: data,
             }),
-            keepUnusedDataFor: 5,
-            providesTags: ["User"],
         }),
 
     }),
 });
 
-export const { useUpdateUserMutation } = userApiSlice;
+export const { useUpdateUserMutation } = userInfo;

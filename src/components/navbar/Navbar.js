@@ -81,7 +81,6 @@ export default function NavbarKQuick() {
   ];
 
   if (validNavPath.some((path) => pathname.startsWith(path))) return null;
-  else if (isLoading) return <Loading />;
   else
     return (
       <nav className="flex flex-col fixed z-40 w-full">

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Modal,
     ModalContent,
@@ -11,48 +11,24 @@ import {
     useDisclosure,
 } from "@nextui-org/react";
 import {users} from "@/app/board/mockData/mockData";
+import {useGetUserSearchQuery} from "@/store/features/user/usersApiSlice";
+import Image from "next/image";
 
 export default function ShareMember() {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const  {data:userSearched, refetch: userRefetch} = useGetUserSearchQuery({name: searchTerm});
+    const [searchResult, setSearchResult] = useState([])
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        setSearchTerm(searchTerm);
-
-        const filteredResults = users.filter((user) =>
-            user.name.toLowerCase().includes(searchTerm)
-        );
-        setSearchResults(filteredResults);
+        setSearchTerm(searchTerm)
     };
 
-    const handleMember = (option, id) => {
-        if (option === 'add') {
-            const filterUserById = users.filter((user) => user.id === id);
-            if (filterUserById.length > 0) {
-                const updatedUsers = filterUserById.map((user) => ({
-                    ...user,
-                    isMember: true,
-                }));
-                const updatedSearchResults = searchResults.map((result) => {
-                    if (result.id === id) {
-                        return {
-                            ...result,
-                            isMember: true,
-                        };
-                    }
-                    return result;
-                });
-                setSearchResults((prevSelectedUsers) => [
-                    ...prevSelectedUsers,
-                    ...updatedUsers,
-                ]);
-                setSearchResults(updatedSearchResults);
-            }
-        }
-        // console.log(searchResults);
-    };
+    useEffect(() => {
+        setSearchResult(userSearched?.data.data)
+        userRefetch();
+    }, [userRefetch, userSearched]);
 
     return (
         <>
@@ -72,36 +48,19 @@ export default function ShareMember() {
                             </ModalHeader>
                             <ModalBody>
                                 <input placeholder={'search members ...'} className={'px-4 py-2 rounded-xl border-1 border-primary-color'} value={searchTerm} onChange={handleSearch} size={'40px'} type="email" />
-                                {searchResults.length > 0 ? (
-                                    <ul className={'h-48 overflow-y-scroll'}>
-                                        {searchResults.map((user) => (
-                                            <div key={user.id} className={'p-2 w-full rounded-xl transition-all hover:bg-primary-color/20 flex justify-start items-center gap-5'}>
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img className={'w-1/6'} src={user.avatar} alt={user.name} />
-                                                <div className={'text-left w-full'}>
-                                                    <div className={'flex justify-between w-full items-center'}>
-                                                        <h4>{user.name}</h4>
-                                                        <p>{user.isMember ? (
-                                                            <div className={'flex gap-3'}>
-                                                                <span>membered</span>
-                                                                <button onClick={() => handleMember('remove', user.id)}>
-                                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM5.66406 14.0625C5.3418 14.0625 5.07812 13.7988 5.07812 13.4766V10.7422C5.07812 10.4199 5.3418 10.1562 5.66406 10.1562H18.5547C18.877 10.1562 19.1406 10.4199 19.1406 10.7422V13.4766C19.1406 13.7988 18.877 14.0625 18.5547 14.0625H5.66406Z" fill="#E20000"/>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        ) : (
-                                                            <button onClick={() => handleMember('add', user.id)}>
-                                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM19.1406 13.4766C19.1406 13.7988 18.877 14.0625 18.5547 14.0625H14.0625V18.5547C14.0625 18.877 13.7988 19.1406 13.4766 19.1406H10.7422C10.4199 19.1406 10.1562 18.877 10.1562 18.5547V14.0625H5.66406C5.3418 14.0625 5.07812 13.7988 5.07812 13.4766V10.7422C5.07812 10.4199 5.3418 10.1562 5.66406 10.1562H10.1562V5.66406C10.1562 5.3418 10.4199 5.07812 10.7422 5.07812H13.4766C13.7988 5.07812 14.0625 5.3418 14.0625 5.66406V10.1562H18.5547C18.877 10.1562 19.1406 10.4199 19.1406 10.7422V13.4766Z" fill="#0346A5"/>
-                                                                </svg>
-                                                            </button>
-                                                        )}</p>
+                                {searchResult?.length > 0 ? (
+                                    <ul className={'h-48 overflow-y-scroll transition-all'}>
+                                        {
+                                            searchResult.map((item, index) => (
+                                                <li key={index} className={'flex justify-start cursor-pointer items-center gap-5 mt-3 rounded-xl hover:bg-blue-50 transition-all p-3'}>
+                                                    <img src={item.avatar ? item.avatar : 'http://136.228.158.126:8002/api/v1/files/4d68fed87605409794748c2e2b10ef95.webp'} alt={'profile'} width={50} height={50} className={'rounded-full object-cover w-[50px] h-[50px]'}  />
+                                                    <div>
+                                                        <p>{item.username}</p>
+                                                        <p>{item.email}</p>
                                                     </div>
-                                                    <p>{user.email}</p>
-                                                </div>
-                                            </div>
-                                        ))}
+                                                </li>
+                                            ))
+                                        }
                                     </ul>
                                 ) : (
                                     <p>No results found.</p>

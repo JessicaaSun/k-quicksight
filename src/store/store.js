@@ -8,6 +8,7 @@ import fileType from "@/store/features/files/fileType";
 import fileSelect from "@/store/features/files/fileSelect";
 import recentData from "@/store/features/recentData/recentData";
 import allRecord from "@/store/features/files/filesDetail";
+import analysisUUID from "@/store/features/files/analysisuuid";
 
 const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
         dataSetSelected: fileSelect,
         recentData: recentData,
         allRecord: allRecord,
+        analysisUuid: analysisUUID,
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

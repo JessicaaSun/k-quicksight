@@ -11,7 +11,7 @@ const steps = [
     'Finishing'
 ];
 
-export default function AnalysisStep({ step, handleStepChange }) {
+export default function AnalysisStep({ step}) {
     return (
         <Box className={"w-full"}>
             <Stepper activeStep={step}  alternativeLabel>

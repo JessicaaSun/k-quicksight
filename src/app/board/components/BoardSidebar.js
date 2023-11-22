@@ -21,11 +21,6 @@ const contentRoute = {
       name: "Dataset",
       route: "/board/dataset",
     },
-    sample: {
-      icon: <FaBook />,
-      name: "Sample",
-      route: "/board/sample",
-    },
     shareWithMe: {
       icon: <FaShare />,
       name: "Share with me",
@@ -111,17 +106,6 @@ const BoardSidebar = ({ toggleSidebar }) => {
           >
             {contentRoute.file.dataset.icon}
             {contentRoute.file.dataset.name}
-          </Link>
-          <Link
-            className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
-              pathname.startsWith(contentRoute.file.sample.route)
-                ? "bg-primary-color text-white"
-                : "bg-white"
-            } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
-            href={contentRoute.file.sample.route}
-          >
-            {contentRoute.file.sample.icon}
-            {contentRoute.file.sample.name}
           </Link>
           <Link
               className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${

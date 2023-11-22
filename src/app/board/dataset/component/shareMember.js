@@ -15,7 +15,7 @@ import {useGetUserSearchQuery} from "@/store/features/user/usersApiSlice";
 import {MdDelete} from "react-icons/md";
 import {useShareMemberMutation} from "@/store/features/shareMember/apiSliceShare";
 
-export default function ShareMember({filename, fileId, owner}) {
+export default function ShareMember({filename, fileId}) {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [searchTerm, setSearchTerm] = useState('');
     const  {data:userSearched, refetch: userRefetch} = useGetUserSearchQuery({name: searchTerm});
@@ -24,16 +24,14 @@ export default function ShareMember({filename, fileId, owner}) {
     const [userSelectedFilter, setUserSelectedFilter] = useState([])
     const [shareMember] = useShareMemberMutation();
 
-
-
     const handleSelectedUser = (userId) => {
         setUserSelected((prevItems) => [...prevItems, userId]);
-        const filteredResults = searchResult.filter(item => item.uuid === userId);
+        const filteredResults = searchResult.filter(item => item.id === userId);
         setUserSelectedFilter((prevItems) => [...prevItems, ...filteredResults]);
     };
     const handleRemoveUserSelect = (userId) => {
         setUserSelected((prevItems) => prevItems.filter(user => user !== userId));
-        setUserSelectedFilter(prevState => prevState.filter(item => item.uuid !== userId));
+        setUserSelectedFilter(prevState => prevState.filter(item => item.id !== userId));
     };
 
     const handleSearch = (event) => {
@@ -55,9 +53,9 @@ export default function ShareMember({filename, fileId, owner}) {
         const dataShare = {
             member: userSelected,
             file: fileId,
-            owner: owner
         }
-        const share = await shareMember({data: dataShare})
+        console.log(dataShare)
+        // const share = await shareMember({data: dataShare})
     }
 
     useEffect(() => {
@@ -101,7 +99,7 @@ export default function ShareMember({filename, fileId, owner}) {
                                                     {
                                                         userSelectedFilter?.length >= 0 ? (
                                                             userSelectedFilter.map((item, index) => (
-                                                                <DropdownItem endContent={<MdDelete className={'text-red-500'} />} key={index} className={'flex justify-between items-center'} onClick={() => handleRemoveUserSelect(item.uuid)}><p>{item.username}</p></DropdownItem>
+                                                                <DropdownItem endContent={<MdDelete className={'text-red-500'} />} key={index} className={'flex justify-between items-center'} onClick={() => handleRemoveUserSelect(item.id)}><p>{item.username}</p></DropdownItem>
                                                             ))
                                                         ) : (
                                                             <DropdownItem>
@@ -129,9 +127,9 @@ export default function ShareMember({filename, fileId, owner}) {
                                                         </div>
                                                     </div>
                                                     {
-                                                        handleCheck(item.uuid) ? (
+                                                        handleCheck(item.id) ? (
                                                             <Button
-                                                                onClick={() => handleRemoveUserSelect(item.uuid)}
+                                                                onClick={() => handleRemoveUserSelect(item.id)}
                                                                 className={'w-fit p-0'}
                                                                 size='sm'
                                                                 color={'primary'}
@@ -141,7 +139,7 @@ export default function ShareMember({filename, fileId, owner}) {
                                                             </Button>
                                                         ) : (
                                                             <Button
-                                                                onClick={() => handleSelectedUser(item.uuid)}
+                                                                onClick={() => handleSelectedUser(item.id)}
                                                                 className={'w-fit p-0'}
                                                                 size='sm'
                                                                 color={'primary'}

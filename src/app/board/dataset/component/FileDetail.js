@@ -28,7 +28,7 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
 
     setTimeout(() => (
         setNotFound('File not found')
-    ), 1800000)
+    ), 30000)
 
     return (
         <div className={'flex justify-center items-center relative shadow-lg rounded-xl'}>
@@ -60,7 +60,7 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
                             emptyContent={"No rows to display."}>
                             {items?.map((row, index) => (
                                 <TableRow key={index}>
-                                    {headers.map((header, index) => (
+                                    {headers?.map((header, index) => (
                                         <TableCell key={index}>{row[header]}</TableCell>
                                     ))}
                                 </TableRow>

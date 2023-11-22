@@ -20,6 +20,9 @@ export const headers = [
     header: "Title",
   },
   {
+    header: 'Clean'
+  },
+  {
     header: "File Type",
   },
   {
@@ -40,7 +43,7 @@ const Dataset = () => {
     setSample((event) => !event);
   };
   const filType = useSelector((state) => state.fileType.fileType);
-  const { data: allFile, isLoading: isFileLoading } = useGetAllFilesQuery({
+  const { data: allFile, refetch: filesRefetch, isLoading: isFileLoading } = useGetAllFilesQuery({
     id: user?.data.id,
     filename: "",
     type: filType,
@@ -51,6 +54,7 @@ const Dataset = () => {
   const [isFull, setStorage] = useState(false);
 
   useEffect(() => {
+    filesRefetch();
     dispatch(setFiles(allFile));
     if (allFile) {
       const totalSize = allFile.reduce(
@@ -60,7 +64,7 @@ const Dataset = () => {
     if (totalFree > 1000000000) {
       setStorage(true);
     }
-  }, [allFile, dispatch, totalFree]);
+  }, [allFile, dispatch, filesRefetch, totalFree]);
 
   return (
     <div className={"py-10 px-5"}>

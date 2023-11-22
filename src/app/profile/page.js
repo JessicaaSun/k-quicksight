@@ -2,7 +2,7 @@
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Image from "next/image";
 import authenticated from '@assets/images/403.png'
-import {Button, Input, Textarea} from "@nextui-org/react";
+import {avatar, Button, Input, Textarea} from "@nextui-org/react";
 import {useRouter} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -13,38 +13,31 @@ import {setUserInfo} from "@/store/features/user/userInfo";
 import {Select} from "antd";
 import Loading from "@/app/loading";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {useUploadSingleMutation} from "@/store/features/user/uploadAccountImage";
 
 export default function Profile() {
-    const { data: user, isLoading } = useGetUserQuery();
+    const { data: user, isLoading, refetch: refetchUser} = useGetUserQuery();
     const router = useRouter();
     const [updateProfile] = useUpdateUserMutation();
     const userInfo = useSelector(state => state?.userInfo?.userInfo)
     const [username, setUsername] = useState('');
     const [UpdateUsername, setUpdateUsername] = useState(false);
-
     const [email, setEmail] = useState('');
     const [update_email, set_updateEmail] = useState(false);
-
     const [phone_number, setPhone_number] = useState('');
     const [update_phone_number, set_update_Phone_number] = useState(false);
-
     const [description, setDescription] = useState('');
     const [update_description, set_updateDescription] = useState(false);
-
     const [gender, setGender] = useState('');
     const [updateGender, set_updateGender] = useState(false);
-
     const [url, setUrl] = useState('');
     const [imageName, setNameImage] = useState('');
-
     const dispatch = useDispatch();
-
     const [ErrorUpdate, setError] = useState([]);
-
-
-    const state = useSelector(state => state)
+    const uploadImage = useUploadSingleMutation();
 
     useEffect(() => {
+        refetchUser();
         setUsername(user?.data.username)
         setEmail((user?.data.email))
         setPhone_number(user?.data.phone_number)
@@ -52,104 +45,67 @@ export default function Profile() {
         setUrl(user?.data.avatar)
         setNameImage(user?.data.avatar)
         setGender(user?.data.gender)
-    }, [user]);
-
-    const update_info = async (phone_number, address, biography, username, gender) => {
-        const id = user?.data.uuid
-        const dataUpdate = {
-            phone_number: phone_number,
-            address: address,
-            biography: biography,
-            username: username,
-            gender: gender,
-        };
-        console.log(dataUpdate)
-        const updateUser = await updateProfile({id, data: dataUpdate})
-        if (updateUser?.error?.status === 400) {
-            setError(updateUser?.error.data.username)
-        } else if (updateUser.data.username) {
-            setError(null)
-            dispatch(setUserInfo({
-                phone_number,
-                description,
-                username,
-                gender
-            }))
-        }
-    };
-
+    }, [refetchUser, user]);
     const updateUserName = () => {
         setUpdateUsername(false);
-        update_info(
-            phone_number,
-            "address",
-            description,
-            username,
-            gender
-        );
+        const data = {
+            username: username
+        }
+        const updateUsername = updateProfile({data: data, id: user?.data.id})
+        if (updateUsername?.error?.status === 400) {
+            setError(updateUsername?.error?.data?.username)
+        } else if (updateUsername?.data?.username) {
+            setError(null)
+        }
     };
-
     const updatePhoneNumber = () => {
         set_update_Phone_number(false)
-        update_info(
-            phone_number,
-            "address",
-            description,
-            username,
-            gender
-        );
-
+        const data = {
+            phone_number: phone_number
+        }
+        const updatephone_number = updateProfile({data: data, id: user?.data.id})
     }
-
     const updateBio = () => {
         set_updateDescription(false)
-        update_info(
-            phone_number,
-            "address",
-            description,
-            username,
-            gender
-        );
+        const data = {
+            biography: description
+        }
+        const updateBiolophy = updateProfile({data: data, id: user?.data.id})
     }
     const updateGender_fun = () => {
         set_updateGender(false)
-        update_info(
-            phone_number,
-            "address",
-            description,
-            username,
-            gender
-        );
+        const data = {
+            gender: gender
+        }
+        const updateGender = updateProfile({data: data, id: user?.data.id})
     }
 
     const handleChange = (value) => {
         setGender(value)
     };
-    
-    const handleImageChange = async (e) => {
-        const file = e.target.files[0];
-        const formData = new FormData();
-        formData.append('file', file);
+
+    const handleImageChange = async (event) => {
+        const file = event.target.files[0];
+
+        if (!file) {
+            return;
+        }
 
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}files/upload/images/`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await uploadImage({ data: formData });
+            const imageUrl = response.data.url;
+            const updateProfileResponse = await updateProfile({
+                data: {
+                    avatar: response.data.filename
                 },
+                id: user?.data.id
             });
-            setUrl(response.data.url)
-            setNameImage(response.data.filename)
-            dispatch(setCurrentImage(response.data.url))
-            update_info(
-                phone_number,
-                "address",
-                description,
-                response.data.filename,
-                username,
-                gender
-            );
+            console.log(updateProfileResponse)
+            dispatch(setCurrentImage(imageUrl));
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
         }
     };
 
@@ -188,7 +144,7 @@ export default function Profile() {
                                     style={{ display: 'none' }}
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={url} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                                <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${imageName}`} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                                 <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
                                   <span>
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,6 +158,7 @@ export default function Profile() {
                             <div className={'flex flex-col justify-between gap-5 items-start w-full'}>
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Name</p>
+                                    <p className={'text-sm font-medium text-primary-color'}>@{user?.data.full_name ? user?.data.full_name : user?.data.username}</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
                                         {!UpdateUsername ? (
                                                 <p className={`font-medium text-lg text-text-color`}>{userInfo ? userInfo.username : username}</p>

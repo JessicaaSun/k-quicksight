@@ -11,9 +11,9 @@ import Image from "next/image";
 
 const Sample_all = () => {
   return (
-    <div className={"py-10 px-5"}>
+    <div className={"py-36 px-[10%]"}>
       <div className={"flex justify-between items-center"}>
-        <p className={"text-primary-color font-semibold text-2xl"}>Recent</p>
+        <p className={"text-primary-color font-semibold text-2xl"}>Sample</p>
         <Input
           placeholder={"Search ..."}
           variant={"bordered"}

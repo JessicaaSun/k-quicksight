@@ -4,7 +4,7 @@ export const uploadSingleApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         uploadSingle: builder.mutation({
             query: (data) => ({
-                url: 'files/upload/',
+                url: 'files/upload/images/',
                 method: 'POST',
                 body: data,
                 headers: {

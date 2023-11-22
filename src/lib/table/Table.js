@@ -26,6 +26,7 @@ export default function TableData({
   headers,
 }) {
   const router = useRouter();
+
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
   };
@@ -37,7 +38,7 @@ export default function TableData({
       <TableHeader>
         {headers.map((item, index) => (
           <TableColumn
-            className={`bg-blue-50 text-lg text-medium ${
+            className={`bg-blue-50 text-lg ${
               item.header === "Actions" ? "text-center w-[200px]" : ""
             }`}
             key={index}
@@ -52,6 +53,7 @@ export default function TableData({
               !isFileLoading ? (
                 <TableRow key={item.id}>
                   <TableCell>{item.file}</TableCell>
+                  <TableCell>{!item.is_original ? <span>Cleaned</span> : <span>Orignal</span>}</TableCell>
                   <TableCell>{item.type}</TableCell>
                   <TableCell>
                     {getTrimIntoColumnOnlyDate(item.created_at)}
@@ -85,13 +87,17 @@ export default function TableData({
                   <TableCell>
                     <Spinner color="default" />
                   </TableCell>
+                  <TableCell>
+                    <Spinner color="default" />
+                  </TableCell>
                 </TableRow>
               )
             )
           : sample_dataset?.map((item, index) => (
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
-                <TableCell>{item.title}</TableCell>
+                <TableCell>{item.fileType}</TableCell>
+                <TableCell>Cleaned</TableCell>
                 <TableCell>
                   {getTrimIntoColumnOnlyDate(item.createAt)}
                 </TableCell>

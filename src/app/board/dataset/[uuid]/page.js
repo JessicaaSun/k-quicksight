@@ -20,15 +20,15 @@ const DetailDataset = ({params}) => {
     const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
     const dispatch = useDispatch();
 
-
     useEffect(() => {
         const fileOverview = async () => {
             const overview = await refetchOverview();
             dispatch(setFileAccurate(overview.data))
         }
         fileOverview()
-    }, [refetchOverview]);
-    
+    }, [dispatch, refetchOverview]);
+
+
     useEffect(() => {
         setHeader(fileDetail?.header);
         setData(fileDetail?.data);

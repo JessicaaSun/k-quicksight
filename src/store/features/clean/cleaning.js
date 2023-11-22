@@ -1,11 +1,11 @@
 import { apiSlice } from "@/store/api/apiSlice";
 export const cleaningSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        cleaningProcess: builder.mutation({
-            query: ({body}) => ({
+        cleansingProcess: builder.mutation({
+            query: ({data}) => ({
                 url: `data-clean/processing-cleaning-file/`,
                 method: 'POST',
-                body: body,
+                body: data,
             }),
             keepUnusedDataFor: 5,
             providesTags: ["files"],
@@ -13,5 +13,5 @@ export const cleaningSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useCleaningProcessMutation } = cleaningSlice;
+export const { useCleansingProcessMutation } = cleaningSlice;
 export default cleaningSlice;

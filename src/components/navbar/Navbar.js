@@ -51,6 +51,11 @@ export default function NavbarKQuick() {
       path: "/contact-us",
       page: "Contact",
     },
+    {
+      id: 5,
+      path: "/sample",
+      page: "Sample",
+    },
   ];
   const router = useRouter();
   const dispatch = useDispatch();

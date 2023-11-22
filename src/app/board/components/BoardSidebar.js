@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, {useEffect} from "react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBook, FaClock, FaFolder } from "react-icons/fa";
+import {FaBook, FaClock, FaFolder, FaShare} from "react-icons/fa";
 import { FaSquarePollVertical, FaTableColumns } from "react-icons/fa6";
+import {LiaShareSquareSolid} from "react-icons/lia";
 
 const contentRoute = {
   file: {
@@ -24,6 +25,11 @@ const contentRoute = {
       icon: <FaBook />,
       name: "Sample",
       route: "/board/sample",
+    },
+    shareWithMe: {
+      icon: <FaShare />,
+      name: "Share with me",
+      route: "/board/shareWithMe",
     },
   },
 
@@ -46,13 +52,10 @@ const BoardSidebar = ({ toggleSidebar }) => {
   const { data: user, isSuccess, refetch: refetchUser } = useGetUserQuery();
   const pathname = usePathname();
 
-<<<<<<< HEAD
   useEffect(() => {
     refetchUser();
   }, [refetchUser, user]);
-  
-=======
->>>>>>> 1003722cfa5ed586335cdbd70bd0c70e52b740ac
+
   return (
     <div
       className={`${
@@ -119,6 +122,17 @@ const BoardSidebar = ({ toggleSidebar }) => {
           >
             {contentRoute.file.sample.icon}
             {contentRoute.file.sample.name}
+          </Link>
+          <Link
+              className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
+                  pathname.startsWith(contentRoute.file.shareWithMe.route)
+                      ? "bg-primary-color text-white"
+                      : "bg-white"
+              } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+              href={contentRoute.file.shareWithMe.route}
+          >
+            {contentRoute.file.shareWithMe.icon}
+            {contentRoute.file.shareWithMe.name}
           </Link>
         </div>
       </div>

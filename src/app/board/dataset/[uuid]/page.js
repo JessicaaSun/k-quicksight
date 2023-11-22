@@ -19,13 +19,11 @@ const DetailDataset = ({params}) => {
     const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0})
     const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
     const dispatch = useDispatch();
-    const [overview_data, setOverview] = useState([])
 
 
     useEffect(() => {
         const fileOverview = async () => {
             const overview = await refetchOverview();
-            setOverview(overview.data)
             dispatch(setFileAccurate(overview.data))
         }
         fileOverview()
@@ -41,7 +39,7 @@ const DetailDataset = ({params}) => {
             <p className={'text-3xl font-medium text-primary-color'}>Detail</p>
             <div className={'flex justify-start items-center gap-5 mt-3'}>
                 <p className={'text-lg font-medium text-text-color'}>{fileDetail?.file}</p>
-                <ShareMember />
+                <ShareMember filename={fileDetail?.file} fileId={fileDetail?.id} owner={user?.data.id} />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
                 <Overview filename={fileDetail?.file} uuid={uuid} />

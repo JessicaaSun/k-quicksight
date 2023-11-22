@@ -54,9 +54,7 @@ const Dataset = () => {
     dispatch(setFiles(allFile));
     if (allFile) {
       const totalSize = allFile.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.size,
-        0
-      );
+        (accumulator, currentValue) => accumulator + currentValue.size, 0);
       dispatch(setTotalSize(1000000000 - totalSize));
     }
     if (totalFree > 1000000000) {

@@ -82,11 +82,11 @@ export default function Overview() {
                                             ))
                                         }
                                     </li>
-                                    <li>Number of columns = {fileoverview?.headers.length ? fileoverview?.headers.length : 0}</li>
+                                    <li>Number of columns = {fileoverview?.headers?.length ? fileoverview?.headers.length : 0}</li>
                                     <li>Number of rows = {fileoverview?.total}</li>
                                     <li className={'flex flex-wrap'}>Label names = [
                                         {
-                                            fileoverview?.headers.map((item, index) => (
+                                            fileoverview?.headers?.map((item, index) => (
                                                 <span key={index} className={'font-medium text-description-color'}>{item} , </span>
                                             ))
                                         }]</li>

@@ -21,7 +21,7 @@ const Sample_all = () => {
           startContent={<SearchIcon />}
           className={"w-[384px]"}
           classNames={{
-            inputWrapper: ["h-[42px] shadow-md"],
+            inputWrapper: ["h-[42px] shadow-sm"],
           }}
         />
       </div>
@@ -35,7 +35,7 @@ const Sample_all = () => {
               href={item.url}
               key={index}
               className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
+                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
               }
             >
               <p className={"w-1/4 text-left"}>{item.title}</p>
@@ -56,7 +56,7 @@ const Sample_all = () => {
               href={item.url}
               key={index}
               className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-md flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
+                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
               }
             >
               <p className={"w-1/3"}>{item.filename}</p>

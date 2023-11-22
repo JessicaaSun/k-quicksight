@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: ["imgur.com", "i.imgur.com"],
+    domains: ["imgur.com", "i.imgur.com"],
   },
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,

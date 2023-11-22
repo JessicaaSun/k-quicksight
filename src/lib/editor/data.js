@@ -51,7 +51,7 @@ export const data = [
                     resolvedName: 'TextLayer',
                 },
                 props: {
-                    text: '<p style="font-family: Akronim; color: rgb(84, 84, 84); font-size: 104px; text-transform: uppercase; text-align: center">LIQUID EDITOR</p>',
+                    text: '<p style="font-family: Akronim; color: rgb(84, 84, 84); font-size: 104px; text-transform: uppercase; text-align: center">K-QUICKSIGHT EDITOR</p>',
                     position: {
                         x: 410.6113744075829,
                         y: 71.30173775671405,
@@ -228,7 +228,7 @@ export const data = [
                     resolvedName: 'TextLayer',
                 },
                 props: {
-                    text: '<p style="font-family: Alatsi; color: rgb(84, 84, 84); font-size: 24px; text-transform: uppercase; text-align: center">NHA TRANG BEACH</p>',
+                    text: '<p style="font-family: Alatsi; color: rgb(84, 84, 84); font-size: 24px; text-transform: uppercase; text-align: center"></p>',
                     position: {
                         x: 387.86255924170615,
                         y: 210.48025276461317,
@@ -486,7 +486,7 @@ export const fulldata = [
                     resolvedName: 'TextLayer',
                 },
                 props: {
-                    text: '<p style="font-family: Alatsi; color: rgb(84, 84, 84); font-size: 24px; text-transform: uppercase; text-align: center">NHA TRANG BEACH</p>',
+                    text: '<p style="font-family: Alatsi; color: rgb(84, 84, 84); font-size: 24px; text-transform: uppercase; text-align: center"></p>',
                     position: {
                         x: 387.86255924170615,
                         y: 210.48025276461317,

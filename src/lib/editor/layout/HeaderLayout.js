@@ -87,7 +87,7 @@ const HeaderLayout = ({ openPreview }, ref) => {
         </Link>
       </div>
       <div className="flex gap-5 items-center">
-        {displayPreviewBtn ? (
+        {/* {displayPreviewBtn ? ( */}
           <div className="flex items-center gap-4">
             <div
               style={{
@@ -132,9 +132,9 @@ const HeaderLayout = ({ openPreview }, ref) => {
               Preview
             </div>
           </div>
-        ) : (
+        {/* ) : (
           ""
-        )}
+        )} */}
         <Dropdown>
           <DropdownTrigger>
             <Avatar

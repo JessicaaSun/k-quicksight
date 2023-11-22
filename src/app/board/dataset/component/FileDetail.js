@@ -12,9 +12,8 @@ import {
     Pagination,
     Button
 } from "@nextui-org/react";
-import {useGetFileDetailQuery} from "@/store/features/files/allFileByuserId";
 
-export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
+export default function FileDetail({dataFile, headers, isLoading}) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 100;
     const pages = Math.ceil(dataFile?.length / rowsPerPage);

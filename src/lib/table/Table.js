@@ -26,7 +26,6 @@ export default function TableData({
   headers,
 }) {
   const router = useRouter();
-
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
   };
@@ -66,6 +65,8 @@ export default function TableData({
                       type={item.type}
                       size={item.size}
                       createAt={item.created_at}
+                      fileId = {item.id}
+
                     />
                   </TableCell>
                 </TableRow>

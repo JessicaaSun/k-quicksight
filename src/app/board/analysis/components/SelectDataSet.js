@@ -85,7 +85,6 @@ const Dataset = () => {
                         sample_dataset={sample_dataset}
                         headers={headers}
                         onFileSelect={handleFileSelect}
-                        // onFileSelect={handleRowSelect}
                     />
                 </div>
                 {selectedFile && (

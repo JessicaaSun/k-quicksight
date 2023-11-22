@@ -7,13 +7,16 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    Spinner, Tooltip,
+    Spinner, Tooltip, Button,
 } from "@nextui-org/react";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
 import { useRouter } from "next/navigation";
 import {FaEye} from "react-icons/fa6";
 import Dropdown_table from "@/lib/table/componentTable/dropdown";
+import {useDispatch} from "react-redux";
+import {setUUID} from "@/store/features/files/analysisuuid";
+
 
 export default function TableDataSet({
                                       file,
@@ -28,22 +31,14 @@ export default function TableDataSet({
         onFileSelect(file);
     };
     const handleView = (uuid) => {
-        router.push(`/board/dataset/${uuid}`);
+        router.push(`/board/analysis/${uuid}`);
     };
     const [selectedColor, setSelectedColor] = useState("default");
     const [selectedRow, setSelectedRow] = useState(null);
-    // const [page, setPage] = React.useState(1);
-    // const rowsPerPage = 4;
-    //
-    // const pages = Math.ceil(users.length / rowsPerPage);
-    //
-    // const items = React.useMemo(() => {
-    //     const start = (page - 1) * rowsPerPage;
-    //     const end = start + rowsPerPage;
-    //
-    //     return users.slice(start, end);
-    // }, [page, users]);
+
+    const dispatch = useDispatch();
     const handleRowSelect = (key) => {
+        dispatch(setUUID(key))
         setSelectedRow(key);
         setSelectedColor("success");
     };
@@ -75,9 +70,9 @@ export default function TableDataSet({
                         !isFileLoading ? (
                             <TableRow
                                 key={item.uuid}
-                                onClick={() => handleRowSelect(item.id)}
+                                onClick={() => handleRowSelect(item.uuid)}
                                 selected={item.id === selectedRow}
-                                // key={rowData.uuid} onClick={() => handleRowClick(rowData)
+                                // onClick={() => handleView(item.)}
                             >
                                 <TableCell>{item.file}</TableCell>
                                 <TableCell>{item.type}</TableCell>
@@ -129,29 +124,16 @@ export default function TableDataSet({
                             </TableCell>
                             <TableCell>{item.size}</TableCell>
                             <TableCell className={"flex gap-5 justify-center"}>
-                                <Tooltip showArrow={true} content={"View"}>
-                                    <button onClick={() => handleView(item.uuid)}>
-                                        <i>
-                                            <FaEye />
-                                        </i>
-                                    </button>
-                                </Tooltip>
+                                <Button >
+                                    <i>
+                                        <FaEye />
+                                    </i>
+                                </Button>
                             </TableCell>
                         </TableRow>
                     ))}
             </TableBody>
         </Table>
-            {/*<div className="flex w-full justify-center mt-4">*/}
-            {/*    <Pagination*/}
-            {/*        isCompact*/}
-            {/*        showControls*/}
-            {/*        showShadow*/}
-            {/*        color="secondary"*/}
-            {/*        page={page}*/}
-            {/*        total={pages}*/}
-            {/*        onChange={(page) => setPage(page)}*/}
-            {/*    />*/}
-            {/*</div>*/}
         </>
     );
 }

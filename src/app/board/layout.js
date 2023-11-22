@@ -58,13 +58,13 @@ export default function BoardRootLayout({ children }) {
   } else if (user) {
     return (
       <section>
-        <Navbar />
+        {noMargin  ? "" : <Navbar />}
         <div
           id={"board"}
           className={`${
             noMargin
               ? `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"} pt-[64px]`
-              : "lg:pl-[320px] py-[90px]"
+              : "lg:pl-[270px] py-[70px]"
           }  bg-background-color min-h-screen`}
         >
           {children}

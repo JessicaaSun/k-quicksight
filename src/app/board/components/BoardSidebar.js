@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -46,10 +46,13 @@ const BoardSidebar = ({ toggleSidebar }) => {
   const { data: user, isSuccess, refetch: refetchUser } = useGetUserQuery();
   const pathname = usePathname();
 
+<<<<<<< HEAD
   useEffect(() => {
     refetchUser();
   }, [refetchUser, user]);
   
+=======
+>>>>>>> 1003722cfa5ed586335cdbd70bd0c70e52b740ac
   return (
     <div
       className={`${

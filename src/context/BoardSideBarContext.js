@@ -9,16 +9,20 @@ const SidebarContext = createContext();
 
 export const SidebarProvider = ({ children }) => {
   const pathname = usePathname();
-  const isHide = pathname.includes("dashboard/", "analysis/");
-  const [isSidebarHidden, setIsSidebarHidden] = useState(isHide);
-
+  const shouldHideSidebar = pathname.includes("dashboard/**") || pathname.includes("analysis/**")|| pathname.includes("editor");
   const isScreenSmall = useMedia('(max-width: 768px)', {
-    defaultState: true, 
+    defaultState: true,
+  });
+
+  const [isSidebarHidden, setIsSidebarHidden] = useState(() => {
+    return shouldHideSidebar || isScreenSmall;
   });
 
   useEffect(() => {
-    setIsSidebarHidden(isScreenSmall);
-  }, [isScreenSmall]);
+    if (!shouldHideSidebar) {
+      setIsSidebarHidden(isScreenSmall);
+    }
+  }, [shouldHideSidebar, isScreenSmall]);
 
   const toggleSidebar = () => {
     setIsSidebarHidden((prev) => !prev);

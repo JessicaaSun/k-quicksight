@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import React, { useRef, useState } from "react";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { fetchSvgContent } from "@lidojs/utils";
+import Image from "next/image";
 
 const UploadContent = ({ visibility, onClose }) => {
   const inputFileRef = useRef(null);
@@ -154,7 +155,8 @@ const UploadContent = ({ visibility, onClose }) => {
                   justifyContent: "center",
                 }}
               >
-                <img
+                <Image
+                  alt="image"
                   src={item.url}
                   loading="lazy"
                   style={{ maxHeight: "100%" }}

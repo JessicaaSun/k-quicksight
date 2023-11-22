@@ -1,29 +1,28 @@
-'use client'
+"use client";
 
-import React from 'react';
-import {useGetUserQuery} from "@/store/features/user/userApiSlice";
-import {Button, Input} from "@nextui-org/react";
-import {SearchIcon} from "@/app/board/recent/searchIcons";
-import {mockData} from "@/app/board/mockData/mockData";
+import React from "react";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import { Button, Input } from "@nextui-org/react";
+import { SearchIcon } from "@/app/board/recent/searchIcons";
+import { mockData } from "@/app/board/mockData/mockData";
 import Link from "next/link";
 import Image from "next/image";
 import {IoSearchSharp} from "react-icons/io5";
 
-export default function UserBoard (){
-
-    const {
-        data: user,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-    } = useGetUserQuery();
+export default function UserBoard() {
+  const {
+    data: user,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetUserQuery();
 
     return (
         <div className={'py-10 px-5'}>
             <div className={'flex min-h-screen flex-col'}>
                 <div className={'flex justify-between items-center'}>
-                    <div className={'text-xl text-primary-color font-semibold'}>Recent</div>
+                    <p className={'text-xl text-primary-color font-semibold'}>Recent</p>
                     <Input
                         startContent={<IoSearchSharp />}
                         classNames={{
@@ -86,6 +85,6 @@ export default function UserBoard (){
                     </div>
                 </div>
             </div>
-        </div>
-    );
+      </div>
+  );
 }

@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useRef, useState } from "react";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { fetchSvgContent } from "@lidojs/utils";
-import Image from "next/image";
 
 const UploadContent = ({ visibility, onClose }) => {
   const inputFileRef = useRef(null);
@@ -58,7 +58,6 @@ const UploadContent = ({ visibility, onClose }) => {
       reader.readAsDataURL(file);
     }
   };
-
   return (
     <div
       style={{
@@ -155,12 +154,7 @@ const UploadContent = ({ visibility, onClose }) => {
                   justifyContent: "center",
                 }}
               >
-                <Image
-                  alt="image"
-                  src={item.url}
-                  loading="lazy"
-                  style={{ maxHeight: "100%" }}
-                />
+                <img alt="image" src={item.url} style={{ maxHeight: "100%" }} />
               </div>
             </div>
           ))}

@@ -14,7 +14,8 @@ const ImageContent = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useAsync(async () => {
-    const response = await axios.get("https://api-gilt-one.vercel.app/images");
+    const response = await axios.get("http://localhost:8000/api/v1/files/view/images/");
+    console.log("response image", response)
     setImages(response.data);
     setIsLoading(false);
   }, []);
@@ -106,10 +107,10 @@ const ImageContent = ({ onClose }) => {
                 paddingBottom: "100%",
                 width: "100%",
               }}
-              onClick={() => addImage(getThumbnail(item.img), item.img)}
+              onClick={() => addImage(item.filename, item.url)}
             >
               <img
-                src={getThumbnail(item.img)}
+                src={item.url}
                 loading="lazy"
                 style={{
                   position: "absolute",

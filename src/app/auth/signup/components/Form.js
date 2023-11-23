@@ -53,10 +53,12 @@ const SignUpForm = () => {
   return (
     <div
       className={
+
         "lg:w-1/3 md:w-2/3 w-full bg-white shadow-lg rounded-3xl p-10"
+
       }
     >
-      <h2 className={"mb-10 text-text-color"}>Hello, dear!</h2>
+      <h2 className={"mb-8 text-primary-color"}>Sign Up</h2>
       <Formik
         initialValues={{
           username: "",

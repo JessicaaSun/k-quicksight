@@ -7,6 +7,12 @@ export const fileShare = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        shareWithMe: builder.query({
+            query: ({ownerId}) => ({
+                url: `share-dataset/member/${ownerId}/`,
+                method: 'GET',
+            })
+        })
     }),
 });
-export const { useShareOtherQuery } = fileShare;
+export const { useShareOtherQuery, useShareWithMeQuery } = fileShare;

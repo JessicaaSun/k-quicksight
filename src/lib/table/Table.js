@@ -33,6 +33,7 @@ export default function TableData({
     <Table
         isHeaderSticky
         aria-label="Example table with client async pagination"
+        className={'rounded-xl shadow-sm'}
     >
       <TableHeader>
         {headers.map((item, index) => (
@@ -66,7 +67,7 @@ export default function TableData({
                       size={item.size}
                       createAt={item.created_at}
                       fileId = {item.id}
-
+                      file={item.filename}
                     />
                   </TableCell>
                 </TableRow>

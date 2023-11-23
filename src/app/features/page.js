@@ -51,10 +51,10 @@ export default function Feature(){
 
     return(
         <>
-            <section className="bg-center bg-no-repeat bg-[url('/assets/images/feature-bg.jpg')] bg-cover bg-blend-darken">
+            <section className="bg-center bg-no-repeat bg-[url('/assets/images/feature-bg.jpg')] bg-overlay/40 bg-cover bg-blend-darken">
                 <div className="px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[117px]">
                     <h1 className="mb-4 text-white">K-QuickSight Features</h1>
-                    <p className="mb-8 text-gray-300">
+                    <p className="mb-8 text-background-color text-xl">
                         Analyze your dataset, and visualize as a perfection.
                     </p>
                 </div>

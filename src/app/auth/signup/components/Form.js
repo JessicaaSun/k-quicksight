@@ -8,6 +8,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
+import {useRegisterMutation} from "@/store/features/auth/authApiSlice";
+import {useDispatch} from "react-redux";
+import {setCurrentEmail} from "@/store/features/auth/authSlice";
 
 const SignUpForm = () => {
   const [showPassword, setPassword] = useState(false);
@@ -16,6 +19,10 @@ const SignUpForm = () => {
   const [errorMessage, setErrorMessage] = useState([]);
   const router = useRouter();
   const [checkBox, setCheckbox] = useState(false);
+  const [checkBoxError, setCheckBokError] = useState(false)
+  const dispatch = useDispatch();
+
+  const [register] = useRegisterMutation();
 
   const handleCheckbox = () => {
     setCheckbox((e) => !e);
@@ -30,10 +37,23 @@ const SignUpForm = () => {
   const toggleConfirmPasswordVisibility = () => {
     set_con_Password((prevShowConfirmPassword) => !prevShowConfirmPassword);
   };
+
+  const handleRegister = async (data) => {
+    if (data.is_confirmed === false) {
+      setCheckBokError(true)
+    } else {
+      setCheckBokError(false)
+      const register_data = await register({data:data})
+      dispatch(setCurrentEmail(register_data?.data?.email))
+      router.push("/auth/verify")
+    }
+    setIsLoading(false)
+  }
+
   return (
     <div
       className={
-        "lg:w-1/3 md:w-2/3 w-full border-2 bg-white shadow-lg border-primary-color rounded-3xl p-10"
+        "lg:w-1/3 md:w-2/3 w-full bg-white shadow-lg rounded-3xl p-10"
       }
     >
       <h2 className={"mb-10 text-text-color"}>Hello, dear!</h2>
@@ -81,17 +101,7 @@ const SignUpForm = () => {
             is_confirmed: checkBox,
           };
           setIsLoading(true);
-          axios
-            .post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/register/`, data)
-            .then((response) => {
-              console.log("data register", data)
-              router.push(`/auth/verify/${response.data.email}`);
-            })
-            .catch(function (error) {
-              setErrorMessage(error?.response?.data?.errors);
-              setIsLoading(false);
-            });
-
+          handleRegister(data)
           setSubmitting(false);
         }}
       >
@@ -190,9 +200,9 @@ const SignUpForm = () => {
                   target={"_blank"}
                   className={"text-primary-color font-semibold hover:underline"}
                 >
-                  {" "}
                   and read Term and Privacy
-                </Link>{" "}
+                </Link>
+                <p className={'text-red-500'}>{checkBoxError ? 'You should accept the term' : ''}</p>
               </span>
             </div>
             {!isLoading ? (

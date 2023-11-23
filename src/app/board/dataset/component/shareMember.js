@@ -60,6 +60,9 @@ export default function ShareMember({filename, fileId, list}) {
         const share = await shareMember({data: dataShare});
         if (share?.data?.code === 201) {
             toast.success(`${share?.data?.message}`)
+            setTimeout(() => {
+                onClose(true)
+            }, 1500)
         } else if (share?.error?.data.code === 400) {
             toast.error(`${share?.error?.data?.message}`)
         }

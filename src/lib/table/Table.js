@@ -47,7 +47,7 @@ export default function TableData({
           </TableColumn>
         ))}
       </TableHeader>
-      <TableBody>
+      <TableBody emptyContent={'no data imported'}>
         {!isSample
           ? file?.map((item, index) =>
               !isFileLoading ? (

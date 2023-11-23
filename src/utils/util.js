@@ -5,7 +5,7 @@ export function capitalize(str) {
 }
 
 export function generateBashURL(str) {
-    if (str.includes('https:') || str.includes('http:') ) {
+    if (str?.includes('https:') || str?.includes('http:') ) {
         return str;
     } else {
         return `${process.env.NEXT_PUBLIC_BASE_URL}files/${str}`;

@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from "react";
 import {
+    Avatar,
     Button, Chip,
     Dropdown, DropdownItem, DropdownMenu, DropdownTrigger,
     Modal,
@@ -12,9 +13,10 @@ import {
     useDisclosure,
 } from "@nextui-org/react";
 import {useGetUserSearchQuery} from "@/store/features/user/usersApiSlice";
-import {MdDelete} from "react-icons/md";
 import {useShareMemberMutation} from "@/store/features/shareMember/apiSliceShare";
 import {FaShareFromSquare} from "react-icons/fa6";
+import {toast, ToastContainer} from "react-toastify";
+import {generateBashURL} from "@/utils/util";
 
 export default function ShareMember({filename, fileId, list}) {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -52,11 +54,15 @@ export default function ShareMember({filename, fileId, list}) {
 
     const handleShare = async () => {
         const dataShare = {
-            member: userSelected,
+            members: userSelected,
             file: fileId,
         }
-        // console.log(dataShare)
-        // const share = await shareMember({data: dataShare})
+        const share = await shareMember({data: dataShare});
+        if (share?.data?.code === 201) {
+            toast.success(`${share?.data?.message}`)
+        } else if (share?.error?.data.code === 400) {
+            toast.error(`${share?.error?.data?.message}`)
+        }
     }
 
     useEffect(() => {
@@ -87,9 +93,30 @@ export default function ShareMember({filename, fileId, list}) {
                                 <p className={'text-md font-normal text-description-color'}>{filename} </p>
                             </ModalHeader>
                             <ModalBody>
+                                <ToastContainer
+                                    position="top-center"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme="light"
+                                />
                                 <div className="flex gap-2 flex-wrap">
                                     {userSelectedFilter?.map((item, index) => (
-                                        <Chip variant="bordered" color={'primary'} key={index} onClose={() => handleRemoveUserSelect(item.id)}>
+                                        <Chip
+                                            avatar={
+                                                <Avatar
+                                                    size="lg"
+                                                    name="profile"
+                                                    src={generateBashURL(item.avatar)}
+                                                />
+                                            }
+                                            size='lg'
+                                            variant="bordered" color={'primary'} key={index} onClose={() => handleRemoveUserSelect(item.id)}>
                                             {item.username}
                                         </Chip>
                                     ))}
@@ -102,7 +129,7 @@ export default function ShareMember({filename, fileId, list}) {
                                             searchResult.map((item, index) => (
                                                 <li key={index} className={'flex justify-between items-center cursor-pointer overflow-x-scroll gap-5 mt-3 p-2 rounded-xl hover:bg-blue-50 transition-all'}>
                                                     <div className={'flex justify-between items-center gap-5'}>
-                                                        <img src={item.avatar ? item.avatar : 'http://136.228.158.126:8002/api/v1/files/4d68fed87605409794748c2e2b10ef95.webp'} alt={'profile'} width={50} height={50} className={'rounded-full object-cover w-[50px] h-[50px]'}  />
+                                                        <img src={item.avatar ? generateBashURL(item.avatar) : 'http://136.228.158.126:8002/api/v1/files/4d68fed87605409794748c2e2b10ef95.webp'} alt={'profile'} width={50} height={50} className={'rounded-full object-cover w-[50px] h-[50px]'}  />
                                                         <div>
                                                             <p>{item.username}</p>
                                                             <p>{item.email}</p>

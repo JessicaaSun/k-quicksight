@@ -7,7 +7,6 @@ import EditDataset from "@/lib/table/componentTable/editDataset";
 import ShareMember from "@/app/board/dataset/component/shareMember";
 
 const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId }) => {
-  console.log(fileId)
   const router = useRouter();
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);

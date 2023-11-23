@@ -30,29 +30,36 @@ export default function Profile() {
     const [update_description, set_updateDescription] = useState(false);
     const [gender, setGender] = useState('');
     const [updateGender, set_updateGender] = useState(false);
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState(null);
     const [imageName, setNameImage] = useState('');
     const dispatch = useDispatch();
     const [ErrorUpdate, setError] = useState([]);
-    const uploadImage = useUploadSingleMutation();
-
+    const [uploadImage] = useUploadSingleMutation();
+    const profile = useSelector((state) => state.image.image);
+    const profileImage = `${process.env.NEXT_PUBLIC_BASE_URL}files/${user?.data.avatar}`;
+    const [full_name, setFullName] = useState('')
+    
     useEffect(() => {
         refetchUser();
         setUsername(user?.data.username)
         setEmail((user?.data.email))
         setPhone_number(user?.data.phone_number)
         setDescription(user?.data.biography)
-        setUrl(user?.data.avatar)
-        setNameImage(user?.data.avatar)
+        // setUrl(profileImage)
+        setNameImage(profileImage)
         setGender(user?.data.gender)
-    }, [refetchUser, user]);
-    const updateUserName = () => {
+        dispatch(setCurrentImage(profileImage))
+        setFullName(user?.data.full_name)
+    }, [dispatch, imageName, profileImage, refetchUser, url, user])
+    const updateUserName = async () => {
         setUpdateUsername(false);
         const data = {
-            username: username
+            username: username,
+            full_name: full_name,
         }
-        const updateUsername = updateProfile({data: data, id: user?.data.id})
-        if (updateUsername?.error?.status === 400) {
+        const updateUsername = await updateProfile({data: data, id: user?.data.id})
+        // console.log(updateUsername)
+        if (updateUsername) {
             setError(updateUsername?.error?.data?.username)
         } else if (updateUsername?.data?.username) {
             setError(null)
@@ -61,6 +68,7 @@ export default function Profile() {
     const updatePhoneNumber = () => {
         set_update_Phone_number(false)
         const data = {
+            username: username,
             phone_number: phone_number
         }
         const updatephone_number = updateProfile({data: data, id: user?.data.id})
@@ -68,6 +76,7 @@ export default function Profile() {
     const updateBio = () => {
         set_updateDescription(false)
         const data = {
+            username: username,
             biography: description
         }
         const updateBiolophy = updateProfile({data: data, id: user?.data.id})
@@ -75,6 +84,7 @@ export default function Profile() {
     const updateGender_fun = () => {
         set_updateGender(false)
         const data = {
+            username: username,
             gender: gender
         }
         const updateGender = updateProfile({data: data, id: user?.data.id})
@@ -86,28 +96,38 @@ export default function Profile() {
 
     const handleImageChange = async (event) => {
         const file = event.target.files[0];
+        const preview = URL.createObjectURL(file)
+
 
         if (!file) {
             return;
         }
 
         try {
-            const formData = new FormData();
-            formData.append('file', file);
-            const response = await uploadImage({ data: formData });
-            const imageUrl = response.data.url;
+            const response = await uploadImage(file);
+            const imageUrl = response.data.filename;
+            setNameImage(imageUrl)
+            dispatch(setCurrentImage(response.data.url))
+            refetchUser();
+            setUrl(preview)
+
             const updateProfileResponse = await updateProfile({
                 data: {
+                    username: username,
                     avatar: response.data.filename
                 },
                 id: user?.data.id
             });
-            console.log(updateProfileResponse)
-            dispatch(setCurrentImage(imageUrl));
+            // console.log(user)
+
+            // dispatch(setCurrentImage(imageUrl));
         } catch (error) {
             console.error(error.message);
         }
     };
+
+    const state = useSelector(state => state)
+    console.log(state)
 
     if(isLoading) {
         return (<Loading />)
@@ -144,7 +164,7 @@ export default function Profile() {
                                     style={{ display: 'none' }}
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${imageName}`} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                                    <img src={url ? url : profile} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                                 <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
                                   <span>
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,14 +178,14 @@ export default function Profile() {
                             <div className={'flex flex-col justify-between gap-5 items-start w-full'}>
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Name</p>
-                                    <p className={'text-sm font-medium text-primary-color'}>@{user?.data.full_name ? user?.data.full_name : user?.data.username}</p>
+                                    <p className={'text-sm font-medium text-primary-color'}>@{user?.data.username ? user?.data.username : user?.data.full_name}</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
                                         {!UpdateUsername ? (
-                                                <p className={`font-medium text-lg text-text-color`}>{userInfo ? userInfo.username : username}</p>
+                                                <p className={`font-medium text-lg text-text-color`}>{user?.data.full_name}</p>
                                         ):(
                                             <Input classNames={{
                                                 inputWrapper: 'h-[46px]'
-                                            }} type={'text'} value={username} onValueChange={setUsername} placeholder={username} className={'font-medium text-text-color text-lg'} />
+                                            }} type={'text'} value={full_name} onValueChange={setFullName} placeholder={full_name} className={'font-medium text-text-color text-lg'} />
                                         )}
                                         {
                                             UpdateUsername ? (

@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import {FaBook, FaClock, FaFolder, FaShare} from "react-icons/fa";
 import { FaSquarePollVertical, FaTableColumns } from "react-icons/fa6";
 import {LiaShareSquareSolid} from "react-icons/lia";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {generateBashURL} from "@/utils/util";
 
 const contentRoute = {
   file: {
@@ -23,7 +25,7 @@ const contentRoute = {
     },
     shareWithMe: {
       icon: <FaShare />,
-      name: "Share with me",
+      name: "Share files",
       route: "/board/shareWithMe",
     },
   },
@@ -64,11 +66,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           className={
             "border-2 border-primary w-[50px] h-[50px] object-cover rounded-full"
           }
-          src={
-            user?.data.avatar
-              ? user.data.avatar
-              : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-          }
+          src={generateBashURL(user?.data.avatar)}
           alt={"profile"}
         />
         <div>

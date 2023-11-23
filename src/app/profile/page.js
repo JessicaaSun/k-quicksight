@@ -181,7 +181,7 @@ export default function Profile() {
                                     <p className={'text-sm font-medium text-primary-color'}>@{user?.data.username ? user?.data.username : user?.data.full_name}</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
                                         {!UpdateUsername ? (
-                                                <p className={`font-medium text-lg text-text-color`}>{user?.data.full_name}</p>
+                                                <p className={`font-medium text-lg text-text-color`}>{full_name ? full_name : user?.data.full_name}</p>
                                         ):(
                                             <Input classNames={{
                                                 inputWrapper: 'h-[46px]'

@@ -19,18 +19,16 @@ const DetailDataset = ({params}) => {
     const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0})
     const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
     const dispatch = useDispatch();
-    const [overview_data, setOverview] = useState([])
-
 
     useEffect(() => {
         const fileOverview = async () => {
             const overview = await refetchOverview();
-            setOverview(overview.data)
             dispatch(setFileAccurate(overview.data))
         }
         fileOverview()
-    }, [refetchOverview]);
-    
+    }, [dispatch, refetchOverview]);
+
+
     useEffect(() => {
         setHeader(fileDetail?.header);
         setData(fileDetail?.data);
@@ -41,17 +39,17 @@ const DetailDataset = ({params}) => {
             <p className={'text-3xl font-medium text-primary-color'}>Detail</p>
             <div className={'flex justify-start items-center gap-5 mt-3'}>
                 <p className={'text-lg font-medium text-text-color'}>{fileDetail?.file}</p>
-                <ShareMember />
+                <ShareMember list={false} filename={fileDetail?.file} fileId={fileDetail?.id} owner={user?.data.id} />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
                 <Overview filename={fileDetail?.file} uuid={uuid} />
-                <CleanModal />
+                <CleanModal filename={fileDetail?.filename} />
             </div>
             <div className={'flex justify-end items-center'}>
                 <HistoryDrawer />
             </div>
             <p className={'text-primary-color font-semibold text-medium my-3'}>Total records: {fileDetail?.total} </p>
-            <FileDetail dataFile={data} uuid={uuid} headers={headers} isLoading={isLoading} size={30} />
+            <FileDetail dataFile={data} headers={headers} isLoading={isLoading} />
         </div>
     );
 };

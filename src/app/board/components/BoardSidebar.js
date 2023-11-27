@@ -1,11 +1,14 @@
 "use client";
 
-import React from "react";
+import React, {useEffect} from "react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBook, FaClock, FaFolder } from "react-icons/fa";
+import {FaBook, FaClock, FaFolder, FaShare} from "react-icons/fa";
 import { FaSquarePollVertical, FaTableColumns } from "react-icons/fa6";
+import {LiaShareSquareSolid} from "react-icons/lia";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {generateBashURL} from "@/utils/util";
 
 const contentRoute = {
   file: {
@@ -20,10 +23,10 @@ const contentRoute = {
       name: "Dataset",
       route: "/board/dataset",
     },
-    sample: {
-      icon: <FaBook />,
-      name: "Sample",
-      route: "/board/sample",
+    shareWithMe: {
+      icon: <FaShare />,
+      name: "Share files",
+      route: "/board/shareWithMe",
     },
   },
 
@@ -43,8 +46,12 @@ const contentRoute = {
 };
 
 const BoardSidebar = ({ toggleSidebar }) => {
-  const { data: user, isSuccess } = useGetUserQuery();
+  const { data: user, isSuccess, refetch: refetchUser } = useGetUserQuery();
   const pathname = usePathname();
+
+  useEffect(() => {
+    refetchUser();
+  }, [refetchUser, user]);
 
   return (
     <div
@@ -59,11 +66,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           className={
             "border-2 border-primary w-[50px] h-[50px] object-cover rounded-full"
           }
-          src={
-            user?.data.avatar
-              ? user.data.avatar
-              : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-          }
+          src={generateBashURL(user?.data.avatar)}
           alt={"profile"}
         />
         <div>
@@ -103,15 +106,15 @@ const BoardSidebar = ({ toggleSidebar }) => {
             {contentRoute.file.dataset.name}
           </Link>
           <Link
-            className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
-              pathname.startsWith(contentRoute.file.sample.route)
-                ? "bg-primary-color text-white"
-                : "bg-white"
-            } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
-            href={contentRoute.file.sample.route}
+              className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
+                  pathname.startsWith(contentRoute.file.shareWithMe.route)
+                      ? "bg-primary-color text-white"
+                      : "bg-white"
+              } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+              href={contentRoute.file.shareWithMe.route}
           >
-            {contentRoute.file.sample.icon}
-            {contentRoute.file.sample.name}
+            {contentRoute.file.shareWithMe.icon}
+            {contentRoute.file.shareWithMe.name}
           </Link>
         </div>
       </div>

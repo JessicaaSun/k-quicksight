@@ -18,6 +18,5 @@ const allFiles = createSlice({
         }
     }
 })
-
 export const {setFiles, setTotalSize} = allFiles.actions;
 export default allFiles.reducer;

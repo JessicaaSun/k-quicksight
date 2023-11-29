@@ -173,7 +173,7 @@ export default function NavbarKQuick() {
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <p className="font-semibold">Signed in as</p>
                       <p className="font-semibold text-primary-color">
-                        {userInfo ? userInfo.username : user?.data.username}
+                        {user?.data.full_name}
                       </p>
                     </DropdownItem>
                     <DropdownItem
@@ -183,7 +183,7 @@ export default function NavbarKQuick() {
                       Profile
                     </DropdownItem>
                     <DropdownItem
-                      onClick={() => router.push("/board/recent")}
+                      onClick={() => router.push("/board/dataset")}
                       key="team_settings"
                     >
                       Board

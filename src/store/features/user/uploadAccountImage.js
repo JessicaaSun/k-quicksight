@@ -3,7 +3,7 @@ import { apiSlice } from "@/store/api/apiSlice";
 export const uploadSingleApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         uploadSingle: builder.mutation({
-            query: (data) => {
+            query: ({data}) => {
                 let formData = new FormData();
                 formData.append("file", data);
 

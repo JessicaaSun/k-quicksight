@@ -16,9 +16,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ["User"]
         }),
         fileImport: builder.mutation({
-            query: ({file}) => ({
-                url: `files/upload/images/`,
-                method: 'POST',
+            query: ({file, userId}) => ({
+                url: `files/file-upload/${userId}/`,
+                method: "POST",
                 body: file,
                 prepareHeaders: (headers) => {
                     headers.set('Content-Type', `multipart/form-data; boundary=${generateBoundary()}`);

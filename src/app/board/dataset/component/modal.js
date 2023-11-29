@@ -32,18 +32,13 @@ export default function App() {
         }
         const scrap = await scrapping({userId: user?.data.id, data: data})
         dispatch(setFileScrap(scrap?.data?.filename))
-        if (scrap?.error?.data.url[0]) {
-            setError(scrap?.error?.data.url[0])
-        } else if (linkScrap) {
-            setError('');
-            router.push('/board/dataset/file-scrap')
-        }
+        router.push('/board/dataset/file-scrap')
     }
 
     return (
         <>
             <Button onPress={onOpen} className={'text-primary-color bg-blue-200 font-semibold border-2 border-white capitalize shadow-lg'}>Import from web</Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal size={'3xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>

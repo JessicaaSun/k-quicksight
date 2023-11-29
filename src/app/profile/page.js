@@ -7,6 +7,7 @@ import Loading from "@/app/loading";
 import {useGetUserQuery, useUpdateUserMutation} from "@/store/features/user/userApiSlice";
 import {generateBashURL} from "@/utils/util";
 import {useUploadSingleMutation} from "@/store/features/user/uploadAccountImage";
+import {FaPencilAlt} from "react-icons/fa";
 
 export default function Profile() {
     const {data:user, isLoading} = useGetUserQuery();
@@ -63,7 +64,8 @@ export default function Profile() {
             username: user?.data.username,
             full_name: fullname,
             gender: gender,
-            biography: biography
+            biography: biography,
+            phone_number: phoneNumber
         }
         const response = await updateInfo({data:data, id: user?.data.id})
     }
@@ -202,7 +204,7 @@ export default function Profile() {
                                                 </>
                                             ) : (
                                                 <>
-                                                    <Input type={'number'} value={phoneNumber} onValueChange={setPhoneNumber} />
+                                                    <Input size={'sm'} type={'number'} value={phoneNumber} onValueChange={setPhoneNumber} />
                                                     <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={handlePhoneNumber}>Done</button>
                                                 </>
                                             )
@@ -213,10 +215,10 @@ export default function Profile() {
                         </div>
                         <div className={'border-1 shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>
                             <div className={'flex justify-between items-center w-full'}>
-                                <h4 className={'text-primary-color'}>{fullname}</h4>
+                                <h4 className={'text-text-color'}>About <span className={'text-primary-color'}>{fullname}</span></h4>
                                 {
                                     !biographyUpdate ? (
-                                        <button onClick={() => setBiographyUpdate(true)}>Edit</button>
+                                        <button onClick={() => setBiographyUpdate(true)} className={'text-primary-color'}><FaPencilAlt /></button>
                                     ) : (
                                         <button onClick={handleBio}>Done</button>
                                     )

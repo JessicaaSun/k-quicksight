@@ -21,7 +21,7 @@ const store = configureStore({
         dataSetSelected: fileSelect,
         recentData: recentData,
         allRecord: allRecord,
-        analysisUuid: analysisUUID,
+        analysisUuid: analysisUUID
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

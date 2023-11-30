@@ -34,6 +34,10 @@ const tabs = [
     name: "Upload",
     icon: <UploadIcon />,
   },
+  {
+    name: "Chart Example",
+    icon: <TextTIcon />,
+  },
 ];
 const Sidebar = () => {
   const { actions } = useEditor();
@@ -83,7 +87,7 @@ const Sidebar = () => {
                 }}
               />
             )}
-            {tab === "Frame" && (
+            {tab === "Chart Example" && (
               <FrameContent
                 onClose={() => {
                   setTab(null);

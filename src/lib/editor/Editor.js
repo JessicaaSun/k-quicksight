@@ -13,7 +13,6 @@ import { useHandlePreview } from "@/context/EditorPreviewContext";
 import HeaderLayout from "./layout/HeaderLayout";
 import dynamic from 'next/dynamic';
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;

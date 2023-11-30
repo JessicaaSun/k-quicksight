@@ -19,30 +19,17 @@ export const data = [
                     },
                     rotate: 0,
                     color: 'rgb(255, 255, 255)',
-                    image: {
-                        url: 'https://i.imgur.com/vbBynfJ.jpg',
-                        thumb: 'https://i.imgur.com/vbBynfJm.jpg',
-                        boxSize: {
-                            width: 1640,
-                            height: 1230,
-                        },
-                        position: {
-                            x: 0,
-                            y: -153,
-                        },
-                        rotate: 0,
-                        transparency: 0.26,
-                    },
+                    
                 },
 
                 locked: false,
                 child: [
-                    'f6761b08-a5c0-41c2-b926-8dac486ed52b',
-                    'b2ef63df-aae1-446a-8f8f-9a459cbd3bf2',
-                    '0db18d57-383a-4ef7-8759-2738e4b2e662',
-                    'f68c4af6-7fbc-48c7-b768-8e8dd49b4e33',
-                    '1c998ea6-b5de-4ecf-8952-ad582cbf047b',
-                    'cf462f31-e1d8-48b5-9398-3fedd9e61fb9',
+                    // 'f6761b08-a5c0-41c2-b926-8dac486ed52b',
+                    // 'b2ef63df-aae1-446a-8f8f-9a459cbd3bf2',
+                    // '0db18d57-383a-4ef7-8759-2738e4b2e662',
+                    // 'f68c4af6-7fbc-48c7-b768-8e8dd49b4e33',
+                    // '1c998ea6-b5de-4ecf-8952-ad582cbf047b',
+                    // 'cf462f31-e1d8-48b5-9398-3fedd9e61fb9',
                 ],
                 parent: null,
             },

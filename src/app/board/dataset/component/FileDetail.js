@@ -12,9 +12,8 @@ import {
     Pagination,
     Button
 } from "@nextui-org/react";
-import {useGetFileDetailQuery} from "@/store/features/files/allFileByuserId";
 
-export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
+export default function FileDetail({dataFile, headers, isLoading}) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 100;
     const pages = Math.ceil(dataFile?.length / rowsPerPage);
@@ -23,7 +22,13 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
         const end = start + rowsPerPage;
         return dataFile?.slice(start, end);
     }, [page, dataFile]);
-    
+
+    const [notFound, setNotFound] = useState('')
+
+    setTimeout(() => (
+        setNotFound('File not found')
+    ), 30000)
+
     return (
         <div className={'flex justify-center items-center relative shadow-lg rounded-xl'}>
             {
@@ -54,7 +59,7 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
                             emptyContent={"No rows to display."}>
                             {items?.map((row, index) => (
                                 <TableRow key={index}>
-                                    {headers.map((header, index) => (
+                                    {headers?.map((header, index) => (
                                         <TableCell key={index}>{row[header]}</TableCell>
                                     ))}
                                 </TableRow>
@@ -62,7 +67,11 @@ export default function FileDetail({dataFile, headers, isLoading, size, uuid}) {
                         </TableBody>
                     </Table>
                 ) : (
-                    <Spinner label={'Loading your dataFile'} />
+                    <>
+                        <Spinner label={'Loading your dataFile'} className={`${notFound ? 'hidden' : ''}`} />
+                        <p className={'text-primary-color font-medium text-lg'}>{notFound}</p>
+                    </>
+
                 )
             }
         </div>

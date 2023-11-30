@@ -23,6 +23,8 @@ import {
 } from "@nextui-org/react";
 import { logout } from "@/store/features/auth/authSlice";
 import { useSidebar } from "@/context/BoardSideBarContext";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {generateBashURL} from "@/utils/util";
 
 const Navbar = () => {
   const { data: user, isSuccess, isLoading } = useGetUserQuery();
@@ -71,11 +73,7 @@ const Navbar = () => {
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src={
-                user?.data.avatar
-                  ? user.data.avatar
-                  : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-              }
+              src={generateBashURL(user?.data.avatar)}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Dynamic Actions">

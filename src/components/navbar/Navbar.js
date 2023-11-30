@@ -25,6 +25,8 @@ import { configSchema } from "next/dist/server/config-schema";
 import { useSession, signOut } from "next-auth/react";
 import Loading from "@/app/loading";
 import logoName from "@assets/logos/name.png";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {generateBashURL} from "@/utils/util";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -50,6 +52,11 @@ export default function NavbarKQuick() {
       id: 4,
       path: "/contact-us",
       page: "Contact",
+    },
+    {
+      id: 5,
+      path: "/sample",
+      page: "Sample",
     },
   ];
   const router = useRouter();
@@ -81,7 +88,6 @@ export default function NavbarKQuick() {
   ];
 
   if (validNavPath.some((path) => pathname.startsWith(path))) return null;
-  else if (isLoading) return <Loading />;
   else
     return (
       <nav className="flex flex-col fixed z-40 w-full">
@@ -160,11 +166,7 @@ export default function NavbarKQuick() {
                       color="primary"
                       name="Jason Hughes"
                       size="sm"
-                      src={
-                        state.image
-                          ? state.image
-                          : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-                      }
+                      src={generateBashURL(user?.data.avatar)}
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">

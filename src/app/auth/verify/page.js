@@ -6,11 +6,16 @@ import React, { useRef, useState, useEffect } from 'react';
 import {FaTimes} from "react-icons/fa";
 import axios from "axios";
 import {useRouter} from "next/navigation";
+import {useSelector} from "react-redux";
+import {useVerifyMutation} from "@/store/features/auth/authApiSlice";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Verify({params, callback, reset, isLoading }) {
+export default function Verify({callback, reset, isLoading }) {
   const [code, setCode] = useState('');
   const [loading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const router = useRouter();
+  const [verify] = useVerifyMutation();
 
   // Refs to control each digit input element
   const inputRefs = [
@@ -31,19 +36,23 @@ export default function Verify({params, callback, reset, isLoading }) {
     setCode('');
   }
 
-  const dataCode = (code) => {
+  const email = useSelector(state => state.auth.email)
+  const [error, setError] = useState('')
+
+  const dataCode = async (code) => {
     const data = {
-      email: decodeURIComponent(params.email),
+      email: email,
       verification_code: code
     }
-    axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/verify/`, data)
-        .then((response) => {
-          router.push(`/auth/login`);
-        })
-        .catch(function (error) {
-          setIsLoading(false);
-        });
+    const verify_account = await verify({data})
+    if (verify_account?.error) {
+      setError(verify_account.error.data.error)
+    } else {
+      toast.success('Verified your account')
+      setTimeout(() => {
+        router.push('/auth/login')
+      }, 2000)
+    }
   }
 
   // Call our callback when code = 6 chars
@@ -135,11 +144,24 @@ export default function Verify({params, callback, reset, isLoading }) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-56">
+      <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+      />
       <div className={"grid md:grid-cols-2 place-items-center md:gap-16"}>
         <div className={"grid grid-cols-1 place-items-center px-3 md:px-0"}>
           <h1 className={"text-primary-color text-center lg:text-[32px]"}>
             Verify your email address
           </h1>
+          <div className={'mt-5 text-red-500 font-medium'}>{error}</div>
           <div className={"grid grid-cols-6 gap-4 mt-14 mb-8 text-center"}>
             {
               [0,1,2,3,4,5].map((index) =>(

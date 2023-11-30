@@ -3,17 +3,22 @@ import { apiSlice } from "@/store/api/apiSlice";
 export const uploadSingleApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         uploadSingle: builder.mutation({
-            query: (data) => ({
-                url: 'files/upload/',
-                method: 'POST',
-                body: data,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }),
+            query: (data) => {
+                let formData = new FormData();
+                formData.append("file", data);
+
+                return {
+                    url: 'files/upload/images/',
+                    method: 'POST',
+                    body: formData,
+                    prepareHeaders: (headers) => {
+                        headers.set("Content-Type", "multipart/form-data")
+                        return headers;
+                    },
+                }
+            },
             invalidatesTags: ['UploadSingle'],
         }),
     }),
 });
-// auto generated hooks for uploadSingle mutation (POST)
 export const { useUploadSingleMutation } = uploadSingleApiSlice;

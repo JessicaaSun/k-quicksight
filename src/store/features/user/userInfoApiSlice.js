@@ -5,15 +5,13 @@ export const userInfo = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         updateUser: builder.mutation({
             query: ({id, data}) => ({
-                url: `users/uuid/${id}/`,
+                url: `users/${id}/`,
                 method: 'put',
                 body: data,
             }),
-            keepUnusedDataFor: 5,
-            providesTags: ["User"],
         }),
 
     }),
 });
 
-export const { useUpdateUserMutation } = userApiSlice;
+export const { useUpdateUserMutation } = userInfo;

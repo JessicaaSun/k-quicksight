@@ -18,8 +18,22 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    register: builder.mutation({
+      query: ({data}) => ({
+        url: `accounts/register/`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    verify: builder.mutation({
+      query: ({data}) => ({
+        url: `accounts/verify/`,
+        method: 'POST',
+        body: data
+      })
+    })
   }),
   
 });
 // auto generated hooks for login mutation
-export const { useLoginMutation, useLoginWithGoogleMutation } = authApiSlice;
+export const { useLoginMutation, useLoginWithGoogleMutation, useRegisterMutation, useVerifyMutation } = authApiSlice;

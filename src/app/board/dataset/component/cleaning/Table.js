@@ -1,24 +1,35 @@
 import React from "react";
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 
-export default function TableMissingValue() {
-    let content = (
+export default function TableMissingValue({item}) {
+    return (
         (
             <Table aria-label="Example static collection table">
                 <TableHeader>
-                    <TableColumn className={'bg-blue-50'}>USERNAME</TableColumn>
-                    <TableColumn className={'bg-blue-50'}>AGE</TableColumn>
-                    <TableColumn className={'bg-blue-50'}>salary</TableColumn>
+                    {
+                        item?.headers?.map((item) => (
+                            <TableColumn className={'bg-blue-50'} key={item}>{item}</TableColumn>
+                        ))
+                    }
                 </TableHeader>
-                <TableBody>
-                    <TableRow key="1">
-                        <TableCell>0</TableCell>
-                        <TableCell>1</TableCell>
-                        <TableCell>0</TableCell>
-                    </TableRow>
+                <TableBody emptyContent={'none value'}>
+                    {
+                        item?.missing_cell.map((rowItem, rowIndex) => (
+                            <TableRow key={rowIndex}>
+                                {
+                                    item?.headers?.map((header, colIndex) => (
+                                        <TableCell key={colIndex}>
+                                            {
+                                                rowItem[header] || <span className={'text-red-500 font-medium'}>null</span>
+                                            }
+                                        </TableCell>
+                                    ))
+                                }
+                            </TableRow>
+                        ))
+                    }
                 </TableBody>
             </Table>
         )
-    )
-    return content;
+    );
 }

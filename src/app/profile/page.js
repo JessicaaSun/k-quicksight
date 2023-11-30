@@ -135,14 +135,14 @@ export default function Profile() {
                                             fullNameUpdate ? (
                                                 <div className={'flex gap-2 justify-between items-center w-full'}>
                                                     <Input value={fullname} size={'sm'} onValueChange={setFullname} />
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={handleUpdateFullname} >
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handleUpdateFullname} >
                                                         Done
                                                     </button>
                                                 </div>
                                             ) : (
                                                 <div className={'flex gap-2 justify-between items-center w-full'}>
                                                     <p className={'text-lg font-medium'}>{user?.data.full_name}</p>
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={() => setFullNameUpdate(true)} >
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setFullNameUpdate(true)} >
                                                         Edit
                                                     </button>
                                                 </div>
@@ -172,14 +172,14 @@ export default function Profile() {
                                                             Other
                                                         </SelectItem>
                                                     </Select>
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={handleUpdateGender} >
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handleUpdateGender} >
                                                         Done
                                                     </button>
                                                 </div>
                                             ) : (
                                                 <div className={'flex gap-2 justify-between items-center w-full'}>
                                                     <p className={'text-lg font-medium'}>{gender}</p>
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={() => setGenderUpdate(true)} >
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setGenderUpdate(true)} >
                                                         Edit
                                                     </button>
                                                 </div>
@@ -200,12 +200,12 @@ export default function Profile() {
                                             !phoneUpdate?(
                                                 <>
                                                     <p className={'text-lg font-medium'}>{phoneNumber}</p>
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={() => setPhoneUpdate(true)}>Edit</button>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setPhoneUpdate(true)}>Edit</button>
                                                 </>
                                             ) : (
                                                 <>
                                                     <Input size={'sm'} type={'number'} value={phoneNumber} onValueChange={setPhoneNumber} />
-                                                    <button className={'bg-blue-100 p-2 w-14 rounded-lg'} onClick={handlePhoneNumber}>Done</button>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handlePhoneNumber}>Done</button>
                                                 </>
                                             )
                                         }

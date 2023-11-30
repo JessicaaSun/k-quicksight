@@ -6,17 +6,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {FaBook, FaClock, FaFolder, FaShare} from "react-icons/fa";
 import { FaSquarePollVertical, FaTableColumns } from "react-icons/fa6";
-import {LiaShareSquareSolid} from "react-icons/lia";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import {generateBashURL} from "@/utils/util";
+import {IoDocumentText} from "react-icons/io5";
 
 const contentRoute = {
   file: {
     _name: "Files",
     recent: {
-      icon: <FaClock />,
-      name: "Recent",
-      route: "/board/recent",
+      icon: <IoDocumentText />,
+      name: "Documentary",
+      route: "/board/doc",
     },
     dataset: {
       icon: <FaFolder />,
@@ -71,7 +70,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
         />
         <div>
           <p className={"text-primary-color text-xl font-semibold"}>
-            {user?.data.username}
+            {user?.data.full_name}
           </p>
           <p className={"text-description-color truncate w-[130px]"}>
             {user?.data.email}
@@ -83,17 +82,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           {contentRoute.file._name}
         </p>
         <div className={"flex flex-col gap-2"}>
-          <Link
-            className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
-              pathname.startsWith(contentRoute.file.recent.route)
-                ? "bg-primary-color text-white"
-                : "bg-white"
-            } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
-            href={contentRoute.file.recent.route}
-          >
-            {contentRoute.file.recent.icon}
-            {contentRoute.file.recent.name}
-          </Link>
+
           <Link
             className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
               pathname.startsWith(contentRoute.file.dataset.route)
@@ -115,6 +104,17 @@ const BoardSidebar = ({ toggleSidebar }) => {
           >
             {contentRoute.file.shareWithMe.icon}
             {contentRoute.file.shareWithMe.name}
+          </Link>
+          <Link
+              className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
+                  pathname.startsWith(contentRoute.file.recent.route)
+                      ? "bg-primary-color text-white"
+                      : "bg-white"
+              } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+              href={contentRoute.file.recent.route}
+          >
+            {contentRoute.file.recent.icon}
+            {contentRoute.file.recent.name}
           </Link>
         </div>
       </div>

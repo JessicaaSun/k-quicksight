@@ -2,12 +2,12 @@
 
 import React, {useEffect, useState} from 'react';
 import {Input} from "@nextui-org/react";
-import {SearchIcon} from "@/app/board/recent/searchIcons";
 import {useDispatch, useSelector} from "react-redux";
 import {setFileName} from "@/store/features/files/fileType";
 import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {setFiles} from "@/store/features/files/fileSlice";
+import {SearchIcon} from "@/app/board/doc/searchIcons";
 
 const SearchDataset = () => {
 

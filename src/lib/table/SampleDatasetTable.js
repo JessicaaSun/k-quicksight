@@ -44,6 +44,7 @@ const SampleDatasetTable = () => {
                                 <TableCell>{item.size}</TableCell>
                                 <TableCell>{item.createAt}</TableCell>
                                 <TableCell>{item.size}</TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         ))
                     }

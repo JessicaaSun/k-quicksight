@@ -42,7 +42,7 @@ const DetailDataset = ({params}) => {
                 <ShareMember list={false} filename={fileDetail?.file} fileId={fileDetail?.id} owner={user?.data.id} />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
-                <Overview filename={fileDetail?.file} uuid={uuid} />
+                <Overview filename={fileDetail?.file} uuid={uuid}  />
                 <CleanModal filename={fileDetail?.filename} />
             </div>
             <div className={'flex justify-end items-center'}>

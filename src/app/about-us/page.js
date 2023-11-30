@@ -3,7 +3,7 @@ import Image from "next/image";
 import mission from '@assets/images/mission_(2).png'
 import vision from '@assets/images/vision_(2).png'
 import Reksmey from '@assets/teams/reksmey.png'
-import tara from '@assets/teams/kitTara.png'
+import tara from '@assets/teams/kit-tara.png'
 import jessica from '@assets/teams/jessica.png'
 import ChenTo from '@assets/teams/chento.png'
 import SoBun from '@assets/teams/sobon.png'

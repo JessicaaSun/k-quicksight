@@ -40,6 +40,14 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        scrapData: builder.mutation({
+            query: ({userId, data}) => ({
+                url: `scrape/${userId}/`,
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ["files"]
+        })
     }),
 });
 
@@ -49,6 +57,7 @@ export const {
     useGetFileDetailQuery,
     useUpdateFileNameMutation,
     useGetFileOverviewQuery,
+    useScrapDataMutation
 } = allFileByUserid;
 
 export default allFileByUserid;

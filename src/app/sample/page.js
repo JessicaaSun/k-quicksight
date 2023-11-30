@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "@nextui-org/react";
-import { SearchIcon } from "@/app/board/recent/searchIcons";
+import { SearchIcon } from "@/app/board/doc/searchIcons";
 import {
   analysis_sample,
   mockData,

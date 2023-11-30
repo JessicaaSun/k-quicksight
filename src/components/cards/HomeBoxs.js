@@ -27,6 +27,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
+      url: '/board/recent',
       title: "Getting started with K-QuickSight",
       description:
         "Gain insights from your data by accessing your step-by-step guide.",
@@ -63,6 +64,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
+      url: '/document',
       title: "Guideline",
       description:
         "We will provide document for the you do know insight all of our service.",
@@ -99,6 +101,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
+      url: 'https://t.me/k_quicksight',
       title: "Join community",
       description:
         "Become part of a community by joining and connecting with like-minded individuals who share common interests and goals.",
@@ -123,7 +126,7 @@ export default function GetStart_boxs() {
   return (
     <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col gap-36">
       {data.map((item, index) => (
-        <div
+        <Link target={'_blank'} href={item.url}
           key={index}
           className={`lg:flex md:flex justify-center items-center gap-10 ${
             index === 1 ? "flex-row-reverse" : ""
@@ -152,7 +155,7 @@ export default function GetStart_boxs() {
               <p className="text-background-color">{item.description}</p>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
@@ -320,6 +323,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import Link from "next/link";
 
 export function SwapperTest() {
   return (

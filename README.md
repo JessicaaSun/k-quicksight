@@ -61,7 +61,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Deployment
 
-Deployment: https://k-quicksight-ui.vercel.app
+Deployment: https://k-quicksight-4gmo.vercel.app/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

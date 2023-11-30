@@ -50,7 +50,7 @@
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/cstadservice/k-quicksight-ui
+   git clone https://github.com/k-quicksight/k-quicksight-ui
    ```
 2. Install NPM packages
    ```sh

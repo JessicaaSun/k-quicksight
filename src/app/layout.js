@@ -30,7 +30,6 @@ export default function RootLayout({ children }) {
                   <AuthProvider>
                     <Navbar_UI />
                     {children}
-
                     <Footer />
                   </AuthProvider>
                 </Providers>

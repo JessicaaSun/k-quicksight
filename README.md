@@ -88,8 +88,7 @@ Deployment: https://k-quicksight-4gmo.vercel.app/
 2. [All Dataset](https://k-quicksight-4gmo.vercel.app/board/dataset) : /board/dataset
 3. [Dataset Detail, Cleansing, Overview, Share dataset](https://k-quicksight-4gmo.vercel.app/board/dataset/${data-set-uuid}) : /board/dataset/${data-set-uuid}
 4. [Shared Files](https://k-quicksight-4gmo.vercel.app/board/shareWithMe) : /board/shareWithMe
-5. [Course detail](https://k-quicksight-ui.vercel.app/student/courses/html) : /student/courses/${coursename} e.g: /student/courses/html
-6. [Analysis](https://k-quicksight-4gmo.vercel.app/board/analysis) : /board/analysis
-7. [Dashboard](https://k-quicksight-4gmo.vercel.app/board/dashboard) : /board/dashboard
+5. [Analysis](https://k-quicksight-4gmo.vercel.app/board/analysis) : /board/analysis
+6. [Dashboard](https://k-quicksight-4gmo.vercel.app/board/dashboard) : /board/dashboard
 
 

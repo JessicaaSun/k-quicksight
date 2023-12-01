@@ -20,11 +20,11 @@ export const allFileByUserid = apiSlice.injectEndpoints({
             providesTags: ["files"],
         }),
         getFileDetail: builder.query({
-            query: ({uuid, size}) => ({
-                url: `files/details/${uuid}/?size=${size}`,
+            query: ({uuid, size, page}) => ({
+                url: `files/details/${uuid}/?size=${size}&p=${page}`,
                 method: 'GET',
             }),
-            keepUnusedDataFor: 5,
+            keepUnusedDataFor: 1,
             providesTags: ["files"],
         }),
         updateFileName: builder.mutation({

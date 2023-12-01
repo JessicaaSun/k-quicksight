@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Image from "next/image";
 import UploadData from "@assets/images/analysis/add-task.png";
 import {Button, useDisclosure} from "@nextui-org/react";
@@ -14,7 +14,7 @@ const UploadDataSet = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { data: user } = useGetUserQuery();
     const dispatch = useDispatch();
-    const [fileInfo, setFileInfo] = useState({});
+    // const [fileInfo, setFileInfo] = useState({});
     const [importFile] = useFileImportMutation();
     const router = useRouter();
     const {data:allFiles, refetch: refetchAllFiles, isLoading: importLoading} = useGetAllFilesQuery({id:user?.data.id, filename: '', type: ''})

@@ -5,10 +5,9 @@ import ShareMember from "@/app/board/dataset/component/shareMember";
 import UploadDataSet from "@/app/board/analysis/components/UploadDataSet";
 import ExistingDataset from "@/app/board/analysis/components/ExistingDataset";
 const NewData = () => {
-
     return (
         <div>
-            <div className={"flex flex-row pt-10 w-full justify-between"}>
+            <div className={"flex flex-row pt-10 w-full justify-between px-5"}>
                 <div className={"flex flex-col"}>
                     <h1 className={"text-primary-color pb-5"}>Analysis / Board</h1>
                     <div className={"flex flex-row gap-5"}>

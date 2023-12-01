@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { MockDataAnalysis } from "@/app/board/mockData/mockDataAnalysis";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-import AnalysisStep from "@/app/board/components/AnalysisStep";
 const Page = () => {
   const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
   const link = {
@@ -15,7 +14,7 @@ const Page = () => {
     <div className="py-10 px-5 ">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-2xl"}>
+          <p className={"text-primary-color font-bold text-3xl"}>
             Analysis
           </p>
         </div>

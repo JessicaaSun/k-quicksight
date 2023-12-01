@@ -15,13 +15,17 @@ import {
 import AnalysisStep from "@/app/board/components/AnalysisStep";
 import SelectDataSet from "@/app/board/analysis/components/SelectDataSet";
 import { useRouter } from 'next/navigation'
-import {useSelector} from "react-redux";
-const ExistingDataset = () => {
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [size, setSize] = React.useState('md')
-    const sizes = ["5xl"];
-    const router = useRouter();
+import { useDispatch, useSelector } from "react-redux";
+import Box from "@mui/material/Box";
 
+const steps = ['import dataset', 'Perform analysis', 'Choosing model ', 'Finishing'];
+const sizes = ["5xl"];
+const ExistingDataset = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [size, setSize] = React.useState('md')
+
+    const router = useRouter();
+    const dispatch = useDispatch();
     const handleOpen = (size) => {
         setSize(size)
         onOpen();
@@ -31,6 +35,35 @@ const ExistingDataset = () => {
         router.push(`/board/analysis/${stateUuid}`);
     };
 
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [skipped, setSkipped] = React.useState(new Set());
+
+    const isStepSkipped = (step) => {
+        return skipped.has(step);
+    };
+
+    const handleNext = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+    const handleCancel = () => {
+        setActiveStep(0);
+    };
+
+    const handleSelectAndNext = () => {
+        handleSelectDataset();
+        handleNext();
+    };
     return (
         <>
             <div className={"flex flex-col"}>
@@ -49,11 +82,11 @@ const ExistingDataset = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                <AnalysisStep step={0}/>
+                            <ModalHeader className="flex flex-col gap-1 pt-10">
+                                <AnalysisStep />
                             </ModalHeader>
                             <ModalBody>
-                                <SelectDataSet/>
+                                <SelectDataSet />
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="primary" onClick={handleSelectDataset}>

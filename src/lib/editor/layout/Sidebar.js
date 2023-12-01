@@ -10,6 +10,8 @@ import UploadIcon from "@duyank/icons/regular/Upload";
 import UploadContent from "./sidebar/UploadContent";
 import FrameContent from "./sidebar/FrameContent";
 import { useEditor } from "@lidojs/editor";
+import { FaRegChartBar } from "react-icons/fa6";
+import VisualContent from "./sidebar/VisualContent";
 
 const tabs = [
   {
@@ -23,6 +25,10 @@ const tabs = [
   {
     name: "Image",
     icon: <ImageIcon />,
+  },
+  {
+    name: "Visual",
+    icon: <FaRegChartBar />,
   },
   {
     name: "Upload",
@@ -59,7 +65,7 @@ const Sidebar = () => {
           <div
             style={{
               width: 360,
-              "@media (maxWidth: 900px)": {
+              "@media (maxWidth: 800px)": {
                 width: "100%",
                 position: "fixed",
                 bottom: 0,
@@ -87,6 +93,14 @@ const Sidebar = () => {
             )}
             {tab === "Image" && (
               <ImageContent
+                onClose={() => {
+                  setTab(null);
+                  actions.setSidebar();
+                }}
+              />
+            )}
+            {tab === "Visual" && (
+              <VisualContent
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();

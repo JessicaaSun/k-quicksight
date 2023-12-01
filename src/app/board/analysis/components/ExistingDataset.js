@@ -59,7 +59,7 @@ const ExistingDataset = () => {
                                 <Button color="primary" onClick={handleSelectDataset}>
                                     Select
                                 </Button>
-                                <Button color="primary" onClick={onClose}>
+                                <Button color="danger" variant={'flat'} onClick={onClose}>
                                     Cancel
                                 </Button>
                             </ModalFooter>

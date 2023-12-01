@@ -33,14 +33,14 @@ export default function TableDataSet({
     const handleView = (uuid) => {
         router.push(`/board/analysis/${uuid}`);
     };
-    const [selectedColor, setSelectedColor] = useState("default");
+    const [selectedColor, setSelectedColor] = useState("primary");
     const [selectedRow, setSelectedRow] = useState(null);
 
     const dispatch = useDispatch();
     const handleRowSelect = (key) => {
         dispatch(setUUID(key))
         setSelectedRow(key);
-        setSelectedColor("success");
+        setSelectedColor("primary");
     };
 
     return (
@@ -55,7 +55,7 @@ export default function TableDataSet({
             <TableHeader>
                 {headers.map((item, index) => (
                     <TableColumn
-                        className={`bg-blue-50 text-lg text-medium ${
+                        className={`bg-blue-50 text-lg ${
                             item.header === "Select" ? "text-center w-[200px]" : ""
                         }`}
                         key={index}

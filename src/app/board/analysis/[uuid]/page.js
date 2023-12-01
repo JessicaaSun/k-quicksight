@@ -13,7 +13,7 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader, Table,
+  ModalHeader, Spinner, Table,
   TableBody, TableCell, TableColumn, TableHeader, TableRow,
   useDisclosure
 } from "@nextui-org/react";
@@ -23,7 +23,7 @@ const Page = ({ params }) => {
   const {data:user} = useGetUserQuery();
   const [headers, setHeader] = useState([]);
   const [data, setData] = useState([]);
-  const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0})
+  const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 100, page: 1})
   const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
   const dispatch = useDispatch();
   const [overview_data, setOverview] = useState([])
@@ -51,7 +51,7 @@ const Page = ({ params }) => {
     setSize(size)
     onOpen();
   }
-  const [selectedColor, setSelectedColor] = React.useState("success");
+  const [selectedColor, setSelectedColor] = React.useState("primary");
   return (
     <div>
       <div className={"flex flex-row pt-10 w-full justify-between"}>
@@ -89,32 +89,32 @@ const Page = ({ params }) => {
                       <Table
                           color={selectedColor}
                              selectionMode="single"
-                             defaultSelectedKeys={["2"]}
+                             defaultSelectedKeys={["Moving Average"]}
                              aria-label="Example static collection table"
                       >
                         <TableHeader>
                           <TableColumn className={"hidden"}>NAME</TableColumn>
                         </TableHeader>
                         <TableBody>
-                          <TableRow key="1">
+                          <TableRow key="Moving Average">
                             <TableCell>Moving Average</TableCell>
                           </TableRow>
-                          <TableRow key="2">
+                          <TableRow key="Random Number Generation">
                             <TableCell>Random Number Generation</TableCell>
                           </TableRow>
-                          <TableRow key="3">
+                          <TableRow key="Rank and Percentile">
                             <TableCell>Rank and Percentile</TableCell>
                           </TableRow>
-                          <TableRow key="4">
+                          <TableRow key="Simple Linear Regression">
                             <TableCell>Simple Linear Regression</TableCell>
                           </TableRow>
-                          <TableRow key="5">
+                          <TableRow key="Multiple Linear Regression">
                             <TableCell>Multiple Linear Regression</TableCell>
                           </TableRow>
-                          <TableRow key="6">
+                          <TableRow key="Polynomial Regression">
                             <TableCell>Polynomial Regression</TableCell>
                           </TableRow>
-                          <TableRow key="7">
+                          <TableRow key="Sampling">
                             <TableCell>Sampling</TableCell>
                           </TableRow>
                         </TableBody>
@@ -124,7 +124,7 @@ const Page = ({ params }) => {
                       <Button color="primary" onPress={onClose}>
                         Select
                       </Button>
-                      <Button color="primary" onPress={onClose}>
+                      <Button color="danger" variant={'flat'} onPress={onClose}>
                         Cancel
                       </Button>
                     </ModalFooter>
@@ -136,7 +136,13 @@ const Page = ({ params }) => {
       </div>
       <div className={"pt-14"}>
         <p className={"py-3 text-2xl"}>Dataset</p>
-        <FileDetail dataFile={data} uuid={uuid} headers={headers} isLoading={isLoading} size={30} />
+        {
+          isLoading ? (
+              <Spinner size={'md'} />
+          ) : (
+              <FileDetail dataFile={fileDetail?.results} uuid={uuid} headers={fileDetail?.headers} isLoading={isLoading} size={30} />
+          )
+        }
       </div>
     </div>
   );

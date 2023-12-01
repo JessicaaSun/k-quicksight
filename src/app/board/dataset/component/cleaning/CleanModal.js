@@ -27,7 +27,7 @@ export default function CleanModal({filename}) {
 
     useEffect(() => {
         if (select === 'autoClean') {
-            setOption(['delete_row_outlier', 'data_type_conversion', 'delete_missing_row', 'delete_duplicate_row'])
+            setOption(['delete_row_outlier', 'data_type_conversion', 'delete_missing_row', 'delete_duplicate_row', 'impute_by_mean', 'impute_by_mode', 'remove_missing_cell'])
         } else if (select === 'byOption') {
             setOption(["delete_missing_row", "delete_duplicate_row"])
         }
@@ -105,6 +105,9 @@ export default function CleanModal({filename}) {
                                         <Checkbox isDisabled={select === 'autoClean' } value="delete_duplicate_row">delete_duplicate_row</Checkbox>
                                         <Checkbox isDisabled={select === 'autoClean' } value="data_type_conversion">data_type_conversion</Checkbox>
                                         <Checkbox isDisabled={select === 'autoClean' } value="delete_row_outlier">delete_row_outlier</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="impute_by_mean">impute_by_mean</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="impute_by_mode">impute_by_mode</Checkbox>
+                                        <Checkbox isDisabled={select === 'autoClean' } value="remove_missing_cell">remove_missing_cell</Checkbox>
                                     </CheckboxGroup>
                                 </div>
 

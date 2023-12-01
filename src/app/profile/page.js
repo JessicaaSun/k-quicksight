@@ -1,133 +1,84 @@
 "use client";
-import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Image from "next/image";
 import authenticated from '@assets/images/403.png'
-import {avatar, Button, Input, Textarea} from "@nextui-org/react";
-import {useRouter} from "next/navigation";
+import {avatar, Button, Input, Select, SelectItem, Textarea} from "@nextui-org/react";
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {useUpdateUserMutation} from "@/store/features/user/userInfoApiSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {setCurrentImage} from "@/store/features/profile_image/imageSlice";
-import {setUserInfo} from "@/store/features/user/userInfo";
-import {Select} from "antd";
 import Loading from "@/app/loading";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import {useGetUserQuery, useUpdateUserMutation} from "@/store/features/user/userApiSlice";
+import {generateBashURL} from "@/utils/util";
 import {useUploadSingleMutation} from "@/store/features/user/uploadAccountImage";
+import {FaPencilAlt} from "react-icons/fa";
 
 export default function Profile() {
-    const { data: user, isLoading, refetch: refetchUser} = useGetUserQuery();
-    const router = useRouter();
-    const [updateProfile] = useUpdateUserMutation();
-    const userInfo = useSelector(state => state?.userInfo?.userInfo)
-    const [username, setUsername] = useState('');
-    const [UpdateUsername, setUpdateUsername] = useState(false);
-    const [email, setEmail] = useState('');
-    const [update_email, set_updateEmail] = useState(false);
-    const [phone_number, setPhone_number] = useState('');
-    const [update_phone_number, set_update_Phone_number] = useState(false);
-    const [description, setDescription] = useState('');
-    const [update_description, set_updateDescription] = useState(false);
+    const {data:user, isLoading} = useGetUserQuery();
+    const [fullNameUpdate, setFullNameUpdate] = useState(false);
+    const [fullname, setFullname] = useState('');
+    const [genderUpdate, setGenderUpdate] = useState(false);
     const [gender, setGender] = useState('');
-    const [updateGender, set_updateGender] = useState(false);
-    const [url, setUrl] = useState(null);
-    const [imageName, setNameImage] = useState('');
-    const dispatch = useDispatch();
-    const [ErrorUpdate, setError] = useState([]);
-    const [uploadImage] = useUploadSingleMutation();
-    const profile = useSelector((state) => state.image.image);
-    const profileImage = `${process.env.NEXT_PUBLIC_BASE_URL}files/${user?.data.avatar}`;
-    const [full_name, setFullName] = useState('')
+    const [biographyUpdate, setBiographyUpdate] = useState(false);
+    const [biography, setBiography] = useState('');
+    const [avatar, setAvatar] = useState('');
+    const [phoneUpdate, setPhoneUpdate] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [imageUpload] = useUploadSingleMutation();
+
+    const handleGender = (e) => {
+        setGender(e.target.value);
+    };
+
+    const [updateInfo] = useUpdateUserMutation();
+
+    const handleUpdateFullname = () => {
+        updateUserInfo();
+        setFullNameUpdate(false)
+    }
+
+    const handlePhoneNumber = () => {
+        updateUserInfo();
+        setPhoneUpdate(false)
+    }
+
+    const handleUpdateGender = () => {
+        updateUserInfo();
+        setGenderUpdate(false)
+    }
+
+    const handleBio = () => {
+        updateUserInfo();
+        setBiographyUpdate(false)
+    }
     
-    useEffect(() => {
-        refetchUser();
-        setUsername(user?.data.username)
-        setEmail((user?.data.email))
-        setPhone_number(user?.data.phone_number)
-        setDescription(user?.data.biography)
-        // setUrl(profileImage)
-        setNameImage(profileImage)
-        setGender(user?.data.gender)
-        dispatch(setCurrentImage(profileImage))
-        setFullName(user?.data.full_name)
-    }, [dispatch, imageName, profileImage, refetchUser, url, user])
-    const updateUserName = async () => {
-        setUpdateUsername(false);
-        const data = {
-            username: username,
-            full_name: full_name,
-        }
-        const updateUsername = await updateProfile({data: data, id: user?.data.id})
-        // console.log(updateUsername)
-        if (updateUsername) {
-            setError(updateUsername?.error?.data?.username)
-        } else if (updateUsername?.data?.username) {
-            setError(null)
-        }
-    };
-    const updatePhoneNumber = () => {
-        set_update_Phone_number(false)
-        const data = {
-            username: username,
-            phone_number: phone_number
-        }
-        const updatephone_number = updateProfile({data: data, id: user?.data.id})
-    }
-    const updateBio = () => {
-        set_updateDescription(false)
-        const data = {
-            username: username,
-            biography: description
-        }
-        const updateBiolophy = updateProfile({data: data, id: user?.data.id})
-    }
-    const updateGender_fun = () => {
-        set_updateGender(false)
-        const data = {
-            username: username,
-            gender: gender
-        }
-        const updateGender = updateProfile({data: data, id: user?.data.id})
-    }
-
-    const handleChange = (value) => {
-        setGender(value)
-    };
-
     const handleImageChange = async (event) => {
-        const file = event.target.files[0];
-        const preview = URL.createObjectURL(file)
-
-
-        if (!file) {
-            return;
+        const file = event.target.files[0]
+        const response = await imageUpload({data: file})
+        setAvatar(response?.data?.filename);
+        let data = {
+            username: user?.data.username,
+            avatar: response?.data?.filename,
         }
+        const updateImage = await updateInfo({data:data, id: user?.data.id})
+    }
 
-        try {
-            const response = await uploadImage(file);
-            const imageUrl = response.data.filename;
-            setNameImage(imageUrl)
-            dispatch(setCurrentImage(response.data.url))
-            refetchUser();
-            setUrl(preview)
-
-            const updateProfileResponse = await updateProfile({
-                data: {
-                    username: username,
-                    avatar: response.data.filename
-                },
-                id: user?.data.id
-            });
-            // console.log(user)
-
-            // dispatch(setCurrentImage(imageUrl));
-        } catch (error) {
-            console.error(error.message);
+    const updateUserInfo = async () => {
+        let data = {
+            username: user?.data.username,
+            full_name: fullname,
+            gender: gender,
+            biography: biography,
+            phone_number: phoneNumber
         }
-    };
+        const response = await updateInfo({data:data, id: user?.data.id})
+    }
 
-    const state = useSelector(state => state)
-    console.log(state)
+    useEffect(() => {
+        setFullname(user?.data.full_name);
+        setGender(user?.data.gender);
+        setBiography(user?.data.biography);
+        setPhoneNumber(user?.data.phone_number);
+        setAvatar(user?.data.avatar);
+    }, [user]);
+
+
 
     if(isLoading) {
         return (<Loading />)
@@ -164,7 +115,7 @@ export default function Profile() {
                                     style={{ display: 'none' }}
                                 />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={url ? url : profile} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
+                                <img src={generateBashURL(avatar)} alt={'profile_image'} className={'w-[150px] h-[150px] object-cover rounded-full'} />
                                 <label htmlFor="upload-input" className={'absolute hover:bg-secondary-color transition-all cursor-pointer bottom-0 right-0 bg-primary-color p-3 rounded-full'}>
                                   <span>
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,61 +129,60 @@ export default function Profile() {
                             <div className={'flex flex-col justify-between gap-5 items-start w-full'}>
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Name</p>
-                                    <p className={'text-sm font-medium text-primary-color'}>@{user?.data.username ? user?.data.username : user?.data.full_name}</p>
-                                    <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
-                                        {!UpdateUsername ? (
-                                                <p className={`font-medium text-lg text-text-color`}>{full_name}</p>
-                                        ):(
-                                            <Input classNames={{
-                                                inputWrapper: 'h-[46px]'
-                                            }} type={'text'} value={full_name} onValueChange={setFullName} placeholder={full_name} className={'font-medium text-text-color text-lg'} />
-                                        )}
+                                    <p className={'text-md text-primary-color font-medium'}>@{user?.data.username}</p>
+                                    <div className={'flex justify-between items-center'}>
                                         {
-                                            UpdateUsername ? (
-                                                <button onClick={updateUserName} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
+                                            fullNameUpdate ? (
+                                                <div className={'flex gap-2 justify-between items-center w-full'}>
+                                                    <Input value={fullname} size={'sm'} onValueChange={setFullname} />
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handleUpdateFullname} >
+                                                        Done
+                                                    </button>
+                                                </div>
                                             ) : (
-                                                <button onClick={() => setUpdateUsername(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
+                                                <div className={'flex gap-2 justify-between items-center w-full'}>
+                                                    <p className={'text-lg font-medium'}>{user?.data.full_name}</p>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setFullNameUpdate(true)} >
+                                                        Edit
+                                                    </button>
+                                                </div>
                                             )
-                                        }
-
-                                    </div>
-                                    <div>
-                                        {
-                                            ErrorUpdate? ErrorUpdate.map((item, index) => (
-                                                <p key={index} className={'text-red-500'}>{item} </p>
-                                            )) : null
                                         }
                                     </div>
                                 </div>
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Gender</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
-                                        {!updateGender ? (
-                                            <p className={'font-medium text-text-color text-lg'}>{userInfo ? userInfo.gender : gender}</p>
-                                        ):(
-                                            <Select
-                                                defaultValue={userInfo ? userInfo.gender : gender}
-                                                style={{
-                                                    width: '100%',
-                                                }}
-                                                onChange={handleChange}
-                                                options={[
-                                                    {
-                                                        value: "Male",
-                                                        label: "Male",
-                                                    },
-                                                    {
-                                                        value: 'Female',
-                                                        label: 'Female',
-                                                    },
-                                                ]}
-                                            />
-                                        )}
                                         {
-                                            updateGender ? (
-                                                <button onClick={updateGender_fun} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
+                                            genderUpdate ? (
+                                                <div className={'flex gap-2 justify-between items-center w-full'}>
+                                                    <Select
+                                                        selectedKeys={[gender]}
+                                                        onChange={handleGender}
+                                                        label="Select gender"
+                                                        className="max-w-xs"
+                                                    >
+                                                        <SelectItem key={'Male'} value={'Male'}>
+                                                            Male
+                                                        </SelectItem>
+                                                        <SelectItem key={'Female'} value={'Female'}>
+                                                            Female
+                                                        </SelectItem>
+                                                        <SelectItem key={'Other'} value={'Other'}>
+                                                            Other
+                                                        </SelectItem>
+                                                    </Select>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handleUpdateGender} >
+                                                        Done
+                                                    </button>
+                                                </div>
                                             ) : (
-                                                <button onClick={() => set_updateGender(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
+                                                <div className={'flex gap-2 justify-between items-center w-full'}>
+                                                    <p className={'text-lg font-medium'}>{gender}</p>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setGenderUpdate(true)} >
+                                                        Edit
+                                                    </button>
+                                                </div>
                                             )
                                         }
                                     </div>
@@ -240,26 +190,23 @@ export default function Profile() {
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Email</p>
                                     <div className={'flex flex-row justify-between gap-5 w-full items-center '}>
-                                        <p className={'font-medium text-text-color text-lg'}>{email}</p>
+                                        <p className={'text-primary-color text-lg font-semibold'}>{user?.data.email}</p>
                                     </div>
                                 </div>
                                 <div className={'flex flex-col gap-1 w-full'}>
                                     <p className={'font-medium w-full text-lg text-description-color'}>Your Phone Number</p>
                                     <div className={'flex flex-row gap-5 justify-between w-full items-center '}>
                                         {
-                                            !update_phone_number ? (
-                                                <p className={'font-medium text-text-color text-lg'}>{userInfo ? userInfo.phone_number : phone_number}</p>
+                                            !phoneUpdate?(
+                                                <>
+                                                    <p className={'text-lg font-medium'}>{phoneNumber}</p>
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={() => setPhoneUpdate(true)}>Edit</button>
+                                                </>
                                             ) : (
-                                                <Input type={'text'} classNames={{
-                                                    inputWrapper: 'h-[46px]'
-                                                }} value={phone_number} onValueChange={setPhone_number} className={'font-medium text-text-color text-lg'}>{!phone_number ? 'UnKnown' : phone_number}</Input>
-                                            )
-                                        }
-                                        {
-                                            update_phone_number ? (
-                                                <button onClick={updatePhoneNumber} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
-                                            ) : (
-                                                <button onClick={() => set_update_Phone_number(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
+                                                <>
+                                                    <Input size={'sm'} type={'number'} value={phoneNumber} onValueChange={setPhoneNumber} />
+                                                    <button className={'bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg'} onClick={handlePhoneNumber}>Done</button>
+                                                </>
                                             )
                                         }
                                     </div>
@@ -268,27 +215,21 @@ export default function Profile() {
                         </div>
                         <div className={'border-1 shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>
                             <div className={'flex justify-between items-center w-full'}>
-                                <p className={'text-xl font-bold text-text-color capitalize'}>about <span className={'text-primary-color'}>{userInfo ? userInfo.username : username}</span></p>
+                                <h4 className={'text-text-color'}>About <span className={'text-primary-color'}>{fullname}</span></h4>
                                 {
-                                    update_description ? (
-                                        <button onClick={updateBio} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Done</button>
+                                    !biographyUpdate ? (
+                                        <button onClick={() => setBiographyUpdate(true)} className={'text-primary-color'}><FaPencilAlt /></button>
                                     ) : (
-                                        <button onClick={() => set_updateDescription(true)} className={'text-text-color hover:bg-primary-color hover:text-white transition-all px-5 py-1 bg-blue-300 rounded-full text-small'}>Edit</button>
+                                        <button onClick={handleBio}>Done</button>
                                     )
                                 }
                             </div>
                             <div className={'text-md text-text-color mt-5 w-full'}>
                                 {
-                                    !update_description ? (
-                                        <div>
-                                            {
-                                                userInfo ? userInfo.biography : description ? description : (
-                                                    <span className={'text-description-color'}>UnKnown Biology</span>
-                                                )
-                                            }
-                                        </div>
+                                    biographyUpdate ? (
+                                        <Textarea size={'lg'} placeholder={'Texting....'} value={biography} onValueChange={setBiography} />
                                     ) : (
-                                        <Textarea type={'text'} value={description} onValueChange={setDescription} placeholder={description} className={'w-full'} />
+                                        <p>{biography}</p>
                                     )
                                 }
                             </div>

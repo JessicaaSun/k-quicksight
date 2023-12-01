@@ -20,11 +20,11 @@ export const allFileByUserid = apiSlice.injectEndpoints({
             providesTags: ["files"],
         }),
         getFileDetail: builder.query({
-            query: ({uuid, size}) => ({
-                url: `files/details/${uuid}/?size=${size}`,
+            query: ({uuid, size, page}) => ({
+                url: `files/details/${uuid}/?size=${size}&p=${page}`,
                 method: 'GET',
             }),
-            keepUnusedDataFor: 5,
+            keepUnusedDataFor: 1,
             providesTags: ["files"],
         }),
         updateFileName: builder.mutation({
@@ -40,6 +40,14 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        scrapData: builder.mutation({
+            query: ({userId, data}) => ({
+                url: `scrape/${userId}/`,
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ["files"]
+        })
     }),
 });
 
@@ -49,6 +57,7 @@ export const {
     useGetFileDetailQuery,
     useUpdateFileNameMutation,
     useGetFileOverviewQuery,
+    useScrapDataMutation
 } = allFileByUserid;
 
 export default allFileByUserid;

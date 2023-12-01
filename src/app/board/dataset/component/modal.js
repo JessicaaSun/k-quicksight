@@ -11,16 +11,34 @@ import {
     useDisclosure,
     Input
 } from "@nextui-org/react";
+import {useScrapDataMutation} from "@/store/features/files/allFileByuserId";
+import {useGetUserQuery} from "@/store/features/clean/importFile";
+import {useDispatch} from "react-redux";
+import {setFileScrap} from "@/store/features/files/fileSlice";
+import {useRouter} from "next/navigation";
 
 export default function App() {
+    const {data:user} = useGetUserQuery();
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [linkScrap, setLinkScrap] = useState('');
+    const [scrapping] = useScrapDataMutation();
+    const [error, setError] = useState('')
+    const dispatch = useDispatch();
+    const router = useRouter();
 
+    const handleScrapping = async () => {
+        let data = {
+            url: linkScrap,
+        }
+        const scrap = await scrapping({userId: user?.data.id, data: data})
+        dispatch(setFileScrap(scrap?.data?.filename))
+        router.push('/board/dataset/file-scrap')
+    }
 
     return (
         <>
             <Button onPress={onOpen} className={'text-primary-color bg-blue-200 font-semibold border-2 border-white capitalize shadow-lg'}>Import from web</Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal size={'3xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -31,12 +49,13 @@ export default function App() {
                                         'h-[42px]'
                                     ]
                                 }} value={linkScrap} onValueChange={setLinkScrap} />
+                                <p className={'text-md text-red-400 font-medium'}>{error}</p>
                             </ModalBody>
                             <ModalFooter className={'flex gap-5'}>
                                 <Button className={'bg-white border-1 border-primary-color text-primary-color font-medium'} variant="light" onPress={onClose}>
                                     Cancel
                                 </Button>
-                                <Button className={'bg-primary-color text-white font-medium'} onPress={onClose}>
+                                <Button className={'bg-primary-color text-white font-medium'} onClick={handleScrapping}>
                                     Import
                                 </Button>
                             </ModalFooter>

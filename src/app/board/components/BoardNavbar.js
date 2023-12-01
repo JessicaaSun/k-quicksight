@@ -70,7 +70,7 @@ const Navbar = () => {
               isBordered
               as="button"
               className="transition-transform"
-              color="secondary"
+              color="primary"
               name="Jason Hughes"
               size="sm"
               src={generateBashURL(user?.data.avatar)}
@@ -80,7 +80,7 @@ const Navbar = () => {
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold text-primary-color">
-                {user?.data.username}
+                {user?.data.full_name}
               </p>
             </DropdownItem>
             <DropdownItem
@@ -90,7 +90,7 @@ const Navbar = () => {
               Profile
             </DropdownItem>
             <DropdownItem
-              onClick={() => router.push("/board/recent")}
+              onClick={() => router.push("/board/dataset")}
               key="team_settings"
             >
               Board

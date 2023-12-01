@@ -16,6 +16,7 @@ import {useGetFileOverviewQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setFileAccurate} from "@/store/features/files/filesDetail";
+import TableImpute from "@/app/board/dataset/component/cleaning/TableImpute";
 
 export default function Overview() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -25,6 +26,7 @@ export default function Overview() {
     useEffect(() => {
         setOutlier(fileoverview?.outlier)
     }, [fileoverview?.outlier, fileoverview]);
+
 
     return (
         <>
@@ -66,33 +68,35 @@ export default function Overview() {
                             </ModalHeader>
                             <ModalBody>
                                 <ul className={'list-disc ml-10 leading-8'}>
+                                    <li>Number of columns = {fileoverview?.headers?.length ? fileoverview?.headers.length : 0}</li>
+                                    <li>Number of rows = {fileoverview?.total}</li>
                                     <li>Duplicate row = {fileoverview?.duplicate_rows?.length? fileoverview.duplicate_rows?.length : 0}</li>
                                     <li>
                                         Outlier
                                         {
                                             outlier?.map((item, index) => (
-                                                <div className={'flex gap-5 flex-wrap'} key={index}>Column: {item.column_name} : ( {item.outlier_range[0]}, {item.outlier_range[1]} )
-                                                    <p>Founded: [
+                                                <div className={'flex gap-5 flex-wrap text-primary-color font-medium'} key={index}>Column: {item.column_name} : ( {item.outlier_range[0]}, {item.outlier_range[1]} )
+                                                    <p className={'text-text-color font-medium'}>Founded: [
                                                         {
                                                             item.outliers.map((item, index)=> (
-                                                                <span key={index}>{item.value}, </span>
+                                                                <span key={index} className={'font-medium text-red-400'}>{item.value}, </span>
                                                             ))
                                                         } ]</p>
                                                 </div>
                                             ))
                                         }
                                     </li>
-                                    <li>Number of columns = {fileoverview?.headers?.length ? fileoverview?.headers.length : 0}</li>
-                                    <li>Number of rows = {fileoverview?.total}</li>
                                     <li className={'flex flex-wrap'}>Label names = [
                                         {
                                             fileoverview?.headers?.map((item, index) => (
-                                                <span key={index} className={'font-medium text-description-color'}>{item} , </span>
+                                                <span key={index} className={'font-medium text-secondary-color'}>{item} , </span>
                                             ))
                                         }]</li>
                                 </ul>
-                                <p className={'text-text-color font-medium'}>Missing values</p>
-                                <TableMissingValue />
+                                <p className={'text-primary-color font-medium'}>Imputation</p>
+                                <TableImpute item={fileoverview} />
+                                <p className={'text-primary-color font-medium'}>Missing values</p>
+                                <TableMissingValue item={fileoverview} />
                             </ModalBody>
                         </>
                     )}

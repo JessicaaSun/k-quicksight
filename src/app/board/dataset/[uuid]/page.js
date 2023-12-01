@@ -10,13 +10,13 @@ import FileDetail from "@/app/board/dataset/component/FileDetail";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useDispatch} from "react-redux";
 import {setFileAccurate} from "@/store/features/files/filesDetail";
+import {Pagination, Select, SelectItem, Spinner} from "@nextui-org/react";
+
 
 const DetailDataset = ({params}) => {
     let uuid = params.uuid;
     const {data:user} = useGetUserQuery();
-    const [headers, setHeader] = useState([]);
-    const [data, setData] = useState([]);
-    const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0})
+    const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: 0, page: 1})
     const {data:fileOverview, isLoading: overviewLoading, refetch: refetchOverview} = useGetFileOverviewQuery({uuid: uuid, userId: user?.data.id});
     const dispatch = useDispatch();
 
@@ -28,12 +28,6 @@ const DetailDataset = ({params}) => {
         fileOverview()
     }, [dispatch, refetchOverview]);
 
-
-    useEffect(() => {
-        setHeader(fileDetail?.header);
-        setData(fileDetail?.data);
-    }, [dispatch, fileDetail?.data, fileDetail?.header, refetchDetail, refetchOverview]);
-
     return (
         <div className={'p-5'} >
             <p className={'text-3xl font-medium text-primary-color'}>Detail</p>
@@ -42,14 +36,16 @@ const DetailDataset = ({params}) => {
                 <ShareMember list={false} filename={fileDetail?.file} fileId={fileDetail?.id} owner={user?.data.id} />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
-                <Overview filename={fileDetail?.file} uuid={uuid} />
+                <Overview filename={fileDetail?.file} uuid={uuid}  />
                 <CleanModal filename={fileDetail?.filename} />
             </div>
             <div className={'flex justify-end items-center'}>
                 <HistoryDrawer />
             </div>
-            <p className={'text-primary-color font-semibold text-medium my-3'}>Total records: {fileDetail?.total} </p>
-            <FileDetail dataFile={data} headers={headers} isLoading={isLoading} />
+            <div className={'flex flex-col gap-3'}>
+                <p className={'text-primary-color font-semibold text-medium'}>Total records: {fileDetail?.total} </p>
+                <FileDetail uuid={uuid} />
+            </div>
         </div>
     );
 };

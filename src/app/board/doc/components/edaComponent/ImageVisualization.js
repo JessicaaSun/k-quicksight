@@ -19,21 +19,25 @@ const ImageVisualization = ({visualizationData, header}) => {
                         <div className={'flex justify-start items-center flex-wrap'}>
                             {
                                 histogram && (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={generateBashURL(histogram)} alt="Histogram" className={'w-1/2'} />
                                 )
                             }
                             {
                                 boxplot && (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={generateBashURL(boxplot)} alt="boxplot" className={'w-1/2'} />
                                 )
                             }
                             {
                                 scatter && (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={generateBashURL(scatter)} alt="scatter" className={'w-1/2'} />
                                 )
                             }
                             {
                                 linechart && (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={generateBashURL(linechart)} alt="line_chart" className={'w-1/2'} />
                                 )
                             }

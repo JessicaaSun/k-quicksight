@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import DataTable from "@/app/board/doc/components/edaComponent/DataTable";
 import CorrelationTable from "@/app/board/doc/components/edaComponent/CorrelationTable";
 import ImageVisualization from "@/app/board/doc/components/edaComponent/ImageVisualization";
+import {FaCheck} from "react-icons/fa";
 
 export const numberHeaders = [
     "Unnamed: 0.1",
@@ -33,7 +34,7 @@ const Visualization = ({bodyEda}) => {
         <div>
 
             <div>
-                <span>You chosen to perform EDA of </span>
+                <span>You have chosen to perform EDA with </span>
                 {
                     bodyEda?.visualizes.map((item, index) => (
                         <span className={'mx-3 p-2 rounded-xl'} key={index} style={{ backgroundColor: getRandomColor(), color: "white"}}>
@@ -42,7 +43,7 @@ const Visualization = ({bodyEda}) => {
                     ))
                 }
             </div>
-            <Button onClick={handleEda} >Perform EDA</Button>
+            <Button onClick={handleEda} className={'my-5 text-md flex gap-4 font-medium text-white'} color={'success'} ><FaCheck /> Perform EDA</Button>
             {
                 detailEDAResponse && (
                     <div className={'flex flex-col gap-3'}>

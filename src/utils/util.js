@@ -11,6 +11,7 @@ export function generateBashURL(str) {
         return 'https://thumbs.dreamstime.com/b/generic-person-gray-photo-placeholder-man-silhouette-white-background-144511705.jpg'
     }
     else {
+        console.log(str)
         return `${process.env.NEXT_PUBLIC_BASE_URL}files/${str}`;
     }
 }

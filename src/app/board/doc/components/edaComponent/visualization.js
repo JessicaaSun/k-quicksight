@@ -1,9 +1,12 @@
 import React from 'react';
 import {useEdaFileMutation} from "@/store/features/ExploreData/ExploreData";
-import {Button, Spinner} from "@nextui-org/react";
+import {Button, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import {getRandomColor} from "@/utils/util";
 import {setDetail} from "@/store/features/ExploreData/edaStore";
 import {useDispatch, useSelector} from "react-redux";
+import DataTable from "@/app/board/doc/components/edaComponent/DataTable";
+import CorrelationTable from "@/app/board/doc/components/edaComponent/CorrelationTable";
+import ImageVisualization from "@/app/board/doc/components/edaComponent/ImageVisualization";
 
 export const numberHeaders = [
     "Unnamed: 0.1",
@@ -42,25 +45,20 @@ const Visualization = ({bodyEda}) => {
             <Button onClick={handleEda} >Perform EDA</Button>
             {
                 detailEDAResponse && (
-                    <>
-                        <p className={'text-lg font-medium'}>All Headers of dataset</p>
-                        {
-                            detailEDAResponse.headers?.map((item, index) => (
-                                <span key={index} className={'my-5 text-primary-color'}> {item},  </span>
-                            ))
-                        }
-                        <p className={'text-lg font-medium'}>Summarize statistic</p>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Statistic</th>
-                                {numberHeaders.map(header => (
-                                    <th key={header}><b>{header}</b></th>
-                                ))}
-                            </tr>
-                            </thead>
-                        </table>
-                    </>
+                    <div className={'flex flex-col gap-3'}>
+                        <div>
+                            <p className={'text-lg font-medium mt-10'}>All Headers of dataset</p>
+                            {
+                                detailEDAResponse.headers?.map((item, index) => (
+                                    <span key={index} className={'my-5 text-primary-color'}> {item},  </span>
+                                ))
+                            }
+                        </div>
+                        <DataTable header={detailEDAResponse?.number_headers} body={detailEDAResponse?.descriptive_stats} />
+                        <CorrelationTable headers={detailEDAResponse?.number_headers} correlationData={detailEDAResponse?.correlation} />
+                        <p className={'text-xl font-semibold text-primary-color'}>Visualization</p>
+                        <ImageVisualization visualizationData={detailEDAResponse?.visualization} header={detailEDAResponse?.number_headers} />
+                    </div>
                 )
             }
         </div>

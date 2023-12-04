@@ -1,5 +1,9 @@
 import dashboard_1 from '@assets/images/dashboard_1.jpg'
 import dashboard_2 from '@assets/images/dashboard_2.png'
+import {LuFileBarChart, LuFileJson} from "react-icons/lu";
+import {TbFileTypeTxt} from "react-icons/tb";
+import {RiFileExcel2Line} from "react-icons/ri";
+import {BsFiletypeCsv} from "react-icons/bs";
 
 export const mockData = {
     dataset: [
@@ -45,27 +49,32 @@ export const dataType = [
     {
         id: 1,
         value: '',
-        label: 'All Files'
+        label: 'All Files',
+        icon: <LuFileBarChart />
     },
     {
         id: 2,
         value: 'txt',
-        label: 'txt'
+        label: 'txt',
+        icon: <TbFileTypeTxt />
     },
     {
         id: 3,
         value: 'xlsx',
-        label: 'xlsx'
+        label: 'xlsx',
+        icon: <RiFileExcel2Line />
     },
     {
         id: 4,
         value: 'json',
-        label: 'json'
+        label: 'json',
+        icon: <LuFileJson />
     },
     {
         id: 5,
         value: 'csv',
-        label: 'csv'
+        label: 'csv',
+        icon: <BsFiletypeCsv />
     },
 ]
 

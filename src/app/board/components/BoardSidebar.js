@@ -8,6 +8,7 @@ import {FaBook, FaClock, FaFolder, FaShare} from "react-icons/fa";
 import { FaSquarePollVertical, FaTableColumns } from "react-icons/fa6";
 import {generateBashURL} from "@/utils/util";
 import {IoDocumentText} from "react-icons/io5";
+import {HiShare} from "react-icons/hi";
 
 const contentRoute = {
   file: {
@@ -23,7 +24,7 @@ const contentRoute = {
       route: "/board/dataset",
     },
     shareWithMe: {
-      icon: <FaShare />,
+      icon: <HiShare />,
       name: "Share files",
       route: "/board/shareWithMe",
     },
@@ -69,7 +70,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           alt={"profile"}
         />
         <div>
-          <p className={"text-primary-color text-xl font-semibold"}>
+          <p className={"text-primary-color truncate w-[130px] text-xl font-semibold"}>
             {user?.data.full_name}
           </p>
           <p className={"text-description-color truncate w-[130px]"}>

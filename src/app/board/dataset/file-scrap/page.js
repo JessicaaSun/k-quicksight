@@ -87,7 +87,7 @@ const FileScrap = () => {
                             </div>
                         ))}
                     </CheckboxGroup>
-                    <Button onClick={handleSave} color="primary" variant="bordered" className={'w-full'}>
+                    <Button onClick={handleSave} color="primary" variant="bordered" className={'w-[98%] m-auto'}>
                         Import file(s)
                     </Button>
                 </div>

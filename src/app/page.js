@@ -46,7 +46,7 @@ export default function Home() {
       <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
         <div className="flex flex-col gap-3 w-full">
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
-            <p className="leading-[65px] max-sm:leading-normal sm:leading-normal">
+            <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
             Discover, Analyze and Decide With{" "}
             <span className=" text-primary-color">
               K-QuickSight

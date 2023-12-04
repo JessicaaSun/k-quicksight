@@ -109,7 +109,8 @@ export const sample_dataset = [
         createAt: '01/11/2023',
         size: '10.89KB',
         url: '/board/dataset/564837b6-838c-11ee-b962-0242ac120002',
-        uuid: '3ca0e936-85e2-11ee-b9d1-0242ac120002'
+        uuid: '3ca0e936-85e2-11ee-b9d1-0242ac120002',
+        thumbnail: 'https://www.niehs.nih.gov/research/scientific-data/assets/images/plan_hero.jpg'
     },
     {
         title: 'cambodia income',
@@ -117,7 +118,8 @@ export const sample_dataset = [
         createAt: '02/10/2023',
         size: '10.49KB',
         url: '/board/dataset/5c13419a-838c-11ee-b962-0242ac120002',
-        uuid: '33b77182-85e2-11ee-b9d1-0242ac120002'
+        uuid: '33b77182-85e2-11ee-b9d1-0242ac120002',
+        thumbnail: 'https://images.spiceworks.com/wp-content/uploads/2022/08/02141047/facets-of-data-analytics.jpg'
     },
 ]
 export const analysis_sample = [

@@ -37,9 +37,9 @@ const Dataset = () => {
   const { data: user, isLoading } = useGetUserQuery();
   const [isSample, setSample] = useState(false);
 
-  const handleDatasetSample = () => {
-    setSample((event) => !event);
-  };
+  // const handleDatasetSample = () => {
+  //   setSample((event) => !event);
+  // };
   const filType = useSelector((state) => state.fileType.fileType);
   const { data: allFile, refetch: filesRefetch, isLoading: isFileLoading } = useGetAllFilesQuery({
     id: user?.data.id,

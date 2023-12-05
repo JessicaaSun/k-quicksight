@@ -9,10 +9,18 @@ export const exploreData = apiSlice.injectEndpoints({
                 body: data,
             }),
             keepUnusedDataFor: 5, // keep unused data in cache for 5 seconds
-            validatesTags: ["files"], // provideTags are used for updating cache
+            validatesTags: ["analysis"], // provideTags are used for updating cache
         }),
+        findHeader: builder.query({
+            query: ({filename}) => ({
+                url: `files/headers/view/${filename}/`,
+                method: 'GET',
+            }),
+            keepUnusedDataFor: 5, // keep unused data in cache for 5 seconds
+            validatesTags: ["analysis"], // provideTags are used for updating cache     
+        }) 
     }),
 });
 
 // auto generated hooks for getUser query (GET)
-export const { useEdaFileMutation } = exploreData;
+export const { useEdaFileMutation, useFindHeaderQuery } = exploreData;

@@ -17,44 +17,7 @@ import { useRouter } from "next/navigation";
 import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 import Dropdown_table from "@/lib/table/componentTable/dropdown";
 import { FaEye } from "react-icons/fa6";
-
-const renderTableRow = (item, index, headers, isFileLoading) => {
-  if (typeof item !== 'object') {
-    console.error(`Invalid item type at index ${index}: ${typeof item}`);
-    return null;
-  }
-
-  return (
-      <TableRow key={item.id}>
-        <TableCell>{item.title || item.file}</TableCell>
-        <TableCell>
-          {!item.is_original ? <span>Cleaned</span> : <span>Original</span>}
-        </TableCell>
-        <TableCell>{item.type || item.fileType}</TableCell>
-        <TableCell>{getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}</TableCell>
-        <TableCell>{formatBytes(item.size)}</TableCell>
-        <TableCell className="flex gap-5 justify-center">
-          {!isFileLoading ? (
-              <Dropdown_table
-                  uuid={item.uuid}
-                  filename={item.file || item.filename}
-                  type={item.type}
-                  size={item.size}
-                  createAt={item.created_at || item.createAt}
-                  fileId={item.id}
-                  file={item.filename}
-              />
-          ) : (
-              Array.from({ length: headers.length }).map((_, i) => (
-                  <TableCell key={i}>
-                    <Spinner color="default" />
-                  </TableCell>
-              ))
-          )}
-        </TableCell>
-      </TableRow>
-  );
-};
+import {BsDot} from "react-icons/bs";
 
 export default function TableData({
   file,
@@ -67,61 +30,38 @@ export default function TableData({
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
   };
+
   return (
-    <Table
-        isHeaderSticky
-        aria-label="Example table with client async pagination"
-        className={'rounded-xl'}
-    >
-      <TableHeader>
-        {headers.map((item, index) => (
-          <TableColumn
-            className={`text-lg ${
-              item.header === "Actions" ? "text-center w-[200px]" : ""
-            }`}
-            key={index}
-          >
-            {item.header}
-          </TableColumn>
-        ))}
-      </TableHeader>
-      <TableBody emptyContent={'no data imported'}>
-        {!isSample
-          ? file?.map((item, index) =>
-              !isFileLoading ? (
-                  renderTableRow(item, index, headers, isFileLoading)
-              ) : (
-                // eslint-disable-next-line react/jsx-key
-                <TableRow>
-                  {Array.from({ length: headers.length }, (_, i) => (
-                      <TableCell key={`spinner-${i}`}>
-                        <Spinner color="default" />
-                      </TableCell>
-                  ))}
-                </TableRow>
-              )
+    <div >
+        {
+            isFileLoading ? (
+                <div className={'flex justify-center items-center'}>
+                    <Spinner color={'primary'} size={'lg'} label="Loading dataset" />
+                </div>
+            ) : (
+                <div className={'flex flex-col gap-3'}>
+                    {
+                        file?.map((item, index) => (
+                            <div key={item.id} className={'hover:bg-primary-color cursor-pointer hover:text-white transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm'}>
+                                <div>
+                                    <p className={'text-lg font-medium flex gap-3 justify-center items-center flex-wrap'}>{item.file} <BsDot /> <span className={'text-sm'}>{getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}</span> </p>
+                                    <p className={'text-sm'}>({item.type}) <span className={'font-medium'}>{!item.is_original ? <span>Cleaned</span> : <span>Original</span>}</span> with {formatBytes(item.size)}</p>
+                                </div>
+                                <Dropdown_table
+                                    uuid={item.uuid}
+                                    filename={item.file || item.filename}
+                                    type={item.type}
+                                    size={item.size}
+                                    createAt={item.created_at || item.createAt}
+                                    fileId={item.id}
+                                    file={item.filename}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
             )
-          : sample_dataset?.map((item, index) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.title}</TableCell>
-                <TableCell>{item.fileType}</TableCell>
-                <TableCell>Cleaned</TableCell>
-                <TableCell>
-                  {getTrimIntoColumnOnlyDate(item.createAt)}
-                </TableCell>
-                <TableCell>{item.size}</TableCell>
-                <TableCell className={"flex gap-5 justify-center"}>
-                  <Tooltip showArrow={true} content={"View"}>
-                    <button onClick={() => handleView(item.uuid)}>
-                      <i>
-                        <FaEye />
-                      </i>
-                    </button>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
-      </TableBody>
-    </Table>
+        }
+    </div>
   );
 }

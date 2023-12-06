@@ -9,6 +9,7 @@ import {useCreateRequestTutorialMutation} from "@/store/features/request-tutoria
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TutorialCard from "@/app/tutorials/components/TutorialCard";
 
 const Tutorial = () => {
 
@@ -59,16 +60,7 @@ const Tutorial = () => {
     return (
         <section className={'py-44 px-[10%]'}>
             <h1 className={'text-bold text-primary-color pt-10 pb-10'}>Tutorials</h1>
-            <div className={'flex flex-col justify-center flex-wrap gap-5 items-center'}>
-                <div className={'lg:flex md:flex gap-5 w-full'}>
-                    <iframe className={'lg:min-h-[437px] md:min-h-[300px] min-h-fit rounded-2xl  w-full'} width="560" height="315" src="https://www.youtube.com/embed/yZvFH7B6gKI?si=OPDoCSwUfF7jrx7q" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                    <iframe className={'lg:min-h-[437px] md:min-h-[300px] min-h-fit rounded-2xl lg:mt-0 md:mt-0 mt-10 w-full'} width="560" height="315" src="https://www.youtube.com/embed/CaqJ65CIoMw?si=tpm4JFOdnBTcHcGX" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                </div>
-                <div className={'lg:flex md:flex gap-5 w-full'}>
-                    <iframe className={'lg:min-h-[437px] md:min-h-[300px] min-h-fit rounded-2xl w-full'} width="560" height="315" src="https://www.youtube.com/embed/lgCNTuLBMK4?si=s989UmLbuJujDI17&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                    <iframe className={'lg:min-h-[437px] md:min-h-[300px] min-h-fit rounded-2xl lg:mt-0 md:mt-0 mt-10 w-full'} width="560" height="315" src="https://www.youtube.com/embed/v2oNWja7M2E?si=ikX9-y8beh_qzG2-&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                </div>
-            </div>
+            <TutorialCard/>
             <h2 className={'text-primary-color font-bold mt-20'}>Recommendation learning resources</h2>
             <div className={'lg:flex md:block justify-start gap-32 items-center py-20'}>
                 <Image src={recommend} alt={'recommendation'} className={'lg:w-1/2 md:w-3/3 w-full h-[400px] object-contain'} />

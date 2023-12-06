@@ -1,69 +1,67 @@
 'use client'
 
-import React, {useEffect, useState} from "react";
-import {Button, Chip, Input} from "@nextui-org/react";
-import {FaDatabase, FaSearch} from "react-icons/fa";
-import Filter from "@/app/sample/components/Filter";
-import {useDispatch, useSelector} from "react-redux";
-import {setSampleFilename} from "@/store/features/sampleDataset/Dataset";
-import {sample_dataset} from "@/app/board/mockData/mockData";
-import {FaTableColumns} from "react-icons/fa6";
-import Image from 'next/image'
-import {TbEyeShare} from "react-icons/tb";
+import React from 'react';
+import { Tabs } from 'antd';
+import Sample_all from "@/app/sample/components/dataset";
+import sampleImage from '@assets/images/vecteezy_it-support-and-application-maintenance_.jpg'
+import Image from "next/image";
+import {Button} from "@nextui-org/react";
+import {FaPlus} from "react-icons/fa";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useRouter} from "next/navigation";
 
-const Sample_all = () => {
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const sampleInfo = useSelector(state => state.sampleDataset)
-    const [filename, setFilename] = useState('');
-
-    useEffect(() => {
-        dispatch(setSampleFilename(filename))
-    }, [dispatch, filename]);
-
-  return (
-    <div className={"py-36 px-[10%] grid gap-5"}>
-        <Input
-            startContent={<div className={'text-primary-color'}><FaSearch  /></div>}
-            endContent={<Filter />}
-            onValueChange={setFilename}
-            radius={'full'}
-            className={'w-full text-lg'}
-            size={'md'}
-            variant={'bordered'}
-            color={'default'}
-            placeholder={'searching'}
-        />
-        <Chip
-            startContent={<FaDatabase />}
-            variant="bordered"
-            color="primary"
-            size={'lg'}
-            className={'px-3'}
-        >
-            Sample
-        </Chip>
-        <h3 className={'text-primary-color flex justify-start items-center gap-5'}><FaTableColumns /> Total dataset: {sample_dataset.length}</h3>
-        <div className={'grid gap-3'}>
-            {
-                sample_dataset.map((item, index) => (
-                    <div key={item.uuid} className={'flex justify-between items-center gap-5 border-1 border-gray-100 rounded-xl shadow-sm p-2'}>
-                        <div className={'flex gap-5 items-center'}>
-                            <img src={item.thumbnail} className={'w-[100px] h-[100px] object-cover rounded-lg'} />
-                            <div>
-                                <h4 className={'capitalize'}>{item.title}</h4>
-                                <p>{item.createAt}</p>
-                                <p>{item.fileType}</p>
-                            </div>
-                        </div>
-                        <Button variant={'ghost'} color={'primary'} onClick={() => router.push(`/sample/${item.uuid}`)}><TbEyeShare /> View detail</Button>
-                    </div>
-                ))
-            }
-        </div>
-    </div>
-  );
+const onChange = (key) => {
+    console.log(key);
 };
 
-export default Sample_all;
+const items = [
+    {
+        key: '1',
+        label: 'Dataset',
+        children: <Sample_all />,
+    },
+    {
+        key: '2',
+        label: 'Analysis',
+        children: 'Analysis will be latter!',
+    },
+    {
+        key: '3',
+        label: 'Dashboard',
+        children: 'Dashboard will be latter',
+    },
+];
+const SampleDataset_main = () => {
+    const router = useRouter();
+    const {data:user, isLoading} = useGetUserQuery();
+
+    const handleRouteAddNewDataset = () => {
+        if (!user) {
+            router.push("/auth/login")
+        } else {
+            router.push("/board/dataset")
+        }
+    }
+
+
+    return (
+        <div className={'py-36 px-[10%]'}>
+            <div className={'lg:flex md:flex grid justify-between items-center'}>
+                <div className={'w-full grid gap-4'}>
+                    <h2 className={'text-text-color'}>Sample</h2>
+                    <p className={'text-description-color'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
+                    <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
+                </div>
+                <Image  src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
+            </div>
+            <Tabs
+                defaultActiveKey="1"
+                items={items}
+                onChange={onChange}
+                size={'large'}
+                indicatorSize={(origin) => origin - 16}
+            />
+        </div>
+    )
+}
+export default SampleDataset_main;

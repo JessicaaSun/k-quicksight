@@ -1,12 +1,13 @@
 'use client'
 
-import React from "react";
+import React, {useState} from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
 import CleanModal from "@/app/board/dataset/component/cleaning/CleanModal";
 
 export default function DetailTable({filename, fileType}) {
+    const [jupyterLink, setJupyterUrl] = useState('https://jupyter.org/try-jupyter/lab?path=notebooks%2Fsqlite.ipynb')
     return (
-        <>
+        <div className={'grid gap-3'}>
             <div className={'flex justify-between items-center'}>
                 <div>
                     <h2 className={'text-primary-color mb-10'}>Detail dataset</h2>
@@ -44,6 +45,6 @@ export default function DetailTable({filename, fileType}) {
                     </TableRow>
                 </TableBody>
             </Table>
-        </>
+        </div>
     );
 }

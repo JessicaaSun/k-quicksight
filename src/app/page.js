@@ -43,7 +43,7 @@ export default function Home() {
   }, [dispatch, loginWithGoogle, session]);
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
-      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
+      <section className="lg:flex md:flex grid gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
         <div className="flex flex-col gap-3 w-full">
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
             <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} priority={false} alt="hero" className="homepage_image w-full" />
+          <Image src={heroImg} priority={false} unoptimized={true} alt="hero" className="homepage_image w-full" />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">

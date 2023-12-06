@@ -51,7 +51,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className={'p-5'}>
+    <div className={'p-7 w-1/3 shadow-md rounded-xl'}>
       <h2 className={"mb-8 text-primary-color"}>Sign Up</h2>
       <Formik
         initialValues={{
@@ -227,6 +227,15 @@ const SignUpForm = () => {
               <div className={"w-full h-0.5 bg-description-color"}></div>
             </div>
             <GoogleSignInBtn></GoogleSignInBtn>
+            <span className="pt-[20px] text-text-color">
+              Have any account yet?{" "}
+              <Link
+                href={"/auth/login"}
+                className="text-primary-color font-semibold"
+              >
+                Login
+              </Link>
+            </span>
           </Form>
         )}
       </Formik>

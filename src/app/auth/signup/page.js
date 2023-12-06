@@ -32,7 +32,7 @@ export default function SignUp() {
           />
         </svg>
       </button>
-      <div className="justify-center min-h-screen flex items-center w-full">
+      <div className="justify-center min-h-screen flex items-center">
         <SignUpForm />
       </div>
     </Outlet>

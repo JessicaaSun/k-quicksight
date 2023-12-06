@@ -41,7 +41,7 @@ export default function LoginQuick() {
       setIsDisabled(true)
       dispatch(setCredentials(data));
       toast.success("Login Success.")
-      setTimeout(() => router.push("/"), 2000);
+      setTimeout(() => router.push("/"), 1500);
     } catch (error) {
       if (!error.response) {
         toast.error("Bad credential please try again.")

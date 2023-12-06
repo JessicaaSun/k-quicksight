@@ -1,13 +1,17 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAnalysisMutation} from "@/store/features/analysis/Analysis";
 import {Select} from "antd";
-import { Button, Input } from '@nextui-org/react';
+import {Button, Input, Spinner} from '@nextui-org/react';
 import { useSelector } from 'react-redux';
 import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 import { useFindHeaderQuery } from '@/store/features/ExploreData/ExploreData';
-import JsonTable from './analysisComponent/JsonTable';
+import Descriptive_statistic from './analysisComponent/Descriptive_statistic';
+import Correllation from "@/app/board/doc/components/analysisComponent/Correllaltion";
+import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
+import NonLinear from "@/app/board/doc/components/analysisComponent/NonLinear";
+import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
 
 
 export const variableNotMoreThan2 = [
@@ -32,7 +36,8 @@ const Analysis = () => {
 
     const filename = useSelector(state => state.eda.filename);
     const {data:headers} = useFindHeaderQuery({filename: filename});
-    const [resultAnalysis, setResultAnalysis] = useState(null)
+    const [resultAnalysis, setResultAnalysis] = useState(null);
+    const [loading, isLoading] = useState(false)
 
     const handleChange = (value) => {
         setModel(value)
@@ -59,12 +64,15 @@ const Analysis = () => {
         }
         setBody(body_json)
         const responseAnalysis = await analysisPost({data: body_json})
-
-        setResultAnalysis(responseAnalysis?.data)
+        setResultAnalysis(responseAnalysis?.data);
+        isLoading(true)
     }
 
-    console.log('result ', resultAnalysis)
-
+    useEffect(() => {
+        if (resultAnalysis) {
+            isLoading(false)
+        }
+    }, [resultAnalysis]);
     
 
     return (
@@ -83,10 +91,6 @@ const Analysis = () => {
                         {
                             value: 'descriptive_statistic',
                             label: 'descriptive_statistic',
-                        },
-                        {
-                            value: 'random_number_generation',
-                            label: 'random_number_generation',
                         },
                         {
                             value: 'correlation',
@@ -164,17 +168,38 @@ const Analysis = () => {
                                                 options={
                                                     headers?.header_label
                                                 }
-                                                />
+                                            />
                                         </div>
                                     </div>
                                 )
                             }
                         </>
                     )}
-                    <Button color='primary' onClick={handleSubmitAnalysis} size='sm' className='w-fit font-medium'>Perform analysis</Button>
+                    <Button color='primary' onClick={handleSubmitAnalysis} size='md' className='w-fit font-medium my-3'>Perform analysis</Button>
                 </>
             </div>
-            <JsonTable jsonData={resultAnalysis?.descriptive_statistic.descriptive_statistic} chosenModel={chosenModel} headers={headers?.header_label} />
+            {
+                loading ? (
+                    <Spinner size={'md'} label={'Processing'} />
+                ): (
+                    <>
+                        {
+                            chosenModel === 'descriptive_statistic' ? (
+                                <Descriptive_statistic data={resultAnalysis?.descriptive_statistic} headers={headers?.header_numeric} />
+                            ) : chosenModel === 'correlation' ? (
+                                <Correllation />
+                            ) : chosenModel === 'simple_linear_regression' ? (
+                                <SimpleLinear data={resultAnalysis?.simple_linear_regression} />
+                            ) : chosenModel === 'non_linear_regression' ? (
+                                <NonLinear data={resultAnalysis?.non_linear_regression} headers={headers?.header_numeric} />
+                            ) : chosenModel === 'multiple_linear_regression' ? (
+                                <MultipleLinear data={resultAnalysis?.multiple_linear_regression} headers={headers?.header_numeric} />
+                            ) : ''
+                        }
+                    </>
+                )
+            }
+
         </div>
     );
 };

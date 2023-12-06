@@ -15,7 +15,7 @@ const Page = () => {
                 </div>
                 {/*image div*/}
                 <div className={'lg:w-1/2 md:w-[60%] flex items-center'}>
-                    <Image src={contactus} alt={"authentication"} className={'w-full md:block hidden'}/>
+                    <Image src={contactus} alt={"authentication"} unoptimized={true} className={'w-full md:block hidden'}/>
                 </div>
             </div>
         </main>

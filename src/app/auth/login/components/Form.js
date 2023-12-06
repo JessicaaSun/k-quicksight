@@ -54,7 +54,7 @@ export default function LoginQuick() {
   };
 
   return (
-    <div className={'p-5'}>
+    <div className={'w-1/3 rounded-xl shadow-md'}>
       <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -67,7 +67,7 @@ export default function LoginQuick() {
           pauseOnHover
           theme="light"
       />
-      <div className="w-full rounded-2xl bg-white flex flex-col gap-4">
+      <div className="w-full rounded-2xl bg-white flex flex-col gap-4 p-7">
         <h2 className="text-primary-color mb-2">
           Login
         </h2>
@@ -131,6 +131,15 @@ export default function LoginQuick() {
           <div className="w-full h-0.5 bg-text-color rounded-md"></div>
         </div>
         <GoogleSignInBtn></GoogleSignInBtn>
+        <span className="pt-[20px] text-text-color">
+              Does not has any account?{" "}
+              <Link
+                href={"/auth/signup"}
+                className="text-primary-color font-semibold"
+              >
+                SignUp
+              </Link>
+        </span>
       </div>
     </div>
   );

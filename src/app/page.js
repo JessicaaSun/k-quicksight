@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} priority={false} alt="hero" className="homepage_image w-full" />
+          <Image src={heroImg} priority={false} unoptimized={true} alt="hero" className="homepage_image w-full" />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">

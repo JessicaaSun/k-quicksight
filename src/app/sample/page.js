@@ -1,103 +1,67 @@
-import React from "react";
-import { Input } from "@nextui-org/react";
-import { SearchIcon } from "@/app/board/doc/searchIcons";
-import {
-  analysis_sample,
-  mockData,
-  sample_dataset,
-} from "@/app/board/mockData/mockData";
-import Link from "next/link";
-import Image from "next/image";
+'use client'
+
+import React, {useEffect, useState} from "react";
+import {Button, Chip, Input} from "@nextui-org/react";
+import {FaDatabase, FaSearch} from "react-icons/fa";
+import Filter from "@/app/sample/components/Filter";
+import {useDispatch, useSelector} from "react-redux";
+import {setSampleFilename} from "@/store/features/sampleDataset/Dataset";
+import {sample_dataset} from "@/app/board/mockData/mockData";
+import {FaTableColumns} from "react-icons/fa6";
+import Image from 'next/image'
+import {TbEyeShare} from "react-icons/tb";
+import {useRouter} from "next/navigation";
 
 const Sample_all = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const sampleInfo = useSelector(state => state.sampleDataset)
+    const [filename, setFilename] = useState('');
+
+    useEffect(() => {
+        dispatch(setSampleFilename(filename))
+    }, [dispatch, filename]);
+
   return (
-    <div className={"py-36 px-[10%]"}>
-      <div className={"flex justify-between items-center"}>
-        <p className={"text-primary-color font-semibold text-2xl"}>Sample</p>
+    <div className={"py-36 px-[10%] grid gap-5"}>
         <Input
-          placeholder={"Search ..."}
-          variant={"bordered"}
-          color={"primary"}
-          startContent={<SearchIcon />}
-          className={"w-[384px]"}
-          classNames={{
-            inputWrapper: ["h-[42px] shadow-sm"],
-          }}
+            startContent={<div className={'text-primary-color'}><FaSearch  /></div>}
+            endContent={<Filter />}
+            onValueChange={setFilename}
+            radius={'full'}
+            className={'w-full text-lg'}
+            size={'md'}
+            variant={'bordered'}
+            color={'default'}
+            placeholder={'searching'}
         />
-      </div>
-      <div className={"my-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Dataset
-        </p>
-        <div className={"flex flex-col gap-5"}>
-          {sample_dataset.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
-              }
-            >
-              <p className={"w-1/4 text-left"}>{item.title}</p>
-              <p className={"w-1/4 text-center"}>{item.fileType}</p>
-              <p className={"w-1/4 text-center"}>{item.createAt}</p>
-              <p className={"w-1/4 text-right"}>{item.size}</p>
-            </Link>
-          ))}
+        <Chip
+            startContent={<FaDatabase />}
+            variant="bordered"
+            color="primary"
+            size={'lg'}
+            className={'px-3'}
+        >
+            Sample
+        </Chip>
+        <h3 className={'text-primary-color flex justify-start items-center gap-5'}><FaTableColumns /> Total dataset: {sample_dataset.length}</h3>
+        <div className={'grid gap-3'}>
+            {
+                sample_dataset.map((item, index) => (
+                    <div key={item.uuid} className={'flex justify-between items-center gap-5 border-1 border-gray-100 rounded-xl shadow-sm p-2'}>
+                        <div className={'flex gap-5 items-center'}>
+                            <img src={item.thumbnail} className={'w-[100px] h-[100px] object-cover rounded-lg'} />
+                            <div>
+                                <h4 className={'capitalize'}>{item.title}</h4>
+                                <p>{item.createAt}</p>
+                                <p>{item.fileType}</p>
+                            </div>
+                        </div>
+                        <Button variant={'ghost'} color={'primary'} onClick={() => router.push(`/sample/${item.uuid}`)}><TbEyeShare /> View detail</Button>
+                    </div>
+                ))
+            }
         </div>
-      </div>
-      <div className={"mb-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Analysis
-        </p>
-        <div className={"flex flex-col gap-5"}>
-          {analysis_sample.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
-              }
-            >
-              <p className={"w-1/3"}>{item.filename}</p>
-              <p className={"w-1/3 text-center"}>{item.createDate}</p>
-              <p className={"w-1/3 text-right"}>{item.fileSize}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className={"mb-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Dashboard
-        </p>
-        <div className={"flex flex-row gap-5"}>
-          {mockData.dashboard.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 flex flex-col gap-5 p-2 hover:bg-blue-100 hover:shadow-lg rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
-              }
-            >
-              <Image
-                src={item.thumbnail}
-                alt={item.name}
-                className={
-                  "max-w-[265px] max-h-[157px] rounded-xl object-cover"
-                }
-              />
-              <div className={"flex flex-col"}>
-                <p className={"text-description-color font-semibold"}>
-                  {item.name}
-                </p>
-                <p className={"text-description-color font-semibold"}>
-                  {item.createdAt}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

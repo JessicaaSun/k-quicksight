@@ -57,14 +57,14 @@ body {
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  display: none;
+  width: 2px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #888;
-  display: none;
+  width: 5px;
+  background: #0346A5;
 }
 
 /* Handle on hover */

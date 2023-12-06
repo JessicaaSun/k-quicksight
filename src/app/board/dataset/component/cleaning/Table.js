@@ -14,7 +14,7 @@ export default function TableMissingValue({item}) {
                 </TableHeader>
                 <TableBody emptyContent={'none value'}>
                     {
-                        item?.missing_cell.map((rowItem, rowIndex) => (
+                        item?.missing_cell?.map((rowItem, rowIndex) => (
                             <TableRow key={rowIndex}>
                                 {
                                     item?.headers?.map((header, colIndex) => (

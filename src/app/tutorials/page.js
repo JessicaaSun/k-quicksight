@@ -63,7 +63,7 @@ const Tutorial = () => {
             <TutorialCard/>
             <h2 className={'text-primary-color font-bold mt-20'}>Recommendation learning resources</h2>
             <div className={'lg:flex md:block justify-start gap-32 items-center py-20'}>
-                <Image src={recommend} alt={'recommendation'} className={'lg:w-1/2 md:w-3/3 w-full h-[400px] object-contain'} />
+                <Image src={recommend} alt={'recommendation'} unoptimized={true} className={'lg:w-1/2 md:w-3/3 w-full h-[400px] object-contain'} />
                 <ul className={'list-disc'}>
                     {
                         resources.map((item, index) => (

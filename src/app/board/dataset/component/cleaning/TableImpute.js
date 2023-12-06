@@ -2,7 +2,6 @@ import React from 'react';
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 
 const TableImpute = ({item}) => {
-    console.log(item.mean)
     return (
         <div className={'flex justify-between items-center gap-3'}>
             <div className={'w-full'}>

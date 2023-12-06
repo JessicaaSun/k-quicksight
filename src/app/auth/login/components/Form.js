@@ -41,7 +41,7 @@ export default function LoginQuick() {
       setIsDisabled(true)
       dispatch(setCredentials(data));
       toast.success("Login Success.")
-      setTimeout(() => router.push("/"), 2000);
+      setTimeout(() => router.push("/"), 1500);
     } catch (error) {
       if (!error.response) {
         toast.error("Bad credential please try again.")
@@ -54,7 +54,7 @@ export default function LoginQuick() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-5 p-3">
+    <div className={'w-1/3 rounded-xl shadow-md'}>
       <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -67,7 +67,7 @@ export default function LoginQuick() {
           pauseOnHover
           theme="light"
       />
-      <div className="lg:w-1/3 md:w-1/2 shadow-lg w-full rounded-2xl bg-white flex flex-col gap-[20px] border-primary-color py-10 px-10">
+      <div className="w-full rounded-2xl bg-white flex flex-col gap-4 p-7">
         <h2 className="text-primary-color mb-2">
           Login
         </h2>
@@ -131,15 +131,14 @@ export default function LoginQuick() {
           <div className="w-full h-0.5 bg-text-color rounded-md"></div>
         </div>
         <GoogleSignInBtn></GoogleSignInBtn>
-
         <span className="pt-[20px] text-text-color">
-          Does not have an account?{" "}
-          <Link
-            href={"/auth/signup"}
-            className="text-primary-color font-semibold"
-          >
-            Sign up
-          </Link>
+              Does not has any account?{" "}
+              <Link
+                href={"/auth/signup"}
+                className="text-primary-color font-semibold"
+              >
+                SignUp
+              </Link>
         </span>
       </div>
     </div>

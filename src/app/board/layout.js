@@ -58,7 +58,7 @@ export default function BoardRootLayout({ children }) {
   } else if (user) {
     return (
       <section>
-        {noMargin  ? "" : <Navbar />}
+        {noMargin ? "" : <Navbar />}
         <div
           id={"board"}
           className={`${

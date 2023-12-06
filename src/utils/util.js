@@ -14,3 +14,7 @@ export function generateBashURL(str) {
         return `${process.env.NEXT_PUBLIC_BASE_URL}files/${str}`;
     }
 }
+export const getRandomColor = () => {
+    // Generate a random hex color code
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+};

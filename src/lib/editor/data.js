@@ -19,7 +19,20 @@ export const data = [
                     },
                     rotate: 0,
                     color: 'rgb(255, 255, 255)',
-                    
+                    // image: {
+                    //     // url: 'https://i.imgur.com/vbBynfJ.jpg',
+                    //     thumb: 'https://i.imgur.com/vbBynfJm.jpg',
+                    //     boxSize: {
+                    //         width: 1640,
+                    //         height: 1230,
+                    //     },
+                    //     position: {
+                    //         x: 0,
+                    //         y: -153,
+                    //     },
+                    //     rotate: 0,
+                    //     transparency: 0.26,
+                    // },
                 },
 
                 locked: false,

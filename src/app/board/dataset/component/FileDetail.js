@@ -10,68 +10,83 @@ import {
     TableCell,
     Spinner,
     Pagination,
-    Button
+    Button, SelectItem, Select
 } from "@nextui-org/react";
+import {useGetFileDetailQuery} from "@/store/features/files/allFileByuserId";
 
-export default function FileDetail({dataFile, headers, isLoading}) {
-    const [page, setPage] = useState(1);
-    const rowsPerPage = 100;
-    const pages = Math.ceil(dataFile?.length / rowsPerPage);
-    const items = useMemo(() => {
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-        return dataFile?.slice(start, end);
-    }, [page, dataFile]);
+export default function FileDetail({uuid}) {
+    const [size, setSize] = useState(100);
+    const [page,setPage] = useState(1)
+    const {data:fileDetail, refetch: refetchDetail, isLoading} = useGetFileDetailQuery({uuid: uuid, size: size, page: page});
 
-    const [notFound, setNotFound] = useState('')
+    const handleSelectionChange = (e) => {
+        setSize(e.target.value);
+    };
 
-    setTimeout(() => (
-        setNotFound('File not found')
-    ), 30000)
+    const handlePageChange = (page) => {
+        setPage(page);
+    }
 
     return (
-        <div className={'flex justify-center items-center relative shadow-lg rounded-xl'}>
+        <div className={'flex justify-end flex-col items-center relative shadow-lg rounded-xl w-full'}>
             {
-                !isLoading && dataFile !== undefined ? (
-                    <Table
-                        isHeaderSticky
-                        bottomContent={
-                            <div className="flex w-full gap-5 items-center justify-end">
-                                <Pagination
-                                    isCompact
-                                    showControls
-                                    showShadow
-                                    color="primary"
-                                    page={page}
-                                    total={pages}
-                                    onChange={(page) => setPage(page)}
-                                />
-                            </div>
-                        }
-                        className={'max-h-[600px] overflow-y-scroll'} aria-label="Example static collection table">
-                        <TableHeader>
-                            {headers?.map((header, index) => (
-                                <TableColumn key={index}>{header}</TableColumn>
-                            ))}
-                        </TableHeader>
-                        <TableBody
-                            loadingContent={<Spinner />}
-                            emptyContent={"No rows to display."}>
-                            {items?.map((row, index) => (
-                                <TableRow key={index}>
-                                    {headers?.map((header, index) => (
-                                        <TableCell key={index}>{row[header]}</TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                ) : (
+                fileDetail !== undefined ? (
                     <>
-                        <Spinner label={'Loading your dataFile'} className={`${notFound ? 'hidden' : ''}`} />
-                        <p className={'text-primary-color font-medium text-lg'}>{notFound}</p>
+                        <Table
+                            isHeaderSticky
+                            className={'max-h-[600px] overflow-y-scroll'} aria-label="Example static collection table">
+                            <TableHeader>
+                                {fileDetail?.headers?.map((header, index) => (
+                                    <TableColumn key={index}>{header}</TableColumn>
+                                ))}
+                            </TableHeader>
+                            <TableBody
+                                loadingContent={<Spinner label={'Loading dataset'} />}
+                                emptyContent={"No rows to display."}>
+                                {fileDetail?.results?.map((row, index) => (
+                                    <TableRow key={index}>
+                                        {fileDetail?.headers.map((header, index) => (
+                                            <TableCell key={index}>{row[header]}</TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        <div className={'flex justify-end items-center'}>
+                            <Select
+                                size={'sm'}
+                                variant={'bordered'}
+                                defaultSelectedKeys={['100']}
+                                className="w-20"
+                                onChange={handleSelectionChange}
+                            >
+                                <SelectItem key={100} value={100}>
+                                    100
+                                </SelectItem>
+                                <SelectItem key={200} value={200}>
+                                    200
+                                </SelectItem>
+                                <SelectItem key={300} value={300}>
+                                    300
+                                </SelectItem>
+                                <SelectItem key={400} value={400}>
+                                    400
+                                </SelectItem>
+                                <SelectItem key={500} value={500}>
+                                    500
+                                </SelectItem>
+                                <SelectItem key={fileDetail?.count} value={fileDetail?.count}>
+                                    {fileDetail?.count}
+                                </SelectItem>
+                            </Select>
+                            <Pagination isCompact showControls total={fileDetail?.pages.length} initialPage={1} onChange={handlePageChange} />
+                        </div>
                     </>
 
+                ) :  (
+                    <div className={'flex justify-center items-center w-full'}>
+                        <Spinner size={'lg'} label={'Loading dataset'} />
+                    </div>
                 )
             }
         </div>

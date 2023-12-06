@@ -26,6 +26,8 @@ import {
 } from "react-icons/ai";
 import logo from "@assets/logos/logo.png";
 import BoardSidebar from "@/app/board/components/BoardSidebar";
+import { logout } from "@/store/features/auth/authSlice";
+import { generateBashURL } from "@/utils/util";
 
 const HeaderLayout = ({ openPreview }, ref) => {
   const uploadRef = useRef(null);
@@ -137,18 +139,14 @@ const HeaderLayout = ({ openPreview }, ref) => {
         )} */}
         <Dropdown>
           <DropdownTrigger>
-            <Avatar
+          <Avatar
               isBordered
               as="button"
               className="transition-transform"
-              color="secondary"
+              color="primary"
               name="Jason Hughes"
               size="sm"
-              src={
-                user?.data.avatar
-                  ? user.data.avatar
-                  : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-              }
+              src={generateBashURL(user?.data.avatar)}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Dynamic Actions">

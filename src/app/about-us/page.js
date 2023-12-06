@@ -81,13 +81,13 @@ export default function AboutUs(){
                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
                 </p>
             </div>
-            <Image src="/assets/images/about-hero.png" width={820} height={820} alt={'about'}/>
+            <Image src="/assets/images/about-hero.png" unoptimized={true} width={820} height={820} alt={'about'}/>
             <div className={'my-10 lg:px-[15%] md:px-[5%] px-5'}>
                 <p className={'text-4xl capitalize text-primary-color font-bold text-center my-10'}>Mission and vision</p>
                 {
                     data.map((e, index) => (
                         <div key={index} className={`lg:flex w-full md:flex justify-center gap-5 items-center ${index === 1 ? "flex-row-reverse" : ""}`}>
-                            <Image src={e.image} alt={e.title} className={'lg:w-1/3 md:w-1/3'}/>
+                            <Image src={e.image} alt={e.title} unoptimized={true} className={'lg:w-1/3 md:w-1/3'}/>
                             <div className={`${index === 1 ? "text-right" : ""}`}>
                                 <h3 className={'text-primary-color'}>{e.title}</h3>
                                 <p className={'text-description-color mt-4'}>{e.description}</p>
@@ -103,11 +103,11 @@ export default function AboutUs(){
                     <div className={'lg:flex md:flex justify-center items-center gap-10 mt-10'}>
                         <div className={'lg:w-1/3 md:w-2/3'}>
 
-                            <Image src={Reksmey} alt={'instructor RakSmey'} />
+                            <Image src={Reksmey} unoptimized={true} alt={'instructor RakSmey'} />
                             <h3 className={'text-center my-5 text-text-color'}>Ms. Mom Reksmey</h3>
                         </div>
                         <div className={'lg:w-1/3 md:w-2/3'}>
-                            <Image src={tara} alt={'instructor Tara'} />
+                            <Image src={tara} unoptimized={true} alt={'instructor Tara'} />
                             <h3 className={'text-center my-5 text-text-color'}>Mr. Kit Tara</h3>
 
                         </div>
@@ -121,7 +121,7 @@ export default function AboutUs(){
                     {
                         members.map((e, index) => (
                             <div key={index} className={'lg:w-1/4 md:w-1/3 m-10'}>
-                                <Image src={e.profile} alt={e.name} />
+                                <Image src={e.profile} unoptimized={true} alt={e.name} />
                                 <h3 className={'text-text-color text-center capitalize'}>{e.name}</h3>
                                 <p className={'text-primary-color font-semibold text-center text-lg mt-2'}>{e.position}</p>
                                 <div className={'flex gap-[33px] justify-center items-center mt-5'}>

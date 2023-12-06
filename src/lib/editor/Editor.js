@@ -82,7 +82,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
     >
       <Container
         className={` ${
-          isSidebarHidden ? "w-full" : "w-[calc(100vw-255px)]"
+          isSidebarHidden ? "w-full" : "w-[calc(100vw-280px)]"
         } h-[calc(100vh-64px)] max-h-auto overflow-y-hidden`}
       >
         <HeaderLayout/>

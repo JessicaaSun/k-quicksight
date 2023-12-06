@@ -34,10 +34,6 @@ const tabs = [
     name: "Upload",
     icon: <UploadIcon />,
   },
-  {
-    name: "Chart Example",
-    icon: <TextTIcon />,
-  },
 ];
 const Sidebar = () => {
   const { actions } = useEditor();

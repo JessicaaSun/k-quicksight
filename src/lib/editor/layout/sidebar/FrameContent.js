@@ -7,36 +7,25 @@ import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import Image from "next/image";
-import MyLineChart from "../../tests/Chart";
-import { generateChart, lineChart } from "../../tests/htmlChart";
 
 const FrameContent = ({ onClose }) => {
   const [frames, setFrames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { actions } = useEditor();
 
-  // useAsync(async () => {
-  //     const response = await axios.get('/frames');
-  //     setFrames(response.data);
-  //     setIsLoading(false);
-  // }, []);
+  useAsync(async () => {
+    const response = await axios.get("/frames");
+    setFrames(response.data);
+    setIsLoading(false);
+  }, []);
 
-  const addShape = () => {
-    
-    actions.addLayerTree(generateChart());
+  const addFrame = async (data) => {
+    actions.addFrameLayer(data, data.clipPath);
     if (isMobile) {
       onClose();
     }
   };
 
-  const shapes = [
-    {
-      type: "rectangle",
-      width: 100,
-      height: 100,
-      icon: <MyLineChart />,
-    },
-  ];
   return (
     <div
       style={{
@@ -97,22 +86,37 @@ const FrameContent = ({ onClose }) => {
             padding: "16px",
           }}
         >
-          {/* {isLoading && <div>Loading...</div>} */}
-          {shapes.map((shape) => (
+          {isLoading && <div>Loading...</div>}
+          {frames.map((item, index) => (
             <div
-              key={shape.type}
-              style={{
-                width: "100%",
-                paddingBottom: "100%",
-                position: "relative",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                
-                addShape();
-              }}
+              key={index}
+              style={{ cursor: "pointer", position: "relative" }}
+              onClick={() => addFrame(item)}
             >
-              {shape.icon}
+              <div style={{ paddingBottom: "100%" }} />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: "100%",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  src={item.img}
+                  style={{
+                    maxHeight: "100%",
+                    maxWidth: "100%",
+                  }}
+                  width={100}
+                  height={100}
+                  alt="Frame"
+                />
+              </div>
             </div>
           ))}
         </div>

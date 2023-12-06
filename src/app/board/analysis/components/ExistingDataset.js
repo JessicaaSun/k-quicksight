@@ -15,13 +15,13 @@ import {
 import AnalysisStep from "@/app/board/components/AnalysisStep";
 import SelectDataSet from "@/app/board/analysis/components/SelectDataSet";
 import { useRouter } from 'next/navigation'
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 
-const steps = ['import dataset', 'Perform analysis', 'Choosing model ','Finishing'];
+const steps = ['import dataset', 'Perform analysis', 'Choosing model ', 'Finishing'];
 const sizes = ["5xl"];
 const ExistingDataset = () => {
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [size, setSize] = React.useState('md')
 
     const router = useRouter();
@@ -83,20 +83,18 @@ const ExistingDataset = () => {
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1 pt-10">
-                                <AnalysisStep/>
+                                <AnalysisStep />
                             </ModalHeader>
                             <ModalBody>
-                                <SelectDataSet/>
+                                <SelectDataSet />
                             </ModalBody>
-                            <ModalFooter className={"flex flex-row gap-10 "}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }} className={"flex flex-row gap-5"}>
-                                    <Button onClick={handleSelectAndNext} className={"text-background-color bg-primary-color"}>
-                                        {activeStep === steps.length - 1 ? 'Finish' : 'Proceed'}
-                                    </Button>
-                                    <Button color="inherit" onClick={onClose} sx={{ mr: 1 }} className={"text-background-color bg-primary-color"}>
-                                        Cancel
-                                    </Button>
-                                </Box>
+                            <ModalFooter>
+                                <Button color="primary" onClick={handleSelectDataset}>
+                                    Select
+                                </Button>
+                                <Button color="danger" variant={'flat'} onClick={onClose}>
+                                    Cancel
+                                </Button>
                             </ModalFooter>
                         </>
                     )}

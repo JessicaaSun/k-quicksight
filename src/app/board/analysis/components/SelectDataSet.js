@@ -14,6 +14,9 @@ export const headers = [
         header: "Title",
     },
     {
+      header: "original",
+    },
+    {
         header: "File Type",
     },
     {
@@ -73,7 +76,7 @@ const Dataset = () => {
                     </p>
                 </div>
 
-                <div className={"flex flex-row gap-96"}>
+                <div className={"flex flex-col gap-3"}>
                     <SearchDataset />
                     <DropDown />
                 </div>

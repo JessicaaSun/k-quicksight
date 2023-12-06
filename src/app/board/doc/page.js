@@ -7,6 +7,7 @@ import { mockData } from "@/app/board/mockData/mockData";
 import Link from "next/link";
 import Image from "next/image";
 import {IoSearchSharp} from "react-icons/io5";
+import StepperProcess from "@/app/board/doc/components/StepperProcess";
 
 export default function UserBoard() {
   const {
@@ -19,7 +20,8 @@ export default function UserBoard() {
 
     return (
         <div className={'py-10 px-5'}>
-            Doc
+          <p className={'text-xl font-semibold text-primary-color mb-5'}>Documentary of processing data analysis</p>
+          <StepperProcess />
         </div>
   );
 }

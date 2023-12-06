@@ -70,8 +70,8 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) 
           }}
           placement="bottomLeft"
         >
-          <Button>
-            <i style={{ color: "#003899" }}>
+          <Button className={'border-0'}>
+            <i>
               <FaEllipsis />
             </i>
           </Button>

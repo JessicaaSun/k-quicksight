@@ -33,14 +33,14 @@ export default function TableDataSet({
     const handleView = (uuid) => {
         router.push(`/board/analysis/${uuid}`);
     };
-    const [selectedColor, setSelectedColor] = useState("default");
+    const [selectedColor, setSelectedColor] = useState("primary");
     const [selectedRow, setSelectedRow] = useState(null);
 
     const dispatch = useDispatch();
     const handleRowSelect = (key) => {
         dispatch(setUUID(key))
         setSelectedRow(key);
-        setSelectedColor("success");
+        setSelectedColor("primary");
     };
 
     return (
@@ -55,7 +55,7 @@ export default function TableDataSet({
             <TableHeader>
                 {headers.map((item, index) => (
                     <TableColumn
-                        className={`bg-blue-50 text-lg text-medium ${
+                        className={`bg-blue-50 text-md ${
                             item.header === "Select" ? "text-center w-[200px]" : ""
                         }`}
                         key={index}
@@ -64,7 +64,7 @@ export default function TableDataSet({
                     </TableColumn>
                 ))}
             </TableHeader>
-            <TableBody>
+            <TableBody emptyContent={'No dataset'}>
                 {!isSample
                     ? file?.map((item, index) =>
                         !isFileLoading ? (
@@ -75,6 +75,7 @@ export default function TableDataSet({
                                 // onClick={() => handleView(item.)}
                             >
                                 <TableCell>{item.file}</TableCell>
+                                <TableCell> <span className={'font-medium'}>{!item.is_original ? <span>Cleaned</span> : <span>Original</span>}</span> </TableCell>
                                 <TableCell>{item.type}</TableCell>
                                 <TableCell>
                                     {getTrimIntoColumnOnlyDate(item.created_at)}

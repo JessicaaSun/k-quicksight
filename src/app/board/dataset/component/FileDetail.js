@@ -41,7 +41,7 @@ export default function FileDetail({uuid}) {
                                 ))}
                             </TableHeader>
                             <TableBody
-                                loadingContent={<Spinner />}
+                                loadingContent={<Spinner label={'Loading dataset'} />}
                                 emptyContent={"No rows to display."}>
                                 {fileDetail?.results?.map((row, index) => (
                                     <TableRow key={index}>
@@ -85,7 +85,7 @@ export default function FileDetail({uuid}) {
 
                 ) :  (
                     <div className={'flex justify-center items-center w-full'}>
-                        <Spinner size={'lg'} />
+                        <Spinner size={'lg'} label={'Loading dataset'} />
                     </div>
                 )
             }

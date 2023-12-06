@@ -11,6 +11,7 @@ import allRecord from "@/store/features/files/filesDetail";
 import analysisUUID from "@/store/features/files/analysisuuid";
 import uuidCleanFile from "@/store/features/clean/FileCleaned";
 import eda from "@/store/features/ExploreData/edaStore";
+import sampleDataset from "@/store/features/sampleDataset/Dataset";
 
 const store = configureStore({
     reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
         analysisUuid: analysisUUID,
         cleanedFileUUID: uuidCleanFile,
         eda: eda,
+        sampleDataset: sampleDataset,
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

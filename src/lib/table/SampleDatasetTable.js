@@ -30,7 +30,6 @@ const SampleDatasetTable = () => {
                 <TableHeader>
                     {
                         headers.map((item, index) => (
-
                             <TableColumn key={index}>{item.header}</TableColumn>
                         ))
                     }

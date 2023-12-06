@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    fileType: null,
+    fileType: '',
     filename: null
 }
 

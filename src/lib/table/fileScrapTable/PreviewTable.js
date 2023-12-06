@@ -1,42 +1,46 @@
 import React from "react";
 import {useScrappingUrlQuery} from "@/store/features/scrappingData/scrappingUrl";
-import {Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
+import {
+    Modal, ModalBody,
+    ModalContent, ModalFooter, ModalHeader,
+    Spinner,
+    Table,
+    TableBody,
+    TableCell,
+    TableColumn,
+    TableHeader,
+    TableRow, useDisclosure
+} from "@nextui-org/react";
+import {Button} from "antd";
 
 export default function PreviewTable({detail}) {
-    const {data:fileDetail, isLoading} = useScrappingUrlQuery({filename: detail});
 
+    const {data:fileDetail, isLoading} = useScrappingUrlQuery({filename: detail});
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    console.log(fileDetail)
     return (
-        <div className={'w-full'}>
-            {
-                isLoading ? <Spinner size={'md'} /> : (
-                    <Table aria-label="Example static collection table">
-                        <TableHeader>
-                            {
-                                fileDetail?.header.map((item) => (
-                                    <TableColumn key={item}>{item}</TableColumn>
-                                ))
-                            }
-                        </TableHeader>
-                        <TableBody>
-                            {
-                                fileDetail?.data.map((item, index) => (
-                                    <TableRow key={index}>
-                                        {
-                                            fileDetail.header.map((item_header, index) => (
-                                                <TableCell key={index}>
-                                                    {
-                                                        item[item_header]
-                                                    }
-                                                </TableCell>
-                                            ))
-                                        }
-                                    </TableRow>
-                                ))
-                            }
-                        </TableBody>
-                    </Table>
-                )
-            }
-        </div>
+        <>
+            <table className="min-w-full border border-gray-300">
+                <thead className="bg-gray-100">
+                <tr>
+                    {fileDetail?.headers?.map((item, index) => (
+                        <th key={index} className="py-2 px-4 border-b">{item}</th>
+                    ))}
+                </tr>
+                </thead>
+                <tbody>
+                {fileDetail?.results?.map((item, rowIndex) => (
+                    <tr key={rowIndex}>
+                        {fileDetail.headers?.map((item_header, colIndex) => (
+                            <td key={colIndex} className="py-2 px-4 border-b">
+                                {item && item[item_header] !== undefined ? item[item_header] : ''}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+
+        </>
     );
 }

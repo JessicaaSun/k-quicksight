@@ -25,11 +25,13 @@ export default function App() {
     const [error, setError] = useState('')
     const dispatch = useDispatch();
     const router = useRouter();
+    const [loading, isLoading] = useState(false)
 
     const handleScrapping = async () => {
         let data = {
             url: linkScrap,
         }
+        isLoading(true)
         const scrap = await scrapping({userId: user?.data.id, data: data})
         dispatch(setFileScrap(scrap?.data?.filename))
         router.push('/board/dataset/file-scrap')
@@ -55,7 +57,7 @@ export default function App() {
                                 <Button className={'bg-white border-1 border-primary-color text-primary-color font-medium'} variant="light" onPress={onClose}>
                                     Cancel
                                 </Button>
-                                <Button className={'bg-primary-color text-white font-medium'} onClick={handleScrapping}>
+                                <Button isLoading={loading} className={'bg-primary-color text-white font-medium'} onClick={handleScrapping}>
                                     Import
                                 </Button>
                             </ModalFooter>

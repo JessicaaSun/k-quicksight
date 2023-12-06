@@ -14,9 +14,8 @@ const UploadContent = ({ visibility, onClose }) => {
 
   const addImage = async (url) => {
     const img = new Image();
-    // img.onerror = (err) => window.alert(err);
     img.src = url;
-    img.crossOrigin = "anonymous";
+    // img.crossOrigin = "anonymous";
     img.onload = () => {
       actions.addImageLayer(
         { url, thumb: url },

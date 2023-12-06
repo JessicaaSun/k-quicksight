@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Loading from "@/app/loading";
 import { useHandlePreview } from "@/context/EditorPreviewContext";
 import HeaderLayout from "./layout/HeaderLayout";
+import dynamic from "next/dynamic";
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +40,9 @@ const KQSEditor = ({ isSidebarHidden }) => {
       return params;
     };
 
-    const res = await axios.get(`https://api-gilt-one.vercel.app/fonts?${buildParams(query)}`);
+    const res = await axios.get(
+      `https://api-gilt-one.vercel.app/fonts?${buildParams(query)}`
+    );
     return res.data;
   }, []);
 
@@ -82,10 +85,10 @@ const KQSEditor = ({ isSidebarHidden }) => {
     >
       <Container
         className={` ${
-          isSidebarHidden ? "w-full" : "w-[calc(100vw-280px)]"
+          isSidebarHidden ? "w-full" : "w-[calc(100vw-275px)]"
         } h-[calc(100vh-64px)] max-h-auto overflow-y-hidden`}
       >
-        <HeaderLayout/>
+        <HeaderLayout />
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{

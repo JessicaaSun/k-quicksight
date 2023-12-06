@@ -8,23 +8,38 @@ import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import Image from "next/image";
-
+import { Textarea } from "@nextui-org/react";
+import { generateText } from "@/data/textLayoutTreeTxt";
 const TextContent = ({ onClose }) => {
   const { actions } = useEditor();
   const [texts, setTexts] = useState([]);
+  const [textInput, setTextInput] = useState();
+  const [dataText, setDataText] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
   useAsync(async () => {
     const response = await axios.get("https://api-gilt-one.vercel.app/texts");
     setTexts(response.data);
     setIsLoading(false);
   }, []);
 
+  const handleChangeText = (e) => {
+    // const newText = e.target.value.replace(/<br\s*\/?>/g, "\n");
+    setTextInput(e.target.value);
+    setDataText(generateText(e.target.value));
+  };
+  const handleSetNewLine = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setTextInput((prevText) => prevText + "<br>");
+    }
+  };
+
   const handleAddText = (data) => {
     actions.addLayerTree(data);
     if (isMobile) {
       onClose();
     }
+    setTextInput("");
   };
 
   return (
@@ -75,8 +90,31 @@ const TextContent = ({ onClose }) => {
         </div>
       </div>
       <div
-        style={{ flexDirection: "column", overflowY: "auto", display: "flex" }}
+        style={{
+          flexDirection: "column",
+          overflowY: "auto",
+          display: "flex",
+          margin: "16px",
+        }}
       >
+        <div>
+          <Textarea
+            placeholder="Enter your Text"
+            value={textInput}
+            onChange={handleChangeText}
+            onKeyDown={handleSetNewLine}
+          />
+        </div>
+        <div
+          className="h-[30px] w-full"
+          onClick={() => {
+            handleAddText(JSON.parse(dataText.data));
+          }}
+        >
+          <button className="h-full w-full mt-3 rounded-lg text-sm font-semibold bg-primary-color text-white">
+            Add Text
+          </button>
+        </div>
         <div
           style={{
             flexGrow: 1,
@@ -86,34 +124,7 @@ const TextContent = ({ onClose }) => {
             gridGap: 8,
             padding: "16px",
           }}
-        >
-          {isLoading && <div>Loading...</div>}
-          {texts.map(({ img, data }, idx) => (
-            <div
-              key={idx}
-              style={{
-                cursor: "pointer",
-                position: "relative",
-                paddingBottom: "100%",
-                width: "100%",
-              }}
-              onClick={() => {handleAddText(JSON.parse(data), console.log("text data:",JSON.parse(data)))}}
-            >
-              <img
-                alt="text"
-                src={getThumbnail(img)}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  height: "100%",
-                  width: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          ))}
-        </div>
+        ></div>
       </div>
     </div>
   );

@@ -242,6 +242,7 @@ const shapes = [
 const ShapeContent = ({ onClose }) => {
   const { actions } = useEditor();
   const addShape = (shape) => {
+    console.log(actions)
     actions.addShapeLayer({
       type: {
         resolvedName: "ShapeLayer",

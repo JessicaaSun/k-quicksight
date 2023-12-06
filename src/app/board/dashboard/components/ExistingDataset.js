@@ -51,10 +51,10 @@ const ExistingDatasetDashboard = () => {
           <Button
             key={size}
             onPress={() => handleOpen(size)}
-            className={"flex flex-col w-full h-full"}
+            className={"flex flex-col justify-center p-4 items-center w-full h-full"}
           >
-            <Image src={TableImage} alt={""} className={"w-40 pt-2"} />
-            <p className={"py-3 font-bold"}>Pick existing dataset</p>
+            <Image src={TableImage} alt={""} className={"w-28"} />
+            <p className={" font-bold"}>Pick existing dataset</p>
           </Button>
         ))}
       </div>

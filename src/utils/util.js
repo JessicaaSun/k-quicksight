@@ -11,6 +11,11 @@ export function generateBashURL(str) {
         return 'https://thumbs.dreamstime.com/b/generic-person-gray-photo-placeholder-man-silhouette-white-background-144511705.jpg'
     }
     else {
+        console.log(str)
         return `${process.env.NEXT_PUBLIC_BASE_URL}files/${str}`;
     }
 }
+export const getRandomColor = () => {
+    // Generate a random hex color code
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+};

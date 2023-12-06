@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useGetFileDetailQuery, useGetFileOverviewQuery} from "@/store/features/files/allFileByuserId";
 import {useGetUserQuery} from "@/store/features/clean/importFile";
 import TableImpute from "@/app/board/dataset/component/cleaning/TableImpute";
@@ -9,6 +9,7 @@ import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
 import {Button, Checkbox, CheckboxGroup, Radio, RadioGroup, Spinner} from "@nextui-org/react";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
+import {setFilename, setShowDetailCleanData, setUuid} from "@/store/features/clean/FileCleaned";
 
 const CleaningStep = () => {
     const UUIDFile = useSelector(state => state.analysisUuid.uuid);
@@ -33,9 +34,9 @@ const CleaningStep = () => {
         }
     }, [select])
 
-    const [uuidFileCleaned, setFileCleanUUID] = useState('');
-    const {data:fileDetail} = useGetFileDetailQuery({uuid: uuidFileCleaned, size: 0, page: 1});
-
+    const dispatch = useDispatch();
+    const uuidFileCleaned = useSelector(state => state.cleanedFileUUID.uuid)
+    const showClean = useSelector(state => state.cleanedFileUUID.showDetailDataClean)
 
     const handleClean = async () => {
         const body = {
@@ -44,11 +45,10 @@ const CleaningStep = () => {
             filename: fileDetailNotClean?.filename
         }
         const response = await cleanProcess({data: body});
-        console.log(body)
-        setFileCleanUUID(response?.data?.uuid)
+        dispatch(setUuid(response?.data?.uuid))
+        dispatch(setFilename(response?.data?.filename))
+        dispatch(setShowDetailCleanData(true))
     }
-
-    console.log(fileDetail)
 
     return (
         <div>
@@ -100,8 +100,8 @@ const CleaningStep = () => {
                                     orientation="horizontal"
                                     onValueChange={setSelect}
                                 >
-                                    <Radio value="autoClean" className={'bg-third-color rounded-xl mr-3 h-[47px]'} color={'primary'}><span className={'text-white font-normal px-2'}>Auto Clean</span></Radio>
-                                    <Radio value="byOption" className={'bg-primary-color rounded-xl h-[47px]'} color={'warning'} ><span className={'text-white font-normal px-2'}>By Options</span></Radio>
+                                    <Radio size='sm' value="autoClean" className={'bg-third-color rounded-xl mr-3 h-[47px]'} color={'primary'}><span className={'text-white font-normal px-2'}>Auto Clean</span></Radio>
+                                    <Radio size='sm' value="byOption" className={'bg-primary-color rounded-xl h-[47px]'} color={'warning'} ><span className={'text-white font-normal px-2'}>By Options</span></Radio>
                                 </RadioGroup>
                             </div>
 
@@ -119,13 +119,13 @@ const CleaningStep = () => {
                                     <Checkbox isDisabled={select === 'autoClean' } value="remove_missing_cell">remove_missing_cell</Checkbox>
                                 </CheckboxGroup>
                             </div>
-                            <Button onClick={handleClean} color={'primary'} variant={'bordered'}>Perform clean dataset</Button>
+                            <Button className='w-1/4' onClick={handleClean} color={'primary'} variant={'bordered'}>Perform clean dataset</Button>
                         </div>
                     </div>
                 ) : null
             }
             {
-                uuidFileCleaned && (
+                showClean && (
                     <div className={'my-10'}>
                         <p className={'text-primary-color my-3 font-medium'}>Cleaned dataset</p>
                         <FileDetail uuid={uuidFileCleaned} />

@@ -1,9 +1,12 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import ShareMember from "@/app/board/dataset/component/shareMember";
 import AnalysisStep from "@/app/board/components/AnalysisStep";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import { useGetFileDetailQuery, useGetFileOverviewQuery } from "@/store/features/files/allFileByuserId";
+import {
+  useGetFileDetailQuery,
+  useGetFileOverviewQuery,
+} from "@/store/features/files/allFileByuserId";
 import { useDispatch, useSelector } from "react-redux";
 import { setFileAccurate } from "@/store/features/files/filesDetail";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
@@ -13,9 +16,15 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader, Spinner, Table,
-  TableBody, TableCell, TableColumn, TableHeader, TableRow,
-  useDisclosure
+  ModalHeader,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  useDisclosure,
 } from "@nextui-org/react";
 import ModelMachineLearning from "@/app/board/analysis/components/ModelMachineLearning";
 import AnalysisStep3 from "@/app/board/analysis/components/AnalysisStep3";
@@ -27,49 +36,63 @@ const Page = ({ params }) => {
   const { data: user } = useGetUserQuery();
   const [headers, setHeader] = useState([]);
   const [data, setData] = useState([]);
-  const { data: fileDetail, refetch: refetchDetail, isLoading } = useGetFileDetailQuery({ uuid: uuid, size: 100, page: 1 })
-  const { data: fileOverview, isLoading: overviewLoading, refetch: refetchOverview } = useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
+  const {
+    data: fileDetail,
+    refetch: refetchDetail,
+    isLoading,
+  } = useGetFileDetailQuery({ uuid: uuid, size: 100, page: 1 });
+  const {
+    data: fileOverview,
+    isLoading: overviewLoading,
+    refetch: refetchOverview,
+  } = useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
   const dispatch = useDispatch();
-  const [overview_data, setOverview] = useState([])
+  const [overview_data, setOverview] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
   const handleSelectDataset = () => {
-    setCurrentStep(0)
+    setCurrentStep(0);
     onClose();
   };
   const handleSelectBoard = () => {
-    setCurrentStep(3)
+    setCurrentStep(3);
   };
 
   useEffect(() => {
     const fileOverview = async () => {
       const overview = await refetchOverview();
-      setOverview(overview.data)
-      dispatch(setFileAccurate(overview.data))
-    }
-    fileOverview()
+      setOverview(overview.data);
+      dispatch(setFileAccurate(overview.data));
+    };
+    fileOverview();
   }, [refetchOverview]);
 
   useEffect(() => {
     setHeader(fileDetail?.header);
     setData(fileDetail?.data);
-  }, [dispatch, fileDetail?.data, fileDetail?.header, refetchDetail, refetchOverview]);
-  const [size, setSize] = React.useState('4xl')
+  }, [
+    dispatch,
+    fileDetail?.data,
+    fileDetail?.header,
+    refetchDetail,
+    refetchOverview,
+  ]);
+  const [size, setSize] = React.useState("4xl");
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const handleSelect = () => {
     if (currentStep === 1) {
       setCurrentStep(2);
     } else if (currentStep === 2) {
-      setCurrentStep(3)
+      setCurrentStep(3);
     }
   };
 
   const handleOpen = (size) => {
     setCurrentStep(1);
-    setSize(size)
+    setSize(size);
     onOpen();
-  }
+  };
   const [selectedColor, setSelectedColor] = React.useState("primary");
   return (
     <div>
@@ -83,14 +106,10 @@ const Page = ({ params }) => {
           </div>
           <div className={"flex flex-row gap-5"}>
             {currentStep !== 3 && (
-              <p className={"text-primary-color"}>
-                Predict future courses
-              </p>
+              <p className={"text-primary-color"}>Predict future courses</p>
             )}
             {currentStep === 3 && (
-              <p className={"text-primary-color text-xl"}>
-                Income
-              </p>
+              <p className={"text-primary-color text-xl"}>Income</p>
             )}
             <ShareMember />
           </div>
@@ -102,24 +121,40 @@ const Page = ({ params }) => {
             </div>
             {currentStep === 3 && (
               <div className={"flex justify-end px-4"}>
-                <Button className={"text-background-color bg-primary-color w-32"} onClick={handleSelectDataset}>
+                <Button
+                  className={"text-background-color bg-primary-color w-32"}
+                  onClick={handleSelectDataset}
+                >
                   Go to Data
                 </Button>
               </div>
             )}
             {currentStep !== 3 && (
               <div className={"flex flex-row justify-end gap-5"}>
-                <Button onPress={onOpen} key={size} onClick={() => handleOpen(size)} className={"bg-primary-color text-background-color"}>
+                <Button
+                  onPress={onOpen}
+                  key={size}
+                  onClick={() => handleOpen(size)}
+                  className={"bg-primary-color text-background-color"}
+                >
                   Perform Analysis
                 </Button>
-                <Button className={"text-background-color bg-primary-color"} onClick={handleSelectBoard}>
+                <Button
+                  className={"text-background-color bg-primary-color"}
+                  onClick={handleSelectBoard}
+                >
                   Go to Board
                 </Button>
               </div>
             )}
           </div>
           {currentStep !== 3 && (
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} size={size}>
+            <Modal
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              onClose={onClose}
+              size={size}
+            >
               <ModalContent>
                 {(onClose) => (
                   <>
@@ -128,7 +163,9 @@ const Page = ({ params }) => {
                       {currentStep === 2 && <AnalysisStep step={2} />}
                     </ModalHeader>
                     <ModalBody>
-                      <p className={"font-bold text-primary-color text-2xl"}>Data Analysis</p>
+                      <p className={"font-bold text-primary-color text-2xl"}>
+                        Data Analysis
+                      </p>
                       <Table
                         color={selectedColor}
                         selectionMode="single"
@@ -167,7 +204,7 @@ const Page = ({ params }) => {
                       <Button color="primary" onPress={handleSelect}>
                         Proceed
                       </Button>
-                      <Button color="danger" variant={'flat'} onPress={onClose}>
+                      <Button color="danger" variant={"flat"} onPress={onClose}>
                         Cancel
                       </Button>
                     </ModalFooter>
@@ -181,18 +218,20 @@ const Page = ({ params }) => {
       {currentStep !== 3 && (
         <div className={"pt-14"}>
           <p className={"py-3 text-2xl"}>Dataset</p>
-          {
-            isLoading ? (
-              <Spinner size={'md'} />
-            ) : (
-              <FileDetail dataFile={fileDetail?.results} uuid={uuid} headers={fileDetail?.headers} isLoading={isLoading} size={30} />
-            )
-          }
+          {isLoading ? (
+            <Spinner size={"md"} />
+          ) : (
+            <FileDetail
+              dataFile={fileDetail?.results}
+              uuid={uuid}
+              headers={fileDetail?.headers}
+              isLoading={isLoading}
+              size={30}
+            />
+          )}
         </div>
       )}
-      {currentStep === 3 && (
-        <AnalysisStep4 />
-      )}
+      {currentStep === 3 && <AnalysisStep4 />}
     </div>
   );
 };

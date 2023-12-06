@@ -12,12 +12,29 @@ import {
     Avatar,
     Tooltip
 } from "@nextui-org/react";
-import {headers} from "@/app/board/analysis/components/SelectDataSet";
 import {getTrimIntoColumnOnlyDate} from "@/utils/getTrimDateTIme";
 import {formatBytes} from "@/utils/convertByte";
 import {IoEyeSharp} from "react-icons/io5";
 import {useRouter} from "next/navigation";
 import {generateBashURL} from "@/utils/util";
+
+const headers = [
+    {
+        header: "Title",
+    },
+    {
+        header: "original",
+    },
+    {
+        header: "File Type",
+    },
+    {
+        header: "Create At",
+    },
+    {
+        header: "Size",
+    },
+];
 
 export default function ShareTable({file}) {
     const router = useRouter();
@@ -25,7 +42,7 @@ export default function ShareTable({file}) {
         <Table removeWrapper aria-label="Example static collection table" className={'rounded-xl shadow-sm border-1 border-gray-200'}>
             <TableHeader>
                 {
-                    headers.map((item, index) => (
+                    headers?.map((item, index) => (
                         <TableColumn key={index}>{item.header}</TableColumn>
                     ))
                 }

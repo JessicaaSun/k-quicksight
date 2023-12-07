@@ -57,7 +57,7 @@ const Dataset = () => {
     if (allFile) {
       const totalSize = allFile.reduce(
         (accumulator, currentValue) => accumulator + currentValue.size, 0);
-      dispatch(setTotalSize(1000000000 - totalSize));
+      dispatch(setTotalSize(totalSize));
     }
     if (totalFree > 1000000000) {
       setStorage(true);
@@ -77,7 +77,7 @@ const Dataset = () => {
         <div className={"flex justify-between items-center gap-5"}>
           <SearchDataset />
           <p className={"text-primary-color font-semibold text-lg w-full"}>
-            Free{" "}
+            Used {" "}
             <span className={"text-secondary-color"}>
               {formatBytes(totalFree)}
             </span>{" "}

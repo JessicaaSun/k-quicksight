@@ -65,7 +65,7 @@ const Page = ({ params }) => {
       dispatch(setFileAccurate(overview.data));
     };
     fileOverview();
-  }, [refetchOverview]);
+  }, [dispatch, refetchOverview]);
 
   useEffect(() => {
     setHeader(fileDetail?.header);

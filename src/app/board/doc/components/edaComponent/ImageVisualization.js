@@ -12,7 +12,7 @@ const ImageVisualization = ({visualizationData, header}) => {
     return (
         <div>
             {Object.entries(visualizationData).map(([header, data]) => {
-                const { histogram, boxplot, scatter, linechart} = data;
+                const { histogram, boxplot, scatter, line_chart} = data;
                 return (
                     <div key={header} className={'flex flex-col gap-3'}>
                         <p className={'text-primary-color'}>Column {header}: </p>
@@ -45,11 +45,11 @@ const ImageVisualization = ({visualizationData, header}) => {
                                 )
                             }
                             {
-                                linechart && (
+                                line_chart && (
 
-                                   <a href={generateBashURL(linechart)} target={"_blank"}>
+                                   <a href={generateBashURL(line_chart)} target={"_blank"}>
                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                       <img src={generateBashURL(linechart)} alt="line_chart" />
+                                       <img src={generateBashURL(line_chart)} alt="line_chart" />
                                    </a>
                                 )
                             }

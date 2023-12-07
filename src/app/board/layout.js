@@ -8,6 +8,7 @@ import authenticated from "@assets/images/authentication.png";
 import { usePathname, useRouter } from "next/navigation";
 import Loading from "@/app/loading";
 import { useSidebar } from "@/context/BoardSideBarContext";
+import { VisualizeFileProvider } from "@/context/VisualizeFileContext";
 
 export default function BoardRootLayout({ children }) {
   const pathname = usePathname();
@@ -58,17 +59,19 @@ export default function BoardRootLayout({ children }) {
   } else if (user) {
     return (
       <section>
-        {noMargin ? "" : <Navbar />}
-        <div
-          id={"board"}
-          className={`${
-            noMargin
-              ? `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"} pt-[64px]`
-              : "lg:pl-[280px] py-[70px]"
-          }  bg-background-color min-h-screen`}
-        >
-          {children}
-        </div>
+        <VisualizeFileProvider>
+          {noMargin ? "" : <Navbar />}
+          <div
+            id={"board"}
+            className={`${
+              noMargin
+                ? `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"} pt-[64px]`
+                : "lg:pl-[280px] py-[70px]"
+            }  bg-background-color min-h-screen`}
+          >
+            {children}
+          </div>
+        </VisualizeFileProvider>
       </section>
     );
   }

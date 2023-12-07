@@ -12,8 +12,18 @@ import FrameContent from "./sidebar/FrameContent";
 import { useEditor } from "@lidojs/editor";
 import { FaRegChartBar } from "react-icons/fa6";
 import VisualContent from "./sidebar/VisualContent";
+import { BsBarChart, BsDatabase } from "react-icons/bs";
+import DataContent from "./sidebar/DataContent";
 
 const tabs = [
+  {
+    name: "Visual",
+    icon: <BsBarChart />,
+  },
+  {
+    name: "Data",
+    icon: <BsDatabase />,
+  },
   {
     name: "Text",
     icon: <TextTIcon />,
@@ -26,10 +36,7 @@ const tabs = [
     name: "Image",
     icon: <ImageIcon />,
   },
-  {
-    name: "Visual",
-    icon: <FaRegChartBar />,
-  },
+
   {
     name: "Upload",
     icon: <UploadIcon />,
@@ -38,6 +45,8 @@ const tabs = [
 const Sidebar = () => {
   const { actions } = useEditor();
   const [tab, setTab] = useState(null);
+  const sidebarWidth = tab === 'Data' ? 'calc(100vw - 74px)' : '300px';
+  
   return (
     <div
       style={{
@@ -64,7 +73,7 @@ const Sidebar = () => {
         {tab && (
           <div
             style={{
-              width: 360,
+              width: sidebarWidth,
               "@media (maxWidth: 800px)": {
                 width: "100%",
                 position: "fixed",
@@ -107,6 +116,14 @@ const Sidebar = () => {
                 }}
               />
             )}
+            {tab === "Data" && (
+              <DataContent
+                onClose={() => {
+                  setTab(null);
+                  actions.setSidebar();
+                }}
+              />
+            )}
             {tab === "Shape" && (
               <ShapeContent
                 onClose={() => {
@@ -127,7 +144,7 @@ const Sidebar = () => {
       </div>
       <div
         style={{
-          width: 360,
+          width: 300,
           position: "absolute",
           overflow: "hidden",
           top: 0,

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="60.738" viewBox="0 0 70 60.738">
+  <g id="Waterfall" transform="translate(-11 -13)">
+    <path id="Line" d="M-1807-893.2h69" transform="translate(1818.5 966.439)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-width="1"/>
+    <g id="Falls" transform="translate(15.419 13)">
+      <g id="Rectangle_47" data-name="Rectangle 47" transform="translate(0 36.949)" fill="#24313d" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="23.513" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="22.513" fill="none"/>
+      </g>
+      <g id="Rectangle_48" data-name="Rectangle 48" transform="translate(11.197 13.436)" fill="#FFA500" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="23.513" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="22.513" fill="none"/>
+      </g>
+      <g id="Rectangle_49" data-name="Rectangle 49" transform="translate(22.394 13.436)" fill="#24313d" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="47.027" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="46.027" fill="none"/>
+      </g>
+      <g id="Rectangle_50" data-name="Rectangle 50" transform="translate(32.471)" fill="#d9f3f4" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="13.436" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="12.436" fill="none"/>
+      </g>
+      <g id="Rectangle_51" data-name="Rectangle 51" transform="translate(43.668 12.316)" fill="#FFA500" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="15.676" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="14.676" fill="none"/>
+      </g>
+      <g id="Rectangle_52" data-name="Rectangle 52" transform="translate(54.864 26.872)" fill="#24313d" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+        <rect width="6.718" height="19.035" stroke="none"/>
+        <rect x="0.5" y="0.5" width="5.718" height="18.035" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

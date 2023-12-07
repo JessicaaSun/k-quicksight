@@ -13,8 +13,9 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import UploadDataSetDashboard from "./components/UploadDataSet";
-import ExistingDatasetDashboard from "./components/ExistingDataset";
+import UploadDataSetDashboard from "./components/importData/UploadDataSet";
+import ExistingDatasetDashboard from "./components/importData/ExistingDataset";
+
 
 const Page = () => {
   const [mockData, setMockData] = useState(MockDataDashboard.listDashboard);

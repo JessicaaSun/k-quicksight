@@ -5,7 +5,6 @@ import React from "react";
 
 const Page = ({ params }) => {
   const { isSidebarHidden } = useSidebar();
-  console.log("is hidden", isSidebarHidden)
   return (
     <div>
       <KQSEditor isSidebarHidden={isSidebarHidden} />

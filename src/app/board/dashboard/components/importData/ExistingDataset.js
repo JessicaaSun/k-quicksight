@@ -11,37 +11,25 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import AnalysisStep from "@/app/board/components/AnalysisStep";
-import Dataset from "@/app/board/dataset/page";
-import SelectDataSet from "@/app/board/analysis/components/SelectDataSet";
 import { useRouter } from "next/navigation";
+import SelectDataset from "./SelectDatasetVis";
+import { useVisualizeFileContext } from "@/context/VisualizeFileContext";
 
 const ExistingDatasetDashboard = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const router = useRouter();
   const sizes = ["5xl"];
+  const { selectedFile } = useVisualizeFileContext();
+
+  const handleSelectDataset = () => {
+    router.push(`/board/dashboard/ueiwdhwz`);
+    console.log("file: ", selectedFile)
+  };
 
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
-  };
-  const handleSelect = async () => {
-    try {
-      // Fetch the UUID from your API
-      const response = await fetch("your-api-endpoint");
-      const data = await response.json();
-
-      const datasetUUID = data.uuid;
-
-      setSelectedDataset(datasetUUID);
-      console.log("Selected Dataset UUID:", datasetUUID);
-      goToStep(1);
-    } catch (error) {
-      console.error("Error fetching dataset UUID:", error);
-    } finally {
-      onClose(); // Close the modal regardless of success or failure
-    }
   };
 
   return (
@@ -51,7 +39,9 @@ const ExistingDatasetDashboard = () => {
           <Button
             key={size}
             onPress={() => handleOpen(size)}
-            className={"flex flex-col justify-center p-4 items-center w-full h-full"}
+            className={
+              "flex flex-col justify-center p-4 items-center w-full h-full"
+            }
           >
             <Image src={TableImage} alt={""} className={"w-28"} />
             <p className={" font-bold"}>Pick existing dataset</p>
@@ -62,22 +52,14 @@ const ExistingDatasetDashboard = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                <AnalysisStep step={0} />
-              </ModalHeader>
               <ModalBody>
-                <SelectDataSet />
+                <SelectDataset />
               </ModalBody>
               <ModalFooter>
-                <Button
-                  color="primary"
-                  onPress={() => {
-                    onClose, router.push("/board/dashboard/editor");
-                  }}
-                >
+                <Button color="primary" onClick={handleSelectDataset}>
                   Select
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="danger" onPress={onClose}>
                   Cancel
                 </Button>
               </ModalFooter>

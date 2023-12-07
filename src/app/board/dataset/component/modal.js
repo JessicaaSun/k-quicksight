@@ -12,10 +12,10 @@ import {
     Input
 } from "@nextui-org/react";
 import {useScrapDataMutation} from "@/store/features/files/allFileByuserId";
-import {useGetUserQuery} from "@/store/features/clean/importFile";
 import {useDispatch} from "react-redux";
 import {setFileScrap} from "@/store/features/files/fileSlice";
 import {useRouter} from "next/navigation";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 
 export default function App() {
     const {data:user} = useGetUserQuery();

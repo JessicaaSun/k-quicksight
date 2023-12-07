@@ -29,30 +29,32 @@ const Sample_all = () => {
     }, [dispatch, filename]);
 
     return (
-        <div className={"grid gap-5"}>
+        <div className={"grid gap-5 w-full"}>
             <Input
                 startContent={<div className={'text-gray-500'}><FaSearch  /></div>}
                 endContent={<Filter />}
                 onValueChange={setFilename}
                 radius={'full'}
-                className={'w-full text-lg'}
+                className={'text-lg'}
                 size={'sm'}
                 variant={'flat'}
                 color={'default'}
                 placeholder={'searching'}
             />
             <h4 className={'text-primary-color flex justify-start items-center gap-5'}><FaTableColumns /> Total dataset: {allSampleDataset?.results.length}</h4>
-            <div className={'grid gap-3'}>
+            <div className={'grid gap-3 w-full'}>
                 {
                     allSampleDataset?.results.map((item, index) => (
-                        <div key={item.id} className={'flex justify-between items-center gap-5 border-1 border-gray-100 rounded-xl shadow-sm p-5'}>
-                            <div className={'flex gap-5 items-center'}>
-                                <div>
-                                    <h4 className={'capitalize'}>{item.file}</h4>
+                        <div key={item.id} className={'grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 justify-between items-center gap-5 border-1 border-gray-100 rounded-xl shadow-sm p-5'}>
+                            <div className={'grid gap-5 items-center w-full'}>
+                                <div className={'w-full'}>
+                                    <p className={'capitalize lg:text-2xl md:text-xl text-lg'}>{item.file}</p>
                                     <p>{getTrimIntoColumnOnlyDate(item.created_at)} - {formatBytes(item.size)}</p>
                                 </div>
                             </div>
-                            <Button radius={'full'} variant={'ghost'} color={'primary'} onClick={() => router.push(`/sample/${item.id}`)}><TbEyeShare /> View detail</Button>
+                            <div className={'flex justify-end items-center'}>
+                                <Button className={'lg:w-fit md:w-fit w-full'} radius={'full'} variant={'ghost'} color={'primary'} onClick={() => router.push(`/sample/${item.id}`)}><TbEyeShare /> View detail</Button>
+                            </div>
                         </div>
                     ))
                 }

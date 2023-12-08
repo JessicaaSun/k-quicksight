@@ -83,14 +83,14 @@ const Sidebar = () => {
                 }}
               />
             )}
-            {tab === "Frame" && (
+            {/* {tab === "Chart Example" && (
               <FrameContent
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();
                 }}
               />
-            )}
+            )} */}
             {tab === "Image" && (
               <ImageContent
                 onClose={() => {

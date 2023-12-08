@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
@@ -6,6 +8,7 @@ import StepLabel from '@mui/material/StepLabel';
 
 const steps = [
     'import dataset',
+    'Exploratory data analysis',
     'Perform analysis',
     'Choosing model ',
     'Finishing'

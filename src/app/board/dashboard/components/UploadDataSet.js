@@ -41,7 +41,7 @@ const UploadDataSetDashboard = () => {
   };
   return (
     <div>
-      <Button className={"flex flex-col w-full h-full"}>
+      <Button className={"flex flex-col p-4 justify-center items-center w-full h-full"}>
         <input
           type="file"
           accept=".csv, .xlsx, .txt, .json"
@@ -49,8 +49,8 @@ const UploadDataSetDashboard = () => {
           style={{ display: "none" }}
           id="uploadInput"
         />
-        <label htmlFor="uploadInput">
-          <Image src={UploadData} alt={""} className={"w-40 "} />
+        <label className="flex flex-col justify-center items-center" htmlFor="uploadInput">
+          <Image src={UploadData} alt={""} className={"w-28 "} />
           <p className={"font-bold"}>Upload new dataset</p>
         </label>
       </Button>

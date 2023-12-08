@@ -81,6 +81,8 @@ const Analysis = () => {
             }, 5000)
         }
     }, [resultAnalysis, ]);
+
+    console.log(resultAnalysis)
     
 
     return (
@@ -128,6 +130,10 @@ const Analysis = () => {
                         {
                             value: 'correlation',
                             label: 'correlation',
+                        },
+                        {
+                            value: 'covariance',
+                            label: 'covariance',
                         },
                         {
                             value: 'simple_linear_regression',
@@ -219,8 +225,8 @@ const Analysis = () => {
                         {
                             chosenModel === 'descriptive_statistic' ? (
                                 <Descriptive_statistic data={resultAnalysis?.descriptive_statistic} headers={headers?.header_numeric} />
-                            ) : chosenModel === 'correlation' ? (
-                                <Correllation />
+                            ) : chosenModel === 'correlation' || chosenModel === 'covariance'  ? (
+                                <Correllation data={resultAnalysis?.correlation || resultAnalysis?.covariance} dependentvariable={dependent_variable} indepentvariable={independent_variable} />
                             ) : chosenModel === 'simple_linear_regression' ? (
                                 <SimpleLinear data={resultAnalysis?.simple_linear_regression} />
                             ) : chosenModel === 'non_linear_regression' ? (

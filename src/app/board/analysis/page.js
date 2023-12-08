@@ -101,16 +101,15 @@ const Page = () => {
                     {
                       allAnalysis?.results.map((item, index) => (
                           <div className="grid gap-3">
-                          <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
+                          <Card className="w-full bg-black hover:scale-105 transition-all h-[300px] col-span-12 sm:col-span-5">
                               <CardHeader className="absolute z-10 top-1 flex-col items-start">
                                 <p className="text-tiny text-white/60 uppercase font-bold">{item.model_name}</p>
                                 <h4 className="text-white font-medium text-2xl">{item.title}</h4>
                               </CardHeader>
                               <button className="w-full h-full" onClick={() => router.push(`/board/analysis/${item.file.uuid}/${item.uuid}`)}>
                                 <img
-                                  removeWrapper
                                   alt="Card example background"
-                                  className="z-0 w-full h-full scale-125 -translate-y-6 object-cover bg-overlay/60"
+                                  className="z-0 w-full h-full scale-125 -translate-y-6 object-cover opacity-70"
                                   src={generateBashURL(item.thumbnail)}
                                 />
                               </button>

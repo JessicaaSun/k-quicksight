@@ -16,7 +16,7 @@ export default function UpdateInfo({ filename, uuid, thumbnailUrl }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [previewImage, setPreviewImage] = useState('');
 
-    const [Analysis_name, setAnalysis_name] = useState(filename || '');
+    const [Analysis_name, setAnalysis_name] = useState(filename);
 
     const [uploadThumnail] = useUploadSingleMutation();
 
@@ -65,7 +65,7 @@ export default function UpdateInfo({ filename, uuid, thumbnailUrl }) {
                                     pauseOnHover
                                     theme="light"
                                 />
-                                <img src={generateBashURL(previewImage)} className="rounded-xl" alt="preview" />
+                                <img src={generateBashURL(previewImage || thumbnailUrl)} className="rounded-xl" alt="preview" />
                                 <input onChange={handleUploadImage} type="file" />
                                 <label>Analysis name</label>
                                 <Input size="sm" placeholder="Analysis name" value={Analysis_name} onValueChange={setAnalysis_name} />

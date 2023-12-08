@@ -8,7 +8,6 @@ import {
   TableRow,
   TableCell,
   Spinner,
-  Tooltip,
   Button,
 } from "@nextui-org/react";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
@@ -38,10 +37,9 @@ export default function TableDataSet({
   const [selectedRow, setSelectedRow] = useState(null);
 
   const dispatch = useDispatch();
-  const handleRowSelect = (file) => {
-    dispatch(setUUID(file.uuid));
-    setSelectedRow(file.uuid);
-    handleRowClick(file);
+  const handleRowSelect = (key) => {
+    dispatch(setUUID(key));
+    setSelectedRow(key);
     setSelectedColor("primary");
   };
 
@@ -72,7 +70,7 @@ export default function TableDataSet({
                 !isFileLoading ? (
                   <TableRow
                     key={item.uuid}
-                    onClick={() => handleRowSelect(item)}
+                    onClick={() => handleRowSelect(item.uuid)}
                     selected={item.id === selectedRow}
                     // onClick={() => handleView(item.)}
                   >
@@ -95,10 +93,12 @@ export default function TableDataSet({
                     <TableCell className={"flex gap-5 justify-center"}>
                       <Dropdown_table
                         uuid={item.uuid}
-                        filename={item.file}
+                        filename={item.file || item.filename}
                         type={item.type}
                         size={item.size}
-                        createAt={item.created_at}
+                        createAt={item.created_at || item.createAt}
+                        fileId={item.id}
+                        file={item.filename}
                       />
                     </TableCell>
                   </TableRow>

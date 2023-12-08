@@ -20,6 +20,7 @@ import Box from "@mui/material/Box";
 
 const steps = [
   "import dataset",
+  "Exploratory data analysis",
   "Perform analysis",
   "Choosing model ",
   "Finishing",
@@ -95,7 +96,7 @@ const ExistingDataset = () => {
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={handleSelectDataset}>
-                  Select
+                  Proceed
                 </Button>
                 <Button color="danger" variant={"flat"} onClick={onClose}>
                   Cancel

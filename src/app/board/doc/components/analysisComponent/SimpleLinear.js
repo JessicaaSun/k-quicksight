@@ -1,4 +1,5 @@
 import React from 'react';
+import {generateBashURL} from "@/utils/util";
 
 const SimpleLinear = ({data}) => {
     if (!data || typeof data !== 'object') {
@@ -6,6 +7,8 @@ const SimpleLinear = ({data}) => {
     }
     const keys = Object.keys(data);
     const coefficientData = data?.conefficient_summary_table;
+
+    console.log(data)
 
     return (
         <div className="overflow-x-scroll">
@@ -113,6 +116,7 @@ const SimpleLinear = ({data}) => {
                     </tbody>
                 </table>
             </div>
+            <img src={generateBashURL(data?.visulaize)} alt={'visualize image'} />
         </div>
     );
 };

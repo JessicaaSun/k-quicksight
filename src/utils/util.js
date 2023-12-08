@@ -8,7 +8,7 @@ export function generateBashURL(str) {
     if (str?.includes('https:') || str?.includes('http:') ) {
         return str;
     } else if (!str) {
-        return 'https://thumbs.dreamstime.com/b/generic-person-gray-photo-placeholder-man-silhouette-white-background-144511705.jpg'
+        return 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
     }
     else {
         return `${process.env.NEXT_PUBLIC_BASE_URL}files/${str}`;

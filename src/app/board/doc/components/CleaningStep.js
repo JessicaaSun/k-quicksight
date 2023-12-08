@@ -9,7 +9,7 @@ import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
 import {Button, Checkbox, CheckboxGroup, Radio, RadioGroup, Spinner} from "@nextui-org/react";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
-import {setFilename, setShowDetailCleanData, setUuid} from "@/store/features/clean/FileCleaned";
+import {setFilename, setId, setShowDetailCleanData, setUuid} from "@/store/features/clean/FileCleaned";
 import {FaCheck} from "react-icons/fa";
 
 const CleaningStep = () => {
@@ -49,6 +49,7 @@ const CleaningStep = () => {
         dispatch(setUuid(response?.data?.uuid))
         dispatch(setFilename(response?.data?.filename))
         dispatch(setShowDetailCleanData(true))
+        dispatch(setId(response?.data.id))
     }
 
     return (

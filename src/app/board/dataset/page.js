@@ -12,13 +12,13 @@ import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import { formatBytes } from "@/utils/convertByte";
 import FileType from "@/app/board/dataset/component/DropDown";
-import {MdOutlineAutoGraph} from "react-icons/md";
+import { MdOutlineAutoGraph } from "react-icons/md";
 export const headers = [
   {
     header: "Title",
   },
   {
-    header: 'Clean'
+    header: "Clean",
   },
   {
     header: "File Type",
@@ -41,7 +41,11 @@ const Dataset = () => {
   //   setSample((event) => !event);
   // };
   const filType = useSelector((state) => state.fileType.fileType);
-  const { data: allFile, refetch: filesRefetch, isLoading: isFileLoading } = useGetAllFilesQuery({
+  const {
+    data: allFile,
+    refetch: filesRefetch,
+    isLoading: isFileLoading,
+  } = useGetAllFilesQuery({
     id: user?.data.id,
     filename: "",
     type: filType,
@@ -56,8 +60,10 @@ const Dataset = () => {
     dispatch(setFiles(allFile));
     if (allFile) {
       const totalSize = allFile.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.size, 0);
-      dispatch(setTotalSize(1000000000 - totalSize));
+        (accumulator, currentValue) => accumulator + currentValue.size,
+        0
+      );
+      dispatch(setTotalSize(totalSize));
     }
     if (totalFree > 1000000000) {
       setStorage(true);
@@ -67,7 +73,7 @@ const Dataset = () => {
   return (
     <div className={"py-10 px-5"}>
       <div className={"flex justify-between items-center"}>
-        <h1 className={"text-primary-color font-semibold"}>Dataset</h1>
+        <p className={"text-primary-color font-semibold text-3xl"}>Dataset</p>
         <div className={"flex justify-center items-center gap-5"}>
           <ModalImport />
           <NewDataset isFull={isFull} />
@@ -77,7 +83,7 @@ const Dataset = () => {
         <div className={"flex justify-between items-center gap-5"}>
           <SearchDataset />
           <p className={"text-primary-color font-semibold text-lg w-full"}>
-            Free{" "}
+            Used{" "}
             <span className={"text-secondary-color"}>
               {formatBytes(totalFree)}
             </span>{" "}
@@ -88,16 +94,20 @@ const Dataset = () => {
         <div className={"flex flex-col flex-wrap gap-5"}>
           <FileType />
         </div>
-        <div className={'flex gap-3 justify-start items-center text-xl font-semibold text-primary-color'}>
+        <div
+          className={
+            "flex gap-3 justify-start items-center text-xl font-semibold text-primary-color"
+          }
+        >
           <MdOutlineAutoGraph />
           Trending dataset
         </div>
         <TableData
-            isSample={isSample}
-            file={state}
-            isFileLoading={isFileLoading}
-            sample_dataset={sample_dataset}
-            headers={headers}
+          isSample={isSample}
+          file={state}
+          isFileLoading={isFileLoading}
+          sample_dataset={sample_dataset}
+          headers={headers}
         />
       </div>
     </div>

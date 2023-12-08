@@ -3,7 +3,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import Sample_all from "@/app/sample/components/dataset";
-import sampleImage from '@assets/images/vecteezy_it-support-and-application-maintenance_.jpg'
+import sampleImage from '@assets/images/sampleSide.png'
 import Image from "next/image";
 import {Button} from "@nextui-org/react";
 import {FaPlus} from "react-icons/fa";
@@ -45,14 +45,14 @@ const SampleDataset_main = () => {
 
 
     return (
-        <div className={'py-36 px-[10%]'}>
-            <div className={'lg:flex md:flex grid justify-between items-center'}>
+        <div className={'py-40 px-[10%]'}>
+            <div className={'lg:flex md:flex block justify-between items-center'}>
                 <div className={'w-full grid gap-4'}>
                     <h2 className={'text-text-color'}>Sample</h2>
                     <p className={'text-description-color'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
                     <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
                 </div>
-                <Image  src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
+                <Image className={'bg-transparent'} src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
             </div>
             <Tabs
                 defaultActiveKey="1"

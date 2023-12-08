@@ -16,7 +16,6 @@ import {
 import UploadDataSetDashboard from "./components/importData/UploadDataSet";
 import ExistingDatasetDashboard from "./components/importData/ExistingDataset";
 
-
 const Page = () => {
   const [mockData, setMockData] = useState(MockDataDashboard.listDashboard);
 
@@ -28,8 +27,6 @@ const Page = () => {
     setSize(size);
     onOpen();
   };
-
-
 
   return (
     <div className="py-10 px-5">
@@ -48,7 +45,11 @@ const Page = () => {
                 </ModalHeader>
 
                 <ModalBody>
-                  <div className={"flex flex-row mb-12 mt-8 justify-center items-center gap-10"}>
+                  <div
+                    className={
+                      "flex flex-row mb-12 mt-8 justify-center items-center gap-10"
+                    }
+                  >
                     <UploadDataSetDashboard />
                     <ExistingDatasetDashboard />
                   </div>
@@ -58,12 +59,11 @@ const Page = () => {
           </ModalContent>
         </Modal>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-2xl"}>
+          <p className={"text-primary-color font-semibold text-3xl"}>
             Dashboard
           </p>
         </div>
         <div className={"text-primary-color "}>
-          {/* <Link href={link.route}> */}
           <Button
             onPress={onOpen}
             className={"bg-primary-color text-background-color"}
@@ -80,12 +80,11 @@ const Page = () => {
             </svg>
             Add new
           </Button>
-          {/* </Link> */}
         </div>
       </div>
       <div>
         {MockDataDashboard.listDashboard.length === 0 ? (
-          <EmptyAnalysis />
+          <EmptyAnalysis isAnalysis={false} />
         ) : (
           <div>
             <div className={"flex flex-row gap-5"}>

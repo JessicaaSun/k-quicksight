@@ -2,7 +2,6 @@ import React from 'react';
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 
 const CorrelationTable = ({ headers, correlationData }) => {
-    console.log(correlationData)
     if (!correlationData) {
         return null; // Return null or a placeholder if correlationData is not available
     }

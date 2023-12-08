@@ -7,7 +7,8 @@ import Loading from "@/app/loading";
 import {useGetUserQuery, useUpdateUserMutation} from "@/store/features/user/userApiSlice";
 import {generateBashURL} from "@/utils/util";
 import {useUploadSingleMutation} from "@/store/features/user/uploadAccountImage";
-import {FaPencilAlt} from "react-icons/fa";
+import {FaPencilAlt, FaStar} from "react-icons/fa";
+import Link from "next/link";
 
 export default function Profile() {
     const {data:user, isLoading} = useGetUserQuery();
@@ -77,6 +78,8 @@ export default function Profile() {
         setPhoneNumber(user?.data.phone_number);
         setAvatar(user?.data.avatar);
     }, [user]);
+
+    console.log(user)
 
 
 
@@ -247,7 +250,21 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className={'lg:w-1/2 relative md:w-1/2 w-full mb-5 lg:-mt-20 md:-mt-20 mt-0 rounded-xl flex flex-col'}>
-                        <div className={'bg-white min-h-[267px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>Analysis</div>
+                        <div className={'bg-white max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>
+                            <p className={'mb-5 text-lg text-primary-color font-semibold'}>Analysis</p>
+                            <div className={'grid gap-3 w-full'}>
+                                {
+                                    user?.data.analysis.map((item, index) => (
+                                        <Link href={`/board/analysis/${item.id}`} key={item.id} className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}>
+                                            <div style={{ backgroundColor: getRandomColor() }} className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}>
+                                                <FaStar />
+                                            </div>
+                                            {item.model_name}
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        </div>
                         <div className={'bg-white min-h-[383px] border-2 shadow-md mt-5 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200'}>Dashboard</div>
                     </div>
                 </div>
@@ -257,3 +274,12 @@ export default function Profile() {
 
     return content;
 }
+
+const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};

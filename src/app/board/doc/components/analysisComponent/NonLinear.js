@@ -1,5 +1,6 @@
 import React from 'react';
 import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
+import {generateBashURL} from "@/utils/util";
 
 const NonLinear = ({data, headers}) => {
 
@@ -108,6 +109,7 @@ const NonLinear = ({data, headers}) => {
                     })}
                 </tbody>
             </table>
+            <img src={generateBashURL(data?.visulaize)} alt={'visualize image'} />
         </div>
     );
 };

@@ -10,7 +10,7 @@ const Analysis = ({ params }) => {
       <div className={"flex flex-row w-full justify-between"}>
         <div className={"flex flex-row"}>
           <div className={"flex flex-col"}>
-            <p className={"text-primary-color font-semibold text-2xl"}>
+            <p className={"text-primary-color font-semibold text-3xl"}>
               Analysis
             </p>
             <div className={"flex flex-row gap-4"}>

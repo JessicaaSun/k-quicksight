@@ -38,14 +38,16 @@ const Page = ({ params }) => {
   const [data, setData] = useState([]);
   const {
     data: fileDetail,
-    refetch: refetchDetail,
     isLoading,
   } = useGetFileDetailQuery({ uuid: uuid, size: 100, page: 1 });
+
   const {
     data: fileOverview,
     isLoading: overviewLoading,
-    refetch: refetchOverview,
   } = useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
+
+  console.log(fileDetail)
+
   const dispatch = useDispatch();
   const [overview_data, setOverview] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
@@ -59,23 +61,12 @@ const Page = ({ params }) => {
   };
 
   useEffect(() => {
-    const fileOverview = async () => {
-      const overview = await refetchOverview();
-      setOverview(overview.data);
-      dispatch(setFileAccurate(overview.data));
-    };
-    fileOverview();
-  }, [dispatch, refetchOverview]);
-
-  useEffect(() => {
     setHeader(fileDetail?.header);
     setData(fileDetail?.data);
   }, [
     dispatch,
     fileDetail?.data,
     fileDetail?.header,
-    refetchDetail,
-    refetchOverview,
   ]);
   const [size, setSize] = React.useState("4xl");
 
@@ -141,9 +132,9 @@ const Page = ({ params }) => {
                 </Button>
                 <Button
                   className={"text-background-color bg-primary-color"}
-                  onClick={handleSelectBoard}
+                  onClick={() => router.back()}
                 >
-                  Go to Board
+                  Back
                 </Button>
               </div>
             )}

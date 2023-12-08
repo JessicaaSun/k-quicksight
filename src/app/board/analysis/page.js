@@ -5,8 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { MockDataAnalysis } from "@/app/board/mockData/mockDataAnalysis";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-const Page = () => {
+import {useAllAnalysisFileQuery} from "@/store/features/analysis/Analysis";
+import {useGetUserQuery} from "@/store/features/clean/importFile";
+import {getTrimIntoColumnOnlyDate} from "@/utils/getTrimDateTIme";
+import {generateBashURL} from "@/utils/util";
+
+const Analysis = () => {
+  const {data:user} = useGetUserQuery();
   const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
+  const {data:allAnalysis} = useAllAnalysisFileQuery({userId: user?.data.id})
+
+  console.log(allAnalysis)
+
   const link = {
     route: "/board/analysis/new",
   };
@@ -37,32 +47,35 @@ const Page = () => {
         </div>
       </div>
       <div>
-        {MockDataAnalysis.listAnalysis.length === 0 ? (
+        {allAnalysis?.results.length === 0 ? (
           <EmptyAnalysis />
         ) : (
           <div>
-            <div className={"flex flex-row gap-5"}>
-              {MockDataAnalysis.listAnalysis.map((item, index) => (
-                <Link
-                  href={item.url}
-                  key={index}
-                  className={
-                    "flex flex-col gap-3 p-2 bg-white shadow-sm hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
-                  }
-                >
-                  <Image
-                    src={item.thumbnail}
-                    alt={item.name}
-                    className={
-                      "max-w-[265px] max-h-[157px] rounded-xl object-cover"
-                    }
-                  />
-                  <div className={"flex ps-2 pb-1 flex-col"}>
-                    <p>{item.name}</p>
-                    <p>{item.createdAt}</p>
-                  </div>
-                </Link>
-              ))}
+            <div className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}>
+              {
+                allAnalysis?.results.map((item, index) => (
+                    <Link
+                        href={`/board/analysis/${item.uuid}`}
+                        key={index}
+                        className={
+                          "flex flex-col gap-3 p-2 bg-white shadow-sm hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
+                        }
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                          src={generateBashURL(item.thumbnail)}
+                          alt={item.model_name}
+                          className={
+                            "w-full rounded-xl object-cover"
+                          }
+                      />
+                      <div className={"flex ps-2 pb-1 flex-col"}>
+                        <h5>{item.title || item.model_name}</h5>
+                        <p>{getTrimIntoColumnOnlyDate(item.created_at)}</p>
+                      </div>
+                    </Link>
+                ))
+              }
             </div>
           </div>
         )}
@@ -70,5 +83,4 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;
+export default Analysis;

@@ -1,5 +1,6 @@
 // components/DataTable.js
 import React from 'react';
+import {generateBashURL} from "@/utils/util";
 
 const Descriptive_statistic = ({ data, headers }) => {
     if (!data || typeof data !== 'object') {

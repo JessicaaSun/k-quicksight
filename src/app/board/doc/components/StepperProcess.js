@@ -32,10 +32,6 @@ const steps = [
         description: <Analysis />,
     },
     {
-        label: 'Visualization',
-        description: <Visualization />,
-    },
-    {
         label: 'Interpret or Recommendation',
         description: 'Interpret or Recommendation',
     },

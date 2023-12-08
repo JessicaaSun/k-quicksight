@@ -90,6 +90,7 @@ const Visualization = () => {
             <p className={'text-red-400'}>- Testing graphic</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <a target={'_blank'} href={'http://136.228.158.126:8002/api/v1/files/e060d6d8deb444aba3518c92f7705882.png'}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     className={'w-full'}
                     src={

@@ -10,8 +10,16 @@ export const analysis = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5,
             invalidatesTags: ["analysis"],
         }),
+        allAnalysisFile: builder.query({
+            query: ({userId}) => ({
+                url: `analysis/list/${userId}/`,
+                method: 'GET',
+            }),
+            keepUnusedDataFor: 5,
+            providesTags: ["analysis"],
+        })
     }),
 });
 
-export const { useAnalysisMutation } = analysis;
+export const { useAnalysisMutation, useAllAnalysisFileQuery } = analysis;
 export default analysis;

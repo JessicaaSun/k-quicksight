@@ -1,14 +1,25 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
+import {Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure} from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
 import { MockDataAnalysis } from "@/app/board/mockData/mockDataAnalysis";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
+import UploadDataSet from "@/app/board/analysis/components/UploadDataSet";
+import ExistingDataset from "@/app/board/analysis/components/ExistingDataset";
 const Page = () => {
   const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
   const link = {
     route: "/board/analysis/new",
+  };
+
+  const [size, setSize] = React.useState("2xl");
+
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+  const handleOpen = (size) => {
+    setSize(size);
+    onOpen();
   };
   return (
     <div className="py-10 px-5 ">
@@ -19,27 +30,58 @@ const Page = () => {
           </p>
         </div>
         <div className={"text-primary-color "}>
-          <Link href={link.route}>
-            <Button className={"bg-primary-color text-background-color"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
+          <div className={"flex flex-row w-full pb-5 justify-between"}>
+            <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                onClose={onClose}
+                size={size}
+            >
+              <ModalContent>
+                {(onClose) => (
+                    <>
+                      <ModalHeader>
+                        <h4>Import Dataset</h4>
+                      </ModalHeader>
+
+                      <ModalBody>
+                        <div className={"flex flex-row mb-12 mt-8 justify-center items-center gap-10"}>
+                          <UploadDataSet />
+                          <ExistingDataset/>
+                        </div>
+                      </ModalBody>
+                    </>
+                )}
+              </ModalContent>
+            </Modal>
+            <div className={"text-primary-color "}>
+              {/* <Link href={link.route}> */}
+              <Button
+                  onPress={onOpen}
+                  className={"bg-primary-color text-background-color"}
               >
-                <path
-                  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-                  fill="white"
-                />
-              </svg>
-              Add new
-            </Button>
-          </Link>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                >
+                  <path
+                      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
+                      fill="white"
+                  />
+                </svg>
+                Add new
+              </Button>
+              {/* </Link> */}
+            </div>
+          </div>
         </div>
       </div>
       <div>
         {MockDataAnalysis.listAnalysis.length === 0 ? (
           <EmptyAnalysis />
-        ) : (
+        )
+            : (
           <div>
             <div className={"flex flex-row gap-5"}>
               {MockDataAnalysis.listAnalysis.map((item, index) => (
@@ -65,7 +107,8 @@ const Page = () => {
               ))}
             </div>
           </div>
-        )}
+        )
+        }
       </div>
     </div>
   );

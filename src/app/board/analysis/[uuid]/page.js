@@ -26,10 +26,14 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
-import ModelMachineLearning from "@/app/board/analysis/components/ModelMachineLearning";
-import AnalysisStep3 from "@/app/board/analysis/components/AnalysisStep3";
-import AnalysisStep4 from "@/app/board/analysis/components/AnalysisStep4";
+import AnalysisStep4 from "@/app/board/analysis/components/steps/AnalysisStep4";
 import { useRouter } from "next/navigation";
+import SelectVisualize from "@/app/board/analysis/components/Eda/SelectVisualize";
+import AnalysisStep3 from "@/app/board/analysis/components/steps/AnalysisStep3";
+import selectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
+import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
+import AnalysisStep2 from "@/app/board/analysis/components/steps/AnalysisStep2";
+import HeaderAnalysis from "@/app/board/analysis/components/steps/HeaderAnalysis";
 
 const Page = ({ params }) => {
   let uuid = params.uuid;
@@ -50,7 +54,7 @@ const Page = ({ params }) => {
   const [overview_data, setOverview] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
-  const handleSelectDataset = () => {
+  const handleSelectGotoData = () => {
     setCurrentStep(0);
     onClose();
   };
@@ -78,13 +82,16 @@ const Page = ({ params }) => {
     refetchOverview,
   ]);
   const [size, setSize] = React.useState("4xl");
-
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+
   const handleSelect = () => {
     if (currentStep === 1) {
       setCurrentStep(2);
     } else if (currentStep === 2) {
       setCurrentStep(3);
+    }else if(currentStep === 3){
+      setCurrentStep(4)
     }
   };
 
@@ -93,27 +100,33 @@ const Page = ({ params }) => {
     setSize(size);
     onOpen();
   };
+
+  const stateUuid = useSelector((state) => state.analysisUuid.uuid);
+  // const handleSelectDataset = () => {
+  //   router.push(`/board/analysis/${stateUuid}`);
+  // };
   const [selectedColor, setSelectedColor] = React.useState("primary");
   return (
     <div>
       <div className={"flex flex-row pt-10 w-full justify-between"}>
-        <div className={"flex flex-col px-10"}>
-          <div className={"flex flex-row"}>
-            <h1 className={"text-primary-color pb-5"}>Analysis</h1>
-            {currentStep !== 3 && (
-              <h1 className={"text-primary-color pb-5"}>/Data</h1>
-            )}
-          </div>
-          <div className={"flex flex-row gap-5"}>
-            {currentStep !== 3 && (
-              <p className={"text-primary-color"}>Predict future courses</p>
-            )}
-            {currentStep === 3 && (
-              <p className={"text-primary-color text-xl"}>Income</p>
-            )}
-            <ShareMember />
-          </div>
-        </div>
+        {/*<div className={"flex flex-col px-10"}>*/}
+        {/*  <div className={"flex flex-row"}>*/}
+        {/*    <h1 className={"text-primary-color pb-5"}>Analysis</h1>*/}
+        {/*    {currentStep !== 3 && (*/}
+        {/*      <h1 className={"text-primary-color pb-5"}>/Data</h1>*/}
+        {/*    )}*/}
+        {/*  </div>*/}
+        {/*  <div className={"flex flex-row gap-5"}>*/}
+        {/*    {currentStep !== 3 && (*/}
+        {/*      <p className={"text-primary-color"}>Predict future courses</p>*/}
+        {/*    )}*/}
+        {/*    {currentStep === 3 && (*/}
+        {/*      <p className={"text-primary-color text-xl"}>Income</p>*/}
+        {/*    )}*/}
+        {/*    <ShareMember />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
+        <HeaderAnalysis/>
         <div>
           <div className={"flex gap-5 px-10 flex-col"}>
             <div className={"px-4 pt-4"}>
@@ -123,7 +136,7 @@ const Page = ({ params }) => {
               <div className={"flex justify-end px-4"}>
                 <Button
                   className={"text-background-color bg-primary-color w-32"}
-                  onClick={handleSelectDataset}
+                  onClick={handleSelectGotoData}
                 >
                   Go to Data
                 </Button>
@@ -137,7 +150,7 @@ const Page = ({ params }) => {
                   onClick={() => handleOpen(size)}
                   className={"bg-primary-color text-background-color"}
                 >
-                  Perform Analysis
+                  Exploratory data analysis
                 </Button>
                 <Button
                   className={"text-background-color bg-primary-color"}
@@ -160,45 +173,14 @@ const Page = ({ params }) => {
                   <>
                     <ModalHeader className="flex flex-col gap-1 pt-10">
                       {currentStep === 1 && <AnalysisStep step={1} />}
-                      {currentStep === 2 && <AnalysisStep step={2} />}
+                      {/*{currentStep === 1 && <AnalysisStep step={1} />}*/}
                     </ModalHeader>
                     <ModalBody>
                       <p className={"font-bold text-primary-color text-2xl"}>
-                        Data Analysis
+                        Perform Exploratory data analysis
                       </p>
-                      <Table
-                        color={selectedColor}
-                        selectionMode="single"
-                        defaultSelectedKeys={["Moving Average"]}
-                        aria-label="Example static collection table"
-                      >
-                        <TableHeader>
-                          <TableColumn className={"hidden"}>NAME</TableColumn>
-                        </TableHeader>
-                        <TableBody>
-                          <TableRow key="Moving Average">
-                            <TableCell>Moving Average</TableCell>
-                          </TableRow>
-                          <TableRow key="Random Number Generation">
-                            <TableCell>Random Number Generation</TableCell>
-                          </TableRow>
-                          <TableRow key="Rank and Percentile">
-                            <TableCell>Rank and Percentile</TableCell>
-                          </TableRow>
-                          <TableRow key="Simple Linear Regression">
-                            <TableCell>Simple Linear Regression</TableCell>
-                          </TableRow>
-                          <TableRow key="Multiple Linear Regression">
-                            <TableCell>Multiple Linear Regression</TableCell>
-                          </TableRow>
-                          <TableRow key="Polynomial Regression">
-                            <TableCell>Polynomial Regression</TableCell>
-                          </TableRow>
-                          <TableRow key="Sampling">
-                            <TableCell>Sampling</TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
+                      {/*<SelectVisulize />*/}
+                      <SelectVisualize/>
                     </ModalBody>
                     <ModalFooter>
                       <Button color="primary" onPress={handleSelect}>
@@ -231,7 +213,8 @@ const Page = ({ params }) => {
           )}
         </div>
       )}
-      {currentStep === 3 && <AnalysisStep4 />}
+      {currentStep === 2 && <AnalysisStep2/>}
+      {currentStep === 3 && <AnalysisStep3 />}
     </div>
   );
 };

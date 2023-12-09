@@ -12,7 +12,7 @@ import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import { formatBytes } from "@/utils/convertByte";
 import FileType from "@/app/board/dataset/component/DropDown";
-import {MdOutlineAutoGraph} from "react-icons/md";
+import { MdOutlineAutoGraph } from "react-icons/md";
 export const headers = [
   {
     header: "Title",
@@ -93,11 +93,11 @@ const Dataset = () => {
           Trending dataset
         </div>
         <TableData
-            isSample={isSample}
-            file={state}
-            isFileLoading={isFileLoading}
-            sample_dataset={sample_dataset}
-            headers={headers}
+          isSample={isSample}
+          file={state}
+          isFileLoading={isFileLoading}
+          sample_dataset={sample_dataset}
+          headers={headers}
         />
       </div>
     </div>

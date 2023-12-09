@@ -14,23 +14,7 @@ const HeaderAnalysis = ({filename}) => {
     };
     return (
         <div>
-            <div className={"flex flex-col px-10"}>
-                <div className={"flex flex-row"}>
-                    <h1 className={"text-primary-color pb-5"}>Analysis</h1>
-                    {currentStep !== 3 && (
-                        <h1 className={"text-primary-color pb-5"}>/Data</h1>
-                    )}
-                </div>
-                <div className={"flex flex-row gap-5"}>
-                    {currentStep !== 3 && (
-                        <p className={"text-primary-color font-medium"}>{filename || 'Analysis'}</p>
-                    )}
-                    {currentStep === 3 && (
-                        <p className={"text-primary-color text-xl"}>Income</p>
-                    )}
-                    <ShareMember />
-                </div>
-            </div>
+            
         </div>
     );
 };

@@ -73,7 +73,7 @@ const Page = ({ params }) => {
       setCurrentStep(2);
     } else if (currentStep === 2) {
       setCurrentStep(3);
-    }else if(currentStep === 3){
+    } else if (currentStep === 3) {
       setCurrentStep(4)
     }
   };
@@ -85,84 +85,23 @@ const Page = ({ params }) => {
   };
 
 
- 
-  const {data: analysisDetail} = useAnalysisDetailsQuery({analysisUUID: analysisUUID});
-  const {data:headers} = useFindHeaderQuery({filename: analysisDetail?.filename});
+
+  const { data: analysisDetail } = useAnalysisDetailsQuery({ analysisUUID: analysisUUID });
+  const { data: headers } = useFindHeaderQuery({ filename: analysisDetail?.filename });
 
   return (
-    <div>
-      <div className={"flex flex-row pt-10 w-full justify-between"}>
-        <HeaderAnalysis filename={analysisDetail?.title} />
-        <div>
-          <div className={"flex gap-5 px-10 flex-col"}>
-            <div className={"px-4 pt-4"}>
-              <AnalysisStep step={currentStep} />
-            </div>
-            {currentStep === 3 && (
-              <div className={"flex justify-end px-4"}>
-                <Button
-                  className={"text-background-color bg-primary-color w-32"}
-                  onClick={handleSelectGotoData}
-                >
-                  Go to Data
-                </Button>
-              </div>
-            )}
-            {currentStep !== 3 && (
-              <div className={"flex flex-row justify-end gap-5"}>
-                <Button
-                  onPress={onOpen}
-                  key={size}
-                  onClick={() => handleOpen(size)}
-                  className={"bg-primary-color text-background-color"}
-                >
-                  Exploratory data analysis
-                </Button>
-                <Button
-                  className={"text-background-color bg-primary-color"}
-                  onClick={() => router.back()}
-                >
-                  Back
-                </Button>
-                <UpdateInfo filename={analysisDetail?.title} uuid={analysisDetail?.uuid} thumbnailUrl={analysisDetail?.thumbnail} />
-              </div>
-            )}
+    <div className="p-10">
+      <div className={"flex flex-row w-full justify-between"}>
+        <div className={"flex flex-col"}>
+          <div className={"flex flex-row"}>
+            <h1 className={"text-primary-color pb-5"}>Analysis</h1>
           </div>
-          {currentStep !== 3 && (
-            <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-              onClose={onClose}
-              size={size}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1 pt-10">
-                      {currentStep === 1 && <AnalysisStep step={1} />}
-                      {/*{currentStep === 1 && <AnalysisStep step={1} />}*/}
-                    </ModalHeader>
-                    <ModalBody>
-                      <p className={"font-bold text-primary-color text-2xl"}>
-                        Perform Exploratory data analysis
-                      </p>
-                      {/*<SelectVisulize />*/}
-                      <SelectVisualize/>
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button color="primary" onPress={handleSelect}>
-                        Proceed
-                      </Button>
-                      <Button color="danger" variant={"flat"} onPress={onClose}>
-                        Cancel
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
-          )}
+          <div className={"flex flex-row gap-5"}>
+            <p className={"text-primary-color font-medium"}>{analysisDetail?.title || 'Analysis'}</p>
+            {/* <ShareMember /> */}
+          </div>
         </div>
+        <UpdateInfo filename={analysisDetail?.title} uuid={analysisUUID} thumbnailUrl={analysisDetail?.thumbnail} />
       </div>
       {currentStep !== 3 && (
         <div className={"pt-14"}>
@@ -195,14 +134,14 @@ const Page = ({ params }) => {
 
       <div className="mt-10">
         <p className="text-xl text-primary-color font-semibold">Analysis detail of {analysisDetail?.model_name}</p>
-        
+
         {
           analysisDetail?.model_name.includes('simple_linear_regression') ? (
             <SimpleLinear data={analysisDetail?.analysis_data} />
           ) : analysisDetail?.model_name.includes('multiple_linear_regression') ? (
             <MultipleLinear data={analysisDetail?.analysis_data} headers={headers?.header_numeric} />
-          ) : analysisDetail?.model_name.includes('covariance') || analysisDetail?.model_name.includes('correlation')  ? (
-            <Correllation data={analysisDetail?.analysis_data}/>
+          ) : analysisDetail?.model_name.includes('covariance') || analysisDetail?.model_name.includes('correlation') ? (
+            <Correllation data={analysisDetail?.analysis_data} />
           ) : null
         }
       </div>

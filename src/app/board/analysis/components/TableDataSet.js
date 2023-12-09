@@ -63,7 +63,7 @@ export default function TableDataSet({
                         {item.header}
                     </TableColumn>
                 ))}
-            </TableHeader>
+            </TableHeader>  
             <TableBody emptyContent={'No dataset'}>
                 {!isSample
                     ? file?.map((item, index) =>

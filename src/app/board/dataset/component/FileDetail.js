@@ -34,11 +34,8 @@ export default function FileDetail({ uuid }) {
   };
 
   return (
-    <div
-      className={
-        "flex justify-end flex-col items-center relative shadow-lg rounded-xl w-full"
-      }
-    >
+    <div className={"relative rounded-xl w-full overflow-auto"}>
+      <p className="text-xl text-primary-color my-3">Dataset</p>
       {fileDetail !== undefined ? (
         <>
           <Table

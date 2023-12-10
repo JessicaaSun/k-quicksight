@@ -12,12 +12,7 @@ import {
   CardHeader,
   CardFooter,
 } from "@nextui-org/react";
-import Link from "next/link";
-import Image from "next/image";
-import { MockDataAnalysis } from "@/app/board/mockData/mockDataAnalysis";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-import UploadDataSet from "@/app/board/analysis/components/UploadDataSet";
-import ExistingDataset from "@/app/board/analysis/components/ExistingDataset";
 import {
   useAllAnalysisFileQuery,
   useDeleteAnalysisFileMutation,
@@ -27,9 +22,9 @@ import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { generateBashURL } from "@/utils/util";
 import DeleteAnalysisFile from "./components/DeleteAnalysis";
 import { useRouter } from "next/navigation";
+import AddNewButton from "./components/NewVersion/ModalAddNew";
 const Page = () => {
   const { data: user } = useGetUserQuery();
-  const [mockData, setMockData] = useState(MockDataAnalysis.listAnalysis);
   const { data: allAnalysis } = useAllAnalysisFileQuery({
     userId: user?.data.id,
     page: 1,
@@ -59,61 +54,13 @@ const Page = () => {
             Analysis
           </p>
         </div>
-        <div className={"text-primary-color "}>
-          <div className={"flex flex-row w-full pb-5 justify-between"}>
-            <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-              onClose={onClose}
-              size={size}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader>
-                      <h4>Import Dataset</h4>
-                    </ModalHeader>
-
-                    <ModalBody>
-                      <div
-                        className={
-                          "flex flex-row mb-12 mt-8 justify-center items-center gap-10"
-                        }
-                      >
-                        <UploadDataSet />
-                        <ExistingDataset />
-                      </div>
-                    </ModalBody>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
-            <div className={"text-primary-color "}>
-              {/* <Link href={link.route}> */}
-              <Button
-                onPress={onOpen}
-                className={"bg-primary-color text-background-color"}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-                    fill="white"
-                  />
-                </svg>
-                Add new
-              </Button>
-              {/* </Link> */}
-            </div>
-          </div>
+        <div>
+          <AddNewButton />
         </div>
       </div>
       <div>
         {allAnalysis?.results.length === 0 ? (
-          <EmptyAnalysis isAnalysis={true} />
+          <EmptyAnalysis />
         ) : (
           <div>
             <div
@@ -121,7 +68,7 @@ const Page = () => {
             >
               {allAnalysis?.results.map((item, index) => (
                 <div key={index} className="grid gap-3">
-                  <Card className="w-full bg-black hover:scale-105 transition-all h-[300px] col-span-12 sm:col-span-5">
+                  <Card className="w-full shadow-sm bg-black hover:scale-105 transition-all h-[300px] col-span-12 sm:col-span-5">
                     <CardHeader className="absolute z-10 top-1 flex-col items-start">
                       <p className="text-tiny text-white/60 uppercase font-bold">
                         {item.model_name}

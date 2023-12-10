@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    dataset: []
+    model: ''
 }
 
 const recentData = createSlice({
@@ -9,7 +9,7 @@ const recentData = createSlice({
     initialState,
     reducers: {
         setRecentData: (state, action) => {
-            state.dataset = action.payload;
+            state.model = action.payload;
         },
     }
 })

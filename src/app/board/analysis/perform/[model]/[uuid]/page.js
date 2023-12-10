@@ -7,7 +7,7 @@ import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import perform from '@assets/images/Project_66-03.jpg'
 import { Button, Input, Spinner } from '@nextui-org/react';
 import { Select } from 'antd';
@@ -20,6 +20,12 @@ import { FaCheck } from 'react-icons/fa';
 import { MdDataThresholding } from 'react-icons/md';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Eda from "@/app/board/doc/components/Eda";
+import FileDetail from "@/app/board/dataset/component/FileDetail";
+import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
+import Visualization from "@/app/board/doc/components/edaComponent/visualization";
+import {setFilename} from "@/store/features/clean/FileCleaned";
+import {setEdaFilename} from "@/store/features/ExploreData/edaStore";
 
 const variableNotMoreThan2 = [
     'descriptive_statistic',
@@ -39,13 +45,18 @@ export default function Perform({ params }) {
     const [dependent_variable, setDependentVariable] = useState('');
     const [analysisPost] = useAnalysisMutation();
     const [disable, setDisabled] = useState(true);
-    const { data: fileDetail } = useGetFileDetailQuery({ uuid: uuid, size: 1, page: 1 });
-    const { data: headers } = useFindHeaderQuery({ filename: fileDetail?.filename });
+    const { data: fileDetail, isLoading: fileLoading } = useGetFileDetailQuery({ uuid: uuid, size: 1, page: 1 });
+    const { data: headers, isLoading:headerLoading } = useFindHeaderQuery({ filename: fileDetail?.filename });
+    // console.log(fileDetail?.filename)
+    // console.log(headers)
+    const bodyEda = useSelector(state => state.eda)
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const [resultAnalysis, setResultAnalysis] = useState(null);
     const [loading, isLoading] = useState(false)
+
 
     const handleSubmitAnalysis = async () => {
         let body_json;
@@ -81,10 +92,19 @@ export default function Perform({ params }) {
                 toast.error('Something went wrong please try again!')
             }, 5000)
         }
-    }, [resultAnalysis,]);
+        dispatch(setEdaFilename(fileDetail?.filename))
+    }, [resultAnalysis, fileDetail, ]);
 
     return (
-        <div className='p-3'>
+        <div className='p-3 grid grid-cols-1'>
+            <div id={'perform eda grid gap-3'}>
+                <p className={'text-xl text-primary-color font-medium'}>Perform EDA</p>
+                <div className={'grid gap-3'}>
+                    <FileDetail uuid={uuid} />
+                    <SelectVisulize />
+                    <Visualization bodyEda={bodyEda} />
+                </div>
+            </div>
             <div>
                 <ToastContainer
                     position="top-center"
@@ -98,67 +118,75 @@ export default function Perform({ params }) {
                     pauseOnHover
                     theme="light"
                 />
-                <p className='uppercase text-xl font-medium text-primary-color mb-10'>Performing analsis with {model}</p>
-                {
-                    variableNotMoreThan2.some((model_mode) => model.startsWith(model_mode)) ?
-                        <div className='grid gap-3'>
-                            <div>
-                                <p className='text-description-color text-md'>Select Dependent variable</p>
-                                <Select
-                                    size={'large'}
-                                    placeholder={'Selecting model'}
-                                    style={{
-                                        width: '40%',
-                                    }}
-                                    value={dependent_variable}
-                                    onChange={setDependentVariable}
-                                    options={headers?.header_label}
-                                />
-                            </div>
-                            <div>
-                                <p className='text-description-color text-md'>Select Independent variable</p>
-                                <Select
-                                    size={'large'}
-                                    placeholder={'Selecting model'}
-                                    style={{
-                                        width: '40%',
-                                    }}
-                                    value={independent_variable}
-                                    onChange={setIndependentVariable}
-                                    options={headers?.header_label}
-                                />
-                            </div>
-                        </div> : (
-                            <div>
-                                <p className='text-description-color text-md'>Select Dependent variable</p>
-                                <div className='flex gap-5'>
+                <div>
+                    <p className='uppercase text-xl font-medium text-primary-color mb-10'>Performing analsis with {model}</p>
+                    {
+                        variableNotMoreThan2.some((model_mode) => model.startsWith(model_mode)) ?
+                            <div className='grid gap-3'>
+                                <div>
+                                    <p className='text-description-color text-md'>Select Dependent variable</p>
                                     <Select
                                         size={'large'}
                                         placeholder={'Selecting model'}
                                         style={{
-                                            width: '40%',
+                                            width: '100%',
                                         }}
                                         value={dependent_variable}
                                         onChange={setDependentVariable}
                                         options={headers?.header_label}
                                     />
+                                </div>
+                                <div>
+                                    <p className='text-description-color text-md'>Select Independent variable</p>
                                     <Select
                                         size={'large'}
-                                        mode="multiple"
-                                        placeholder="Independent variable"
-                                        value={independent_variables}
-                                        onChange={setIndependentVariables}
+                                        placeholder={'Selecting model'}
                                         style={{
-                                            width: '40%',
+                                            width: '100%',
                                         }}
-                                        options={
-                                            headers?.header_label
-                                        }
+                                        value={independent_variable}
+                                        onChange={setIndependentVariable}
+                                        options={headers?.header_label}
                                     />
                                 </div>
-                            </div>
-                        )
-                }
+                            </div> : (
+                                <div className={'w-full'}>
+                                    <p className='text-description-color text-md'>Select Dependent variable</p>
+                                    {
+                                        fileLoading || headerLoading ? (
+                                            <Spinner size={'md'} label={'loading - variables'} />
+                                        ) : (
+                                            <div className='flex gap-5 w-full'>
+                                                <Select
+                                                    size={'large'}
+                                                    placeholder={'Selecting model'}
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                    value={dependent_variable}
+                                                    onChange={setDependentVariable}
+                                                    options={headers?.header_label}
+                                                />
+                                                <Select
+                                                    size={'large'}
+                                                    mode="multiple"
+                                                    placeholder="Independent variable"
+                                                    value={independent_variables}
+                                                    onChange={setIndependentVariables}
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                    options={
+                                                        headers?.header_label
+                                                    }
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            )
+                    }
+                </div>
                 <div className='flex gap-3 justify-start items-center'>
                     <Button  color='primary' onClick={handleSubmitAnalysis} size='md' className='w-fit font-medium my-3'><MdDataThresholding />Perform analysis</Button>
                     <Button disabled={disable} color='primary' size='md' className='w-fit' onClick={() => router.push('/board/analysis')} ><FaCheck />Done</Button>
@@ -171,17 +199,23 @@ export default function Perform({ params }) {
                     ) : (
                         <>
                             {
-                                model === 'descriptive_statistic' ? (
-                                    <Descriptive_statistic data={resultAnalysis?.descriptive_statistic} headers={headers?.header_numeric} />
-                                ) : model === 'correlation' || model === 'covariance' ? (
-                                    <Correllation data={resultAnalysis?.correlation || resultAnalysis?.covariance} dependentvariable={dependent_variable} indepentvariable={independent_variable} />
-                                ) : model === 'simple_linear_regression' ? (
-                                    <SimpleLinear data={resultAnalysis?.simple_linear_regression} />
-                                ) : model === 'non_linear_regression' ? (
-                                    <NonLinear data={resultAnalysis?.non_linear_regression} headers={headers?.header_numeric} />
-                                ) : model === 'multiple_linear_regression' ? (
-                                    <MultipleLinear data={resultAnalysis?.multiple_linear_regression} headers={headers?.header_numeric} />
-                                ) : ''
+                                resultAnalysis && (
+                                    <>
+                                        {
+                                            model === 'descriptive_statistic' ? (
+                                                <Descriptive_statistic data={resultAnalysis?.descriptive_statistic} headers={headers?.header_numeric} />
+                                            ) : model === 'correlation' || model === 'covariance' ? (
+                                                <Correllation data={resultAnalysis?.correlation || resultAnalysis?.covariance} dependentvariable={dependent_variable} indepentvariable={independent_variable} />
+                                            ) : model === 'simple_linear_regression' ? (
+                                                <SimpleLinear data={resultAnalysis?.simple_linear_regression} />
+                                            ) : model === 'non_linear_regression' ? (
+                                                <NonLinear data={resultAnalysis?.non_linear_regression} headers={headers?.header_numeric} />
+                                            ) : model === 'multiple_linear_regression' ? (
+                                                <MultipleLinear data={resultAnalysis?.multiple_linear_regression} headers={headers?.header_numeric} />
+                                            ) : ''
+                                        }
+                                    </>
+                                )
                             }
                         </>
                     )

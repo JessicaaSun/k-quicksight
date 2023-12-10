@@ -50,17 +50,6 @@ const Visualization = ({bodyEda}) => {
 
     return (
         <>
-            <div>
-                <span>You have chosen to perform EDA with </span>
-                {
-                    bodyEda?.visualizes.map((item, index) => (
-                        <span className={'mx-3 p-2 rounded-xl'} key={index} style={{ backgroundColor: getRandomColor(), color: "white"}}>
-                          {item}{' '}
-                        </span>
-                    ))
-                }
-                <p>{error}</p>
-            </div>
             <Button isLoading={loading} onClick={handleEda} className={'my-5 text-md flex gap-4 font-medium text-white'} color={'success'} ><FaCheck /> Perform EDA</Button>
             {
                 detailEDAResponse && (

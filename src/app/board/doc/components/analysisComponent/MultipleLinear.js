@@ -1,19 +1,21 @@
 import React from 'react';
 import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
+import {generateBashURL} from "@/utils/util";
 
 const MultipleLinear = ({data, headers}) => {
     if (!data || typeof data !== 'object') {
         return <p className={'text-red-400'}>Please input valid columns or click perform button</p>;
     }
-
     console.log(data)
+    // else if (!data?.coefficient_summary_table || data?.coefficient_summary_table !== 'object') {
+    //     return <p className={'text-red-400'}>Please input valid columns or click perform button</p>;
+    // }
     const coefficientData = data?.coefficient_summary_table;
     return (
         <div className="overflow-x-scroll">
             <div className="p-4">
                 <p className={'text-lg text-primary-color my-3'}>Descriptive statistic: </p>
                 <Descriptive_statistic headers={headers} data={data?.descriptive_statistics} />
-
                 <p className={'text-lg text-primary-color my-3'}>Regression statistics: </p>
                 <div className="overflow-x-auto">
                     <table className="w-full border">
@@ -46,34 +48,43 @@ const MultipleLinear = ({data, headers}) => {
                     </table>
                 </div>
 
-                <p className={'text-lg text-primary-color my-3'}>Coefficient summary table: </p>
-                <div className="overflow-x-auto">
-                    <table className="w-full border" id="coefficientTable">
-                        <thead>
-                        <tr>
-                            {coefficientData?.header?.map((header, index) => (
-                                <th key={index} className="border p-2">{header}</th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {Object.keys(coefficientData).map((key, rowIndex) => {
-                            if (key !== 'header') {
-                                const rowData = coefficientData[key];
-                                return (
-                                    <tr key={rowIndex}>
-                                        <th className="border p-2">{rowData[0]}</th>
-                                        {rowData.slice(1).map((value, columnIndex) => (
-                                            <td key={columnIndex} className="border p-2">{value}</td>
-                                        ))}
-                                    </tr>
-                                );
-                            }
-                            return null;
-                        })}
-                        </tbody>
-                    </table>
+                <div className={'grid grid-cols-2'}>
+                    {
+                        data?.visualizes?.map((item, index) => (
+                            // eslint-disable-next-line react/jsx-key
+                            <img src={generateBashURL(item)} alt={'visualize image'} />
+                        ))
+                    }
                 </div>
+
+                {/*<p className={'text-lg text-primary-color my-3'}>Coefficient summary table: </p>*/}
+                {/*<div className="overflow-x-auto">*/}
+                {/*    <table className="w-full border" id="coefficientTable">*/}
+                {/*        <thead>*/}
+                {/*        <tr>*/}
+                {/*            {coefficientData?.header?.map((header, index) => (*/}
+                {/*                <th key={index} className="border p-2">{header}</th>*/}
+                {/*            ))}*/}
+                {/*        </tr>*/}
+                {/*        </thead>*/}
+                {/*        <tbody>*/}
+                {/*        {Object.keys(coefficientData).map((key, rowIndex) => {*/}
+                {/*            if (key !== 'header') {*/}
+                {/*                const rowData = coefficientData[key];*/}
+                {/*                return (*/}
+                {/*                    <tr key={rowIndex}>*/}
+                {/*                        <th className="border p-2">{rowData[0]}</th>*/}
+                {/*                        {rowData.slice(1).map((value, columnIndex) => (*/}
+                {/*                            <td key={columnIndex} className="border p-2">{value}</td>*/}
+                {/*                        ))}*/}
+                {/*                    </tr>*/}
+                {/*                );*/}
+                {/*            }*/}
+                {/*            return null;*/}
+                {/*        })}*/}
+                {/*        </tbody>*/}
+                {/*    </table>*/}
+                {/*</div>*/}
             </div>
 
         </div>

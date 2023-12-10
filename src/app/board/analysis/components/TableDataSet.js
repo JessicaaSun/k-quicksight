@@ -7,7 +7,7 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    Spinner, Tooltip, Button,
+    Spinner, Button,
 } from "@nextui-org/react";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
@@ -63,7 +63,7 @@ export default function TableDataSet({
                         {item.header}
                     </TableColumn>
                 ))}
-            </TableHeader>
+            </TableHeader>  
             <TableBody emptyContent={'No dataset'}>
                 {!isSample
                     ? file?.map((item, index) =>
@@ -84,10 +84,12 @@ export default function TableDataSet({
                                 <TableCell className={"flex gap-5 justify-center"}>
                                     <Dropdown_table
                                         uuid={item.uuid}
-                                        filename={item.file}
+                                        filename={item.file || item.filename}
                                         type={item.type}
                                         size={item.size}
-                                        createAt={item.created_at}
+                                        createAt={item.created_at || item.createAt}
+                                        fileId={item.id}
+                                        file={item.filename}
                                     />
                                 </TableCell>
                             </TableRow>

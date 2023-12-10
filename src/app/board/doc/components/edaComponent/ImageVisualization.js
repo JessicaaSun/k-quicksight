@@ -12,33 +12,45 @@ const ImageVisualization = ({visualizationData, header}) => {
     return (
         <div>
             {Object.entries(visualizationData).map(([header, data]) => {
-                const { histogram, boxplot, scatter, linechart} = data;
+                const { histogram, boxplot, scatter, line_chart} = data;
                 return (
                     <div key={header} className={'flex flex-col gap-3'}>
                         <p className={'text-primary-color'}>Column {header}: </p>
-                        <div className={'flex justify-start items-center flex-wrap'}>
+                        <div className={'grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1'}>
                             {
                                 histogram && (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={generateBashURL(histogram)} alt="Histogram" className={'w-1/2'} />
+
+                                    <a target={"_blank"} href={generateBashURL(histogram)} >
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={generateBashURL(histogram)} alt="Histogram" />
+                                    </a>
                                 )
                             }
                             {
                                 boxplot && (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={generateBashURL(boxplot)} alt="boxplot" className={'w-1/2'} />
+
+                                    <a target={"_blank"} href={generateBashURL(boxplot)}>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={generateBashURL(boxplot)} alt="boxplot" />
+                                    </a>
                                 )
                             }
                             {
                                 scatter && (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={generateBashURL(scatter)} alt="scatter" className={'w-1/2'} />
+
+                                    <a href={generateBashURL(scatter)} target={"_blank"}>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={generateBashURL(scatter)} alt="scatter" />
+                                    </a>
                                 )
                             }
                             {
-                                linechart && (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={generateBashURL(linechart)} alt="line_chart" className={'w-1/2'} />
+                                line_chart && (
+
+                                   <a href={generateBashURL(line_chart)} target={"_blank"}>
+                                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                                       <img src={generateBashURL(line_chart)} alt="line_chart" />
+                                   </a>
                                 )
                             }
                         </div>

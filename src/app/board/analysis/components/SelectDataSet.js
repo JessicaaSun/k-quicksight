@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import TableDataSet from "@/app/board/analysis/components/TableDataSet";
+import ImportExistDataset from "@/app/board/doc/components/ImportExistDataset";
+import {Pagination, Select, SelectItem} from "@nextui-org/react";
 export const headers = [
     {
         header: "Title",
@@ -41,11 +43,7 @@ const Dataset = () => {
         setSelectedFile(file);
     };
     const filType = useSelector((state) => state.fileType.fileType);
-    const { data: allFile, isLoading: isFileLoading } = useGetAllFilesQuery({
-        id: user?.data.id,
-        filename: "",
-        type: filType,
-    });
+    const { data: allFile, isLoading: isFileLoading } = useGetAllFilesQuery({id: user?.data.id, filename: "", type: filType,});
     const dispatch = useDispatch();
     const state = useSelector((state) => state.allFiles.allFiles);
     const totalFree = useSelector((state) => state.allFiles.total);
@@ -64,9 +62,23 @@ const Dataset = () => {
             setStorage(true);
         }
     }, [allFile, dispatch, totalFree]);
-    // const handleRowSelect = (file) => {
-    //     setSelectedFile(file);
-    // };
+
+
+
+    const itemsPerPage = 3;
+    const [page, setPage] = useState(1);
+
+    const totalFiles = allFile?.length || 0;
+    const totalPages = totalFiles <= itemsPerPage ? 1 : Math.ceil(totalFiles / itemsPerPage);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
+    const startIdx = (page - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+
+    const filesToShow = allFile?.slice(startIdx, endIdx) || [];
     return (
         <div className={"px-5"}>
             <div className={" flex flex-col gap-8"}>
@@ -80,16 +92,29 @@ const Dataset = () => {
                     <SearchDataset />
                     <DropDown />
                 </div>
-                <div className={"w-full max-h-[550px] overflow-y-scroll"}>
+                <div className={"w-full max-h-[550px] overflow-y-scroll "}>
                     <TableDataSet
                         isSample={isSample}
-                        file={state}
+                        file={filesToShow}
                         isFileLoading={isFileLoading}
                         sample_dataset={sample_dataset}
                         headers={headers}
                         onFileSelect={handleFileSelect}
                     />
+
+                    <div className={'flex flex-row'}>
+                        <Pagination
+                            isCompact
+                            showControls
+                            total={totalPages}
+                            initialPage={page}
+                            onChange={handlePageChange}
+                        />
+                    </div>
                 </div>
+                {/*<div>*/}
+                {/*    <ImportExistDataset />*/}
+                {/*</div>*/}
                 {selectedFile && (
                     <div>
                         <p>Selected File: {selectedFile.title}</p>

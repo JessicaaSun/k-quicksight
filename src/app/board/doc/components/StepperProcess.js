@@ -12,6 +12,7 @@ import CleaningStep from "@/app/board/doc/components/CleaningStep";
 import Eda from "@/app/board/doc/components/Eda";
 import Analysis from "@/app/board/doc/components/Analysis";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import Visualization from "@/app/board/doc/components/Visualization";
 
 const steps = [
     {
@@ -29,10 +30,6 @@ const steps = [
     {
         label: 'Analysis',
         description: <Analysis />,
-    },
-    {
-        label: 'Visualization',
-        description: 'Visualization',
     },
     {
         label: 'Interpret or Recommendation',

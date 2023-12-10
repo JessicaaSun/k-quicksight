@@ -12,7 +12,7 @@ import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import { formatBytes } from "@/utils/convertByte";
 import FileType from "@/app/board/dataset/component/DropDown";
-import {MdOutlineAutoGraph} from "react-icons/md";
+import { MdOutlineAutoGraph } from "react-icons/md";
 export const headers = [
   {
     header: "Title",
@@ -57,7 +57,7 @@ const Dataset = () => {
     if (allFile) {
       const totalSize = allFile.reduce(
         (accumulator, currentValue) => accumulator + currentValue.size, 0);
-      dispatch(setTotalSize(1000000000 - totalSize));
+      dispatch(setTotalSize(totalSize));
     }
     if (totalFree > 1000000000) {
       setStorage(true);
@@ -77,7 +77,7 @@ const Dataset = () => {
         <div className={"flex justify-between items-center gap-5"}>
           <SearchDataset />
           <p className={"text-primary-color font-semibold text-lg w-full"}>
-            Free{" "}
+            Used {" "}
             <span className={"text-secondary-color"}>
               {formatBytes(totalFree)}
             </span>{" "}
@@ -93,11 +93,11 @@ const Dataset = () => {
           Trending dataset
         </div>
         <TableData
-            isSample={isSample}
-            file={state}
-            isFileLoading={isFileLoading}
-            sample_dataset={sample_dataset}
-            headers={headers}
+          isSample={isSample}
+          file={state}
+          isFileLoading={isFileLoading}
+          sample_dataset={sample_dataset}
+          headers={headers}
         />
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React, {useMemo, useState} from 'react';
 import {Checkbox, Select, SelectItem} from "@nextui-org/react";
-import FileDetail from "@/app/board/dataset/component/FileDetail";
 
 const AnalysisStep3 = ({headers}) => {
     const [extractedHeaders, setExtractedHeaders] = useState([]);

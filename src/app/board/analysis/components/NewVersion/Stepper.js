@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
@@ -7,18 +5,16 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
 const steps = [
-    'import dataset',
-    'Exploratory data analysis',
-    'Perform analysis',
-    'Choosing model ',
-    'Finishing'
+    'Import dataset',
+    'perform analysis',
+    'Create an ad',
 ];
 
-export default function AnalysisStep({ step}) {
+export default function HorizontalLinearAlternativeLabelStepper({activeSteps}) {
     return (
-        <Box className={"w-full"}>
-            <Stepper activeStep={step}>
-                {steps.map((label, index) => (
+        <Box sx={{ width: '100%' }}>
+            <Stepper activeStep={activeSteps} alternativeLabel>
+                {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>
                     </Step>

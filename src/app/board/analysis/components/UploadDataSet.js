@@ -4,7 +4,7 @@ import Image from "next/image";
 import UploadData from "@assets/images/analysis/add-task.png";
 import {Button, useDisclosure} from "@nextui-org/react";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useFileImportMutation} from "@/store/features/clean/importFile";
 import {useRouter} from "next/navigation";
 import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
@@ -28,8 +28,19 @@ const UploadDataSet = () => {
         const formData = new FormData();
         formData.append('file', file);
         const response = await importFile({ file: formData, userId: user?.data.id });
+        // Check if the import was successful and the analysisUuid is available
+        if (response && response.data && response.data.analysisUuid) {
+            const analysisUuid = response.data.analysisUuid;
+            // Call showData to navigate to the new route
+            showData();
+        }
         onOpenChange(false)
         refetchAllFiles();
+    };
+
+    const stateUuid = useSelector((state) => state.analysisUuid.uuid);
+    const showData = () => {
+        router.push(`/board/analysis/${stateUuid}`);
     };
     return (
         <div>

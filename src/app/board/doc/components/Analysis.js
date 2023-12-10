@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from 'react';
 import {useAnalysisMutation} from "@/store/features/analysis/Analysis";
 import {Select} from "antd";
-import {Button, Input, Spinner} from '@nextui-org/react';
+import {Button, Input, Spinner, Tooltip} from '@nextui-org/react';
 import { useSelector } from 'react-redux';
 import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 import { useFindHeaderQuery } from '@/store/features/ExploreData/ExploreData';
@@ -12,6 +12,9 @@ import Correllation from "@/app/board/doc/components/analysisComponent/Correllal
 import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
 import NonLinear from "@/app/board/doc/components/analysisComponent/NonLinear";
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {FaRegQuestionCircle} from "react-icons/fa";
 
 
 export const variableNotMoreThan2 = [
@@ -71,14 +74,42 @@ const Analysis = () => {
     useEffect(() => {
         if (resultAnalysis) {
             isLoading(false)
+        } else if (resultAnalysis === undefined) {
+            setTimeout(() => {
+                isLoading(false)
+                toast.error('Something went wrong please try again!')
+            }, 5000)
         }
-    }, [resultAnalysis]);
+    }, [resultAnalysis, ]);
+
+    console.log(resultAnalysis)
     
 
     return (
         <div className={'grid gap-3'}>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <h3 className={'text-primary-color'}>Prep the Data for Modelling</h3>
             <div className={'grid gap-2'}>
+                {
+                    !chosenModel ? (<p className={'flex justify-start items-center gap-5 text-red-400 text-lg font-medium'}>Please, choose the model:
+                        <Tooltip showArrow size={'lg'} key={'48b5'} color={'danger'} content={'If you are not choose the model, you cannot perform analysis!'} className="capitalize">
+                            <Button variant={'light'}>
+                                <FaRegQuestionCircle />
+                            </Button>
+                        </Tooltip>
+                    </p>): ''
+                }
                 <p className={'text-lg text-primary-color'}>Choosing model: <span className={'font-semibold'}>{chosenModel}</span></p>
                 <Select
                     size={'large'}
@@ -89,12 +120,20 @@ const Analysis = () => {
                     onChange={handleChange}
                     options={[
                         {
+                            value: '',
+                            label: 'Canceling choosing model',
+                        },
+                        {
                             value: 'descriptive_statistic',
                             label: 'descriptive_statistic',
                         },
                         {
                             value: 'correlation',
                             label: 'correlation',
+                        },
+                        {
+                            value: 'covariance',
+                            label: 'covariance',
                         },
                         {
                             value: 'simple_linear_regression',
@@ -175,7 +214,7 @@ const Analysis = () => {
                             }
                         </>
                     )}
-                    <Button color='primary' onClick={handleSubmitAnalysis} size='md' className='w-fit font-medium my-3'>Perform analysis</Button>
+                    <Button disabled={!chosenModel} color='primary' onClick={handleSubmitAnalysis} size='md' className='w-fit font-medium my-3'>Perform analysis</Button>
                 </>
             </div>
             {
@@ -186,8 +225,8 @@ const Analysis = () => {
                         {
                             chosenModel === 'descriptive_statistic' ? (
                                 <Descriptive_statistic data={resultAnalysis?.descriptive_statistic} headers={headers?.header_numeric} />
-                            ) : chosenModel === 'correlation' ? (
-                                <Correllation />
+                            ) : chosenModel === 'correlation' || chosenModel === 'covariance'  ? (
+                                <Correllation data={resultAnalysis?.correlation || resultAnalysis?.covariance} dependentvariable={dependent_variable} indepentvariable={independent_variable} />
                             ) : chosenModel === 'simple_linear_regression' ? (
                                 <SimpleLinear data={resultAnalysis?.simple_linear_regression} />
                             ) : chosenModel === 'non_linear_regression' ? (

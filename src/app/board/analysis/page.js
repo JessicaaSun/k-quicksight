@@ -16,7 +16,7 @@ import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
 import {
   useAllAnalysisFileQuery,
   useDeleteAnalysisFileMutation,
-} from "@/store/features/analysis/Analysis";
+} from "@/store/features/analysis/analysisApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { generateBashURL } from "@/utils/util";

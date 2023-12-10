@@ -9,7 +9,7 @@ import fileSelect from "@/store/features/files/fileSelect";
 import recentData from "@/store/features/recentData/recentData";
 import allRecord from "@/store/features/files/filesDetail";
 import analysisUUID from "@/store/features/files/analysisuuid";
-import uuidCleanFile from "@/store/features/clean/FileCleaned";
+import uuidCleanFile from "@/store/features/clean/fileCleanedApiSlice";
 import eda from "@/store/features/ExploreData/edaStore";
 import sampleDataset from "@/store/features/sampleDataset/Dataset";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAnalysisMutation } from "@/store/features/analysis/Analysis";
+import { useAnalysisMutation } from "@/store/features/analysis/analysisApiSlice";
 import { Select } from "antd";
 import { Button, Input, Spinner, Tooltip } from "@nextui-org/react";
 import { useSelector } from "react-redux";

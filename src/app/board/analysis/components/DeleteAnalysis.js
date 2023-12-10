@@ -2,7 +2,7 @@
 
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import { useDeleteAnalysisFileMutation } from "@/store/features/analysis/Analysis";
+import { useDeleteAnalysisFileMutation } from "@/store/features/analysis/analysisApiSlice";
 import { MdDelete } from "react-icons/md";
 
 export default function DeleteAnalysisFile({uuid, filename}) {

@@ -6,7 +6,7 @@ import Analysis from "./AnalysisWithData";
 import { useState } from "react";
 import { generateBashURL } from "@/utils/util";
 import { useUploadSingleMutation } from "@/store/features/user/uploadAccountImage";
-import { useUpdateAnalysisFileMutation } from "@/store/features/analysis/Analysis";
+import { useUpdateAnalysisFileMutation } from "@/store/features/analysis/analysisApiSlice";
 import { FaPencilAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';

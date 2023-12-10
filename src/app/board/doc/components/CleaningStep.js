@@ -8,7 +8,7 @@ import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
 import {Button, Checkbox, CheckboxGroup, Radio, RadioGroup, Spinner} from "@nextui-org/react";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
-import {setFilename, setId, setShowDetailCleanData, setUuid} from "@/store/features/clean/FileCleaned";
+import {setFilename, setId, setShowDetailCleanData, setUuid} from "@/store/features/clean/fileCleanedApiSlice";
 import {FaCheck} from "react-icons/fa";
 import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 

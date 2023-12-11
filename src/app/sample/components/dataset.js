@@ -32,7 +32,6 @@ const Sample_all = () => {
         <div className={"grid gap-5 w-full"}>
             <Input
                 startContent={<div className={'text-gray-500'}><FaSearch  /></div>}
-                endContent={<Filter />}
                 onValueChange={setFilename}
                 radius={'full'}
                 className={'text-lg'}

@@ -51,7 +51,7 @@ const Page = () => {
                 <div className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}>
                   {
                     allAnalysis?.results.map((item, index) => (
-                      <div className="grid gap-3">
+                      <div key={index} className="grid gap-3">
                         <Card className="w-full shadow-sm bg-black hover:scale-105 transition-all h-[300px] col-span-12 sm:col-span-5">
                           <CardHeader className="absolute z-10 top-1 flex-col items-start">
                             <p className="text-tiny text-white/60 uppercase font-bold">{item.model_name}</p>

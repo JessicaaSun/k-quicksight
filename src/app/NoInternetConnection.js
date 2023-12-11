@@ -13,14 +13,18 @@ const NoInternetConnection = (props) => {
         setOnline(navigator.onLine)
     },[])
 
-    // event listeners to update the state 
-    window.addEventListener('online', () => {
-        setOnline(true)
-    });
+    if (typeof window !== 'undefined') {
+        // event listeners to update the state
+        window.addEventListener('online', () => {
+            setOnline(true);
+        });
 
-    window.addEventListener('offline', () => {
-        setOnline(false)
-    });
+        window.addEventListener('offline', () => {
+            setOnline(false);
+        });
+    } else {
+        console.warn('Window object is not defined. This code should run in a browser environment.');
+    }
 
     // if user is online, return the child component else return a custom component
     if(isOnline){

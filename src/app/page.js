@@ -68,7 +68,7 @@ export default function Home() {
               </Button>
             ) : (
               <Button
-                onClick={() => router.push("/board/recent")}
+                onClick={() => router.push("/board/dataset")}
                 className="w-[184px] font-bold bg-primary-color text-white"
               >
                 Go To Board

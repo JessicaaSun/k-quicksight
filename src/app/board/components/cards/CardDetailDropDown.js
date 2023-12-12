@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { useDeleteDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
 
-const CardDetailDropDown = ({ editAction, deleteAction, uuid, filename }) => {
+const CardDetailDropDown = ({ uuid, filename }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [deleteDashboard] = useDeleteDashboardMutation();
@@ -23,17 +23,23 @@ const CardDetailDropDown = ({ editAction, deleteAction, uuid, filename }) => {
     const response = await deleteDashboard({ uuid: uuid });
   };
 
+  const editAction = async () => {
+    console.log("edit action");
+  };
+
   const items = [
     {
       key: "1",
       label: "Edit",
       icon: <AiFillEdit />,
+      onClick: editAction,
     },
     {
       key: "2",
       label: "Delete",
       icon: <FaTrashCan />,
       danger: true,
+      onClick: onOpen,
     },
   ];
 
@@ -70,9 +76,7 @@ const CardDetailDropDown = ({ editAction, deleteAction, uuid, filename }) => {
             }}
             placement="bottomRight"
           >
-            <div
-              className={"border-0 p-[6px] rounded-md hover:bg-slate-100"}
-            >
+            <div className={"border-0 p-[6px] rounded-md hover:bg-slate-100"}>
               <IoEllipsisHorizontal className="cursor-pointer text-secondary-color hover:text-[##e33be3]" />
             </div>
           </Dropdown>

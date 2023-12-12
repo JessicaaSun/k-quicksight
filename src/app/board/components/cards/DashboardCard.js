@@ -52,7 +52,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
             {getTrimIntoColumnDateAndTime(item.created_at)}
           </p>
         </div>
-        <CardDetailDropDown />
+        <CardDetailDropDown uuid={item?.uuid} />
       </div>
     </div>
   );

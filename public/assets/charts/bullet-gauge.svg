@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63.146" height="70" viewBox="0 0 63.146 70">
+  <g id="Bullet_Gauge" data-name="Bullet Gauge" transform="translate(-12.715 -14.5)">
+    <g id="Group_222" data-name="Group 222" transform="translate(13 24.231)">
+      <g id="Group_219" data-name="Group 219" transform="translate(0 -3)">
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="62.861" height="13" transform="translate(0 0.269)" fill="#24313d"/>
+        <g id="Rectangle_53" data-name="Rectangle 53" transform="translate(0 4.269)" fill="#FFA500" stroke="#2a2a2a" stroke-width="0.5">
+          <rect width="55.876" height="5" stroke="none"/>
+          <rect x="0.25" y="0.25" width="55.376" height="4.5" fill="none"/>
+        </g>
+      </g>
+      <g id="Group_220" data-name="Group 220" transform="translate(0 18.789)">
+        <rect id="Rectangle_3-2" data-name="Rectangle 3" width="36.016" height="13" transform="translate(0 0.48)" fill="#24313d"/>
+        <g id="Rectangle_53-2" data-name="Rectangle 53" transform="translate(0 4.48)" fill="#FFA500" stroke="#2a2a2a" stroke-width="0.5">
+          <rect width="29.102" height="5" stroke="none"/>
+          <rect x="0.25" y="0.25" width="28.602" height="4.5" fill="none"/>
+        </g>
+      </g>
+      <g id="Group_221" data-name="Group 221" transform="translate(0 40.579)">
+        <rect id="Rectangle_3-3" data-name="Rectangle 3" width="56.826" height="13" transform="translate(0 -0.31)" fill="#24313d"/>
+        <g id="Rectangle_53-3" data-name="Rectangle 53" transform="translate(0 3.69)" fill="#FFA500" stroke="#2a2a2a" stroke-width="0.5">
+          <rect width="47.728" height="5" stroke="none"/>
+          <rect x="0.25" y="0.25" width="47.228" height="4.5" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <path id="Line" d="M761-316.833v69" transform="translate(-747.785 331.833)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

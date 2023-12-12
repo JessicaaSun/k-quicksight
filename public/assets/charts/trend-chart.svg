@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="71.3" height="72.5" viewBox="0 0 71.3 72.5">
+  <g id="Trend_Chart" data-name="Trend Chart" transform="translate(-11.214 -15.454)">
+    <g id="Group_119" data-name="Group 119" transform="translate(0 17.382)">
+      <path id="Path_19" data-name="Path 19" d="M314.5,535.213V520.171l16.144-12.627,16.144,5.031L371,500v35.216" transform="translate(-296.318 -470.817)" fill="#FFA500" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" stroke-width="1" fill-rule="evenodd"/>
+      <path id="Path_20" data-name="Path 20" d="M371,942.651H314.5V932.256l16.144-10.395,16.144,5.677L371,916.664v25.987" transform="translate(-296.321 -878.255)" fill="#0346A5" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" stroke-width="1" fill-rule="evenodd"/>
+    </g>
+    <g id="Arrow" transform="translate(11.214 15.954)">
+      <path id="Path_21" data-name="Path 21" d="M93.74,191.743,91.619,187.5,89.5,191.743Z" transform="translate(-89.497 -187.5)" fill="#202020" fill-rule="evenodd"/>
+      <path id="Path_22" data-name="Path 22" d="M1864.5,1962.5l4.279,2.14-4.279,2.14Z" transform="translate(-1797.479 -1894.78)" fill="#202020" fill-rule="evenodd"/>
+      <path id="Path_23" data-name="Path 23" d="M189.5,347.5v66.449h66.449" transform="translate(-187.375 -344.088)" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" stroke-width="1" fill-rule="evenodd"/>
+    </g>
+    <g id="Group_120" data-name="Group 120" transform="translate(-20.5 -7)">
+      <g id="Ellipse_85" data-name="Ellipse 85" transform="translate(65.5 22.454)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1.5">
+        <ellipse cx="15" cy="15.5" rx="15" ry="15.5" stroke="none"/>
+        <ellipse cx="15" cy="15.5" rx="14.25" ry="14.75" fill="none"/>
+      </g>
+      <path id="Path_213" data-name="Path 213" d="M-1667.024-648.42v8.469l5.213,4.9" transform="translate(1747.354 679.021)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

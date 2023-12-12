@@ -1,5 +1,5 @@
 import React from 'react';
-import UploadNewData from "@/app/board/analysis/components/UploadNewData";
+import UploadNewData from "@/app/board/analysis/components/modals/UploadNewData";
 import FileDetail from '@/app/board/dataset/component/FileDetail';
 import HorizontalLinearAlternativeLabelStepper from '../../components/NewVersion/Stepper';
 import { Button } from '@nextui-org/react';

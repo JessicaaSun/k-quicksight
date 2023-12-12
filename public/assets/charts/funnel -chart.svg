@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69" height="65" viewBox="0 0 69 65">
+  <g id="Funnel_Chart" data-name="Funnel Chart" transform="translate(-12 -20.881)">
+    <g id="Rectangle_20" data-name="Rectangle 20" transform="translate(12 20.881)" fill="#24313d" stroke="#000" stroke-width="1">
+      <rect width="69" height="14" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="68" height="13" rx="2.5" fill="none"/>
+    </g>
+    <g id="Rectangle_21" data-name="Rectangle 21" transform="translate(19 37.881)" fill="#FFA500" stroke="#000" stroke-width="1">
+      <rect width="55" height="14" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="54" height="13" rx="2.5" fill="none"/>
+    </g>
+    <g id="Rectangle_23" data-name="Rectangle 23" transform="translate(36 54.881)" fill="#d9f3f4" stroke="#000" stroke-width="1">
+      <rect width="22" height="13" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="21" height="12" rx="2.5" fill="none"/>
+    </g>
+    <g id="Rectangle_24" data-name="Rectangle 24" transform="translate(36 71.881)" fill="#fff" stroke="#000" stroke-width="1">
+      <rect width="22" height="14" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="21" height="13" rx="2.5" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69.479" height="69.479" viewBox="0 0 69.479 69.479">
+  <g id="Flow_Diagram" data-name="Flow Diagram" transform="translate(-13.5 -13.5)">
+    <g id="Rectangle_26" data-name="Rectangle 26" transform="translate(23.479 35.479)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+      <rect width="50" height="30" stroke="none"/>
+      <rect x="0.5" y="0.5" width="49" height="29" fill="none"/>
+    </g>
+    <path id="Path_135" data-name="Path 135" d="M-2177-938.4v12.579" transform="translate(2225.24 960.193)" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_136" data-name="Path 136" d="M-2177-938.4v9.422" transform="translate(2225.24 1003.492)" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_129" data-name="Path 129" d="M34.349,16,19,23.084l15.349,7.084L49.7,23.084Z" transform="translate(13.891 13.349)" fill="#24313d" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_130" data-name="Path 130" d="M44.252,11.265V3H23v8.265H44.252Z" transform="translate(14.613 11)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_131" data-name="Path 131" d="M24.252,38.265V30H3v8.265H24.252Z" transform="translate(11 15.878)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_132" data-name="Path 132" d="M44.252,54H23v8.265H44.252Z" transform="translate(14.613 20.214)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1"/>
+    <path id="Path_133" data-name="Path 133" d="M43,30v8.265H64.252V30H43Z" transform="translate(18.227 15.878)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+  </g>
+</svg>

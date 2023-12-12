@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69" height="60.426" viewBox="0 0 69 60.426">
+  <g id="Semi-Circle_Donut" data-name="Semi-Circle Donut" transform="translate(-11.749 -13.418)">
+    <g id="Coloumn_4" data-name="Coloumn 4" transform="translate(66.297 13.918)">
+      <rect id="Rectangle_17" data-name="Rectangle 17" width="35.86" height="10.246" transform="translate(0 53.278) rotate(-90)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_18" data-name="Rectangle 18" width="6.147" height="10.246" transform="translate(0 59.426) rotate(-90)" fill="#24313d" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_19" data-name="Rectangle 19" width="17.418" height="10.246" transform="translate(0 17.418) rotate(-90)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+    <g id="Coloumn_3" data-name="Coloumn 3" transform="translate(48.879 49.266)">
+      <rect id="Rectangle_14" data-name="Rectangle 14" width="11.9" height="10.246" transform="translate(0 19.979) rotate(-90)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_15" data-name="Rectangle 15" width="4.098" height="10.246" transform="translate(0 24.078) rotate(-90)" fill="#24313d" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_16" data-name="Rectangle 16" width="8.08" height="10.246" transform="translate(0 8.08) rotate(-90)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+    <g id="Coloumn_2" data-name="Coloumn 2" transform="translate(32.485 35.434)">
+      <rect id="Rectangle_8" data-name="Rectangle 8" width="23.565" height="10.246" transform="translate(0 28.688) rotate(-90)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_9" data-name="Rectangle 9" width="9.221" height="10.246" transform="translate(0 37.909) rotate(-90)" fill="#24313d" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="5.123" height="10.246" transform="translate(0 5.123) rotate(-90)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+    <g id="Coloumn_1" data-name="Coloumn 1" transform="translate(15.068 19.041)">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="28.688" height="10.246" transform="translate(0 43.032) rotate(-90)" fill="#FFA500" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="11.27" height="10.246" transform="translate(0 54.303) rotate(-90)" fill="#24313d" stroke="#2a2a2a" stroke-width="1"/>
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="14.344" height="10.246" transform="translate(0 14.344) rotate(-90)" fill="#d9f3f4" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+    <path id="Line" d="M0,0V68" transform="translate(12.249 73.343) rotate(-90)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

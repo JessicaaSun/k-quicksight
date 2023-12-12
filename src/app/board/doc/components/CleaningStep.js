@@ -3,14 +3,14 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useGetFileDetailQuery, useGetFileOverviewQuery} from "@/store/features/files/allFileByuserId";
-import {useGetUserQuery} from "@/store/features/clean/importFile";
 import TableImpute from "@/app/board/dataset/component/cleaning/TableImpute";
 import TableMissingValue from "@/app/board/dataset/component/cleaning/Table";
 import {Button, Checkbox, CheckboxGroup, Radio, RadioGroup, Spinner} from "@nextui-org/react";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
-import {setFilename, setId, setShowDetailCleanData, setUuid} from "@/store/features/clean/FileCleaned";
+import {setFilename, setId, setShowDetailCleanData, setUuid} from "@/store/features/clean/fileCleanedApiSlice";
 import {FaCheck} from "react-icons/fa";
+import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 
 const CleaningStep = () => {
     const UUIDFile = useSelector(state => state.analysisUuid.uuid);

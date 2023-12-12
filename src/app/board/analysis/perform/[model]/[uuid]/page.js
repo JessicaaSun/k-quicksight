@@ -1,7 +1,7 @@
 'use client'
 
 import { useFindHeaderQuery } from '@/store/features/ExploreData/ExploreData';
-import { useAnalysisMutation } from '@/store/features/analysis/Analysis';
+import { useAnalysisMutation } from '@/store/features/analysis/analysisApiSlice';
 import { useGetFileDetailQuery } from '@/store/features/files/allFileByuserId';
 import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 import Image from 'next/image';

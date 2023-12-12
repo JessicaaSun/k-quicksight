@@ -25,8 +25,11 @@ module.exports = {
         "2xl": "1320px",
       },
       colors: {
+        "danger": "#f31260",
+        "hover-danger": "#D40E53",
         "background-color": "#FAFAFA",
         "primary-color": "#0346A5",
+        "hover-primary": "rgba(3, 70, 165, 0.5)",
         "secondary-color": "#800080",
         "third-color": "#FFA500",
         "text-color": "#363636",

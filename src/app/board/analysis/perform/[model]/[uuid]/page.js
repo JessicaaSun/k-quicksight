@@ -1,7 +1,7 @@
 'use client'
 
 import { useFindHeaderQuery } from '@/store/features/ExploreData/ExploreData';
-import { useAnalysisMutation } from '@/store/features/analysis/Analysis';
+import { useAnalysisMutation } from '@/store/features/analysis/analysisApiSlice';
 import { useGetFileDetailQuery } from '@/store/features/files/allFileByuserId';
 import { useGetUserQuery } from '@/store/features/user/userApiSlice';
 import Image from 'next/image';
@@ -24,7 +24,6 @@ import Eda from "@/app/board/doc/components/Eda";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
 import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
 import Visualization from "@/app/board/doc/components/edaComponent/visualization";
-import {setFilename} from "@/store/features/clean/FileCleaned";
 import {setEdaFilename} from "@/store/features/ExploreData/edaStore";
 
 const variableNotMoreThan2 = [

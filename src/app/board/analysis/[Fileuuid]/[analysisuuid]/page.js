@@ -34,13 +34,13 @@ import selectVisulize from "@/app/board/doc/components/edaComponent/selectVisuli
 import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
 // import AnalysisStep2 from "@/app/board/analysis/components/steps/AnalysisStep2";
 import HeaderAnalysis from "@/app/board/analysis/components/steps/HeaderAnalysis";
-import analysis, { useAnalysisDetailsQuery } from "@/store/features/analysis/Analysis";
+import analysis, { useAnalysisDetailsQuery } from "@/store/features/analysis/analysisApiSlice";
 import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import CorrelationTable from "@/app/board/doc/components/edaComponent/CorrelationTable";
 import Correllation from "@/app/board/doc/components/analysisComponent/Correllaltion";
-import UpdateInfo from "../../components/UpdateInfo";
+import UpdateInfo from "../../components/modals/UpdateInfo";
 
 const Page = ({ params }) => {
   let uuid = params.Fileuuid;

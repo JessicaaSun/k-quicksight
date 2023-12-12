@@ -6,14 +6,14 @@ import {useFindHeaderQuery} from "@/store/features/ExploreData/ExploreData";
 import {Select} from "antd";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {Button} from "@nextui-org/react";
-import {useVisualizationMutation} from "@/store/features/visualization/Visuization";
+import { useVisualizeMutation } from '@/store/features/visualization/visualizeApiSlice';
 
 const Visualization = () => {
     const {data:user} = useGetUserQuery();
     const filename = useSelector(state => state.eda.filename);
     const fileId = useSelector(state => state.cleanedFileUUID.id);
     const {data:headers} = useFindHeaderQuery({filename: filename});
-    const [visualizatoin] = useVisualizationMutation();
+    const [visualization] = useVisualizeMutation();
     const [error, setError] = useState('');
 
     const [chartType, setChartType] = useState('');
@@ -37,7 +37,7 @@ const Visualization = () => {
             file: fileId,
             user: user?.data.id
         }
-        const response = await visualizatoin({data: bodyData})
+        const response = await visualization({data: bodyData})
         setError(response?.error?.data.file[0])
     }
 

@@ -108,6 +108,7 @@ export default function NavbarKQuick() {
                   href="/"
                   className="flex gap-5 justify-center items-center"
                 >
+                  <div className="w-[32px] h-[32px] max-sm:w-[28px] max-sm:h-[28px]">
                   <Avatar
                     isBordered
                     as="button"
@@ -115,7 +116,8 @@ export default function NavbarKQuick() {
                     size="sm"
                     src="/assets/logos/logo.png"
                   />
-                  <span className="text-primary-color font-semibold text-lg">
+                  </div>
+                  <span className="text-primary-color max-sm:hidden sm:hidden md:flex font-semibold text-lg">
                     <Image
                       priority={false}
                       unoptimized={true}

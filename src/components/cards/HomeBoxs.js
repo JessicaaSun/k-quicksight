@@ -124,7 +124,7 @@ export default function GetStart_boxs() {
   ];
 
   return (
-    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col gap-36">
+    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col max-sm:gap-14 sm:gap-14 gap-36">
       {data.map((item, index) => (
         <Link target={'_blank'} href={item.url}
           key={index}

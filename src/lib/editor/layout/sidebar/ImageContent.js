@@ -14,7 +14,9 @@ const ImageContent = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useAsync(async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}files/view/images/`);
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}files/view/images/`
+    );
     setImages(response.data);
     setIsLoading(false);
   }, []);
@@ -107,10 +109,13 @@ const ImageContent = ({ onClose }) => {
                 paddingBottom: "100%",
                 width: "100%",
               }}
-              onClick={() => addImage((item.img), item.img)}
+              onClick={() => {
+                addImage(item.img, item.img);
+                console.log(item.img);
+              }}
             >
               <img
-                src={(item.img)}
+                src={item.img}
                 loading="lazy"
                 style={{
                   position: "absolute",

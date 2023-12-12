@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80.041" height="71" viewBox="0 0 80.041 71">
+  <g id="Bubble_Chart" data-name="Bubble Chart" transform="translate(0 -0.462)">
+    <g id="Layer_1" data-name="Layer 1" transform="translate(1.547 1.665)">
+      <line id="Line_11" data-name="Line 11" y2="68.275" transform="translate(2.978)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_12" data-name="Line 12" x1="77.994" transform="translate(0 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_13" data-name="Line 13" y2="2.978" transform="translate(14.89 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_14" data-name="Line 14" y2="2.978" transform="translate(26.801 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_15" data-name="Line 15" y2="2.978" transform="translate(38.713 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_16" data-name="Line 16" y2="2.978" transform="translate(50.624 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_17" data-name="Line 17" y2="2.978" transform="translate(62.536 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_23" data-name="Line 23" y2="2.978" transform="translate(74.447 65.297)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_18" data-name="Line 18" x1="2.978" transform="translate(0 5.755)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_19" data-name="Line 19" x1="2.978" transform="translate(0 17.667)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_20" data-name="Line 20" x1="2.978" transform="translate(0 29.578)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_21" data-name="Line 21" x1="2.978" transform="translate(0 41.49)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_22" data-name="Line 22" x1="2.978" transform="translate(0 53.401)" fill="none" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_5" data-name="Ellipse 5" cx="2.5" cy="2.5" r="2.5" transform="translate(11.453 50.797)" fill="#0346A5" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_13" data-name="Ellipse 13" cx="2" cy="2" r="2" transform="translate(30.453 50.797)" fill="#FFA500" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_6" data-name="Ellipse 6" cx="6.5" cy="6.5" r="6.5" transform="translate(15.453 34.797)" fill="#d9f3f4" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_7" data-name="Ellipse 7" cx="4" cy="4" r="4" transform="translate(33.453 37.797)" fill="#0346A5" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_8" data-name="Ellipse 8" cx="8.5" cy="8.5" r="8.5" transform="translate(27.453 15.797)" fill="#FFA500" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_9" data-name="Ellipse 9" cx="2.5" cy="2.5" r="2.5" transform="translate(48.453 19.797)" fill="#0346A5" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_10" data-name="Ellipse 10" cx="4" cy="4" r="4" transform="translate(48.453 5.797)" fill="#d9f3f4" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_11" data-name="Ellipse 11" cx="4" cy="4" r="4" transform="translate(59.453 14.797)" fill="#0346A5" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_12" data-name="Ellipse 12" cx="4.5" cy="4.5" r="4.5" transform="translate(48.453 34.797)" fill="#0346A5" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(0 0.185)">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="71" height="71" transform="translate(0 0.277)" fill="none"/>
+    </g>
+  </g>
+</svg>

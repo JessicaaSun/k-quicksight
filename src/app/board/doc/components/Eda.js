@@ -24,7 +24,7 @@ const Eda = () => {
                 showClean ? (
                     <>
                         <p className={'text-lg text-primary-color font-medium'}>Detail dataset</p>
-                        <FileDetail uuid={uuidFileCleaned} />
+                        <FileDetail showHeader={true} uuid={uuidFileCleaned} />
                         <SelectVisulize />
                         <Visualization bodyEda={bodyEda} />
                     </>

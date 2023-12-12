@@ -15,7 +15,11 @@ const DataContent = ({ onClose }) => {
     data: fileDetail,
     refetch: refetchDetail,
     isLoading,
-  } = useGetFileDetailQuery({ uuid: "28453108-020d-4fff-89c4-9aafd4ea8358", size: 100, page: 1 });
+  } = useGetFileDetailQuery({
+    uuid: "28453108-020d-4fff-89c4-9aafd4ea8358",
+    size: 100,
+    page: 1,
+  });
 
   return (
     <div
@@ -77,6 +81,7 @@ const DataContent = ({ onClose }) => {
           <Spinner size={"md"} />
         ) : (
           <FileDetail
+            showHeader={false}
             dataFile={fileDetail?.results}
             uuid={"28453108-020d-4fff-89c4-9aafd4ea8358"}
             headers={fileDetail?.headers}

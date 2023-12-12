@@ -16,7 +16,7 @@ import {
 } from "@nextui-org/react";
 import { useGetFileDetailQuery } from "@/store/features/files/allFileByuserId";
 
-export default function FileDetail({ uuid }) {
+export default function FileDetail({ uuid, showHeader }) {
   const [size, setSize] = useState(100);
   const [page, setPage] = useState(1);
   const {
@@ -35,7 +35,11 @@ export default function FileDetail({ uuid }) {
 
   return (
     <div className={"relative rounded-xl w-full overflow-auto"}>
-      <p className="text-xl text-primary-color my-3">Dataset</p>
+      {showHeader ? (
+        <p className="text-xl text-primary-color font-semibold my-3">Dataset</p>
+      ) : (
+        ""
+      )}
       {fileDetail !== undefined ? (
         <>
           <Table

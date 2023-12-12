@@ -8,12 +8,11 @@ import { useSelector } from "react-redux";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import Descriptive_statistic from "./analysisComponent/Descriptive_statistic";
-import Correllation from "@/app/board/doc/components/analysisComponent/Correllaltion";
+import Correllation from "@/app/board/doc/components/analysisComponent/Correlation";
 import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
 import NonLinear from "@/app/board/doc/components/analysisComponent/NonLinear";
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { FaRegQuestionCircle } from "react-icons/fa";
 
 export const variableNotMoreThan2 = [
@@ -87,18 +86,6 @@ const Analysis = () => {
 
   return (
     <div className={"grid gap-3"}>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <h3 className={"text-primary-color"}>Prep the Data for Modelling</h3>
       <div className={"grid gap-2"}>
         {!chosenModel ? (

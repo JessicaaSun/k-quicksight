@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { Dropdown, message, Space, Button } from "antd";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { AiFillEdit } from "react-icons/ai";
 import {
   Modal,
@@ -23,8 +23,20 @@ import { generateBashURL } from "@/utils/util";
 import SelectButton from "@/components/buttons/SelectButton";
 import DeleteButtonComponent from "@/components/buttons/DeleteButton";
 import UploadImageZone from "@/components/forms/UploadImageZone";
+import {
+  useAnalysisMutation,
+  useDeleteAnalysisFileMutation,
+  useUpdateAnalysisFileMutation,
+} from "@/store/features/analysis/analysisApiSlice";
+import "react-toastify/dist/ReactToastify.css";
 
-const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
+const CardDetailDropDown = ({
+  isAnalysis,
+  uuid,
+  datasetId,
+  filename,
+  thumbnailUrl,
+}) => {
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
@@ -38,13 +50,15 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
     onClose: onDeleteClose,
   } = useDisclosure();
 
-  const [deleteDashboard] = useDeleteDashboardMutation();
+  const [analysisName, setAnalysisName] = useState(filename);
   const [previewImage, setPreviewImage] = useState("");
-
   const [dashboardTitle, setDashboardTitle] = useState(filename);
 
   const [uploadThumbnail] = useUploadSingleMutation();
   const [updateDashboard] = useUpdateDashboardMutation();
+  const [deleteDashboard] = useDeleteDashboardMutation();
+  const [updateAnalysis] = useUpdateAnalysisFileMutation();
+  const [deleteAnalysisFile] = useDeleteAnalysisFileMutation();
 
   const handleUploadImage = async (event) => {
     const file = event.target.files[0];
@@ -52,7 +66,23 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
     setPreviewImage(response?.data?.filename);
   };
 
-  const handleUpdate = async () => {
+  const handleDeleteAnalysis = async () => {
+    const response = await deleteAnalysisFile({ uuid: uuid });
+  };
+
+  const handleUpdateAnalysis = async () => {
+    let body = {
+      title: analysisName,
+      thumbnail: previewImage,
+    };
+    const response = await updateAnalysis({ data: body, uuid: uuid });
+    toast.success("Successfully updated analysis");
+    setTimeout(() => {
+      onEditOpenChange(false);
+    }, 2000);
+  };
+
+  const handleUpdateDashboard = async () => {
     try {
       let body = {
         title: dashboardTitle,
@@ -61,7 +91,7 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
       };
       const response = await updateDashboard({ data: body, uuid: uuid });
       if (response) {
-        // toast.success("Successfully updated");
+        toast.success("Successfully updated dashboard");
         setTimeout(() => {
           onEditOpenChange(false);
         }, 2000);
@@ -71,7 +101,7 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDeleteDashboard = async () => {
     const response = await deleteDashboard({ uuid: uuid });
     onDeleteClose();
   };
@@ -94,20 +124,25 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
 
   return (
     <>
+     
       <Modal isOpen={isEditOpen} onOpenChange={onEditOpenChange}>
         <ModalContent>
           {(onEditClose) => (
             <>
               <ModalHeader className="flex text-text-color pt-4 pb-0 flex-col">
-                Update {dashboardTitle || filename}
+                Update {filename}
               </ModalHeader>
               <ModalBody>
                 <label className="font-semibold">Title</label>
                 <Input
                   size="sm"
-                  placeholder="Dashboard title"
-                  value={dashboardTitle}
-                  onValueChange={setDashboardTitle}
+                  placeholder={
+                    isAnalysis ? "Analysis Title" : "Dashboard Title"
+                  }
+                  value={isAnalysis ? analysisName : dashboardTitle}
+                  onValueChange={
+                    isAnalysis ? setAnalysisName : setDashboardTitle
+                  }
                 />
                 <label className="font-semibold">Thumbnail</label>
                 <UploadImageZone
@@ -124,14 +159,18 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
                   paddingX={6}
                   text={"Cancel"}
                   hover={"#D40E53"}
-                  clickAction={handleDelete}
+                  clickAction={
+                    isAnalysis ? handleDeleteAnalysis : handleDeleteDashboard
+                  }
                 />
                 <SelectButton
                   rounded={"xl"}
                   color={"primary-color"}
                   text={"Update"}
                   hover={"hover-primary"}
-                  clickAction={handleUpdate}
+                  clickAction={
+                    isAnalysis ? handleUpdateAnalysis : handleUpdateDashboard
+                  }
                 />
               </ModalFooter>
             </>
@@ -146,7 +185,10 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
                 {filename}
               </ModalHeader>
               <ModalBody>
-                <p>Are you sure you want to delete this dashboard? </p>
+                <p>
+                  Are you sure you want to delete this{" "}
+                  {isAnalysis ? "analysis" : "dashboard"}?
+                </p>
               </ModalBody>
               <ModalFooter className="flex justify-between">
                 <SelectButton
@@ -162,7 +204,7 @@ const CardDetailDropDown = ({ uuid, datasetId, filename, thumbnailUrl }) => {
                   paddingX={5}
                   text={"Delete"}
                   icon={<FaTrashCan size={12} />}
-                  clickAction={handleDelete}
+                  clickAction={handleDeleteDashboard}
                 />
               </ModalFooter>
             </>

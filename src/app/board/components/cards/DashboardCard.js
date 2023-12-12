@@ -53,6 +53,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
           thumbnailUrl={item?.thumbnail}
           filename={getTitle()}
           uuid={item?.uuid}
+          isAnalysis={false}
         />
       </div>
     </div>

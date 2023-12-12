@@ -8,9 +8,11 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setFiles, setTotalSize } from "@/store/features/files/fileSlice";
 import SearchDataset from "@/app/board/dataset/component/SearchDataset";
-import TableDataSet from "@/app/board/analysis/components/TableDataSet";
+
 import ImportExistDataset from "@/app/board/doc/components/ImportExistDataset";
 import {Pagination, Select, SelectItem} from "@nextui-org/react";
+import TableDataSet from "@/app/board/dashboard/components/importData/DatasetTable";
+
 export const headers = [
     {
         header: "Title",

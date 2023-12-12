@@ -64,7 +64,7 @@ export default function AddNewButton() {
         variant="solid"
       >
         <FaCirclePlus />
-        Add new
+        Create Analysis
       </Button>
       <Modal
         size="2xl"

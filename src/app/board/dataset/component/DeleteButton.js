@@ -25,7 +25,7 @@ import { headers } from "@/app/board/dataset/page";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
 import { FaTrash } from "react-icons/fa6";
-import {toast, ToastContainer} from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function DeleteButton({ uuid, filename, type, createAt, size }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -41,10 +41,10 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
     await deleteFileById({ uuid: uuid, id: user?.data.id });
     const updatedFiles = allFiles.filter((file) => file.uuid !== uuid);
     dispatch(setFiles(updatedFiles));
-    toast.success('deleted success!');
+    toast.success("deleted success!");
     refetchAllFiles();
     setTimeout(() => {
-      onOpenChange(false)
+      onOpenChange(false);
     }, 2000);
   };
 
@@ -56,7 +56,10 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
           "min-w-fit bg-transparent hover:text-danger gap-4 inline-flex justify-start h-unit-6 px-unit-0"
         }
       >
-        <i><FaTrash/></i>Delete
+        <i>
+          <FaTrash />
+        </i>
+        Delete
       </Button>
       <Modal
         size={"2xl"}
@@ -88,7 +91,6 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
           {(onClose) => (
             <>
               <ModalBody>
-
                 <p className={"text-center text-text-color font-normal mt-10"}>
                   Are you sure to delete{" "}
                   <span className={"text-lg font-semibold text-red-500"}>
@@ -96,18 +98,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
                   </span>{" "}
                   ?
                 </p>
-                <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                />
+
                 <Table aria-label="Example static collection table">
                   <TableHeader>
                     {headers.slice(0, 4).map((item, index) => (
@@ -130,10 +121,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button
-                  onClick={() => handleDeleteFile(uuid)}
-                  color="primary"
-                >
+                <Button onClick={() => handleDeleteFile(uuid)} color="primary">
                   Delete
                 </Button>
               </ModalFooter>

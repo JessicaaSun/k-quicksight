@@ -91,9 +91,9 @@ const Page = () => {
                 return (
                   <div key={item.uuid}>
                     <DashboardCard
-                    isAnalysis={true} 
-                    analysisModel={"Correlation"}
-                    fileTitle={"Sale_amazon.csv"}
+                      isAnalysis={true}
+                      analysisModel={"Correlation"}
+                      fileTitle={"Sale_amazon.csv"}
                       routeTo={`/board/dashboard/${item.uuid}`}
                       item={item}
                       index={index}

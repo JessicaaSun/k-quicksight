@@ -20,7 +20,7 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import SelectButton from "@/components/buttons/SelectButton";
 import { useCreateDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ExistingDatasetTable = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -57,23 +57,11 @@ const ExistingDatasetTable = () => {
 
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <Button
         onPress={onOpen}
         className={"flex flex-col justify-center p-4 items-center h-full"}
       >
-        <Image  priority={false} src={TableImage} alt={""} className={"w-28"} />
+        <Image priority={false} src={TableImage} alt={""} className={"w-28"} />
         <p className={" font-bold"}>Pick existing dataset</p>
       </Button>
       <Modal

@@ -132,7 +132,7 @@ const CleaningStep = () => {
                 showClean && (
                     <div className={'my-10'}>
                         <p className={'text-primary-color my-3 font-medium'}>Cleaned dataset</p>
-                        <FileDetail uuid={uuidFileCleaned} />
+                        <FileDetail showHeader={true} uuid={uuidFileCleaned} />
                     </div>
                 )
             }

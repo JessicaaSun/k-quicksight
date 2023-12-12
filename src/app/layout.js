@@ -10,6 +10,7 @@ import Footer from "@/components/footer/footer";
 import { SidebarProvider } from "@/context/BoardSideBarContext";
 import { PreviewProvider } from "@/context/EditorPreviewContext";
 import NoInternetConnection from "@/app/NoInternetConnection";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 

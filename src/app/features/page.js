@@ -71,15 +71,15 @@ export default function Feature(){
 
                 {
                     feature.map((data,index)=>(
-                        <div key={index} className={`lg:flex md:block justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} gap-10`}>
+                        <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} gap-10`}>
                             <div className="lg:w-2/3 md:1/2 w-full">
                                 <Button size="sm" variant="flat" className={'text-primary-color bg-primary-color/10 mb-6 font-medium rounded-xl'}>
                                     {data.bagde}
                                 </Button>
                                 <h2 className="text-primary-color mb-3">{data.title}</h2>
-                                <p className={"sm:text-lg text-description-color md:text-xl lg:text-xls"}>Say goodbye to tedious data cleansing tasks. Our platform automates the process, ensuring your data is clean and ready for analysis.</p>
+                                <p className={"sm:text-lg text-description-color md:text-xl lg:text-xls"}>{data.description}</p>
                             </div>
-                            <Image src={data.image} unoptimized width={100} height={100} alt={"feature"} className={"lg:w-1/3 md:2/3 w-full"} />
+                            <Image src={data.image} unoptimized width={100} height={100} alt={"feature"} className={"lg:w-1/3 md:w-1/2 w-full"} />
                         </div>
                     ))
                 }

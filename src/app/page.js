@@ -62,14 +62,14 @@ export default function Home() {
             {!user ? (
               <Button
                 onClick={() => router.push("/auth/login")}
-                className="w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
+                className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
                 Get started
               </Button>
             ) : (
               <Button
                 onClick={() => router.push("/board/dataset")}
-                className="w-[184px]  max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
+                className="md:w-[184px]  max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
                 Go To Board
               </Button>
@@ -77,7 +77,7 @@ export default function Home() {
 
             <Button
               onClick={() => router.push("/tutorials")}
-              className="w-[217px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
+              className="md:w-[184px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
             >
               <svg
                 width="20"

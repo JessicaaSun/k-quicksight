@@ -20,7 +20,7 @@ import {
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { generateBashURL } from "@/utils/util";
-import DeleteAnalysisFile from "./components/DeleteAnalysis";
+import DeleteAnalysisFile from "./components/modals/DeleteAnalysis";
 import { useRouter } from "next/navigation";
 import AddNewButton from "./components/NewVersion/ModalAddNew";
 const Page = () => {
@@ -47,7 +47,7 @@ const Page = () => {
   };
 
   return (
-    <div className="py-10 px-5 ">
+    <div className="py-10 px-7 ">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
         <div className={"flex flex-col"}>
           <p className={"text-primary-color font-semibold text-3xl"}>

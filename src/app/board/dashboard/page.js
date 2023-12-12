@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
+import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { MockDataDashboard } from "../mockData/mockDataDashboard";
 import {
   Button,
@@ -16,10 +17,20 @@ import {
 import UploadDataSetDashboard from "./components/importData/UploadDataSet";
 import AddDashboard from "./components/buttons/AddDashboard";
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import { useGetDashboardByUserUuidQuery } from "@/store/features/visualization/visualizeApiSlice";
+import Loading from "@/app/loading";
+import { generateBashURL } from "@/utils/util";
+import DashboardCard from "../components/cards/DashboardCard";
 
 const Page = () => {
-  const [mockData, setMockData] = useState(MockDataDashboard.listDashboard);
-
+  const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
+  const { data: allDashboard, isLoading: dashboardLoading } =
+    useGetDashboardByUserUuidQuery({
+      userUuid: user?.data.uuid,
+      page: 1,
+      size: 100,
+    });
   const [size, setSize] = React.useState("2xl");
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -29,8 +40,12 @@ const Page = () => {
     onOpen();
   };
 
+  if (userLoading || dashboardLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="py-10 px-5">
+    <div className="py-10 px-7">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
         <Modal
           isOpen={isOpen}
@@ -64,35 +79,28 @@ const Page = () => {
             Dashboard
           </p>
         </div>
-        <AddDashboard onOpen={onOpen}/>
+        <AddDashboard onOpen={onOpen} />
       </div>
       <div>
-        {MockDataDashboard.listDashboard.length === 0 ? (
+        {allDashboard && allDashboard?.results.length === 0 ? (
           <EmptyAnalysis isAnalysis={false} />
         ) : (
           <div>
-            <div className={"flex flex-row gap-5"}>
-              {MockDataDashboard.listDashboard.map((item, index) => (
-                <Link
-                  href={item.url}
-                  key={index}
-                  className={
-                    "flex flex-col gap-3 p-2 bg-white shadow-sm hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
-                  }
-                >
-                  <Image
-                    src={item.thumbnail}
-                    alt={item.name}
-                    className={
-                      "max-w-[265px] max-h-[157px] rounded-xl object-cover"
-                    }
-                  />
-                  <div className={"flex ps-2 pb-1 flex-col"}>
-                    <p>{item.name}</p>
-                    <p>{item.createdAt}</p>
+            <div className={"flex flex-wrap gap-5"}>
+              {allDashboard?.results?.map((item, index) => {
+                return (
+                  <div key={item.uuid}>
+                    <DashboardCard
+                    isAnalysis={true} 
+                    analysisModel={"Correlation"}
+                    fileTitle={"Sale_amazon.csv"}
+                      routeTo={`/board/dashboard/${item.uuid}`}
+                      item={item}
+                      index={index}
+                    />
                   </div>
-                </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

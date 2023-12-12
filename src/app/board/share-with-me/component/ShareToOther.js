@@ -13,9 +13,9 @@ const ShareToOther = () => {
     }, [shareOtherRefetch, useShareOther, user]);
 
     return (
-        <div className={'p-10'}>
+        <div className={'pt-5'}>
             <h3 className={'text-primary-color'}>Files share to other</h3>
-            <div className={'py-10'}>
+            <div className={'pt-7'}>
                 <ShareTable file={useShareOther} />
             </div>
         </div>

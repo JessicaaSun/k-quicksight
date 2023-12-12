@@ -71,7 +71,7 @@ const Dataset = () => {
   }, [allFile, dispatch, filesRefetch, totalFree]);
 
   return (
-    <div className={"py-10 px-5"}>
+    <div className={"py-10 px-7"}>
       <div className={"flex justify-between items-center"}>
         <p className={"text-primary-color font-semibold text-3xl"}>Dataset</p>
         <div className={"flex justify-center items-center gap-5"}>

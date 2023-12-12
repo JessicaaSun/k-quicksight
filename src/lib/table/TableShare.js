@@ -12,7 +12,7 @@ import {
   Avatar,
   Tooltip,
 } from "@nextui-org/react";
-import { headers } from "@/app/board/analysis/components/SelectDataSet";
+import { headers } from "@/app/board/analysis/components/modals/SelectDataSet";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
 import { IoEyeSharp } from "react-icons/io5";

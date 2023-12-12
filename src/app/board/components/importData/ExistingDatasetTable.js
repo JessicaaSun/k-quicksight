@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import TableImage from "@assets/images/analysis/table.png";
 import {
@@ -19,6 +19,7 @@ import ListAllFiles from "./ListAllFiles";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import SelectButton from "@/components/buttons/SelectButton";
+import { useCreateDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
 
 const ExistingDatasetTable = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -27,15 +28,29 @@ const ExistingDatasetTable = () => {
   const [datasetName, setDatasets] = useState("");
   const [fileType, setFileTypes] = useState("");
   const { data: user } = useGetUserQuery();
+  const [createDashboard] = useCreateDashboardMutation();
+  const [loading, isLoading] = useState(false);
+  const [selectedFileUuid, setSelectedFileUuid] = useState(null);
   const { data: allFiles, isLoading: isFileLoading } = useGetAllFilesQuery({
     id: user?.data.id,
     filename: datasetName,
     type: fileType,
   });
 
-  const handleSelectDataset = () => {
-    router.push(`/board/dashboard/ueiwdhwz`);
-    console.log("file: ", selectedFile);
+  const handleSelectDataSet = async () => {
+    if (selectedFileUuid === null) {
+      console.error("No file selected");
+      return;
+    }
+    let body;
+    body = {
+      created_by: user?.data?.id,
+    };
+
+    const responseDashboard = await createDashboard({ data: body });
+    console.log("dash", responseDashboard)
+    isLoading(true);
+    router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
   };
 
   return (
@@ -55,7 +70,7 @@ const ExistingDatasetTable = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex text-xl text-text-color flex-col gap-1">
                 Importing dataset
               </ModalHeader>
               <ModalBody>
@@ -73,10 +88,14 @@ const ExistingDatasetTable = () => {
                     color={"primary-color"}
                     text={"Select"}
                     hover={"hover-primary"}
-                    clickAction={handleSelectDataset}
+                    clickAction={handleSelectDataSet}
                   />
                 </div>
-                <ListAllFiles file={allFiles} isFileLoading={isFileLoading} />
+                <ListAllFiles
+                  file={allFiles}
+                  isFileLoading={isFileLoading}
+                  onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
+                />
               </ModalBody>
             </>
           )}

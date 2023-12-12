@@ -1,8 +1,8 @@
 'use client'
 import React from 'react';
 import { Tabs } from 'antd';
-import ShareWithmeTap from "@/app/board/shareWithMe/component/shareWithme_tap";
-import ShareToOther from "@/app/board/shareWithMe/component/ShareToOther";
+import ShareWithmeTap from "@/app/board/share-with-me/component/shareWithme_tap";
+import ShareToOther from "@/app/board/share-with-me/component/ShareToOther";
 const onChange = (key) => {
     console.log(key);
 };
@@ -18,5 +18,5 @@ const items = [
         children: <ShareToOther />,
     },
 ];
-const App = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+const App = () => <div className='pt-5 px-7'><Tabs defaultActiveKey="1" items={items} onChange={onChange} /></div>;
 export default App;

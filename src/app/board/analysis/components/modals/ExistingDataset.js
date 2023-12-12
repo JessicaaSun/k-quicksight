@@ -13,7 +13,7 @@ import {
   useSelect,
 } from "@nextui-org/react";
 import AnalysisStep from "@/app/board/components/AnalysisStep";
-import SelectDataSet from "@/app/board/analysis/components/SelectDataSet";
+import SelectDataSet from "@/app/board/analysis/components/modals/SelectDataSet";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";

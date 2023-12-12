@@ -12,7 +12,7 @@ import {
   AiOutlineCaretRight,
 } from "react-icons/ai";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import BoardSidebar from "@/app/board/components/BoardSidebar";
+import BoardSidebar from "@/app/board/components/navbar/BoardSidebar";
 import {
   Avatar,
   Button,

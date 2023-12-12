@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "@/app/board/components/BoardNavbar";
+import Navbar from "@/app/board/components/navbar/BoardNavbar";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
@@ -66,7 +66,7 @@ export default function BoardRootLayout({ children }) {
             className={`${
               noMargin
                 ? `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"} pt-[64px]`
-                : "lg:pl-[280px] py-[70px]"
+                : "lg:pl-[255px] py-[60px]"
             }  bg-background-color min-h-screen`}
           >
             {children}

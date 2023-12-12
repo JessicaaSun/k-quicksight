@@ -2,8 +2,8 @@
 import React, {useState} from 'react';
 import AnalysisStep from "@/app/board/components/AnalysisStep";
 import ShareMember from "@/app/board/dataset/component/shareMember";
-import UploadDataSet from "@/app/board/analysis/components/UploadDataSet";
-import ExistingDataset from "@/app/board/analysis/components/ExistingDataset";
+import UploadDataSet from "@/app/board/analysis/components/modals/UploadDataSet";
+import ExistingDataset from "@/app/board/analysis/components/modals/ExistingDataset";
 const NewData = () => {
     return (
         <div>

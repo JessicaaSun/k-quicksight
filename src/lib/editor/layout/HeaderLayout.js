@@ -25,7 +25,7 @@ import {
   AiOutlineCaretRight,
 } from "react-icons/ai";
 import logo from "@assets/logos/logo.png";
-import BoardSidebar from "@/app/board/components/BoardSidebar";
+import BoardSidebar from "@/app/board/components/navbar/BoardSidebar";
 import { logout } from "@/store/features/auth/authSlice";
 import { generateBashURL } from "@/utils/util";
 

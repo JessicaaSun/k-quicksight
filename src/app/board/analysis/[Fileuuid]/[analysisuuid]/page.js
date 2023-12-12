@@ -40,7 +40,7 @@ import MultipleLinear from "@/app/board/doc/components/analysisComponent/Multipl
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import CorrelationTable from "@/app/board/doc/components/edaComponent/CorrelationTable";
 import Correllation from "@/app/board/doc/components/analysisComponent/Correllaltion";
-import UpdateInfo from "../../components/UpdateInfo";
+import UpdateInfo from "../../components/modals/UpdateInfo";
 
 const Page = ({ params }) => {
   let uuid = params.Fileuuid;

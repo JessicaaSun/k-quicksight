@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
-import Analysis from "./AnalysisWithData";
+import Analysis from "../AnalysisWithData";
 import { useState } from "react";
 import { generateBashURL } from "@/utils/util";
 import { useUploadSingleMutation } from "@/store/features/user/uploadAccountImage";

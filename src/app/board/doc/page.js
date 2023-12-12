@@ -19,7 +19,7 @@ export default function UserBoard() {
   } = useGetUserQuery();
 
   return (
-    <div className={"py-10 px-5"}>
+    <div className={"py-10 px-7"}>
       <p className={"text-primary-color font-semibold text-xl"}>
         Documentary of processing data analysis
       </p>

@@ -19,8 +19,8 @@ export const visualize = apiSlice.injectEndpoints({
       invalidatesTags: ["visualize"],
     }),
     getDashboardByUserUuid: builder.query({
-      query: ({ userUuid }) => ({
-        url: `dashboards/detail_by_user/${userUuid}/`,
+      query: ({ userUuid , page, size }) => ({
+        url: `dashboards/detail_by_user/${userUuid}/?p=${page}&size=${size}`,
         method: "GET",
       }),
       keepUnusedDataFor: 5,
@@ -53,5 +53,12 @@ export const visualize = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useVisualizeMutation } = visualize;
+export const {
+  useCreateDashboardMutation,
+  useDeleteDashboardMutation,
+  useGetDashboardByUserUuidQuery,
+  useGetDashboardDetailByUuidQuery,
+  useVisualizeMutation,
+  useUpdateDashboardMutation
+} = visualize;
 export default visualize;

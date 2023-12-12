@@ -25,8 +25,8 @@ const contentRoute = {
     },
     shareWithMe: {
       icon: <HiShare />,
-      name: "Share files",
-      route: "/board/shareWithMe",
+      name: "Shared files",
+      route: "/board/share-with-me",
     },
   },
 

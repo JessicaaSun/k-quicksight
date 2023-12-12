@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "photostad-api.istad.co", "developers.elementor.com"],
   },
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,

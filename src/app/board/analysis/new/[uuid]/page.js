@@ -15,7 +15,6 @@ const NewAnalysis = ({ params }) => {
             <div className='flex justify-between items-center'>
                 <div>
                     <h2 className='text-primary-color uppercase'>Analysis</h2>
-                    <p className='text-description-color'>Pre-analysis</p>
                 </div>
             </div>
             <div className='flex justify-end items-center'>

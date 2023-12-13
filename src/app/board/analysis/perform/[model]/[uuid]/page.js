@@ -111,7 +111,7 @@ export default function Perform({ params }) {
       </div>
       <div>
         <div>
-          <p className="uppercase text-xl font-medium text-primary-color mb-10">
+          <p className="uppercase text-xl font-medium text-primary-color mt-10">
             Performing analsis with {model}
           </p>
           {variableNotMoreThan2.some((model_mode) =>
@@ -202,7 +202,7 @@ export default function Perform({ params }) {
             onClick={() => router.push("/board/analysis")}
           >
             <FaCheck />
-            Done
+            Done analysis
           </Button>
         </div>
         {loading ? (

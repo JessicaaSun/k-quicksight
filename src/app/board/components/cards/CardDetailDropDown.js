@@ -51,7 +51,7 @@ const CardDetailDropDown = ({
   } = useDisclosure();
 
   const [analysisName, setAnalysisName] = useState(filename);
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(thumbnailUrl);
   const [dashboardTitle, setDashboardTitle] = useState(filename);
 
   const [uploadThumbnail] = useUploadSingleMutation();

@@ -17,8 +17,8 @@ import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import Correlation from "@/app/board/doc/components/analysisComponent/Correlation";
 
 const Page = ({ params }) => {
-  let uuid = params.fileUuid;
-  let analysisUUID = params.analysisUuid;
+  let uuid = params.Fileuuid;
+  let analysisUUID = params.analysisuuid;
   const { data: user } = useGetUserQuery();
 
   const { data: fileDetail, isLoading: detailLoading } = useGetFileDetailQuery({
@@ -27,35 +27,11 @@ const Page = ({ params }) => {
     page: 1,
   });
 
-  const { data: fileOverview, isLoading: overviewLoading } =
-    useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
+  const { data: fileOverview, isLoading: overviewLoading } = useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
 
   const dispatch = useDispatch();
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
-  const handleSelectGotoData = () => {
-    setCurrentStep(0);
-    onClose();
-  };
-
-  const [size, setSize] = useState("4xl");
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-
-  const handleSelect = () => {
-    if (currentStep === 1) {
-      setCurrentStep(2);
-    } else if (currentStep === 2) {
-      setCurrentStep(3);
-    } else if (currentStep === 3) {
-      setCurrentStep(4);
-    }
-  };
-
-  const handleOpen = (size) => {
-    setCurrentStep(1);
-    setSize(size);
-    onOpen();
-  };
 
   const { data: analysisDetail } = useAnalysisDetailsQuery({
     analysisUUID: analysisUUID,
@@ -73,38 +49,35 @@ const Page = ({ params }) => {
               {analysisDetail?.title || "Untitled Analysis"}
             </p>
           </div>
-          {/* <div className={"flex flex-row gap-5"}><ShareMember /></div> */}
         </div>
       </div>
-      {currentStep !== 3 && (
-        <div className={"pt-6"}>
-          {detailLoading ? (
-            <div className="flex justify-center items-center">
-              <Spinner size={"md"} />
-            </div>
-          ) : (
-            <>
-              {fileDetail ? (
-                <FileDetail
-                  showHeader={true}
-                  dataFile={fileDetail?.results}
-                  uuid={uuid}
-                  headers={fileDetail?.headers}
-                  isLoading={detailLoading}
-                  size={30}
-                />
-              ) : (
-                <div>
-                  <p className="text-red-400 text-xl text-center font-medium">
-                    Dataset might be deleted
-                  </p>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
-      {currentStep === 3 && <AnalysisStep3 />}
+
+      <div className={"pt-6"}>
+        {detailLoading ? (
+          <div className="flex justify-center items-center">
+            <Spinner size={"md"} />
+          </div>
+        ) : (
+          <>
+            {fileDetail ? (
+              <FileDetail
+                showHeader={true}
+                dataFile={fileDetail?.results}
+                uuid={uuid}
+                headers={fileDetail?.headers}
+                isLoading={detailLoading}
+                size={30}
+              />
+            ) : (
+              <div>
+                <p className="text-red-400 text-xl text-center font-medium">
+                  Dataset might be deleted
+                </p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       <div className="mt-10">
         <p className="text-xl mb-7 text-text-color  font-semibold">

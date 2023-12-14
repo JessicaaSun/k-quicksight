@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import perform from "@assets/images/Project_66-03.jpg";
 import { Button, Input, Spinner } from "@nextui-org/react";
-import {Select, Tabs} from "antd";
+import { Select, Tabs } from "antd";
 import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
 import Correllation from "@/app/board/doc/components/analysisComponent/Correlation";
 import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
@@ -101,39 +101,84 @@ export default function Perform({ params }) {
 
   return (
     <div className="p-3 grid grid-cols-1">
-      <Tabs defaultActiveKey="1" items={
-        [
+      <Tabs
+        defaultActiveKey="1"
+        items={[
           {
-            key: '1',
-            label: 'Dataset',
-            children: <div id={"perform eda grid gap-3"}>
-              <p className={"text-xl text-primary-color font-medium"}>Perform EDA</p>
-              <div className={"grid gap-3"}>
-                <FileDetail uuid={uuid} showHeader={true}/>
+            key: "1",
+            label: "Dataset",
+            children: (
+              <div id={"perform eda grid gap-3"}>
+                <p className={"text-xl text-primary-color font-medium"}>
+                  Perform EDA
+                </p>
+                <div className={"grid gap-3"}>
+                  <FileDetail uuid={uuid} showHeader={true} />
+                </div>
               </div>
-            </div>,
+            ),
           },
           {
-            key: '2',
-            label: 'Performing',
-            children: <div>
+            key: "2",
+            label: "Performing",
+            children: (
               <div>
-                <div className={'grid gap-3'}>
-                  <SelectVisulize />
-                  <Visualization bodyEda={bodyEda} />
-                </div>
-                <p className="uppercase text-xl font-medium text-primary-color mt-10">
-                  Performing analsis with {model}
-                </p>
-                {variableNotMoreThan2.some((model_mode) =>
+                <div>
+                  <div className={"grid gap-3"}>
+                    <SelectVisulize />
+                    <Visualization bodyEda={bodyEda} />
+                  </div>
+                  <p className="uppercase text-xl font-medium text-primary-color mt-10">
+                    Performing analsis with {model}
+                  </p>
+                  {variableNotMoreThan2.some((model_mode) =>
                     model.startsWith(model_mode)
-                ) ? (
+                  ) ? (
                     <div className="grid gap-3">
                       <div>
                         <p className="text-description-color text-md">
                           Select Dependent variable
                         </p>
                         <Select
+                          aria-label="Select"
+                          size={"large"}
+                          placeholder={"Selecting model"}
+                          style={{
+                            width: "100%",
+                          }}
+                          value={dependent_variable}
+                          onChange={setDependentVariable}
+                          options={headers?.header_label}
+                        />
+                      </div>
+                      <div>
+                        <p className="text-description-color text-md">
+                          Select Independent variable
+                        </p>
+                        <Select
+                          size={"large"}
+                          aria-label="Select"
+                          placeholder={"Selecting model"}
+                          style={{
+                            width: "100%",
+                          }}
+                          value={independent_variable}
+                          onChange={setIndependentVariable}
+                          options={headers?.header_label}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={"w-full"}>
+                      <p className="text-description-color text-md">
+                        Select Dependent variable
+                      </p>
+                      {fileLoading || headerLoading ? (
+                        <Spinner size={"md"} label={"loading - variables"} />
+                      ) : (
+                        <div className="flex gap-5 w-full">
+                          <Select
+                            aria-label="Select"
                             size={"large"}
                             placeholder={"Selecting model"}
                             style={{
@@ -142,126 +187,94 @@ export default function Perform({ params }) {
                             value={dependent_variable}
                             onChange={setDependentVariable}
                             options={headers?.header_label}
-                        />
-                      </div>
-                      <div>
-                        <p className="text-description-color text-md">
-                          Select Independent variable
-                        </p>
-                        <Select
+                          />
+                          <Select
+                            aria-label="Select"
                             size={"large"}
-                            placeholder={"Selecting model"}
+                            mode="multiple"
+                            placeholder="Independent variable"
+                            value={independent_variables}
+                            onChange={setIndependentVariables}
                             style={{
                               width: "100%",
                             }}
-                            value={independent_variable}
-                            onChange={setIndependentVariable}
                             options={headers?.header_label}
-                        />
-                      </div>
-                    </div>
-                ) : (
-                    <div className={"w-full"}>
-                      <p className="text-description-color text-md">
-                        Select Dependent variable
-                      </p>
-                      {fileLoading || headerLoading ? (
-                          <Spinner size={"md"} label={"loading - variables"} />
-                      ) : (
-                          <div className="flex gap-5 w-full">
-                            <Select
-                                size={"large"}
-                                placeholder={"Selecting model"}
-                                style={{
-                                  width: "100%",
-                                }}
-                                value={dependent_variable}
-                                onChange={setDependentVariable}
-                                options={headers?.header_label}
-                            />
-                            <Select
-                                size={"large"}
-                                mode="multiple"
-                                placeholder="Independent variable"
-                                value={independent_variables}
-                                onChange={setIndependentVariables}
-                                style={{
-                                  width: "100%",
-                                }}
-                                options={headers?.header_label}
-                            />
-                          </div>
+                          />
+                        </div>
                       )}
                     </div>
-                )}
-              </div>
-              <div className="flex gap-3 justify-start items-center">
-                <Button
+                  )}
+                </div>
+                <div className="flex gap-3 justify-start items-center">
+                  <Button
                     color="primary"
                     onClick={handleSubmitAnalysis}
                     size="md"
                     className="w-fit font-medium my-3"
-                >
-                  <MdDataThresholding />
-                  Perform analysis
-                </Button>
-                <Button
+                  >
+                    <MdDataThresholding />
+                    Perform analysis
+                  </Button>
+                  <Button
                     disabled={disable}
                     color="primary"
                     size="md"
                     className="w-fit"
                     onClick={() => router.push("/board/analysis")}
-                >
-                  <FaCheck />
-                  Done analysis
-                </Button>
-              </div>
-              {loading ? (
+                  >
+                    <FaCheck />
+                    Done analysis
+                  </Button>
+                </div>
+                {loading ? (
                   <div className="flex justify-center items-center">
                     <Spinner size={"md"} label={"Processing"} />
                   </div>
-              ) : (
+                ) : (
                   <>
                     {resultAnalysis && (
-                        <>
-                          {model === "descriptive_statistic" ? (
-                              <Descriptive_statistic
-                                  data={resultAnalysis?.descriptive_statistic}
-                                  headers={headers?.header_numeric}
-                              />
-                          ) : model === "correlation" || model === "covariance" ? (
-                              <Correllation
-                                  data={
-                                      resultAnalysis?.correlation || resultAnalysis?.covariance
-                                  }
-                                  dependentvariable={dependent_variable}
-                                  indepentvariable={independent_variable}
-                              />
-                          ) : model === "simple_linear_regression" ? (
-                              <SimpleLinear
-                                  data={resultAnalysis?.simple_linear_regression}
-                              />
-                          ) : model === "non_linear_regression" ? (
-                              <NonLinear
-                                  data={resultAnalysis?.non_linear_regression}
-                                  headers={headers?.header_numeric}
-                              />
-                          ) : model === "multiple_linear_regression" ? (
-                              <MultipleLinear
-                                  data={resultAnalysis?.multiple_linear_regression}
-                                  headers={headers?.header_numeric}
-                              />
-                          ) : (
-                              ""
-                          )}
-                        </>
+                      <>
+                        {model === "descriptive_statistic" ? (
+                          <Descriptive_statistic
+                            data={resultAnalysis?.descriptive_statistic}
+                            headers={headers?.header_numeric}
+                          />
+                        ) : model === "correlation" ||
+                          model === "covariance" ? (
+                          <Correllation
+                            data={
+                              resultAnalysis?.correlation ||
+                              resultAnalysis?.covariance
+                            }
+                            dependentvariable={dependent_variable}
+                            indepentvariable={independent_variable}
+                          />
+                        ) : model === "simple_linear_regression" ? (
+                          <SimpleLinear
+                            data={resultAnalysis?.simple_linear_regression}
+                          />
+                        ) : model === "non_linear_regression" ? (
+                          <NonLinear
+                            data={resultAnalysis?.non_linear_regression}
+                            headers={headers?.header_numeric}
+                          />
+                        ) : model === "multiple_linear_regression" ? (
+                          <MultipleLinear
+                            data={resultAnalysis?.multiple_linear_regression}
+                            headers={headers?.header_numeric}
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </>
                     )}
                   </>
-              )}
-            </div>
-          }
-        ]
-      } />
+                )}
+              </div>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 }

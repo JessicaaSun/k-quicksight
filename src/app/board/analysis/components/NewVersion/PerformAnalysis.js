@@ -64,6 +64,7 @@ export default function PerformAnalysisButton({uuid}) {
                                     <p className="text-small text-default-500">Model selected: {value}</p>
                                     <Select
                                         size="sm"
+                                        aria-label="Select"
                                         variant="bordered"
                                         placeholder="Select model"
                                         selectedKeys={value}

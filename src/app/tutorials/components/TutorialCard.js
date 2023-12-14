@@ -18,10 +18,10 @@ export default function TutorialCard() {
     } = useGetTutorialsQuery({page, size, title:""});
     console.log((tutorials))
     return (
-        <div className={"grid grid-cols-2 gap-4 "}>
+        <div className={"md:grid md:gap-5 lg:gap-8 grid-cols-2 "}>
             {
                 tutorials?.results.map((e, index) => (
-                    <div className="cursor-pointer" key={index} onClick={()=>router.push(`/tutorials/${e.uuid}`)}>
+                    <div className="cursor-pointer md:pt-0 pt-5" key={index} onClick={()=>router.push(`/tutorials/${e.uuid}`)}>
                         <Card isFooterBlurred
                               className="w-full h-[400px]  sm:col-span-7"
 

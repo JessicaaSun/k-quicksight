@@ -19,7 +19,7 @@ export const visualize = apiSlice.injectEndpoints({
       invalidatesTags: ["visualize"],
     }),
     getDashboardByUserUuid: builder.query({
-      query: ({ userUuid , page, size }) => ({
+      query: ({ userUuid, page, size }) => ({
         url: `dashboards/detail_by_user/${userUuid}/?p=${page}&size=${size}`,
         method: "GET",
       }),
@@ -50,6 +50,14 @@ export const visualize = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
       invalidatesTags: ["visualize"],
     }),
+    getColumnHeaderDataTypeByUuid: builder.query({
+      query: ({ uuid }) => ({
+        url: `visualize/view-type-dataset/${uuid}/`,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 1,
+      providesTags: ["visualize"],
+    }),
   }),
 });
 
@@ -59,6 +67,7 @@ export const {
   useGetDashboardByUserUuidQuery,
   useGetDashboardDetailByUuidQuery,
   useVisualizeMutation,
-  useUpdateDashboardMutation
+  useUpdateDashboardMutation,
+  useGetColumnHeaderDataTypeByUuidQuery,
 } = visualize;
 export default visualize;

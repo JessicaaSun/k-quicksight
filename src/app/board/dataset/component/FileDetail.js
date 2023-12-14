@@ -67,28 +67,33 @@ export default function FileDetail({ uuid, showHeader }) {
           </Table>
           <div className={"flex justify-end items-center"}>
             <Select
+              aria-label="Select number of rows to display"
               size={"sm"}
               variant={"bordered"}
               defaultSelectedKeys={["100"]}
               className="w-20"
               onChange={handleSelectionChange}
             >
-              <SelectItem key={100} value={100}>
+              <SelectItem textValue="100" key={100} value={100}>
                 100
               </SelectItem>
-              <SelectItem key={200} value={200}>
+              <SelectItem textValue="200" key={200} value={200}>
                 200
               </SelectItem>
-              <SelectItem key={300} value={300}>
+              <SelectItem textValue="300" key={300} value={300}>
                 300
               </SelectItem>
-              <SelectItem key={400} value={400}>
+              <SelectItem textValue="400" key={400} value={400}>
                 400
               </SelectItem>
-              <SelectItem key={500} value={500}>
+              <SelectItem textValue="500" key={500} value={500}>
                 500
               </SelectItem>
-              <SelectItem key={fileDetail?.count} value={fileDetail?.count}>
+              <SelectItem
+                key={fileDetail?.count}
+                textValue={fileDetail?.count}
+                value={fileDetail?.count}
+              >
                 {fileDetail?.count}
               </SelectItem>
             </Select>

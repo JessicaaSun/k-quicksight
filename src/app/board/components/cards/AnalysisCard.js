@@ -12,20 +12,14 @@ import {
 
 const AnalysisCard = ({ item, index }) => {
   const router = useRouter();
-  const getTitle = () => {
-    if (item?.title !== null) {
-      return item?.title;
-    } else {
-      return `Untitled${index > 0 ? ` ${index}` : ""}`;
-    }
-  };
+
   return (
     <Card className="w-full shadow-sm bg-black hover:scale-105 transition-all h-[300px] col-span-12 sm:col-span-5">
       <CardHeader className="absolute z-10 top-1 flex-col items-start">
         <p className="text-tiny text-white/60 uppercase font-bold">
           {item.model_name}
         </p>
-        <h4 className="text-white font-medium text-2xl">{getTitle()}</h4>
+        <h4 className="text-white font-medium text-2xl">{item?.title || 'Untitled'}</h4>
       </CardHeader>
       <button
         className="w-full h-full"
@@ -50,7 +44,7 @@ const AnalysisCard = ({ item, index }) => {
         </div>
         <CardDetailDropDown
           thumbnailUrl={item?.thumbnail}
-          filename={getTitle()}
+          filename={item?.title || 'Untitled'}
           isAnalysis={true}
           uuid={item?.uuid}
         />

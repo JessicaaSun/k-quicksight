@@ -20,7 +20,7 @@ const Container = styled.div`
   max-height: auto;
 `;
 
-const KQSEditor = ({ isSidebarHidden }) => {
+const KQSEditor = ({ isSidebarHidden,dashboardData }) => {
   const leftSidebarRef = useRef(null);
   const [viewPortHeight, setViewPortHeight] = useState(0);
   const { handleOnClickPreview, isOpenPreview } = useHandlePreview();
@@ -69,6 +69,9 @@ const KQSEditor = ({ isSidebarHidden }) => {
     return <Loading />;
   }
 
+  if (!dashboardData) {
+    return <Loading />;
+  } 
   return (
     <Editor
       config={{
@@ -88,7 +91,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
           isSidebarHidden ? "w-full" : "w-[calc(100vw-275px)]"
         } h-[calc(100vh-64px)] max-h-auto overflow-y-hidden`}
       >
-        <HeaderLayout />
+        <HeaderLayout dashboardData={dashboardData}/>
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{
@@ -109,7 +112,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
               background: "white",
             }}
           >
-            <Sidebar />
+            <Sidebar dashboardData={dashboardData}/>
           </div>
           <div
             style={{
@@ -129,7 +132,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
                 flexDirection: "column",
               }}
             >
-              <EditorContent />
+              <EditorContent dashboardData={dashboardData}/>
             </div>
             <div
               style={{

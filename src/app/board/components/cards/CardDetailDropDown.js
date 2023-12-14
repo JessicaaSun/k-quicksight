@@ -51,7 +51,7 @@ const CardDetailDropDown = ({
   } = useDisclosure();
 
   const [analysisName, setAnalysisName] = useState(filename);
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(thumbnailUrl);
   const [dashboardTitle, setDashboardTitle] = useState(filename);
 
   const [uploadThumbnail] = useUploadSingleMutation();
@@ -87,7 +87,6 @@ const CardDetailDropDown = ({
       let body = {
         title: dashboardTitle,
         thumbnail: previewImage,
-        file: datasetId,
       };
       const response = await updateDashboard({ data: body, uuid: uuid });
       if (response) {
@@ -160,7 +159,7 @@ const CardDetailDropDown = ({
                   text={"Cancel"}
                   hover={"#D40E53"}
                   clickAction={
-                    isAnalysis ? handleDeleteAnalysis : handleDeleteDashboard
+                  onEditClose
                   }
                 />
                 <SelectButton
@@ -204,7 +203,7 @@ const CardDetailDropDown = ({
                   paddingX={5}
                   text={"Delete"}
                   icon={<FaTrashCan size={12} />}
-                  clickAction={handleDeleteDashboard}
+                  clickAction={isAnalysis ? handleDeleteAnalysis : handleDeleteDashboard}
                 />
               </ModalFooter>
             </>

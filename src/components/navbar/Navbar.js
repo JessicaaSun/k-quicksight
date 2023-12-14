@@ -141,7 +141,7 @@ export default function NavbarKQuick() {
               ))}
             </NavbarMenu>
           </Navbar>
-          <div className="lg:flex md:flex hidden justify-center items-center gap-10 transition-all text-background-color">
+          <div className="lg:flex md:flex hidden justify-center items-center md:gap-3 lg:gap-10 xl:gap-10 transition-all text-background-color">
             {menuItems.map((item) => (
               <Link
                 href={item.path}

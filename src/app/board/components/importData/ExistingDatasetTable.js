@@ -21,6 +21,7 @@ import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import SelectButton from "@/components/buttons/SelectButton";
 import { useCreateDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
 import { toast } from "react-toastify";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const ExistingDatasetTable = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

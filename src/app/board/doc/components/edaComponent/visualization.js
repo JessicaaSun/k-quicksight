@@ -50,7 +50,7 @@ const Visualization = ({bodyEda}) => {
 
     return (
         <>
-            <Button isLoading={loading} onClick={handleEda} className={'my-5 text-md flex gap-4 font-medium text-white'} color={'success'} ><FaCheck /> Perform EDA</Button>
+            <Button isLoading={loading} onClick={handleEda} className={'mb-3 text-md flex gap-4 font-medium text-white'} color={'success'} ><FaCheck /> Perform EDA</Button>
             {
                 detailEDAResponse && (
                     <div className={'flex flex-col gap-3'}>

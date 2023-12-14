@@ -255,7 +255,7 @@ export default function Profile() {
                             <div className={'grid gap-3 w-full'}>
                                 {
                                     user?.data.analysis.map((item, index) => (
-                                        <Link href={`/board/analysis/${item.id}`} key={item.id} className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}>
+                                        <Link href={`/board/analysis/${item.uuid}`} key={item.id} className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}>
                                             <div style={{ backgroundColor: getRandomColor() }} className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}>
                                                 <FaStar />
                                             </div>

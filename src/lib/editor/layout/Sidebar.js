@@ -14,6 +14,7 @@ import { FaRegChartBar } from "react-icons/fa6";
 import VisualContent from "./sidebar/VisualContent";
 import { BsBarChart, BsDatabase } from "react-icons/bs";
 import DataContent from "./sidebar/DataContent";
+import Loading from "@/app/loading";
 
 const tabs = [
   {
@@ -32,21 +33,23 @@ const tabs = [
     name: "Shape",
     icon: <SquareIcon />,
   },
-  {
-    name: "Image",
-    icon: <ImageIcon />,
-  },
+  // {
+  //   name: "Image",
+  //   icon: <ImageIcon />,
+  // },
 
   {
     name: "Upload",
     icon: <UploadIcon />,
   },
 ];
-const Sidebar = () => {
+const Sidebar = ({ dashboardData }) => {
   const { actions } = useEditor();
   const [tab, setTab] = useState(null);
-  const sidebarWidth = tab === 'Data' ? 'calc(100vw - 74px)' : '300px';
-  
+  const sidebarWidth = tab === "Data" ? "calc(100vw - 74px)" : "300px";
+  if (!dashboardData) {
+    return <Loading />;
+  }
   return (
     <div
       style={{
@@ -110,6 +113,7 @@ const Sidebar = () => {
             )}
             {tab === "Visual" && (
               <VisualContent
+                datasetUuid={dashboardData?.file?.uuid}
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();
@@ -118,6 +122,8 @@ const Sidebar = () => {
             )}
             {tab === "Data" && (
               <DataContent
+                dataTitle={dashboardData?.file?.file}
+                datasetUuid={dashboardData?.file?.uuid}
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();

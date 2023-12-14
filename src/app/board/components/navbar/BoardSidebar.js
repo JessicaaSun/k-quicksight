@@ -39,7 +39,7 @@ const contentRoute = {
     },
     dashboard: {
       icon: <FaTableColumns />,
-      name: "dashboard",
+      name: "Dashboard",
       route: "/board/dashboard",
     },
   },

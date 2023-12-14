@@ -5,7 +5,8 @@ import {
   useGetFileDetailQuery,
   useGetFileOverviewQuery,
 } from "@/store/features/files/allFileByuserId";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFileAccurate } from "@/store/features/files/filesDetail";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
 import { Spinner, useDisclosure } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
@@ -17,8 +18,8 @@ import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import Correlation from "@/app/board/doc/components/analysisComponent/Correlation";
 
 const Page = ({ params }) => {
-  let uuid = params.Fileuuid;
-  let analysisUUID = params.analysisuuid;
+  let uuid = params.fileUuid;
+  let analysisUUID = params.analysisUuid;
   const { data: user } = useGetUserQuery();
 
   const { data: fileDetail, isLoading: detailLoading } = useGetFileDetailQuery({
@@ -45,7 +46,7 @@ const Page = ({ params }) => {
       <div className={"flex flex-row w-full justify-between"}>
         <div className={"flex flex-col"}>
           <div className={"flex flex-row"}>
-            <p className={"text-primary-color font-semibold text-3xl"}>
+          <p className={"text-primary-color font-semibold text-3xl"}>
               {analysisDetail?.title || "Untitled Analysis"}
             </p>
           </div>

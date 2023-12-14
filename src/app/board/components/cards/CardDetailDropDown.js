@@ -87,7 +87,6 @@ const CardDetailDropDown = ({
       let body = {
         title: dashboardTitle,
         thumbnail: previewImage,
-        file: datasetId,
       };
       const response = await updateDashboard({ data: body, uuid: uuid });
       if (response) {

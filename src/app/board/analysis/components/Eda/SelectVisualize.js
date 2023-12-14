@@ -38,6 +38,7 @@ const SelectVisualize = () => {
                 defaultValue={visualization}
                 placeholder="Please select"
                 onChange={handleChange}
+                aria-label="Select"
                 options={options}
             >
                 {options.map((option) => (

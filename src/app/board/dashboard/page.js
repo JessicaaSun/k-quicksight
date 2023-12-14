@@ -1,10 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
-import { MockDataDashboard } from "../mockData/mockDataDashboard";
+import EmptyAnalysis from "@/app/board/components/cards/emptyAnalysis";
 import {
   Button,
   Modal,
@@ -14,14 +10,15 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import UploadDataSetDashboard from "./components/importData/UploadDataSet";
-import AddDashboard from "./components/buttons/AddDashboard";
+
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetDashboardByUserUuidQuery } from "@/store/features/visualization/visualizeApiSlice";
 import Loading from "@/app/loading";
-import { generateBashURL } from "@/utils/util";
 import DashboardCard from "../components/cards/DashboardCard";
+import { AiOutlineSearch } from "react-icons/ai";
+import UploadDataSetDashboard from "../components/importData/UploadDataSet";
+import AddDashboard from "../components/buttons/AddDashboard";
 
 const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
@@ -32,6 +29,8 @@ const Page = () => {
       size: 100,
     });
   const [size, setSize] = React.useState("2xl");
+  const [dashboardTitle, setDashboardTitle] = useState("");
+  const [filteredDashboards, setFilteredDashboards] = useState([]);
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
@@ -39,6 +38,18 @@ const Page = () => {
     setSize(size);
     onOpen();
   };
+  useEffect(() => {
+    if (dashboardTitle.trim() === "") {
+      // If the search query is empty, show all dashboards
+      setFilteredDashboards(allDashboard?.results || []);
+    } else {
+      // If there is a search query, filter dashboards based on the title
+      const filteredResults = (allDashboard?.results || []).filter((item) =>
+        item.title.toLowerCase().includes(dashboardTitle.toLowerCase())
+      );
+      setFilteredDashboards(filteredResults);
+    }
+  }, [dashboardTitle, allDashboard]);
 
   if (userLoading || dashboardLoading) {
     return <Loading />;
@@ -81,17 +92,31 @@ const Page = () => {
         </div>
         <AddDashboard onOpen={onOpen} />
       </div>
+      <div className="mb-5 relative">
+        <div className="absolute z-10 inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <AiOutlineSearch size={20} className="text-gray-400 font-semibold" />
+        </div>
+        <input
+          id="searchQueryInput"
+          type="text"
+          name="searchQueryInput"
+          placeholder="Search"
+          className="w-[40%] h-[35px] bg-slate-50 outline-third-color outline-1  border-[1px] border-gray-300 rounded-3xl px-9 text-base"
+          value={dashboardTitle}
+          onChange={(e) => setDashboardTitle(e.target.value)}
+        />
+      </div>
       <div>
         {allDashboard && allDashboard?.results.length === 0 ? (
           <EmptyAnalysis isAnalysis={false} />
         ) : (
           <div>
             <div className={"flex flex-wrap gap-5"}>
-              {allDashboard?.results?.map((item, index) => {
+              {filteredDashboards?.map((item, index) => {
                 return (
                   <div key={item.uuid}>
                     <DashboardCard
-                      isAnalysis={true}
+                      isAnalysis={false}
                       analysisModel={"Correlation"}
                       fileTitle={"Sale_amazon.csv"}
                       routeTo={`/board/dashboard/${item.uuid}`}

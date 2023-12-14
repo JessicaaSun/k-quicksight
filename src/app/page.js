@@ -77,10 +77,8 @@ export default function Home() {
 
             <Button
               onClick={() => router.push("/tutorials")}
-
               className="md:w-[217px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
-
-            >
+            >          
               <svg
                 width="20"
                 height="18"

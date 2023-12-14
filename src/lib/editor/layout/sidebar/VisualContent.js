@@ -2,25 +2,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { useAsync } from "react-use";
-import axios from "axios";
 import NextImage from "next/image";
-import { getThumbnail } from "../../utils/thumbnail";
 import { Tooltip } from "@nextui-org/react";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { Select } from "antd";
-import { Button } from "@nextui-org/react";
 import { chartList } from "../../components/chart-list/ChartList";
-import { useGetFileDetailQuery } from "@/store/features/files/allFileByuserId";
-import { useVisualizeMutation } from "@/store/features/visualization/visualizeApiSlice";
+import {
+  useGetColumnHeaderDataTypeByUuidQuery,
+  useVisualizeMutation,
+} from "@/store/features/visualization/visualizeApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
+import Loading from "@/app/loading";
 
-const VisualContent = ({ onClose }) => {
-  const [images, setImages] = useState([]);
-  const [selectedChart, setSelectedChart] = useState(null);
+const VisualContent = ({ onClose, datasetUuid }) => {
+  const [selectedChart, setSelectedChart] = useState(
+    chartList[0]?.value || null
+  );
   const [isLoading, setIsLoading] = useState(false);
   const { actions } = useEditor();
   const [xAxis, setXAxis] = useState(null);
@@ -30,16 +29,12 @@ const VisualContent = ({ onClose }) => {
   const [createVisual] = useVisualizeMutation();
 
   const {
-    data: fileDetail,
+    data: headers,
     refetch: refetchDetail,
     isLoading: isFileDetailLoading,
-  } = useGetFileDetailQuery({
-    uuid: "28453108-020d-4fff-89c4-9aafd4ea8358",
-    size: 100,
-    page: 1,
+  } = useGetColumnHeaderDataTypeByUuidQuery({
+    uuid: datasetUuid,
   });
-
-  const headers = fileDetail?.headers;
 
   const pieType = ["pie_chart", "donut_chart"];
 
@@ -55,51 +50,25 @@ const VisualContent = ({ onClose }) => {
         chart_name: selectedChart,
         x_axis: xAxis,
         y_axis: yAxis,
-        file: 100,
-        user: user?.data.id,
+        file_uuid: datasetUuid,
       };
     } else {
       body = {
         chart_name: selectedChart,
         x_axis: xAxis,
         y_axis: yAxis,
-        file: 100,
-        user: user?.data.id,
+        file_uuid: datasetUuid,
       };
     }
 
-    console.log("select chart: ", selectedChart);
     let responseChart;
 
     try {
       responseChart = await createVisual({ data: body });
     } finally {
-      console.log("select chart: ", selectedChart);
-      console.log(responseChart?.data.visual?.pie_chart);
-      addImage(
-        
-        responseChart?.data.visual?.pie_chart,
-        responseChart?.data.visual?.pie_chart
-      );
+      addImage(responseChart?.data.img, responseChart?.data.img);
     }
   };
-  const options = [
-    {
-      id: 1,
-      value: "line",
-      label: "Line Chart",
-    },
-    {
-      id: 2,
-      value: "pie",
-      label: "Pie Chart",
-    },
-    {
-      id: 3,
-      value: "bar",
-      label: "Bar Chart",
-    },
-  ];
 
   const handleChartClick = (chart) => {
     setSelectedChart(chart?.value);
@@ -107,15 +76,22 @@ const VisualContent = ({ onClose }) => {
 
   const renderChartOptions = () => {
     return chartList.map((chart) => (
-      <div key={chart.id} className="flex cursor-pointer">
+      <div
+        key={chart.id}
+        className={`flex cursor-pointer ${
+          selectedChart === chart.value
+            ? "border-dashed border-2 p-1 rounded-md border-primary-color"
+            : ""
+        }`}
+      >
         <Tooltip showArrow={true} content={chart.title}>
           <NextImage
             onClick={() => handleChartClick(chart)}
-            className="w-[30px] h-[30px]"
+            className="w-[35px] h-[35px]"
             src={chart?.icon}
             alt={chart.title}
-            width={30}
-            height={30}
+            width={35}
+            height={35}
           />
         </Tooltip>
       </div>
@@ -124,7 +100,7 @@ const VisualContent = ({ onClose }) => {
 
   const renderFieldsSelect = () => {
     if (!selectedChart) return null;
-    const headersOptions = headers?.map((header, index) => ({
+    const headersOptions = headers?.data?.all_columns.map((header, index) => ({
       id: index,
       value: header,
       label: header,
@@ -133,9 +109,9 @@ const VisualContent = ({ onClose }) => {
       case "line_chart":
       case "scatter_plot":
       case "column_chart":
+      case "histogram":
       case "bar_chart":
-      case "heatmap":
-      case "bubble_chart":
+      case "area_chart":
         return (
           <>
             <div className="mb-2">
@@ -165,15 +141,11 @@ const VisualContent = ({ onClose }) => {
           </>
         );
       case "pie_chart":
-      case "donut_chart":
         return (
           <div className="mb-2">
-            <p className="ps-2 text-sm text-text-color pb-2 font-semibold">
-              Count
-            </p>
             <div className="mb-2">
               <p className="ps-2 text-sm text-text-color pb-2 font-semibold">
-                X Axis
+                Legend
               </p>
               <Select
                 style={{ width: "100%" }}
@@ -185,7 +157,7 @@ const VisualContent = ({ onClose }) => {
             </div>
             <div className="mb-2">
               <p className="ps-2 text-sm text-text-color pb-2 font-semibold">
-                Y Axis
+                Values
               </p>
               <Select
                 style={{ width: "100%" }}
@@ -197,27 +169,28 @@ const VisualContent = ({ onClose }) => {
             </div>
           </div>
         );
+      case "heatmap":
+      case "bubble_chart":
+      case "donut_chart":
+      case "waterfall":
+      case "kpi":
+        return <p>Chart is not available yet. Coming soon!!</p>;
       default:
         return null;
     }
   };
 
-  // useAsync(async () => {
-  //   const response = await axios.get(
-  //     `${process.env.NEXT_PUBLIC_BASE_URL}files/view/images/`
-  //   );
-  //   setImages(response.data);
-  //   setIsLoading(false);
-  // }, []);
-
   const addImage = async (thumb, url) => {
     const img = new Image();
 
-    img.src = url;
+    const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}files/${url}`; // Concatenate BASE_URL with the image path
+
+    img.src = fullUrl;
+    console.log("url, ", fullUrl); // Log the full URL
     // img.crossOrigin = "anonymous";
     img.onload = () => {
       actions.addImageLayer(
-        { thumb, url },
+        { thumb, url: fullUrl },
         { width: img.naturalWidth, height: img.naturalHeight }
       );
       if (isMobile) {
@@ -226,6 +199,9 @@ const VisualContent = ({ onClose }) => {
     };
   };
 
+  if (!datasetUuid) {
+    return <Loading />;
+  }
   return (
     <div
       style={{
@@ -277,7 +253,7 @@ const VisualContent = ({ onClose }) => {
         className="mx-5"
         style={{
           flexDirection: "column",
-          marginTop: 20,
+          marginTop: 15,
           overflowY: "auto",
           display: "flex",
         }}
@@ -285,16 +261,6 @@ const VisualContent = ({ onClose }) => {
         <div className="mb-3">
           <div className="flex mb-3 justify-between">
             <p className="text-text-color font-semibold">Visual Type</p>
-            <div>
-              <button
-                className={
-                  "rounded-lg py-1 px-5 bg-primary-color text-sm text-white"
-                }
-                onClick={handleCreateVisual}
-              >
-                Add Chart
-              </button>
-            </div>
           </div>
           <div className="flex mb-2 flex-wrap mt-3 gap-4">
             {renderChartOptions()}
@@ -303,6 +269,16 @@ const VisualContent = ({ onClose }) => {
 
         <p className="text-text-color mb-3 mt-2 font-semibold">Fields</p>
         <div className="mb-2">{renderFieldsSelect()}</div>
+        <div className="flex items-end justify-end">
+          <button
+            className={
+              "rounded-lg font-medium py-1 mt-4 px-5 bg-primary-color text-sm text-white"
+            }
+            onClick={handleCreateVisual}
+          >
+            Add Chart
+          </button>
+        </div>
       </div>
     </div>
   );

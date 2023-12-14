@@ -52,29 +52,29 @@ body {
   }
 }
 
-/* width */
+
 ::-webkit-scrollbar {
   width: 0px;
+  height: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  width: 2px;
+  background: whitesmoke;
+  width: 4px;
+  border-radius: 10px;
+  margin: 5px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  width: 5px;
-  background: #0346A5;
+  width: 2px;
+  height: 6px;
+  background: rgb(200, 199, 199);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
+} 
 @layer base {
   h1 {
     @apply text-4xl;

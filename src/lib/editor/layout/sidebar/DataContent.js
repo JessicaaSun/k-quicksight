@@ -9,14 +9,13 @@ import FileDetail from "@/app/board/dataset/component/FileDetail";
 import { useVisualizeFileContext } from "@/context/VisualizeFileContext";
 import { useGetFileDetailQuery } from "@/store/features/files/allFileByuserId";
 
-const DataContent = ({ onClose }) => {
-  const { selectedFiled } = useVisualizeFileContext();
+const DataContent = ({ onClose, dataTitle, datasetUuid }) => {
   const {
     data: fileDetail,
     refetch: refetchDetail,
     isLoading,
   } = useGetFileDetailQuery({
-    uuid: "28453108-020d-4fff-89c4-9aafd4ea8358",
+    uuid: datasetUuid,
     size: 100,
     page: 1,
   });
@@ -50,7 +49,7 @@ const DataContent = ({ onClose }) => {
             flexGrow: 1,
           }}
         >
-          Dataset
+          <span className="text-third-color">Dataset: </span>{dataTitle}
         </p>
         <div
           style={{
@@ -80,14 +79,7 @@ const DataContent = ({ onClose }) => {
         {isLoading ? (
           <Spinner size={"md"} />
         ) : (
-          <FileDetail
-            showHeader={false}
-            dataFile={fileDetail?.results}
-            uuid={"28453108-020d-4fff-89c4-9aafd4ea8358"}
-            headers={fileDetail?.headers}
-            isLoading={isLoading}
-            size={30}
-          />
+          <FileDetail showHeader={false} uuid={datasetUuid} />
         )}
       </div>
     </div>

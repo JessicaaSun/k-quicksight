@@ -107,7 +107,7 @@ const UploadContent = ({ visibility, onClose }) => {
       <div
         style={{
           margin: 16,
-          background: "#3a3a4c",
+          background: "#0346A5",
           borderRadius: 8,
           color: "#fff",
           padding: "8px 16px",

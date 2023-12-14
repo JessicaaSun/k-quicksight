@@ -117,6 +117,7 @@ const Analysis = () => {
           Choosing model: <span className={"font-semibold"}>{chosenModel}</span>
         </p>
         <Select
+          aria-label="Select"
           size={"large"}
           placeholder={"Selecting model"}
           style={{
@@ -166,6 +167,7 @@ const Analysis = () => {
                       Select Dependent variable
                     </p>
                     <Select
+                      aria-label="Select"
                       size={"large"}
                       placeholder={"Selecting model"}
                       style={{
@@ -181,6 +183,7 @@ const Analysis = () => {
                       Select Independent variable
                     </p>
                     <Select
+                      aria-label="Select"
                       size={"large"}
                       placeholder={"Selecting model"}
                       style={{
@@ -199,6 +202,7 @@ const Analysis = () => {
                   </p>
                   <div className="flex gap-5">
                     <Select
+                      aria-label="Select"
                       size={"large"}
                       placeholder={"Selecting model"}
                       style={{
@@ -209,6 +213,7 @@ const Analysis = () => {
                       options={headers?.header_label}
                     />
                     <Select
+                      aria-label="Select"
                       size={"large"}
                       mode="multiple"
                       placeholder="Independent variable"

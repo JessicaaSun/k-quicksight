@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
 
-const AddDashboard = ({onOpen}) => {
+const AddDashboard = ({ onOpen, isAnalysis }) => {
   return (
     <div className={"text-primary-color "}>
       <Button
@@ -18,7 +18,7 @@ const AddDashboard = ({onOpen}) => {
             fill="white"
           />
         </svg>
-        Create Dashboard
+        {isAnalysis ? "Create Analysis" : "Create Dashboard"}
       </Button>
     </div>
   );

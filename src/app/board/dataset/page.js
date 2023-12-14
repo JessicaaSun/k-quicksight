@@ -72,9 +72,9 @@ const Dataset = () => {
 
   return (
     <div className={"py-10 px-7"}>
-      <div className={"flex justify-between items-center"}>
+      <div className={"flex flex-wrap justify-between items-center"}>
         <p className={"text-primary-color font-semibold text-3xl"}>Dataset</p>
-        <div className={"flex justify-center items-center gap-5"}>
+        <div className={"flex justify-center items-center gap-5 lg:mt-0 md:mt-0 mt-5"}>
           <ModalImport />
           <NewDataset isFull={isFull} />
         </div>
@@ -96,7 +96,7 @@ const Dataset = () => {
         </div>
         <div
           className={
-            "flex gap-3 justify-start items-center text-xl font-semibold text-primary-color"
+            "flex gap-3 justify-start items-center text-xl font-semibold text-primary-color mt-5"
           }
         >
           <MdOutlineAutoGraph />

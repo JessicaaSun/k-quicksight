@@ -48,7 +48,7 @@ const Page = () => {
               className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}
             >
               {allAnalysis?.results.map((item, index) => (
-                <div key={index} className="grid gap-3">
+                <div key={index} className="grid gap-3 shadow-md rounded-2xl">
                   <AnalysisCard item={item} index={index} />
                 </div>
               ))}

@@ -15,7 +15,7 @@ import {
 import {useGetUserSearchQuery} from "@/store/features/user/usersApiSlice";
 import {useShareMemberMutation} from "@/store/features/shareMember/apiSliceShare";
 import {FaShareFromSquare} from "react-icons/fa6";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import {generateBashURL} from "@/utils/util";
 
 export default function ShareMember({filename, fileId, list}) {
@@ -96,18 +96,7 @@ export default function ShareMember({filename, fileId, list}) {
                                 <p className={'text-md font-normal text-description-color'}>{filename} </p>
                             </ModalHeader>
                             <ModalBody>
-                                <ToastContainer
-                                    position="top-center"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                />
+                            
                                 <div className="flex gap-2 flex-wrap">
                                     {userSelectedFilter?.map((item, index) => (
                                         <Chip

@@ -17,10 +17,6 @@ const DashboardCard = ({ item, index, routeTo }) => {
       return `Untitled${index > 0 ? ` ${index}` : ""}`;
     }
   };
-  const handleCardClick = () => {
-    console.log("Card clicked!");
-  };
-
   const handleImageClick = () => {
     router.push(routeTo);
   };
@@ -30,11 +26,11 @@ const DashboardCard = ({ item, index, routeTo }) => {
       className={
         "flex flex-col hover:scale-105  bg-white rounded-xl shadow-sm transition-all"
       }
-      onClick={handleCardClick}
     >
       <Image
         width={265}
         height={157}
+        priority={false}
         src={generateBashURL(item?.thumbnail)}
         alt={item?.title !== null ? item?.title : "Thumbnail"}
         className={
@@ -52,7 +48,13 @@ const DashboardCard = ({ item, index, routeTo }) => {
             {getTrimIntoColumnDateAndTime(item.created_at)}
           </p>
         </div>
-        <CardDetailDropDown uuid={item?.uuid} />
+        <CardDetailDropDown
+          datasetId={item?.file?.id}
+          thumbnailUrl={item?.thumbnail}
+          filename={getTitle()}
+          uuid={item?.uuid}
+          isAnalysis={false}
+        />
       </div>
     </div>
   );

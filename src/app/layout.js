@@ -10,6 +10,8 @@ import Footer from "@/components/footer/footer";
 import { SidebarProvider } from "@/context/BoardSideBarContext";
 import { PreviewProvider } from "@/context/EditorPreviewContext";
 import NoInternetConnection from "@/app/NoInternetConnection";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +33,18 @@ export default function RootLayout({ children }) {
                   <Providers>
                     <AuthProvider>
                       <Navbar_UI />
+                      <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                      />
                       {children}
                       <Footer />
                     </AuthProvider>

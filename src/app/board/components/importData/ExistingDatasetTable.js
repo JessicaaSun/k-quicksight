@@ -20,11 +20,11 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import SelectButton from "@/components/buttons/SelectButton";
 import { useCreateDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
+import { toast } from "react-toastify";
 
 const ExistingDatasetTable = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
-  const { selectedFile } = useVisualizeFileContext();
   const [datasetName, setDatasets] = useState("");
   const [fileType, setFileTypes] = useState("");
   const { data: user } = useGetUserQuery();
@@ -38,19 +38,21 @@ const ExistingDatasetTable = () => {
   });
 
   const handleSelectDataSet = async () => {
-    if (selectedFileUuid === null) {
-      console.error("No file selected");
-      return;
+    try {
+      let body;
+      body = {
+        created_by: user?.data?.id,
+        file_uuid: selectedFileUuid,
+      };
+      const responseDashboard = await createDashboard({ data: body });
+      console.log("dash", responseDashboard);
+      isLoading(true);
+      router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
+    } catch {
+      if (!error.response) {
+        toast.error("No file selected.");
+      }
     }
-    let body;
-    body = {
-      created_by: user?.data?.id,
-    };
-
-    const responseDashboard = await createDashboard({ data: body });
-    console.log("dash", responseDashboard)
-    isLoading(true);
-    router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
   };
 
   return (
@@ -59,7 +61,7 @@ const ExistingDatasetTable = () => {
         onPress={onOpen}
         className={"flex flex-col justify-center p-4 items-center h-full"}
       >
-        <Image src={TableImage} alt={""} className={"w-28"} />
+        <Image priority={false} src={TableImage} alt={""} className={"w-28"} />
         <p className={" font-bold"}>Pick existing dataset</p>
       </Button>
       <Modal
@@ -85,6 +87,7 @@ const ExistingDatasetTable = () => {
                     onChange={(e) => setDatasets(e.target.value)}
                   />
                   <SelectButton
+                    rounded={"full"}
                     color={"primary-color"}
                     text={"Select"}
                     hover={"hover-primary"}

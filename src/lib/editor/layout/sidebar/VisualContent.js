@@ -65,9 +65,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
 
     try {
       responseChart = await createVisual({ data: body });
-      console.log("chart", responseChart);
     } finally {
-      console.log("select chart: ", selectedChart);
       addImage(responseChart?.data.img, responseChart?.data.img);
     }
   };
@@ -111,9 +109,9 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       case "line_chart":
       case "scatter_plot":
       case "column_chart":
+      case "histogram":
       case "bar_chart":
-      case "heatmap":
-      case "bubble_chart":
+      case "area_chart":
         return (
           <>
             <div className="mb-2">
@@ -143,7 +141,6 @@ const VisualContent = ({ onClose, datasetUuid }) => {
           </>
         );
       case "pie_chart":
-      case "donut_chart":
         return (
           <div className="mb-2">
             <div className="mb-2">
@@ -172,6 +169,12 @@ const VisualContent = ({ onClose, datasetUuid }) => {
             </div>
           </div>
         );
+      case "heatmap":
+      case "bubble_chart":
+      case "donut_chart":
+      case "waterfall":
+      case "kpi":
+        return <p>Chart is not available yet. Coming soon!!</p>;
       default:
         return null;
     }

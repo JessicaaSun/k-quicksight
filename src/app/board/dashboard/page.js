@@ -1,10 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
-import { MockDataDashboard } from "../mockData/mockDataDashboard";
+import EmptyAnalysis from "@/app/board/components/cards/emptyAnalysis";
 import {
   Button,
   Modal,
@@ -14,15 +10,15 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import UploadDataSetDashboard from "./components/importData/UploadDataSet";
-import AddDashboard from "./components/buttons/AddDashboard";
+
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetDashboardByUserUuidQuery } from "@/store/features/visualization/visualizeApiSlice";
 import Loading from "@/app/loading";
-import { generateBashURL } from "@/utils/util";
 import DashboardCard from "../components/cards/DashboardCard";
-import { AiOutlineFileSearch, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import UploadDataSetDashboard from "../components/importData/UploadDataSet";
+import AddDashboard from "../components/buttons/AddDashboard";
 
 const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();

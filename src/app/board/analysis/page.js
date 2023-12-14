@@ -2,12 +2,13 @@
 "use client";
 import React from "react";
 import { useDisclosure } from "@nextui-org/react";
-import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
+
 import { useAllAnalysisFileQuery } from "@/store/features/analysis/analysisApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useRouter } from "next/navigation";
 import AddNewButton from "./components/NewVersion/ModalAddNew";
 import AnalysisCard from "../components/cards/AnalysisCard";
+import EmptyAnalysis from "../components/cards/emptyAnalysis";
 const Page = () => {
   const { data: user } = useGetUserQuery();
   const { data: allAnalysis } = useAllAnalysisFileQuery({

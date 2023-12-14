@@ -6,6 +6,10 @@ import pieChart from "@assets/charts/pie-chart.svg";
 import donutChart from "@assets/charts/donut-chart.svg";
 import bubbleChart from "@assets/charts/bubble-chart.svg";
 import heatMap from "@assets/charts/heat-map.svg";
+import waterfall from "@assets/charts/waterfall.svg";
+import gauge from "@assets/charts/gauge.svg";
+import histogram from "@assets/charts/vertical-bar-chart.svg";
+import areaChart from "@assets/charts/area-chart.svg";
 
 export const chartList = [
   {
@@ -40,20 +44,44 @@ export const chartList = [
   },
   {
     id: 6,
-    icon: scatterChart,
-    value: "scatter_chart",
-    title: "Scatter plot",
+    icon: gauge,
+    value: "kpi",
+    title: "KPI",
   },
   {
     id: 7,
+    icon: histogram,
+    value: "histogram",
+    title: "Histogram",
+  },
+  {
+    id: 8,
+    icon: areaChart,
+    value: "area_chart",
+    title: "Area chart",
+  },
+  {
+    id: 9,
+    icon: scatterChart,
+    value: "scatter_plot",
+    title: "Scatter plot",
+  },
+  {
+    id: 10,
     icon: bubbleChart,
     value: "bubble_chart",
     title: "Bubble chart",
   },
   {
-    id: 8,
+    id: 11,
     icon: heatMap,
     value: "heatmap",
     title: "Heat Map",
+  },
+  {
+    id: 12,
+    icon: waterfall,
+    value: "waterfall",
+    title: "Waterfall",
   },
 ];

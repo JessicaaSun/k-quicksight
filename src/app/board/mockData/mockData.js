@@ -1,5 +1,9 @@
 import dashboard_1 from '@assets/images/dashboard_1.jpg'
 import dashboard_2 from '@assets/images/dashboard_2.png'
+import {LuFileBarChart, LuFileJson} from "react-icons/lu";
+import {TbFileTypeTxt} from "react-icons/tb";
+import {RiFileExcel2Line} from "react-icons/ri";
+import {BsFiletypeCsv} from "react-icons/bs";
 
 export const mockData = {
     dataset: [
@@ -45,27 +49,32 @@ export const dataType = [
     {
         id: 1,
         value: '',
-        label: 'All Files'
+        label: 'All Files',
+        icon: <LuFileBarChart />
     },
     {
         id: 2,
         value: 'txt',
-        label: 'txt'
+        label: 'txt',
+        icon: <TbFileTypeTxt />
     },
     {
         id: 3,
         value: 'xlsx',
-        label: 'xlsx'
+        label: 'xlsx',
+        icon: <RiFileExcel2Line />
     },
     {
         id: 4,
         value: 'json',
-        label: 'json'
+        label: 'json',
+        icon: <LuFileJson />
     },
     {
         id: 5,
         value: 'csv',
-        label: 'csv'
+        label: 'csv',
+        icon: <BsFiletypeCsv />
     },
 ]
 
@@ -100,7 +109,8 @@ export const sample_dataset = [
         createAt: '01/11/2023',
         size: '10.89KB',
         url: '/board/dataset/564837b6-838c-11ee-b962-0242ac120002',
-        uuid: '3ca0e936-85e2-11ee-b9d1-0242ac120002'
+        uuid: '3ca0e936-85e2-11ee-b9d1-0242ac120002',
+        thumbnail: 'https://www.niehs.nih.gov/research/scientific-data/assets/images/plan_hero.jpg'
     },
     {
         title: 'cambodia income',
@@ -108,7 +118,8 @@ export const sample_dataset = [
         createAt: '02/10/2023',
         size: '10.49KB',
         url: '/board/dataset/5c13419a-838c-11ee-b962-0242ac120002',
-        uuid: '33b77182-85e2-11ee-b9d1-0242ac120002'
+        uuid: '33b77182-85e2-11ee-b9d1-0242ac120002',
+        thumbnail: 'https://images.spiceworks.com/wp-content/uploads/2022/08/02141047/facets-of-data-analytics.jpg'
     },
 ]
 export const analysis_sample = [

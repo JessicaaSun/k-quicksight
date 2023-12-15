@@ -33,9 +33,9 @@ const SearchDataset = () => {
     return (
         <Input color={'primary'} startContent={<SearchIcon />} classNames={{
             inputWrapper: [
-                'h-[41px] w-[325px] bg-white shadow-sm border-1 border-gray-400'
+                'h-[50px] w-full bg-white shadow-sm border-1 border-gray-400 rounded-full'
             ]
-        }}  onValueChange={setValueSearch} value={searchValue} placeholder={'Search'} className={'w-fit'} />
+        }}  onValueChange={setValueSearch} value={searchValue} placeholder={'Search'} />
     );
 };
 

@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import FormLogin from "./components/Form";
 import React from "react";
 import Outlet from "@/middleware/Outlet";
 import Loading from "@/app/loading";
+import LoginQuick from "./components/Form";
 
 export default function Login() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Login() {
   // }
   return (
     <Outlet>
-      <main className="min-h-screen bg-background-color">
+      <main className="min-h-screen flex justify-center items-center bg-background-color">
         <button
           onClick={() => router.push("/")}
           className="fixed top-5 right-10"
@@ -34,7 +34,7 @@ export default function Login() {
             />
           </svg>
         </button>
-        <FormLogin />
+        <LoginQuick />
       </main>
     </Outlet>
   );

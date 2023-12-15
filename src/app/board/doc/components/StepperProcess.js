@@ -11,6 +11,8 @@ import ImportExistDataset from "@/app/board/doc/components/ImportExistDataset";
 import CleaningStep from "@/app/board/doc/components/CleaningStep";
 import Eda from "@/app/board/doc/components/Eda";
 import Analysis from "@/app/board/doc/components/Analysis";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import Visualization from "@/app/board/doc/components/Visualization";
 
 const steps = [
     {
@@ -28,10 +30,6 @@ const steps = [
     {
         label: 'Analysis',
         description: <Analysis />,
-    },
-    {
-        label: 'Visualization',
-        description: 'Visualization',
     },
     {
         label: 'Interpret or Recommendation',
@@ -64,21 +62,22 @@ export default function StepperProcess() {
                         </StepLabel>
                         <StepContent>
                             <Typography>{step.description}</Typography>
-                            <Box sx={{ mb: 2 }}>
-                                <div>
+                            <Box sx={{ mb: 2, mt: 4 }}>
+                                <div className='flex justify-between items-center'>
                                     <Button
+                                        className='flex gap-3 rounded-xl bg-third-color text-white px-3 hover:bg-third-color/50'
                                         disabled={index === 0}
                                         onClick={handleBack}
                                         sx={{ mt: 1, mr: 1 }}
                                     >
-                                        Back
+                                        <FaArrowLeft /> Back 
                                     </Button>
                                     <Button
-                                        variant="text"
+                                        className='flex gap-3 rounded-xl bg-primary-color text-white px-3 hover:bg-primary-color/50'
                                         onClick={handleNext}
                                         sx={{ mt: 1, mr: 1 }}
                                     >
-                                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                                        {index === steps.length - 1 ? 'Finish' : 'Continue'} <FaArrowRight />
                                     </Button>
                                 </div>
                             </Box>

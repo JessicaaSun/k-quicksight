@@ -44,7 +44,7 @@ const DetailDataset = ({params}) => {
             </div>
             <div className={'flex flex-col gap-3'}>
                 <p className={'text-primary-color font-semibold text-medium'}>Total records: {fileDetail?.total} </p>
-                <FileDetail uuid={uuid} />
+                <FileDetail uuid={uuid} showHeader={true}/>
             </div>
         </div>
     );

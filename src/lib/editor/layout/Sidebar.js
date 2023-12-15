@@ -12,8 +12,19 @@ import FrameContent from "./sidebar/FrameContent";
 import { useEditor } from "@lidojs/editor";
 import { FaRegChartBar } from "react-icons/fa6";
 import VisualContent from "./sidebar/VisualContent";
+import { BsBarChart, BsDatabase } from "react-icons/bs";
+import DataContent from "./sidebar/DataContent";
+import Loading from "@/app/loading";
 
 const tabs = [
+  {
+    name: "Visual",
+    icon: <BsBarChart />,
+  },
+  {
+    name: "Data",
+    icon: <BsDatabase />,
+  },
   {
     name: "Text",
     icon: <TextTIcon />,
@@ -22,22 +33,23 @@ const tabs = [
     name: "Shape",
     icon: <SquareIcon />,
   },
-  {
-    name: "Image",
-    icon: <ImageIcon />,
-  },
-  {
-    name: "Visual",
-    icon: <FaRegChartBar />,
-  },
+  // {
+  //   name: "Image",
+  //   icon: <ImageIcon />,
+  // },
+
   {
     name: "Upload",
     icon: <UploadIcon />,
   },
 ];
-const Sidebar = () => {
+const Sidebar = ({ dashboardData }) => {
   const { actions } = useEditor();
   const [tab, setTab] = useState(null);
+  const sidebarWidth = tab === "Data" ? "calc(100vw - 74px)" : "300px";
+  if (!dashboardData) {
+    return <Loading />;
+  }
   return (
     <div
       style={{
@@ -64,7 +76,7 @@ const Sidebar = () => {
         {tab && (
           <div
             style={{
-              width: 360,
+              width: sidebarWidth,
               "@media (maxWidth: 800px)": {
                 width: "100%",
                 position: "fixed",
@@ -83,14 +95,14 @@ const Sidebar = () => {
                 }}
               />
             )}
-            {tab === "Frame" && (
+            {/* {tab === "Chart Example" && (
               <FrameContent
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();
                 }}
               />
-            )}
+            )} */}
             {tab === "Image" && (
               <ImageContent
                 onClose={() => {
@@ -101,6 +113,17 @@ const Sidebar = () => {
             )}
             {tab === "Visual" && (
               <VisualContent
+                datasetUuid={dashboardData?.file?.uuid}
+                onClose={() => {
+                  setTab(null);
+                  actions.setSidebar();
+                }}
+              />
+            )}
+            {tab === "Data" && (
+              <DataContent
+                dataTitle={dashboardData?.file?.file}
+                datasetUuid={dashboardData?.file?.uuid}
                 onClose={() => {
                   setTab(null);
                   actions.setSidebar();
@@ -127,7 +150,7 @@ const Sidebar = () => {
       </div>
       <div
         style={{
-          width: 360,
+          width: 300,
           position: "absolute",
           overflow: "hidden",
           top: 0,

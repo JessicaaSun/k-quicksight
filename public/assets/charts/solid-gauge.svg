@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="38.641" viewBox="0 0 70 38.641">
+  <g id="Solid_Gauge" data-name="Solid Gauge" transform="translate(-11.004 -11)">
+    <path id="Subtraction_10" data-name="Subtraction 10" d="M13.147,33.957H0A34.514,34.514,0,0,1,66.293,21.073,34.279,34.279,0,0,1,69,33.955H55.853a21.36,21.36,0,0,0-42.706,0Z" transform="translate(11.504 11.5)" fill="#FFA500" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Subtraction_12" data-name="Subtraction 12" d="M18.7,22.317H5.553A21.224,21.224,0,0,0,3.88,14.55,21.285,21.285,0,0,0,0,8.491L10.041,0a34.385,34.385,0,0,1,5.951,9.434A34.281,34.281,0,0,1,18.7,22.316Z" transform="translate(61.805 23.14)" fill="#24313d" stroke="#2a2a2a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <g id="Group_92" data-name="Group 92" transform="matrix(0.695, 0.719, -0.719, 0.695, 46.114, 40.33)">
+      <g id="Group_91" data-name="Group 91" transform="translate(0)">
+        <circle id="Ellipse_76" data-name="Ellipse 76" cx="4" cy="4" r="4" transform="translate(-1.439 -1.389)" fill="#24313d"/>
+      </g>
+    </g>
+    <line id="Line_33" data-name="Line 33" y1="10.954" transform="matrix(0.695, 0.719, -0.719, 0.695, 55.896, 34.69)" fill="none" stroke="#24313d" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+</svg>

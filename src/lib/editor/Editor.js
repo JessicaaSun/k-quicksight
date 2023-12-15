@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Loading from "@/app/loading";
 import { useHandlePreview } from "@/context/EditorPreviewContext";
 import HeaderLayout from "./layout/HeaderLayout";
+import dynamic from "next/dynamic";
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const Container = styled.div`
   max-height: auto;
 `;
 
-const KQSEditor = ({ isSidebarHidden }) => {
+const KQSEditor = ({ isSidebarHidden,dashboardData }) => {
   const leftSidebarRef = useRef(null);
   const [viewPortHeight, setViewPortHeight] = useState(0);
   const { handleOnClickPreview, isOpenPreview } = useHandlePreview();
@@ -39,7 +40,9 @@ const KQSEditor = ({ isSidebarHidden }) => {
       return params;
     };
 
-    const res = await axios.get(`https://api-gilt-one.vercel.app/fonts?${buildParams(query)}`);
+    const res = await axios.get(
+      `https://api-gilt-one.vercel.app/fonts?${buildParams(query)}`
+    );
     return res.data;
   }, []);
 
@@ -66,6 +69,9 @@ const KQSEditor = ({ isSidebarHidden }) => {
     return <Loading />;
   }
 
+  if (!dashboardData) {
+    return <Loading />;
+  } 
   return (
     <Editor
       config={{
@@ -82,10 +88,10 @@ const KQSEditor = ({ isSidebarHidden }) => {
     >
       <Container
         className={` ${
-          isSidebarHidden ? "w-full" : "w-[calc(100vw-255px)]"
+          isSidebarHidden ? "w-full" : "w-[calc(100vw-275px)]"
         } h-[calc(100vh-64px)] max-h-auto overflow-y-hidden`}
       >
-        <HeaderLayout/>
+        <HeaderLayout dashboardData={dashboardData}/>
         {isOpenPreview && <PreviewModal onClose={handleOnClickPreview} />}
         <div
           style={{
@@ -106,7 +112,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
               background: "white",
             }}
           >
-            <Sidebar />
+            <Sidebar dashboardData={dashboardData}/>
           </div>
           <div
             style={{
@@ -126,7 +132,7 @@ const KQSEditor = ({ isSidebarHidden }) => {
                 flexDirection: "column",
               }}
             >
-              <EditorContent />
+              <EditorContent dashboardData={dashboardData}/>
             </div>
             <div
               style={{

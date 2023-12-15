@@ -1,9 +1,10 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PlayCircleIcon from "@duyank/icons/regular/PlayCircle";
 import { downloadObjectAsJson } from "../utils/download";
+import { toast } from "react-toastify";
 import { useEditor } from "@lidojs/editor";
 import {
   Avatar,
@@ -25,21 +26,71 @@ import {
   AiOutlineCaretRight,
 } from "react-icons/ai";
 import logo from "@assets/logos/logo.png";
-import BoardSidebar from "@/app/board/components/BoardSidebar";
+import BoardSidebar from "@/app/board/components/navbar/BoardSidebar";
+import { logout } from "@/store/features/auth/authSlice";
+import { generateBashURL } from "@/utils/util";
+import Loading from "@/app/loading";
+import { useUpdateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 
-const HeaderLayout = ({ openPreview }, ref) => {
+const HeaderLayout = ({ openPreview, dashboardData }, ref) => {
   const uploadRef = useRef(null);
+  const inputRef = useRef(null);
   const { actions, query } = useEditor();
   const { data: user, isSuccess, isLoading } = useGetUserQuery();
+  const [updateDashboard] = useUpdateDashboardMutation();
   const dispatch = useDispatch();
   const pathname = usePathname();
 
-  const displayPreviewBtn = pathname.includes("dashboard/**", "analysis/**", "editor");
+  const displayPreviewBtn = pathname.includes(
+    "dashboard/**",
+    "analysis/**",
+    "editor"
+  );
   const { isSidebarHidden, toggleSidebar } = useSidebar();
   const { handleOnClickPreview } = useHandlePreview();
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState(dashboardData?.title);
 
-  const handleExport = () => {
-    downloadObjectAsJson("file", query.serialize());
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleBlur = () => {
+    setIsEditing(false);
+    // Save the changes or perform any required actions here
+  };
+
+  // Focus the input field when editing starts
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+
+  const handleExport = async () => {
+    const dataStr = JSON.stringify(query.serialize());
+    
+    try {
+      let body = {
+        title: title,
+        thumbnail: dashboardData?.thumbnail,
+        json_data: dataStr,
+      };
+      const response = await updateDashboard({
+        data: body,
+        uuid: dashboardData?.uuid,
+      });
+      if (response) {
+        toast.success("Successfully updated dashboard");
+      }
+    } catch {
+      toast.error("Updated fail");
+    }
   };
 
   const handleImport = (e) => {
@@ -54,7 +105,9 @@ const HeaderLayout = ({ openPreview }, ref) => {
       e.target.value = "";
     }
   };
-
+  if (!dashboardData) {
+    return <Loading />;
+  }
   return (
     <div
       ref={ref}
@@ -62,6 +115,7 @@ const HeaderLayout = ({ openPreview }, ref) => {
         "fixed z-40 top-0 right-0 w-full bg-primary-color flex justify-between items-center px-[3%] py-3"
       }
     >
+   
       <div className={"flex justify-center items-center gap-5"}>
         {isSidebarHidden ? (
           <button
@@ -85,53 +139,73 @@ const HeaderLayout = ({ openPreview }, ref) => {
             className={"bg-white rounded-full w-[36px] h-[36px] object-contain"}
           />
         </Link>
+        <div className="hover:border-slate-300 hover:border-5 rounded-md ps-3">
+          <h4
+            onDoubleClick={handleDoubleClick}
+            className="text-white cursor-text "
+          >
+            {isEditing ? (
+              <input
+                type="title"
+                className="text-white bg-primary-color focus:outline-none focus:border-1 focus:border-dashed focus:border-third-color; 
+              border-transparent"
+                value={title}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                ref={inputRef}
+              />
+            ) : (
+              <span>{title}</span>
+            )}
+          </h4>
+        </div>
       </div>
       <div className="flex gap-5 items-center">
         {/* {displayPreviewBtn ? ( */}
-          <div className="flex items-center gap-4">
-            <div
-              style={{
-                cursor: "pointer",
-                color: "#fff",
-                fontWeight: 700,
-                ":hover": {
-                  textDecoration: "underline",
-                },
-              }}
-              onClick={() => uploadRef.current?.click()}
-            >
-              <input
-                ref={uploadRef}
-                type="file"
-                accept="application/json"
-                onChange={handleImport}
-                style={{ display: "none" }}
-              />
-              Import
-            </div>
-            <div
-              style={{
-                cursor: "pointer",
-                color: "#fff",
-                fontWeight: 700,
-                ":hover": {
-                  textDecoration: "underline",
-                },
-              }}
-              onClick={handleExport}
-            >
-              Export
-            </div>
-            <div
-              className="flex items-center text-primary-color leading-1 bg-white p-2 rounded-lg cursor-pointer hover:bg-slate-200"
-              onClick={handleOnClickPreview}
-            >
-              <div style={{ fontSize: 20 }}>
-                <AiFillPlayCircle />
-              </div>{" "}
-              Preview
-            </div>
+        <div className="flex items-center gap-4">
+          <div
+            style={{
+              cursor: "pointer",
+              color: "#fff",
+              fontWeight: 700,
+              ":hover": {
+                textDecoration: "underline",
+              },
+            }}
+            onClick={() => uploadRef.current?.click()}
+          >
+            <input
+              ref={uploadRef}
+              type="file"
+              accept="application/json"
+              onChange={handleImport}
+              style={{ display: "none" }}
+            />
+            Import
           </div>
+          <div
+            style={{
+              cursor: "pointer",
+              color: "#fff",
+              fontWeight: 700,
+              ":hover": {
+                textDecoration: "underline",
+              },
+            }}
+            onClick={handleExport}
+          >
+            Save
+          </div>
+          <div
+            className="flex items-center text-primary-color leading-1 bg-white p-2 rounded-lg cursor-pointer hover:bg-slate-200"
+            onClick={handleOnClickPreview}
+          >
+            <div style={{ fontSize: 20 }}>
+              <AiFillPlayCircle />
+            </div>{" "}
+            Preview
+          </div>
+        </div>
         {/* ) : (
           ""
         )} */}
@@ -141,14 +215,10 @@ const HeaderLayout = ({ openPreview }, ref) => {
               isBordered
               as="button"
               className="transition-transform"
-              color="secondary"
+              color="primary"
               name="Jason Hughes"
               size="sm"
-              src={
-                user?.data.avatar
-                  ? user.data.avatar
-                  : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-              }
+              src={generateBashURL(user?.data.avatar)}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Dynamic Actions">

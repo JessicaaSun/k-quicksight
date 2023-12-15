@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="69.615" viewBox="0 0 70 69.615">
+  <g id="Venn_Diagram" data-name="Venn Diagram" transform="translate(-14.5 -14.5)">
+    <path id="Subtraction_15" data-name="Subtraction 15" d="M12.518,17.422h0A22.058,22.058,0,0,1,0,1.924,21.831,21.831,0,0,1,9.01,0,21.86,21.86,0,0,1,21.521,3.9a22,22,0,0,0-9,13.516Z" transform="translate(27.979 39.637)" fill="#24313d"/>
+    <path id="Subtraction_16" data-name="Subtraction 16" d="M9,17.416v0A21.783,21.783,0,0,0,5.756,9.746,22,22,0,0,0,0,3.9,22.02,22.02,0,0,1,21.506,1.918,22.057,22.057,0,0,1,9,17.415Z" transform="translate(49.5 39.637)" fill="#FFA500"/>
+    <path id="Subtraction_17" data-name="Subtraction 17" d="M9.478,22.658h0a22.17,22.17,0,0,1-6.886-7.72A22.076,22.076,0,0,1,.475.006a21.818,21.818,0,0,0,9,1.918A21.822,21.822,0,0,0,18.479,0a22.141,22.141,0,0,1,.476,4.573,22.028,22.028,0,0,1-2.591,10.365,22.171,22.171,0,0,1-6.885,7.72Z" transform="translate(40.022 57.053)" fill="#d9f3f4"/>
+    <g id="Elipse" transform="translate(15 15)">
+      <circle id="Ellipse_63" data-name="Ellipse 63" cx="21.989" cy="21.989" r="21.989" transform="translate(12.503)" fill="none" stroke="#2d3039" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      <circle id="Ellipse_64" data-name="Ellipse 64" cx="21.989" cy="21.989" r="21.989" transform="translate(0 24.637)" fill="none" stroke="#2d3039" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      <circle id="Ellipse_65" data-name="Ellipse 65" cx="21.989" cy="21.989" r="21.989" transform="translate(25.022 24.637)" fill="none" stroke="#2d3039" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

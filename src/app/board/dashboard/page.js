@@ -1,68 +1,131 @@
 "use client";
-import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
-import Link from "next/link";
-import Image from "next/image";
-import EmptyAnalysis from "@/app/board/components/emptyAnalysis";
-import { MockDataDashboard } from "../mockData/mockDataDashboard";
+import React, { useEffect, useState } from "react";
+import EmptyAnalysis from "@/app/board/components/cards/emptyAnalysis";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
+
+import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import Loading from "@/app/loading";
+import DashboardCard from "../components/cards/DashboardCard";
+import { AiOutlineSearch } from "react-icons/ai";
+import UploadDataSetDashboard from "../components/importData/UploadDataSet";
+import AddDashboard from "../components/buttons/AddDashboard";
+import { useGetDashboardByUserUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
+
 const Page = () => {
-  const [mockData, setMockData] = useState(MockDataDashboard.listDashboard);
-  const link = {
-    route: "/board/dashboard/new",
+  const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
+  const { data: allDashboard, isLoading: dashboardLoading } =
+    useGetDashboardByUserUuidQuery({
+      userUuid: user?.data.uuid,
+      page: 1,
+      size: 100,
+    });
+  const [size, setSize] = React.useState("2xl");
+  const [dashboardTitle, setDashboardTitle] = useState("");
+  const [filteredDashboards, setFilteredDashboards] = useState([]);
+
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+  const handleOpen = (size) => {
+    setSize(size);
+    onOpen();
   };
+  useEffect(() => {
+    if (dashboardTitle.trim() === "") {
+      // If the search query is empty, show all dashboards
+      setFilteredDashboards(allDashboard?.results || []);
+    } else {
+      // If there is a search query, filter dashboards based on the title
+      const filteredResults = (allDashboard?.results || []).filter((item) =>
+        item.title.toLowerCase().includes(dashboardTitle.toLowerCase())
+      );
+      setFilteredDashboards(filteredResults);
+    }
+  }, [dashboardTitle, allDashboard]);
+
+  if (userLoading || dashboardLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="py-10 px-5">
+    <div className="py-10 px-7">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          onClose={onClose}
+          size={size}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader>
+                  <h4>Import Dataset</h4>
+                </ModalHeader>
+
+                <ModalBody>
+                  <div
+                    className={
+                      "flex flex-row mb-12 mt-8 justify-center items-center gap-10"
+                    }
+                  >
+                    <UploadDataSetDashboard />
+                    <ExistingDatasetTable />
+                  </div>
+                </ModalBody>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-2xl"}>
+          <p className={"text-primary-color font-semibold text-3xl"}>
             Dashboard
           </p>
         </div>
-        <div className={"text-primary-color "}>
-          <Link href={link.route}>
-            <Button className={"bg-primary-color text-background-color"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-                  fill="white"
-                />
-              </svg>
-              Add new
-            </Button>
-          </Link>
+        <AddDashboard onOpen={onOpen} />
+      </div>
+      <div className="mb-5 relative">
+        <div className="absolute z-10 inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <AiOutlineSearch size={20} className="text-gray-400 font-semibold" />
         </div>
+        <input
+          id="searchQueryInput"
+          type="text"
+          name="searchQueryInput"
+          placeholder="Search"
+          className="w-[40%] h-[35px] bg-slate-50 outline-third-color outline-1  border-[1px] border-gray-300 rounded-3xl px-9 text-base"
+          value={dashboardTitle}
+          onChange={(e) => setDashboardTitle(e.target.value)}
+        />
       </div>
       <div>
-        {MockDataDashboard.listDashboard.length === 0 ? (
-          <EmptyAnalysis />
+        {allDashboard && allDashboard?.results.length === 0 ? (
+          <EmptyAnalysis isAnalysis={false} />
         ) : (
           <div>
-            <div className={"flex flex-row gap-5"}>
-              {MockDataDashboard.listDashboard.map((item, index) => (
-                <Link
-                  href={item.url}
-                  key={index}
-                  className={
-                    "flex flex-col gap-3 p-2 bg-white shadow-sm hover:bg-blue-100 rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
-                  }
-                >
-                  <Image
-                    src={item.thumbnail}
-                    alt={item.name}
-                    className={
-                      "max-w-[265px] max-h-[157px] rounded-xl object-cover"
-                    }
-                  />
-                  <div className={"flex ps-2 pb-1 flex-col"}>
-                    <p>{item.name}</p>
-                    <p>{item.createdAt}</p>
+            <div className={"flex flex-wrap gap-5"}>
+              {filteredDashboards?.map((item, index) => {
+                return (
+                  <div key={item.uuid}>
+                    <DashboardCard
+                      isAnalysis={false}
+                      analysisModel={"Correlation"}
+                      fileTitle={"Sale_amazon.csv"}
+                      routeTo={`/board/dashboard/${item.uuid}`}
+                      item={item}
+                      index={index}
+                    />
                   </div>
-                </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

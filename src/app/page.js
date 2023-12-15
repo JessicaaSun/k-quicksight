@@ -43,10 +43,10 @@ export default function Home() {
   }, [dispatch, loginWithGoogle, session]);
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
-      <section className="lg:flex md:flex block gap-5 justify-between items-center px-[10%] mt-10 py-14 sm:py-12 max-sm:py-12">
+      <section className="lg:flex md:flex gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 py-14 sm:py-12 max-sm:py-12">
         <div className="flex flex-col gap-3 w-full">
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
-            <p className="leading-[65px] max-sm:leading-normal sm:leading-normal">
+            <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
             Discover, Analyze and Decide With{" "}
             <span className=" text-primary-color">
               K-QuickSight
@@ -58,18 +58,18 @@ export default function Home() {
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.
           </p>
-          <div className="w-full pt-6 flex gap-5">
+          <div className="w-full pt-6 flex max-sm:gap-3 sm:gap-3 gap-5">
             {!user ? (
               <Button
                 onClick={() => router.push("/auth/login")}
-                className="w-[184px] font-bold bg-primary-color text-white"
+                className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
                 Get started
               </Button>
             ) : (
               <Button
-                onClick={() => router.push("/board/recent")}
-                className="w-[184px] font-bold bg-primary-color text-white"
+                onClick={() => router.push("/board/dataset")}
+                className="md:w-[184px]  max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
                 Go To Board
               </Button>
@@ -77,8 +77,8 @@ export default function Home() {
 
             <Button
               onClick={() => router.push("/tutorials")}
-              className="min-w-[217px] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
-            >
+              className="md:w-[217px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
+            >          
               <svg
                 width="20"
                 height="18"
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} priority={false} alt="hero" className="homepage_image w-full" />
+          <Image src={heroImg} priority={false} unoptimized={true} alt="hero" className="homepage_image w-full" />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">
@@ -107,16 +107,16 @@ export default function Home() {
         </h2>
         <Card_Why />
       </section>
-      <section className="w-full py-20 px-[10%]">
+      <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
         <h2 className="text-primary-color font-bold text-center">
           Getting started with K-QuickSight
         </h2>
         <GetStart_boxs />
       </section>
-      <section className="pb-32 w-full lg:px-[10%] md:px-[5%] px-3">
+      <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>
-      <section className="bg-secondary-color px-3 flex flex-col justify-center items-center py-20 w-full">
+      <section className="bg-secondary-color px-3 flex flex-col justify-center items-center max-sm:py-16 sm:py-16 py-20 w-full">
         <h2 className="text-background-color">What Our Users Say</h2>
 
         <p className="text-background-color mb-12 font-normal lg:w-[40%] md:w-2/3 w-full mt-4 text-center">

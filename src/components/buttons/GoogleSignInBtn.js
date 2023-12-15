@@ -7,8 +7,7 @@ import { useLoginMutation } from "@/store/features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/features/auth/authSlice";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const GoogleSignInBtn = () => {
   const [login, { isLoading }] = useLoginMutation();

@@ -1,105 +1,67 @@
-import React from "react";
-import { Input } from "@nextui-org/react";
-import { SearchIcon } from "@/app/board/doc/searchIcons";
-import {
-  analysis_sample,
-  mockData,
-  sample_dataset,
-} from "@/app/board/mockData/mockData";
-import Link from "next/link";
-import Image from "next/image";
+'use client'
 
-const Sample_all = () => {
-  return (
-    <div className={"py-36 px-[10%]"}>
-      <div className={"flex justify-between items-center"}>
-        <p className={"text-primary-color font-semibold text-2xl"}>Sample</p>
-        <Input
-          placeholder={"Search ..."}
-          variant={"bordered"}
-          color={"primary"}
-          startContent={<SearchIcon />}
-          className={"w-[384px]"}
-          classNames={{
-            inputWrapper: ["h-[42px] shadow-sm"],
-          }}
-        />
-      </div>
-      <div className={"my-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Dataset
-        </p>
-        <div className={"flex flex-col gap-5"}>
-          {sample_dataset.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
-              }
-            >
-              <p className={"w-1/4 text-left"}>{item.title}</p>
-              <p className={"w-1/4 text-center"}>{item.fileType}</p>
-              <p className={"w-1/4 text-center"}>{item.createAt}</p>
-              <p className={"w-1/4 text-right"}>{item.size}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className={"mb-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Analysis
-        </p>
-        <div className={"flex flex-col gap-5"}>
-          {analysis_sample.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 hover:bg-primary-color hover:text-white transition-all shadow-sm flex flex-end justify-between font-semibold items-center rounded-xl px-5 py-2 text-primary-color border-1 border-gray-200"
-              }
-            >
-              <p className={"w-1/3"}>{item.filename}</p>
-              <p className={"w-1/3 text-center"}>{item.createDate}</p>
-              <p className={"w-1/3 text-right"}>{item.fileSize}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className={"mb-10"}>
-        <p className={"text-xl mb-5 text-primary-color font-semibold"}>
-          Dashboard
-        </p>
-        <div className={"flex flex-row gap-5"}>
-          {mockData.dashboard.map((item, index) => (
-            <Link
-              href={item.url}
-              key={index}
-              className={
-                "active:scale-105 flex flex-col gap-5 p-2 hover:bg-blue-100 hover:shadow-lg rounded-xl hover:ring-1 hover:ring-primary-color transition-all"
-              }
-            >
-              <Image
-                src={item.thumbnail}
-                alt={item.name}
-                className={
-                  "max-w-[265px] max-h-[157px] rounded-xl object-cover"
-                }
-              />
-              <div className={"flex flex-col"}>
-                <p className={"text-description-color font-semibold"}>
-                  {item.name}
-                </p>
-                <p className={"text-description-color font-semibold"}>
-                  {item.createdAt}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+import React from 'react';
+import { Tabs } from 'antd';
+import Sample_all from "@/app/sample/components/dataset";
+import sampleImage from '@assets/images/sampleSide.png'
+import Image from "next/image";
+import {Button} from "@nextui-org/react";
+import {FaPlus} from "react-icons/fa";
+import {useGetUserQuery} from "@/store/features/user/userApiSlice";
+import {useRouter} from "next/navigation";
+
+const onChange = (key) => {
+    console.log(key);
 };
 
-export default Sample_all;
+const items = [
+    {
+        key: '1',
+        label: 'Dataset',
+        children: <Sample_all />,
+    },
+    {
+        key: '2',
+        label: 'Analysis',
+        children: 'Analysis will be latter!',
+    },
+    {
+        key: '3',
+        label: 'Dashboard',
+        children: 'Dashboard will be latter',
+    },
+];
+const SampleDataset_main = () => {
+    const router = useRouter();
+    const {data:user, isLoading} = useGetUserQuery();
+
+    const handleRouteAddNewDataset = () => {
+        if (!user) {
+            router.push("/auth/login")
+        } else {
+            router.push("/board/dataset")
+        }
+    }
+
+
+    return (
+        <div className={'py-40 px-[10%]'}>
+            <div className={'lg:flex md:flex block justify-between items-center'}>
+                <div className={'w-full grid gap-4'}>
+                    <h2 className={'text-text-color'}>Sample</h2>
+                    <p className={'text-description-color'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
+                    <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
+                </div>
+                <Image className={'bg-transparent'} src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
+            </div>
+            <Tabs
+                defaultActiveKey="1"
+                items={items}
+                onChange={onChange}
+                size={'large'}
+                indicatorSize={(origin) => origin - 16}
+            />
+        </div>
+    )
+}
+export default SampleDataset_main;

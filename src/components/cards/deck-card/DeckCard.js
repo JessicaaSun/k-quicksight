@@ -13,12 +13,12 @@ export default function DeckCard() {
     <Swiper
       modules={[EffectCards]}
       grabCursor={true}
-      className="md:w-[600px] max-sm:w-[370px] sm:w-[450px] h-auto" 
+      className="md:w-[600px] max-sm:w-[290px] sm:w-[400px] h-auto" 
       effect="cards"
     >
       {data.map((feedback, index) => (
         <SwiperSlide key={index} className={styles.swiperSlide}>
-          <div className="p-10 justify-center flex flex-col gap-10">
+          <div className="p-10 max-sm:p-6 sm:p-6 justify-center flex flex-col gap-10">
             <p className="md:text-[20px] sm:text-[18px] max-sm:text-[18px] font-normal">
               {feedback.feedback}
             </p>

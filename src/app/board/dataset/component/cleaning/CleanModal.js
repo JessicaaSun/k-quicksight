@@ -12,11 +12,9 @@ import {
     Checkbox, Radio, RadioGroup, cn, CheckboxGroup
 } from "@nextui-org/react";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
-import 'react-toastify/dist/ReactToastify.css';
-
 export default function CleanModal({filename}) {
     const router = useRouter();
     const {data:user} = useGetUserQuery();
@@ -73,18 +71,7 @@ export default function CleanModal({filename}) {
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-primary-color text-3xl">Cleansing Options</ModalHeader>
                             <ModalBody>
-                                <ToastContainer
-                                    position="top-center"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                />
+                               
                                 <div className={'mt-5'}>
                                     <RadioGroup
                                         value={select}

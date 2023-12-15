@@ -124,7 +124,7 @@ export default function GetStart_boxs() {
   ];
 
   return (
-    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col gap-36">
+    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col max-sm:gap-14 sm:gap-14 gap-36">
       {data.map((item, index) => (
         <Link target={'_blank'} href={item.url}
           key={index}
@@ -147,7 +147,7 @@ export default function GetStart_boxs() {
                   : "-right-32 top-20 w-[320px]"
               } lg:absolute md:hidden lg:block hidden`}
             >
-              <Image src={item.out_image} alt={item.out_image} />
+              <Image src={item.out_image} unoptimized={true} alt={item.out_image} />
             </div>
             <div>{item.svg}</div>
             <div className="lg:mt-0 md:mt-0 mt-5 flex flex-col gap-2">

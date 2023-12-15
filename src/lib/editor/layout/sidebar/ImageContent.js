@@ -14,8 +14,9 @@ const ImageContent = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useAsync(async () => {
-    const response = await axios.get("http://localhost:8000/api/v1/files/view/images/");
-    console.log("response image", response)
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}files/view/images/`
+    );
     setImages(response.data);
     setIsLoading(false);
   }, []);
@@ -24,17 +25,17 @@ const ImageContent = ({ onClose }) => {
 
   const addImage = async (thumb, url) => {
     const img = new Image();
+
     img.src = url;
-    await img.decode();
-
-    actions.addImageLayer(
-      { thumb, url },
-      { width: img.width, height: img.height }
-    );
-
-    if (isMobile) {
-      onClose();
-    }
+    img.onload = () => {
+      actions.addImageLayer(
+        { thumb, url },
+        { width: img.naturalWidth, height: img.naturalHeight }
+      );
+      if (isMobile) {
+        onClose();
+      }
+    };
   };
 
   return (
@@ -107,10 +108,13 @@ const ImageContent = ({ onClose }) => {
                 paddingBottom: "100%",
                 width: "100%",
               }}
-              onClick={() => addImage(item.filename, item.url)}
+              onClick={() => {
+                addImage(item.img, item.img);
+                console.log(item.img);
+              }}
             >
               <img
-                src={item.url}
+                src={item.img}
                 loading="lazy"
                 style={{
                   position: "absolute",

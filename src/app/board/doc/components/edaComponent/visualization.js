@@ -1,4 +1,6 @@
-import React from 'react';
+'use client'
+
+import React, {useEffect, useState} from 'react';
 import {useEdaFileMutation} from "@/store/features/ExploreData/ExploreData";
 import {Button, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import {getRandomColor} from "@/utils/util";
@@ -7,6 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import DataTable from "@/app/board/doc/components/edaComponent/DataTable";
 import CorrelationTable from "@/app/board/doc/components/edaComponent/CorrelationTable";
 import ImageVisualization from "@/app/board/doc/components/edaComponent/ImageVisualization";
+import {FaCheck} from "react-icons/fa";
+import fastForward from "@duyank/icons/regular/FastForward";
 
 export const numberHeaders = [
     "Unnamed: 0.1",
@@ -21,28 +25,32 @@ export const numberHeaders = [
 const Visualization = ({bodyEda}) => {
     const dispatch = useDispatch();
     const [edaFile] = useEdaFileMutation();
-    const detailEDAResponse = useSelector(state => state.eda.detail)
+    const detailEDAResponse = useSelector(state => state.eda.detail);
+    const [loading, isLoading] = useState(false)
+    const [response, setResponse] = useState(null)
+    const [error, setError] = useState('')
 
     const handleEda = async () => {
         const response = await edaFile({data: bodyEda})
+        isLoading(true)
+        setResponse(response?.data)
         dispatch(setDetail(response?.data))
     }
-    console.log(detailEDAResponse)
+
+    useEffect(() => {
+        if (response) {
+            isLoading(false)
+        } else if (response === undefined) {
+            setTimeout(() => {
+                isLoading(false)
+                setError('Something when wrong')
+            }, 3000)
+        }
+    }, [response]);
 
     return (
-        <div>
-
-            <div>
-                <span>You chosen to perform EDA of </span>
-                {
-                    bodyEda?.visualizes.map((item, index) => (
-                        <span className={'mx-3 p-2 rounded-xl'} key={index} style={{ backgroundColor: getRandomColor(), color: "white"}}>
-                          {item}{' '}
-                        </span>
-                    ))
-                }
-            </div>
-            <Button onClick={handleEda} >Perform EDA</Button>
+        <>
+            <Button isLoading={loading} onClick={handleEda} className={'mb-3 text-md flex gap-4 font-medium text-white'} color={'success'} ><FaCheck /> Perform EDA</Button>
             {
                 detailEDAResponse && (
                     <div className={'flex flex-col gap-3'}>
@@ -61,7 +69,7 @@ const Visualization = ({bodyEda}) => {
                     </div>
                 )
             }
-        </div>
+        </>
     );
 };
 

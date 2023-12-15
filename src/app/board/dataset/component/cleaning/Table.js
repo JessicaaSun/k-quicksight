@@ -4,32 +4,32 @@ import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@
 export default function TableMissingValue({item}) {
     return (
         (
-            <Table aria-label="Example static collection table">
-                <TableHeader>
+            <table aria-label="Example static collection table">
+                <tr>
                     {
                         item?.headers?.map((item) => (
-                            <TableColumn className={'bg-blue-50'} key={item}>{item}</TableColumn>
+                            <th className={'bg-blue-50'} key={item}>{item}</th>
                         ))
                     }
-                </TableHeader>
-                <TableBody emptyContent={'none value'}>
+                </tr>
+                <tbody>
                     {
-                        item?.missing_cell.map((rowItem, rowIndex) => (
-                            <TableRow key={rowIndex}>
+                        item?.missing_cell?.map((rowItem, rowIndex) => (
+                            <tr key={rowIndex}>
                                 {
                                     item?.headers?.map((header, colIndex) => (
-                                        <TableCell key={colIndex}>
+                                        <td key={colIndex}>
                                             {
                                                 rowItem[header] || <span className={'text-red-500 font-medium'}>null</span>
                                             }
-                                        </TableCell>
+                                        </td>
                                     ))
                                 }
-                            </TableRow>
+                            </tr>
                         ))
                     }
-                </TableBody>
-            </Table>
+                </tbody>
+            </table>
         )
     );
 }

@@ -21,15 +21,17 @@ const Eda = () => {
     return (
         <div className={'flex flex-col gap-5'}>
             {
-                showClean && (
+                showClean ? (
                     <>
                         <p className={'text-lg text-primary-color font-medium'}>Detail dataset</p>
-                        <FileDetail uuid={uuidFileCleaned} />
+                        <FileDetail showHeader={true} uuid={uuidFileCleaned} />
+                        <SelectVisulize />
+                        <Visualization bodyEda={bodyEda} />
                     </>
+                ) : (
+                    <p className={'text-lg text-primary-color font-medium'}>Please clean your dataset first!</p>
                 )
             }
-            <SelectVisulize />
-            <Visualization bodyEda={bodyEda} />
         </div>
     );
 };

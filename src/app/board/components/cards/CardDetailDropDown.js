@@ -14,12 +14,7 @@ import {
   Input,
   useDisclosure,
 } from "@nextui-org/react";
-import {
-  useDeleteDashboardMutation,
-  useUpdateDashboardMutation,
-} from "@/store/features/visualization/visualizeApiSlice";
 import { useUploadSingleMutation } from "@/store/features/user/uploadAccountImage";
-import { generateBashURL } from "@/utils/util";
 import SelectButton from "@/components/buttons/SelectButton";
 import DeleteButtonComponent from "@/components/buttons/DeleteButton";
 import UploadImageZone from "@/components/forms/UploadImageZone";
@@ -29,6 +24,7 @@ import {
   useUpdateAnalysisFileMutation,
 } from "@/store/features/analysis/analysisApiSlice";
 import "react-toastify/dist/ReactToastify.css";
+import { useDeleteDashboardMutation, useUpdateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 
 const CardDetailDropDown = ({
   isAnalysis,

@@ -1,7 +1,7 @@
 "use client";
 import { useSidebar } from "@/context/BoardSideBarContext";
 import KQSEditor from "@/lib/editor/Editor";
-import { useGetDashboardDetailByUuidQuery } from "@/store/features/visualization/visualizeApiSlice";
+import { useGetDashboardDetailByUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
 import React, { useEffect } from "react";
 
 const Page = ({ params }) => {

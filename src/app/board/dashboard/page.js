@@ -13,12 +13,12 @@ import {
 
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
-import { useGetDashboardByUserUuidQuery } from "@/store/features/visualization/visualizeApiSlice";
 import Loading from "@/app/loading";
 import DashboardCard from "../components/cards/DashboardCard";
 import { AiOutlineSearch } from "react-icons/ai";
 import UploadDataSetDashboard from "../components/importData/UploadDataSet";
 import AddDashboard from "../components/buttons/AddDashboard";
+import { useGetDashboardByUserUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
 
 const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();

@@ -9,12 +9,10 @@ import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { Select } from "antd";
 import { chartList } from "../../components/chart-list/ChartList";
-import {
-  useGetColumnHeaderDataTypeByUuidQuery,
-  useVisualizeMutation,
-} from "@/store/features/visualization/visualizeApiSlice";
+import { useVisualizeMutation } from "@/store/features/visualization/visualizeApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Loading from "@/app/loading";
+import { useGetColumnHeaderDataTypeByUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
 
 const VisualContent = ({ onClose, datasetUuid }) => {
   const [selectedChart, setSelectedChart] = useState(
@@ -61,15 +59,24 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       };
     }
 
-    let responseChart;
-
-    try {
-      responseChart = await createVisual({ data: body });
-    } finally {
-      addImage(responseChart?.data.img, responseChart?.data.img);
-    }
+    const responseChart = await createVisual({ data: body });
+    addImage(responseChart?.data?.img, responseChart?.data?.img);
   };
 
+  const addImage = async (thumb, url) => {
+    const img = new Image();
+
+    img.src = url;
+    img.onload = () => {
+      actions.addImageLayer(
+        { thumb, url },
+        { width: img.naturalWidth, height: img.naturalHeight }
+      );
+      if (isMobile) {
+        onClose();
+      }
+    };
+  };
   const handleChartClick = (chart) => {
     setSelectedChart(chart?.value);
   };
@@ -178,25 +185,6 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       default:
         return null;
     }
-  };
-
-  const addImage = async (thumb, url) => {
-    const img = new Image();
-
-    const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}files/${url}`; // Concatenate BASE_URL with the image path
-
-    img.src = fullUrl;
-    console.log("url, ", fullUrl); // Log the full URL
-    // img.crossOrigin = "anonymous";
-    img.onload = () => {
-      actions.addImageLayer(
-        { thumb, url: fullUrl },
-        { width: img.naturalWidth, height: img.naturalHeight }
-      );
-      if (isMobile) {
-        onClose();
-      }
-    };
   };
 
   if (!datasetUuid) {

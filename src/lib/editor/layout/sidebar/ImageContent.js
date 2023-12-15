@@ -27,7 +27,6 @@ const ImageContent = ({ onClose }) => {
     const img = new Image();
 
     img.src = url;
-    // img.crossOrigin = "anonymous";
     img.onload = () => {
       actions.addImageLayer(
         { thumb, url },

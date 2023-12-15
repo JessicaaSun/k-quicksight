@@ -30,7 +30,7 @@ import BoardSidebar from "@/app/board/components/navbar/BoardSidebar";
 import { logout } from "@/store/features/auth/authSlice";
 import { generateBashURL } from "@/utils/util";
 import Loading from "@/app/loading";
-import { useUpdateDashboardMutation } from "@/store/features/visualization/visualizeApiSlice";
+import { useUpdateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 
 const HeaderLayout = ({ openPreview, dashboardData }, ref) => {
   const uploadRef = useRef(null);

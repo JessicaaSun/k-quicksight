@@ -21,6 +21,8 @@ import { generateBashURL } from "@/utils/util";
 
 export default function ShareTable({ file }) {
   const router = useRouter();
+
+  console.log(file)
   return (
     <Table
       removeWrapper
@@ -38,6 +40,7 @@ export default function ShareTable({ file }) {
         {file?.map((item, index) => (
           <TableRow key={index}>
             <TableCell>{item.file.file}</TableCell>
+            <TableCell>{item.file.is_original ? 'Original' : 'Cleaned'}</TableCell>
             <TableCell>{item.file.type}</TableCell>
             <TableCell>
               {getTrimIntoColumnOnlyDate(item.file.created_at)}

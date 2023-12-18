@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
-      console.log("session:", session)
+      console.log("session:", session);
       const fetchData = async () => {
         try {
           const { data } = await loginWithGoogle({
@@ -35,7 +35,7 @@ export default function Home() {
           // Navigate to the welcome page
         } catch (error) {
           // Handle any errors that occur during the API call
-          console.error("Error fetching user data:", error);
+          console.error("Error fetching user data:");
         }
       };
       fetchData();
@@ -43,14 +43,12 @@ export default function Home() {
   }, [dispatch, loginWithGoogle, session]);
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
-      <section className="lg:flex md:flex gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 py-14 sm:py-12 max-sm:py-12">
+      <section className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 py-14 sm:py-12 max-sm:py-12">
         <div className="flex flex-col gap-3 w-full">
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
             <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
-            Discover, Analyze and Decide With{" "}
-            <span className=" text-primary-color">
-              K-QuickSight
-            </span>
+              Discover, Analyze and Decide With{" "}
+              <span className=" text-primary-color">K-QuickSight</span>
             </p>
           </div>
           <p className="text-description-color text-lg">
@@ -78,7 +76,7 @@ export default function Home() {
             <Button
               onClick={() => router.push("/tutorials")}
               className="md:w-[217px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
-            >          
+            >
               <svg
                 width="20"
                 height="18"
@@ -97,8 +95,14 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} priority={false} unoptimized={true} alt="hero" className="homepage_image w-full" />
+        <div className="mt-10">
+          <Image
+            src={heroImg}
+            priority={false}
+            unoptimized={true}
+            alt="hero"
+            className="homepage_image w-full"
+          />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">

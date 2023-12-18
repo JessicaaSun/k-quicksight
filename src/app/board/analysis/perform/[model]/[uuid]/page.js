@@ -124,8 +124,8 @@ export default function Perform({ params }) {
             children: (
               <div>
                 <div>
-                  <div className={"grid gap-3"}>
-                    <SelectVisulize />
+                  <div className={"flex flex-col gap-3"}>
+                    <div className="w-1/3"><SelectVisulize /></div>
                     <Visualization bodyEda={bodyEda} />
                   </div>
                   <p className="uppercase text-xl font-medium text-primary-color mt-10">

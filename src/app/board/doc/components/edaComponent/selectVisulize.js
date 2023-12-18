@@ -41,6 +41,7 @@ export default function selectVisulize () {
                 allowClear
                 style={{
                     width: '100%',
+                    marginTop: '10px',
                 }}
                 defaultValue={visualization}
                 placeholder="Please select"

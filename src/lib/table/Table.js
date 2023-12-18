@@ -46,7 +46,7 @@ export default function TableData({
                             <div key={item.id} className={'hover:bg-primary-color cursor-pointer hover:text-white transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm'}>
                                 <div>
                                     <Link href={`/board/dataset/${item.uuid}`} className={'text-lg font-medium hover:underline flex gap-3 items-center flex-wrap'}>{item.file} <BsDot /> <span className={'text-sm'}>{getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}</span> </Link>
-                                    <p className={'text-sm'}>({item.type}) <span className={'font-medium'}>{!item.is_original ? <span>Cleaned</span> : <span>Original</span>}</span> with {formatBytes(item.size)}</p>
+                                    <p className={'text-sm'}>({item.type}) <span className={'font-semibold text-third-color'}>{!item.is_original ? <span>Cleaned</span> : <span>Original</span>}</span> with {formatBytes(item.size)}</p>
                                 </div>
                                 <Dropdown_table
                                     uuid={item.uuid}

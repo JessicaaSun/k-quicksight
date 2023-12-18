@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
-      console.log("session:", session)
+      console.log("session:", session);
       const fetchData = async () => {
         try {
           const { data } = await loginWithGoogle({
@@ -43,14 +43,14 @@ export default function Home() {
   }, [dispatch, loginWithGoogle, session]);
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
-      <section className="lg:flex md:flex gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 py-14 sm:py-12 max-sm:py-12">
+      <section className="lg:flex md:flex gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 md:pt-6 md:pb-6  sm:pb-0 max-sm:pb-0 sm:pt-14 max-sm:pt-14">
         <div className="flex flex-col gap-3 w-full">
-          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
-            <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
-            Discover, Analyze and Decide With{" "}
-            <span className=" text-primary-color">
-              K-QuickSight
-            </span>
+          <div className=" lg:text-5xl md:text-4xl leading-[65px] text-3xl font-bold">
+            <p className=" text-text-color max-sm:leading-normal sm:leading-normal">
+              Discover, Analyze and Decide With{" "}
+              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">
+                K-QuickSight
+              </span>
             </p>
           </div>
           <p className="text-description-color text-lg">
@@ -78,7 +78,7 @@ export default function Home() {
             <Button
               onClick={() => router.push("/tutorials")}
               className="md:w-[217px] max-sm:w-[60%] sm:w-[60%] font-bold text-text-color bg-white border-1 border-gray-300 flex gap-5"
-            >          
+            >
               <svg
                 width="20"
                 height="18"
@@ -90,22 +90,30 @@ export default function Home() {
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M0 2.03003C0 1.02557 0.95939 0.211304 2.14286 0.211304H17.8571C19.0406 0.211304 20 1.02557 20 2.03003V15.3673C20 16.3717 19.0406 17.186 17.8571 17.186H2.14286C0.95939 17.186 0 16.3717 0 15.3673V2.03003ZM7.07703 5.84497V11.7221C7.07763 11.8205 7.10886 11.9169 7.16753 12.0017C7.2262 12.0865 7.31024 12.1566 7.41114 12.205C7.51203 12.2533 7.62619 12.2781 7.74204 12.277C7.8579 12.2758 7.97133 12.2487 8.07083 12.1983L14.0016 9.25971C14.1015 9.21074 14.1844 9.14033 14.242 9.05556C14.2997 8.97079 14.33 8.87463 14.33 8.77675C14.33 8.67887 14.2997 8.58272 14.242 8.49794C14.1844 8.41317 14.1015 8.34276 14.0016 8.29379L8.07083 5.36882C7.97133 5.31845 7.8579 5.29131 7.74204 5.29013C7.62619 5.28897 7.51203 5.31381 7.41114 5.36214C7.31024 5.41048 7.2262 5.48061 7.16753 5.5654C7.10886 5.65019 7.07763 5.74664 7.07703 5.84497Z"
-                  fill="#0346A5"
+                  fill="#FFA500"
                 />
               </svg>
               Watch tutorials
             </Button>
           </div>
         </div>
-        <div className="lg:w-2/3 md:w-1/2 w-full mt-10">
-          <Image src={heroImg} priority={false} unoptimized={true} alt="hero" className="homepage_image w-full" />
+        <div className="lg:w-2/3 md:w-1/2 w-full mt-10 pt-0 max-sm:pt-12 sm:pt-12">
+          <Image
+            src={heroImg}
+            priority={false}
+            unoptimized={true}
+            alt="hero"
+            className="homepage_image w-full"
+          />
         </div>
       </section>
       <section className="bg-secondary-color min-w-full px-10 py-20">
-        <h2 className="text-third-color text-center">
+        <h2  className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
+        <div data-aos="fade-up">
         <Card_Why />
+        </div>
       </section>
       <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
         <h2 className="text-primary-color font-bold text-center">

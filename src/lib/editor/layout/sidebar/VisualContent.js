@@ -81,10 +81,12 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       try {
         const responseCard = await createKpiCard({ data: body });
         if (responseCard) {
-          handleAddCard(
-            responseCard?.data.data[0]?.value,
-            responseCard?.data.data[0]?.message
-          );
+          const value = responseCard?.data.data[0]?.value.toFixed(2);
+          const message =
+            responseCard?.data.data[0]?.message.charAt(0).toUpperCase() +
+            responseCard?.data.data[0]?.message.slice(1);
+          handleAddCard(responseCard?.data.data[0]?.value.toFixed(2),  responseCard?.data.data[0]?.message.charAt(0).toUpperCase() +
+          responseCard?.data.data[0]?.message.slice(1));
         } else {
           console.error("Invalid response from createKpi:", responseCard);
         }
@@ -106,7 +108,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
 
   const handleAddCard = (text, desc) => {
     const cardData = generateCard(text, desc);
-    console.log("add card", cardData)
+    console.log("add card", cardData);
     actions.addLayerTree(JSON.parse(cardData.data));
     if (isMobile) {
       onClose();

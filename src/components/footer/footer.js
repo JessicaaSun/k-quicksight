@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <div
       className={
-        "bg-background-color w-full lg:flex md:flex-wrap block justify-between items-start px-16 pt-10"
+        "bg-background-color w-full lg:flex md:flex-wrap block justify-between items-start md:px-16 max-sm:px-9 sm:px-9 pt-10"
       }
     >
       <div className={"flex flex-col gap-5"}>
@@ -72,7 +72,7 @@ export default function Footer() {
             className={"w-[73px]"}
           />
         </div>
-        <div>
+        <div className="md:pb-0 max-sm:pb-3 sm:pb-3">
           <a
             className={"text-xl font-semibold lowercase"}
             href={"mailto:kquicksight@gmail.com"}
@@ -95,7 +95,7 @@ export default function Footer() {
           </Link>
         ))}
       </div>
-      <div className={"flex flex-col gap-2"}>
+      <div className={"flex md:pt-0 max-sm:pt-2 sm:pt-2 flex-col gap-2"}>
         {guide.map((e, index) => (
           <Link
             href={e.url}
@@ -106,13 +106,13 @@ export default function Footer() {
           </Link>
         ))}
       </div>
-      <div className={"lg:w-1/4 md:w-2/3 "}>
-        <span className={"font-[600] text-text-color text-[28px]"}>
+      <div className={"lg:w-1/4 md:w-2/3 md:pt-0 max-sm:pt-5 sm:pt-5"}>
+        <span className={"font-[600]  text-text-color max-sm:text-[20px] sm:text-[20px] md:text-[28px]"}>
           Unlocking Insights, Empowering Decisions with{" "}
           <span className={"text-primary-color font-bold"}>K-QuickSight</span>
         </span>
       </div>
-      <div className={"h-0.5 mt-10 w-full bg-description-color"}></div>
+      <div className={"h-0.5 md:mt-10  max-sm:mt-5 sm:mt-5 w-full bg-description-color"}></div>
       <div
         className={
           "lg:flex md:flex block justify-between items-center w-full py-5"

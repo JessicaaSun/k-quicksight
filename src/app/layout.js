@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Provider from "./provider";
 import Navbar_UI from "@/components/navbar/Navbar";
 import { Suspense } from "react";
+import { AOSInit } from "./aos";
 import Loading from "./loading";
 import AuthProvider from "./AuthProvider";
 import Footer from "@/components/footer/footer";
@@ -11,7 +12,7 @@ import { SidebarProvider } from "@/context/BoardSideBarContext";
 import { PreviewProvider } from "@/context/EditorPreviewContext";
 import NoInternetConnection from "@/app/NoInternetConnection";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-background-color">
+        <AOSInit />
         <NoInternetConnection>
           <SidebarProvider>
             <PreviewProvider>

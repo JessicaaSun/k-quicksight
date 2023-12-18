@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/BoardSideBarContext";
 import { useHandlePreview } from "@/context/EditorPreviewContext";
-
+import styles from "./styles/header.module.css";
 import {
   AiFillPlayCircle,
   AiOutlineCaretLeft,
@@ -64,17 +64,10 @@ const HeaderLayout = ({ openPreview, dashboardData }, ref) => {
     // Save the changes or perform any required actions here
   };
 
-  // Focus the input field when editing starts
-  useEffect(() => {
-    if (isEditing) {
-      inputRef.current.focus();
-    }
-  }, [isEditing]);
-
 
   const handleExport = async () => {
     const dataStr = JSON.stringify(query.serialize());
-    
+
     try {
       let body = {
         title: title,
@@ -115,7 +108,6 @@ const HeaderLayout = ({ openPreview, dashboardData }, ref) => {
         "fixed z-40 top-0 right-0 w-full bg-primary-color flex justify-between items-center px-[3%] py-3"
       }
     >
-   
       <div className={"flex justify-center items-center gap-5"}>
         {isSidebarHidden ? (
           <button
@@ -135,30 +127,27 @@ const HeaderLayout = ({ openPreview, dashboardData }, ref) => {
         <Link href={"/"}>
           <Image
             src={logo}
+            width={36}
+            height={36}
             alt={"logo"}
             className={"bg-white rounded-full w-[36px] h-[36px] object-contain"}
           />
         </Link>
-        <div className="hover:border-slate-300 hover:border-5 rounded-md ps-3">
-          <h4
-            onDoubleClick={handleDoubleClick}
-            className="text-white cursor-text "
-          >
-            {isEditing ? (
-              <input
-                type="title"
-                className="text-white bg-primary-color focus:outline-none focus:border-1 focus:border-dashed focus:border-third-color; 
-              border-transparent"
-                value={title}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                ref={inputRef}
-              />
-            ) : (
-              <span>{title}</span>
-            )}
-          </h4>
-        </div>
+
+        <h4 onDoubleClick={handleDoubleClick}>
+          {isEditing ? (
+            <input
+              type="text"
+              value={title}
+              className={styles.input}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              ref={inputRef}
+            />
+          ) : (
+            <span className={styles.title}>{title}</span>
+          )}
+        </h4>
       </div>
       <div className="flex gap-5 items-center">
         {/* {displayPreviewBtn ? ( */}

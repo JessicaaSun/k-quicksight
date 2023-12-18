@@ -4,15 +4,25 @@
 import React, { useState } from "react";
 import NextImage from "next/image";
 import { Tooltip } from "@nextui-org/react";
+import { useAsync } from "react-use";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { Select } from "antd";
-import { chartList } from "../../components/chart-list/ChartList";
-import { useVisualizeMutation } from "@/store/features/visualization/visualizeApiSlice";
+import axios from "axios";
+import {
+  aggregateCategory,
+  aggregateNum,
+  chartList,
+} from "../../components/chart-list/ChartList";
+import {
+  useCreateKpiMutation,
+  useVisualizeMutation,
+} from "@/store/features/visualization/visualizeApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Loading from "@/app/loading";
 import { useGetColumnHeaderDataTypeByUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
+import { generateCard } from "@/data/textLayoutTreeTxt";
 
 const VisualContent = ({ onClose, datasetUuid }) => {
   const [selectedChart, setSelectedChart] = useState(
@@ -25,6 +35,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
 
   const { data: user } = useGetUserQuery();
   const [createVisual] = useVisualizeMutation();
+  const [createKpiCard] = useCreateKpiMutation();
 
   const {
     data: headers,
@@ -34,22 +45,52 @@ const VisualContent = ({ onClose, datasetUuid }) => {
     uuid: datasetUuid,
   });
 
-  const pieType = ["pie_chart", "donut_chart"];
+  const allHeader = headers?.data?.all_columns.map((header, index) => ({
+    id: index,
+    value: header,
+    label: header,
+  }));
+  const numericFields =
+    headers?.data?.numeric_columns.map((header, index) => ({
+      id: index,
+      value: header,
+      label: header,
+    })) || [];
+
+  const categoryFields =
+    headers?.data?.object_columns.map((header, index) => ({
+      id: index,
+      value: header,
+      label: header,
+    })) || [];
 
   const handleCreateVisual = async () => {
-    if (!selectedChart) {
-      console.error("selectedChart is null or undefined");
-      return;
-    }
-
     let body;
-    if (pieType.some((type) => selectedChart.startsWith(type))) {
+    if (selectedChart === "card") {
       body = {
-        chart_name: selectedChart,
-        x_axis: xAxis,
-        y_axis: yAxis,
+        chart_name: "card",
+        type_field:
+          numericFields && numericFields.some((field) => field.value === xAxis)
+            ? "number"
+            : "category",
+        fields: [xAxis],
+        aggregation: yAxis,
         file_uuid: datasetUuid,
       };
+
+      try {
+        const responseCard = await createKpiCard({ data: body });
+        if (responseCard) {
+          handleAddCard(
+            responseCard?.data.data[0]?.value,
+            responseCard?.data.data[0]?.message
+          );
+        } else {
+          console.error("Invalid response from createKpi:", responseCard);
+        }
+      } catch (error) {
+        console.error("Error in createKpi:", error);
+      }
     } else {
       body = {
         chart_name: selectedChart,
@@ -57,10 +98,19 @@ const VisualContent = ({ onClose, datasetUuid }) => {
         y_axis: yAxis,
         file_uuid: datasetUuid,
       };
-    }
 
-    const responseChart = await createVisual({ data: body });
-    addImage(responseChart?.data?.img, responseChart?.data?.img);
+      const responseChart = await createVisual({ data: body });
+      addImage(responseChart?.data?.img, responseChart?.data?.img);
+    }
+  };
+
+  const handleAddCard = (text, desc) => {
+    const cardData = generateCard(text, desc);
+    console.log("add card", cardData)
+    actions.addLayerTree(JSON.parse(cardData.data));
+    if (isMobile) {
+      onClose();
+    }
   };
 
   const addImage = async (thumb, url) => {
@@ -107,11 +157,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
 
   const renderFieldsSelect = () => {
     if (!selectedChart) return null;
-    const headersOptions = headers?.data?.all_columns.map((header, index) => ({
-      id: index,
-      value: header,
-      label: header,
-    }));
+
     switch (selectedChart) {
       case "line_chart":
       case "scatter_plot":
@@ -130,7 +176,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
                 placeholder="Select an option"
                 onChange={(value) => setXAxis(value)}
                 value={xAxis}
-                options={headersOptions}
+                options={allHeader}
               />
             </div>
             <div className="mb-2">
@@ -142,7 +188,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
                 placeholder="Select an option"
                 onChange={(value) => setYAxis(value)}
                 value={yAxis}
-                options={headersOptions}
+                options={allHeader}
               />
             </div>
           </>
@@ -159,7 +205,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
                 placeholder="Select an option"
                 onChange={(value) => setXAxis(value)}
                 value={xAxis}
-                options={headersOptions}
+                options={allHeader}
               />
             </div>
             <div className="mb-2">
@@ -171,8 +217,59 @@ const VisualContent = ({ onClose, datasetUuid }) => {
                 placeholder="Select an option"
                 onChange={(value) => setYAxis(value)}
                 value={yAxis}
-                options={headersOptions}
+                options={allHeader}
               />
+            </div>
+          </div>
+        );
+      case "card":
+        return (
+          <div className="mb-2">
+            <div className="mb-2">
+              <p className="ps-2 text-sm text-text-color pb-2 font-semibold">
+                Field
+              </p>
+              <Select
+                style={{ width: "100%" }}
+                placeholder="Select an option"
+                onChange={(value) => setXAxis(value)}
+                value={xAxis}
+                options={allHeader}
+              />
+            </div>
+            <div className="mb-2">
+              <p className="ps-2 text-sm text-text-color pb-2 font-semibold">
+                Aggregate
+              </p>
+
+              <Select
+                disabled={!xAxis}
+                style={{ width: "100%" }}
+                placeholder="Select an option"
+                onChange={(value, option) => setYAxis(value)}
+                value={yAxis}
+              >
+                {numericFields &&
+                numericFields.some((field) => field.value === xAxis)
+                  ? aggregateNum.map((option) => (
+                      <Select.Option
+                        key={option.id}
+                        value={option.value}
+                        data-title={option.title}
+                      >
+                        {option.title}
+                      </Select.Option>
+                    ))
+                  : aggregateCategory.map((option) => (
+                      <Select.Option
+                        key={option.id}
+                        value={option.value}
+                        data-title={option.title}
+                      >
+                        {option.title}
+                      </Select.Option>
+                    ))}
+              </Select>
             </div>
           </div>
         );
@@ -180,7 +277,6 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       case "bubble_chart":
       case "donut_chart":
       case "waterfall":
-      case "kpi":
         return <p>Chart is not available yet. Coming soon!!</p>;
       default:
         return null;

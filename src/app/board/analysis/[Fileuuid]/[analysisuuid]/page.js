@@ -28,8 +28,6 @@ const Page = ({ params }) => {
     page: 1,
   });
 
-  const { data: fileOverview, isLoading: overviewLoading } = useGetFileOverviewQuery({ uuid: uuid, userId: user?.data.id });
-
   const dispatch = useDispatch();
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();

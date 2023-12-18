@@ -35,7 +35,7 @@ export default function Home() {
           // Navigate to the welcome page
         } catch (error) {
           // Handle any errors that occur during the API call
-          console.error("Error fetching user data:", error);
+          console.error("Error fetching user data:");
         }
       };
       fetchData();
@@ -43,14 +43,12 @@ export default function Home() {
   }, [dispatch, loginWithGoogle, session]);
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
-      <section className="lg:flex md:flex gap-5 justify-between items-center md:px-[10%] sm:px-8 max-sm:px-8 mt-10 md:pt-6 md:pb-6  sm:pb-0 max-sm:pb-0 sm:pt-14 max-sm:pt-14">
+      <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
         <div className="flex flex-col gap-3 w-full">
-          <div className=" lg:text-5xl md:text-4xl leading-[65px] text-3xl font-bold">
-            <p className=" text-text-color max-sm:leading-normal sm:leading-normal">
+          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
+            <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
-              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">
-                K-QuickSight
-              </span>
+              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
             </p>
           </div>
           <p className="text-description-color text-lg">
@@ -97,7 +95,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="lg:w-2/3 md:w-1/2 w-full mt-10 pt-0 max-sm:pt-12 sm:pt-12">
+        <div className="mt-10">
           <Image
             src={heroImg}
             priority={false}
@@ -111,7 +109,7 @@ export default function Home() {
         <h2  className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
-        <div data-aos="fade-up">
+        <div>
         <Card_Why />
         </div>
       </section>

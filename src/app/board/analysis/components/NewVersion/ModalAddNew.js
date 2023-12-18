@@ -72,7 +72,7 @@ export default function AddNewButton() {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
-        <ModalContent>
+        <ModalContent >
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
@@ -82,17 +82,15 @@ export default function AddNewButton() {
                 <div className="grid grid-cols-2 gap-2">
                   <Button
                     onClick={() => handleChoice("exist")}
-                    className={`${
-                      choice === "exist" ? "bg-primary-color text-white" : ""
-                    }`}
+                    className={`${choice === "exist" ? "bg-primary-color text-white" : ""
+                      }`}
                   >
                     Existing Dataset
                   </Button>
                   <Button
                     onClick={() => handleChoice("new")}
-                    className={`${
-                      choice === "new" ? "bg-primary-color text-white" : ""
-                    }`}
+                    className={`${choice === "new" ? "bg-primary-color text-white" : ""
+                      }`}
                   >
                     New Dataset
                   </Button>

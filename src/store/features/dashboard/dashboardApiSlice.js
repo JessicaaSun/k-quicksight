@@ -49,6 +49,14 @@ export const dashboard = apiSlice.injectEndpoints({
       keepUnusedDataFor: 1,
       providesTags: ["dashboard"],
     }),
+    getAllDashboardByUserUUID: builder.query({
+      query: ({ uuid }) => ({
+        url: `dashboards/detail_by_user/${uuid}/`,
+        method: 'GET',
+      }),
+      keepUnusedDataFor: 5,
+      providesTags: ["dashboard"]
+    })
   }),
 });
 
@@ -59,5 +67,6 @@ export const {
   useGetDashboardDetailByUuidQuery,
   useUpdateDashboardMutation,
   useGetColumnHeaderDataTypeByUuidQuery,
+  useGetAllDashboardByUserUUIDQuery
 } = dashboard;
 export default dashboard;

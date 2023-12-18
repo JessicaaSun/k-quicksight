@@ -38,10 +38,11 @@ const models = [
     },
 ]
 
-export default function PerformAnalysisButton({uuid}) {
+export default function PerformAnalysisButton({ uuid }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [value, setValue] = React.useState(new Set([]));
     const [disabled, setDisabled] = useState(true);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -83,8 +84,9 @@ export default function PerformAnalysisButton({uuid}) {
                             </ModalBody>
                             <ModalFooter>
                                 <Button onClick={() => {
+                                    setLoading(true)
                                     router.push(`/board/analysis/perform/${value?.currentKey}/${uuid}`)
-                                }} disabled={disabled} color="primary">
+                                }} disabled={disabled} isLoading={loading} color="primary">
                                     {
                                         !disabled ? (<>Next</>) : (<>Please choose the model</>)
                                     } <MdNavigateNext />

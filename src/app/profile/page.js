@@ -19,6 +19,9 @@ import { generateBashURL } from "@/utils/util";
 import { useUploadSingleMutation } from "@/store/features/user/uploadAccountImage";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 import Link from "next/link";
+import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/dashboardApiSlice";
+import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
+import { BsClipboard2DataFill } from "react-icons/bs";
 
 export default function Profile() {
   const { data: user, isLoading } = useGetUserQuery();
@@ -32,6 +35,7 @@ export default function Profile() {
   const [phoneUpdate, setPhoneUpdate] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [imageUpload] = useUploadSingleMutation();
+  const [error, setError] = useState('');
 
   const handleGender = (e) => {
     setGender(e.target.value);
@@ -79,7 +83,12 @@ export default function Profile() {
       phone_number: phoneNumber,
     };
     const response = await updateInfo({ data: data, id: user?.data.id });
+    setError(response?.error?.data?.phone_number)
   };
+
+  // dashboard api 
+  const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({ uuid: user?.data.uuid })
+  console.log(allDashboard)
 
   useEffect(() => {
     setFullname(user?.data.full_name);
@@ -88,8 +97,6 @@ export default function Profile() {
     setPhoneNumber(user?.data.phone_number);
     setAvatar(user?.data.avatar);
   }, [user]);
-
-  console.log(user);
 
   if (isLoading) {
     return <Loading />;
@@ -380,6 +387,7 @@ export default function Profile() {
                       </>
                     )}
                   </div>
+                  <p className="text-red-400">{error}</p>
                 </div>
               </div>
             </div>
@@ -474,7 +482,7 @@ export default function Profile() {
                       style={{ backgroundColor: getRandomColor() }}
                       className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}
                     >
-                      <FaStar />
+                      <FaStar className="text-2xl" />
                     </div>
                     <div className="grid gap-1">
                       <p className="text-lg">{item.title}</p>
@@ -490,6 +498,28 @@ export default function Profile() {
               }
             >
               Dashboard
+              <div className="w-full grid gap-3 mt-5">
+                {
+                  allDashboard?.results.map((item, index) => (
+                    <Link
+                      href={`/board/dashboard/${item.uuid}`}
+                      key={item.id}
+                      className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
+                    >
+                      <div
+                        style={{ backgroundColor: getRandomColor() }}
+                        className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}
+                      >
+                        <BsClipboard2DataFill className="text-2xl" />
+                      </div>
+                      <div className="grid gap-1">
+                        <p className="text-lg">{item.title}</p>
+                        <p className="text-sm">{getTrimIntoColumnDateAndTime(item.created_at)}</p>
+                      </div>
+                    </Link>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </div>

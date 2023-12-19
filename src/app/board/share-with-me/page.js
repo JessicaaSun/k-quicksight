@@ -3,9 +3,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import ShareWithmeTap from "@/app/board/share-with-me/component/shareWithme_tap";
 import ShareToOther from "@/app/board/share-with-me/component/ShareToOther";
-const onChange = (key) => {
-    console.log(key);
-};
+
 const items = [
     {
         key: '1',
@@ -18,5 +16,5 @@ const items = [
         children: <ShareToOther />,
     },
 ];
-const App = () => <div className='pt-5 px-7'><Tabs defaultActiveKey="1" items={items} onChange={onChange} /></div>;
+const App = () => <div className='pt-5 px-7'><Tabs defaultActiveKey="1" items={items} /></div>;
 export default App;

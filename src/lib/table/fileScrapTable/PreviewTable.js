@@ -17,7 +17,7 @@ export default function PreviewTable({detail}) {
 
     const {data:fileDetail, isLoading} = useScrappingUrlQuery({filename: detail});
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    console.log(fileDetail)
+    
     return (
         <>
             <table className="min-w-full border border-gray-300">

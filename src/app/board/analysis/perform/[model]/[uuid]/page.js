@@ -50,8 +50,7 @@ export default function Perform({ params }) {
   const { data: headers, isLoading: headerLoading } = useFindHeaderQuery({
     filename: fileDetail?.filename,
   });
-  // console.log(fileDetail?.filename)
-  // console.log(headers)
+  
   const bodyEda = useSelector((state) => state.eda);
 
   const router = useRouter();

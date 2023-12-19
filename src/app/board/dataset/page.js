@@ -36,10 +36,6 @@ export const headers = [
 const Dataset = () => {
   const { data: user, isLoading } = useGetUserQuery();
   const [isSample, setSample] = useState(false);
-
-  // const handleDatasetSample = () => {
-  //   setSample((event) => !event);
-  // };
   const filType = useSelector((state) => state.fileType.fileType);
   const {
     data: allFile,
@@ -52,7 +48,7 @@ const Dataset = () => {
   });
   const dispatch = useDispatch();
   const state = useSelector((state) => state.allFiles.allFiles);
-  const totalFree = useSelector((state) => state.allFiles.total);
+  const totalFree = user?.data.storage_data;
   const [isFull, setStorage] = useState(false);
 
   useEffect(() => {
@@ -65,7 +61,7 @@ const Dataset = () => {
       );
       dispatch(setTotalSize(totalSize));
     }
-    if (totalFree > 1000000000) {
+    if (totalFree < 1048576) {
       setStorage(true);
     }
   }, [allFile, dispatch, filesRefetch, totalFree]);

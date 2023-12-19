@@ -9,7 +9,6 @@ export default function TutorialDetail({params}){
         isError,
         isSuccess,
     } = useGetTutorialsUUIDQuery({uuid:uuid});
-    console.log(tutorial?.content)
     return (
         <div className={'py-44 px-[10%]'}>
             <div

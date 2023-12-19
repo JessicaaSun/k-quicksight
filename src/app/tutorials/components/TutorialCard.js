@@ -16,7 +16,6 @@ export default function TutorialCard() {
         isError,
         isSuccess,
     } = useGetTutorialsQuery({page, size, title:""});
-    console.log((tutorials))
     return (
         <div className={"md:grid md:gap-5 lg:gap-8 grid-cols-2 "}>
             {

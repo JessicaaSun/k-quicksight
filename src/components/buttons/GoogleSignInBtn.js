@@ -21,7 +21,6 @@ const GoogleSignInBtn = () => {
   const handleLogin = async (email, password) => {
     try {
       const { data } = await login({ email, password }).unwrap();
-      console.log("data: ", data);
       dispatch(setCredentials(data));
       setTimeout(async () => {
         router.push("/");
@@ -29,7 +28,6 @@ const GoogleSignInBtn = () => {
     } catch (error) {
       if (!error.response) {
         alert("No Server Response");
-        console.log(error);
       } else if (error.response.status === 400) {
         alert("Missing email or password");
       } else if (error.response.status === 403) {

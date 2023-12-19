@@ -41,7 +41,6 @@ export default function AddNewButton() {
       file: formData,
       userId: user?.data.id,
     });
-    console.log(response);
 
     if (response?.error?.status === 400) {
       setErrorMessage(response?.error.data);
@@ -53,8 +52,6 @@ export default function AddNewButton() {
     };
     setFilename(body);
   };
-
-  console.log(file);
 
   return (
     <>

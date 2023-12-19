@@ -17,7 +17,6 @@ const SearchDataset = () => {
     const {data: user} = useGetUserQuery();
     const {data: setAllFiles, isLoading: isFileLoading} = useGetAllFilesQuery({id: user?.data.id, filename: files?.filename, type: files.fileType});
 
-    // console.log(setAllFiles)
 
 
 
@@ -26,8 +25,7 @@ const SearchDataset = () => {
         dispatch(setFiles(setAllFiles))
     }, [searchValue, dispatch, setAllFiles]);
 
-    // const state = useSelector(state => state)
-    // console.log(setAllFiles)
+    
 
 
     return (

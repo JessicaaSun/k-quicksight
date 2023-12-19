@@ -88,7 +88,7 @@ export default function Profile() {
 
   // dashboard api 
   const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({ uuid: user?.data.uuid })
-  console.log(allDashboard)
+
 
   useEffect(() => {
     setFullname(user?.data.full_name);

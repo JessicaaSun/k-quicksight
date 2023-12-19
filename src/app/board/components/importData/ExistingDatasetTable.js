@@ -47,7 +47,7 @@ const ExistingDatasetTable = () => {
         file_uuid: selectedFileUuid,
       };
       const responseDashboard = await createDashboard({ data: body });
-      console.log("dash", responseDashboard);
+      
       isLoading(true);
       router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
     } catch {

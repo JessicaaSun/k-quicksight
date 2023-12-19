@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/dashboardApiSlice";
 import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { BsClipboard2DataFill } from "react-icons/bs";
+import { formatBytes } from "@/utils/convertByte";
 
 export default function Profile() {
   const { data: user, isLoading } = useGetUserQuery();
@@ -450,10 +451,10 @@ export default function Profile() {
                 <p className={"font-semibold text-lg text-text-color"}>Used</p>
                 <div
                   className={
-                    "text-md text-text-color bg-gray-100 px-6 rounded-full py-0.5"
+                    `text-md text-text-color ${user?.data.storage_data < 819200 ? 'bg-red-300' : 'bg-gray-100'} px-6 rounded-full py-0.5`
                   }
                 >
-                  {user?.data.storage_data} KB
+                  {formatBytes(user?.data.storage_data)}
                 </div>
               </div>
             </div>

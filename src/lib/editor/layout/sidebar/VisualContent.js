@@ -81,12 +81,11 @@ const VisualContent = ({ onClose, datasetUuid }) => {
       try {
         const responseCard = await createKpiCard({ data: body });
         if (responseCard) {
-          const value = responseCard?.data.data[0]?.value.toFixed(2);
-          const message =
+          handleAddCard(
+            responseCard?.data.data[0]?.value,
             responseCard?.data.data[0]?.message.charAt(0).toUpperCase() +
-            responseCard?.data.data[0]?.message.slice(1);
-          handleAddCard(responseCard?.data.data[0]?.value.toFixed(2),  responseCard?.data.data[0]?.message.charAt(0).toUpperCase() +
-          responseCard?.data.data[0]?.message.slice(1));
+              responseCard?.data.data[0]?.message.slice(1)
+          );
         } else {
           console.error("Invalid response from createKpi:", responseCard);
         }

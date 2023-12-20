@@ -2,13 +2,13 @@
 
 import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import recommend from "@assets/images/recommend.png";
 import { useCreateRequestTutorialMutation } from "@/store/features/request-tutorial/requestTutorialApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { toast } from "react-toastify";
 import TutorialCard from "@/app/tutorials/components/TutorialCard";
+import SelectButton from "@/components/buttons/SelectButton";
 
 const Tutorial = () => {
   const resources = [
@@ -56,14 +56,30 @@ const Tutorial = () => {
   };
 
   return (
-    <section className={"py-44 px-[10%]"}>
-      <h1 className={"text-bold text-primary-color pt-10 pb-10"}>Tutorials</h1>
+    <section
+      className={
+        "md:pt-32 md:pb-20 max-sm:pt-40  max-sm:pb-6 sm:pb-6 sm:pt-40 lg:px-[10%] md:px-[7%] max-sm:px-8 sm:px-8"
+      }
+    >
+      <h1
+        className={
+          "text-bold text-primary-color pt-10 md:pb-10 max-sm:pb-5 sm:pb-5"
+        }
+      >
+        Tutorials
+      </h1>
       <TutorialCard />
-      <h2 className={"text-primary-color font-bold mt-20"}>
+      <h2
+        className={
+          "text-primary-color font-bold md:mt-20 max-sm:mt-12 sm:mt-12"
+        }
+      >
         Recommendation learning resources
       </h2>
       <div
-        className={"lg:flex md:block justify-start gap-32 items-center py-20"}
+        className={
+          "lg:flex md:block justify-start gap-32 items-center md:py-20 max-sm:py-0 sm:py-0"
+        }
       >
         <Image
           src={recommend}
@@ -112,14 +128,18 @@ const Tutorial = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className={"py-10 flex flex-col gap-10 relative"}>
+            <Form
+              className={
+                "md:pb-6 pt-10 max-sm:pb-0 sm:pb-0 flex flex-col md:gap-10 max-sm:gap-5 sm:gap-5 relative"
+              }
+            >
               <div>
                 <p className={"text-lg text-text-color font-semibold"}>
                   Subject
                 </p>
                 <Field
                   className={
-                    "w-full px-5 py-2 my-3 bg-gray-50 rounded-xl border-2 border-gray-400"
+                    "block w-full px-4 py-[8px] my-3 border-gray-200 border-1  bg-white rounded-xl"
                   }
                   type={"text"}
                   name={"subject"}
@@ -138,7 +158,7 @@ const Tutorial = () => {
                 <Field
                   as={"textarea"}
                   className={
-                    "w-full h-[200p x] overflow-y-scroll resize-y px-5 py-5 my-3 bg-gray-50 rounded-xl border-2 border-gray-400"
+                    "block w-full px-4 py-[8px] h-[100px] my-3 border-gray-200 border-1  bg-white rounded-xl"
                   }
                   type={"text"}
                   name={"message"}
@@ -152,16 +172,15 @@ const Tutorial = () => {
                   component={"div"}
                 />
               </div>
-
-              <Button
-                type={"submit"}
-                disabled={isSubmitting}
-                className={
-                  "font-bold text-white bg-primary-color absolute right-0 -bottom-5 rounded-xl w-fit py-2 px-12"
-                }
-              >
-                Send
-              </Button>
+              <div className=" flex justify-end">
+                <SelectButton
+                  rounded={"xl"}
+                  color={"primary-color"}
+                  clickAction={console.log("Please integrate with API")}
+                  disabled={isSubmitting}
+                  text="Send"
+                />
+              </div>
             </Form>
           )}
         </Formik>

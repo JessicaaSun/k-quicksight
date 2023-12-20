@@ -39,7 +39,6 @@ const Dataset = () => {
   const filType = useSelector((state) => state.fileType.fileType);
   const {
     data: allFile,
-    refetch: filesRefetch,
     isLoading: isFileLoading,
   } = useGetAllFilesQuery({
     id: user?.data.id,
@@ -52,19 +51,18 @@ const Dataset = () => {
   const [isFull, setStorage] = useState(false);
 
   useEffect(() => {
-    filesRefetch();
-    dispatch(setFiles(allFile));
-    if (allFile) {
-      const totalSize = allFile.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.size,
-        0
-      );
-      dispatch(setTotalSize(totalSize));
-    }
-    if (totalFree < 1048576) {
-      setStorage(true);
-    }
-  }, [allFile, dispatch, filesRefetch, totalFree]);
+    const checkStorage = () => {
+      if (totalFree < 1048576) {
+        setStorage(true);
+      } else {
+        setStorage(false);
+      }
+    };
+    checkStorage();
+  }, [state, dispatch, totalFree]);
+
+// Make sure to replace 'setTotalSize' and 'setFiles' with your actual action creators.
+
 
   return (
     <div className={"py-10 px-7"}>
@@ -100,7 +98,7 @@ const Dataset = () => {
         </div>
         <TableData
           isSample={isSample}
-          file={state}
+          file={allFile}
           isFileLoading={isFileLoading}
           sample_dataset={sample_dataset}
           headers={headers}

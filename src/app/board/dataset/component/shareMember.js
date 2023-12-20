@@ -57,6 +57,7 @@ export default function ShareMember({filename, fileId, list}) {
             members: userSelected,
             file: fileId,
         }
+        console.log(dataShare)
         const share = await shareMember({data: dataShare});
         if (share?.data?.code === 201) {
             toast.success(`${share?.data?.message}`)

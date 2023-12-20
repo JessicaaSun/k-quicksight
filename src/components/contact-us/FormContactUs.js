@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {Button, Input, Textarea} from "@nextui-org/react";
 import {useUploadDescriptionMutation} from "@/store/features/contact-us/uploadSlice";
+import { fieldNormal } from '@/app/auth/signup/components/Form';
 
 const FormContactUs = () => {
     const [email, setEmail] = useState("");
@@ -47,7 +48,7 @@ const FormContactUs = () => {
             <Input
                 type="email"
                 label="Email"
-                placeholder="you@example.com"
+                placeholder="Yourname@example.com"
                 labelPlacement="outside"
                 isRequired
                 required
@@ -56,7 +57,7 @@ const FormContactUs = () => {
                 errorMessage={isInvalid && "Please enter a valid email"}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                classNames={styleInput}
+                classNames={fieldNormal}
             />
             <Textarea
                 label="Description"
@@ -65,7 +66,7 @@ const FormContactUs = () => {
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                classNames={styleInput}
+                classNames={fieldNormal}
             />
             <Button type={"submit"} className="bg-primary-color text-white h-[46px] font-semibold w-40">
                 Send Message

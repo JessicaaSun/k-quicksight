@@ -8,9 +8,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
-import {useRegisterMutation} from "@/store/features/auth/authApiSlice";
-import {useDispatch} from "react-redux";
-import {setCurrentEmail} from "@/store/features/auth/authSlice";
+import { useRegisterMutation } from "@/store/features/auth/authApiSlice";
+import { useDispatch } from "react-redux";
+import { setCurrentEmail } from "@/store/features/auth/authSlice";
+import Image from "next/image";
+
+export const fieldNormal =
+  "block w-full px-4 py-[8px] mt-2 border-gray-200 border-1  bg-white rounded-xl";
 
 const SignUpForm = () => {
   const [showPassword, setPassword] = useState(false);
@@ -19,7 +23,7 @@ const SignUpForm = () => {
   const [errorMessage, setErrorMessage] = useState([]);
   const router = useRouter();
   const [checkBox, setCheckbox] = useState(false);
-  const [checkBoxError, setCheckBokError] = useState(false)
+  const [checkBoxError, setCheckBokError] = useState(false);
   const dispatch = useDispatch();
 
   const [register] = useRegisterMutation();
@@ -28,8 +32,6 @@ const SignUpForm = () => {
     setCheckbox((e) => !e);
   };
 
-  const inputStyle =
-    "w-full px-5 py-2 rounded-xl border-2 border-primary-color";
   const togglePasswordVisibility = () => {
     setPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -40,19 +42,22 @@ const SignUpForm = () => {
 
   const handleRegister = async (data) => {
     if (data.is_confirmed === false) {
-      setCheckBokError(true)
+      setCheckBokError(true);
     } else {
-      setCheckBokError(false)
-      const register_data = await register({data:data})
-      dispatch(setCurrentEmail(register_data?.data?.email))
-      router.push("/auth/verify")
+      setCheckBokError(false);
+      const register_data = await register({ data: data });
+      dispatch(setCurrentEmail(register_data?.data?.email));
+      router.push("/auth/verify");
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
-    <div className={'p-7 w-1/3 shadow-md rounded-xl'}>
-      <h2 className={"mb-8 text-primary-color"}>Sign Up</h2>
+    <div className="md:w-[60%] lg:w-[45%] max-sm:w-full sm:w-full md:pe-20 lg:pe-30 max-sm:px-10 sm:px-10 flex h-full flex-col">
+      <p className="text-description-color text-lg font-medium">
+        Welcome to K-QuickSight!
+      </p>
+      <h2 className={"mb-8 pt-2 text-primary-color"}>Sign Up</h2>
       <Formik
         initialValues={{
           username: "",
@@ -63,7 +68,7 @@ const SignUpForm = () => {
         validate={(values) => {
           const errors = {};
           if (!values.email) {
-            errors.email = "Required";
+            errors.email = "Email is required";
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
@@ -80,9 +85,9 @@ const SignUpForm = () => {
             errors.password = "Password must contain at least one letter";
           }
           if (!values.confirm_password) {
-            errors.confirm_password = "confirm has been required";
+            errors.confirm_password = "Confirm is required";
           } else if (values.password !== values.confirm_password) {
-            errors.confirm_password = "password not matched";
+            errors.confirm_password = "Password does not matched";
           }
           if (!values.confirm_privacy === false) {
             errors.confirm_privacy = "You should check the privacy terms.";
@@ -97,148 +102,185 @@ const SignUpForm = () => {
             is_confirmed: checkBox,
           };
           setIsLoading(true);
-          handleRegister(data)
+          handleRegister(data);
           setSubmitting(false);
         }}
       >
         {({ isSubmitting }) => (
-          <Form className={"flex bg-white flex-col gap-[20px] w-full"}>
-            <div>
+          <Form>
+            <div className="mb-3">
+              <label
+                htmlFor="name"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Username
+              </label>
+
               <Field
-                className={inputStyle}
                 type="text"
-                name={"username"}
+                name="username"
+                id="username"
                 placeholder="Username"
+                className={fieldNormal}
               />
-              <p className="text-red-600 font-normal">
-                {errorMessage?.username}
-              </p>
               <ErrorMessage
-                className={"text-red-500"}
-                name={"username"}
-                component={"div"}
+                name="username"
+                component="p"
+                className="mt-2 text-sm text-red-600 dark:text-red-500"
               />
             </div>
-            <div>
+            <div className="mb-3">
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Email
+              </label>
               <Field
-                className={inputStyle}
                 type="email"
                 name="email"
-                placeholder={"Email"}
+                id="email"
+                placeholder="name@example.com"
+                className={fieldNormal}
               />
-              <p className="text-red-600 font-normal">{errorMessage?.email}</p>
               <ErrorMessage
-                className={"text-red-500"}
                 name="email"
-                component="div"
+                component="p"
+                className="mt-2 text-sm text-red-600 dark:text-red-500"
               />
             </div>
-            <div>
-              <div className={"relative"}>
+            <div className="mb-3">
+              <label
+                htmlFor="password"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Password
+              </label>
+              <div className="relative">
                 <Field
-                  className={inputStyle}
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder={"Password"}
+                  id="password"
+                  placeholder="Password"
+                  className={fieldNormal}
                 />
                 <button
-                  className={
-                    "absolute translate-x-[80%] opacity-80 translate-y-1/3 right-10"
-                  }
                   type="button"
                   onClick={togglePasswordVisibility}
+                  className="absolute top-1/2 transform -translate-y-1/2 right-2 text-gray-700 hover:text-gray-400 focus:outline-none"
                 >
                   {showPassword ? (
-                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    <EyeFilledIcon className="h-5 w-5" aria-hidden="true" />
                   ) : (
-                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    <EyeSlashFilledIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   )}
                 </button>
               </div>
+
               <ErrorMessage
-                className={"text-red-500"}
                 name="password"
-                component="div"
+                component="p"
+                className="mt-2 text-sm text-red-600 dark:text-red-500"
               />
             </div>
-            <div className={"relative"}>
-              <Field
-                className={inputStyle}
-                type={show_con_Password ? "text" : "password"}
-                name="confirm_password"
-                placeholder={"confirm -password"}
-              />
-              <button
-                className={
-                  "absolute translate-x-[80%] opacity-80 translate-y-1/3 right-10"
-                }
-                type="button"
-                onClick={toggleConfirmPasswordVisibility}
+            <div className="mb-4">
+              <label
+                htmlFor="confirm_password"
+                className="block text-sm font-semibold text-gray-800"
               >
-                {show_con_Password ? (
-                  <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                ) : (
-                  <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                )}
-              </button>
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Field
+                  type={show_con_Password ? "text" : "password"}
+                  name="confirm_password"
+                  id="confirm_password"
+                  placeholder="Confirm password"
+                  className={fieldNormal}
+                />
+                <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute top-1/2 transform -translate-y-1/2 right-2 text-gray-700 hover:text-gray-400 focus:outline-none"
+                >
+                  {show_con_Password ? (
+                    <EyeFilledIcon className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <EyeSlashFilledIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  )}
+                </button>
+              </div>
+
               <ErrorMessage
-                className={"text-red-500"}
                 name="confirm_password"
-                component="div"
+                component="p"
+                className="mt-2 text-sm text-red-600 dark:text-red-500"
               />
             </div>
-            <div>
+            <div className="mb-4">
               <Checkbox onClick={handleCheckbox} radius="md"></Checkbox>
               <span>
-                Check{" "}
+                Check and read{" "}
                 <Link
                   href={"/auth/confirmation"}
                   target={"_blank"}
-                  className={"text-primary-color font-semibold hover:underline"}
+                  className={
+                    "text-secondary-color font-semibold hover:underline"
+                  }
                 >
-                  and read Term and Privacy
+                  Term and Privacy
                 </Link>
-                <p className={'text-red-500'}>{checkBoxError ? 'You should accept the term' : ''}</p>
+                <p className={"text-red-500"}>
+                  {checkBoxError ? "You should accept the term" : ""}
+                </p>
               </span>
-            </div>
-            {!isLoading ? (
-              <Button
-                className={
-                  "bg-primary-color py-3 rounded-xl font-semibold text-background"
-                }
+            </div>{" "}
+            <div className="mt-7 flex flex-col items-center w-full justify-center">
+              <button
                 type="submit"
                 disabled={isSubmitting}
+                className="w-auto bg-primary-color justify-center flex primaryButton px-24 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
               >
-                Sign Up
-              </Button>
-            ) : (
-              <Button
-                className={
-                  "bg-primary-color py-3 rounded-xl font-semibold text-lg text-background"
-                }
-                isLoading={true}
-              >
-                Signing up ...
-              </Button>
-            )}
-            <div className={"flex gap-5 justify-center items-center"}>
-              <div className={"w-full h-0.5 bg-description-color"}></div>
-              <div className={"font-semibold text-description-color"}>OR</div>
-              <div className={"w-full h-0.5 bg-description-color"}></div>
+                {isLoading ? (
+                  <div className="flex justify-center">
+                    <p className="mr-2">Signing Up</p>
+                    <Image
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 animate-spin"
+                      src="https://www.svgrepo.com/show/199956/loading-loader.svg"
+                      alt="Loading icon"
+                    ></Image>
+                  </div>
+                ) : (
+                  "Sign Up"
+                )}
+              </button>
             </div>
-            <GoogleSignInBtn></GoogleSignInBtn>
-            <span className="pt-[20px] text-text-color">
-              Have any account yet?{" "}
-              <Link
-                href={"/auth/login"}
-                className="text-primary-color font-semibold"
-              >
-                Login
-              </Link>
-            </span>
           </Form>
         )}
       </Formik>
+      <div className="flex justify-center items-center flex-col">
+        <p className="my-3 text-description-color">OR</p>
+        <div>
+          <GoogleSignInBtn></GoogleSignInBtn>
+        </div>
+        <p className="pt-[20px] max-sm:text-center sm:text-center md:text-start text-text-color">
+          Already have an account?{" "}
+          <Link
+            href={"/auth/login"}
+            className="text-secondary-color font-semibold"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import fileNotFound from "@assets/images/fileNotFound.png";
 import { useRouter } from "next/navigation";
-import { Button, Select, SelectItem } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { IoChevronBackCircle } from "react-icons/io5";
 import PreviewTable from "@/lib/table/fileScrapTable/PreviewTable";
 import { CheckboxGroup, Checkbox } from "@nextui-org/react";

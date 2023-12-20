@@ -39,9 +39,7 @@ const DetailDataset = ({params}) => {
                 <Overview filename={fileDetail?.file} uuid={uuid}  />
                 <CleanModal filename={fileDetail?.filename} />
             </div>
-            <div className={'flex justify-end items-center'}>
-                <HistoryDrawer />
-            </div>
+
             <div className={'flex flex-col gap-3'}>
                 <p className={'text-primary-color font-semibold text-medium'}>Total records: {fileDetail?.total} </p>
                 <FileDetail uuid={uuid} showHeader={true}/>

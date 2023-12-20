@@ -52,26 +52,26 @@ export default function Feature(){
     return(
         <>
             <section className="bg-center bg-no-repeat bg-[url('/assets/images/feature-bg.jpg')] bg-overlay/40 bg-cover bg-blend-darken">
-                <div className="px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[117px]">
+                <div className="md:px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[117px]">
                     <h1 className="mb-4 text-white">K-QuickSight Features</h1>
-                    <p className="mb-8 text-background-color text-xl">
+                    <p className="md:mb-8 sm:mb-0 max-sm:mb-0 text-background-color text-xl">
                         Analyze your dataset, and visualize as a perfection.
                     </p>
                 </div>
             </section>
 
-            <div className="max-w-lg mx-auto text-center py-8 my-8 relative">
+            <div className="max-w-lg  mx-auto text-center py-8 my-8 relative">
                 <div className="w-32 border-2 border-blue-800/50 opacity-90 mx-auto absolute -translate-x-1/2 -translate-y-1/2 top-0 left-1/2"/>
                 <h2 className={"text-primary-color mt-10"}>
                     OUR FEATURE
                 </h2>
             </div>
 
-            <section className={"place-content-center flex flex-col gap-20 mb-40 lg:px-[10%] md:px-5 px-3"}>
+            <section className={"place-content-center flex flex-col gap-20 md:mb-24 max-sm:mb-10 sm:mb-10 lg:px-[10%] md:px-5 sm:px-8 max-sm:px-8"}>
 
                 {
                     feature.map((data,index)=>(
-                        <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} gap-10`}>
+                        <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} md:gap-10 max-sm:gap-6 sm:gap-6`}>
                             <div className="lg:w-2/3 md:1/2 w-full">
                                 <Button size="sm" variant="flat" className={'text-primary-color bg-primary-color/10 mb-6 font-medium rounded-xl'}>
                                     {data.bagde}

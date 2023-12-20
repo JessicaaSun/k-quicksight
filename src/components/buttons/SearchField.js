@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchButton = (onChange, value, text) => {
+const SearchField = (onChange, value, text) => {
   return (
     <input
       id="searchQueryInput"
@@ -14,4 +14,4 @@ const SearchButton = (onChange, value, text) => {
   );
 };
 
-export default SearchButton;
+export default SearchField;

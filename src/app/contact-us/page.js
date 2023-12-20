@@ -6,9 +6,9 @@ import FormContactUs from "@/components/contact-us/FormContactUs";
 
 const Page = () => {
     return (
-        <main className="flex lg:min-h-screen w-full flex-col lg:px-48 items-center justify-center lg:max-h-screen lg:pt-32 md:pt-36 md:px-5 pt-48 px-10">
+        <main className="flex w-full flex-col lg:px-48 items-center justify-center lg:max-h-screen xl:pt-28 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 lg:pt-34 md:pt-36 md:px-14 max-sm:px-8 sm:px-8">
             <div className={" w-full md:gap-20 items-center md:flex "}>
-                <div className={"flex w-full md:w-[40%] lg: flex-col"}>
+                <div className={"flex w-full md:w-[90%] xl:w-[40%] lg:w-[80%] flex-col"}>
                     <h1 className={"text-primary-color pb-4"}>Contact Us</h1>
                     <p className={"text-descriptive-color pb-6"}>Got any issue?  Want to send feedback about the beta feature? need detail about our business plan? Let us know.</p>
                     <FormContactUs/>

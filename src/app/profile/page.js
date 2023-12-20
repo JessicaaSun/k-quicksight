@@ -141,7 +141,7 @@ export default function Profile() {
 
   if (user) {
     content = (
-      <div className="flex min-h-screen flex-col items-center justify-start lg:px-[10%] md:px-[5%] px-3 py-48">
+      <div className="flex min-h-screen flex-col items-center justify-start lg:px-[10%] md:px-[5%] px-3 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 md:pt-48 md:mb-48">
         <div
           className={
             "p-5 w-full text-white min-h-[190px] rounded-2xl bg-[#1E2875]"

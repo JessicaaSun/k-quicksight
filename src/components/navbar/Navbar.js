@@ -26,7 +26,7 @@ import { useSession, signOut } from "next-auth/react";
 import Loading from "@/app/loading";
 import logoName from "@assets/logos/name.png";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-import {generateBashURL} from "@/utils/util";
+import { generateBashURL } from "@/utils/util";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -109,13 +109,13 @@ export default function NavbarKQuick() {
                   className="flex gap-5 justify-center items-center"
                 >
                   <div className="w-[32px] h-[32px] max-sm:w-[28px] max-sm:h-[28px]">
-                  <Avatar
-                    isBordered
-                    as="button"
-                    className="transition-transform py-[0.3rem] object-cover bg-background-color"
-                    size="sm"
-                    src="/assets/logos/logo.png"
-                  />
+                    <Avatar
+                      isBordered
+                      as="button"
+                      className="transition-transform py-[0.3rem] object-cover bg-background-color"
+                      size="sm"
+                      src="/assets/logos/logo.png"
+                    />
                   </div>
                   <span className="text-primary-color max-sm:hidden sm:hidden md:flex font-semibold text-lg">
                     <Image
@@ -172,25 +172,32 @@ export default function NavbarKQuick() {
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="profile" className="h-14 gap-2">
+                    <DropdownItem
+                      textValue={user?.data.full_name}
+                      key="profile"
+                      className="h-14 gap-2"
+                    >
                       <p className="font-semibold">Signed in as</p>
                       <p className="font-semibold text-primary-color">
                         {user?.data.full_name}
                       </p>
                     </DropdownItem>
                     <DropdownItem
+                      textValue="Profile"
                       onClick={() => router.push("/profile")}
                       key="settings"
                     >
                       Profile
                     </DropdownItem>
                     <DropdownItem
+                      textValue="Board"
                       onClick={() => router.push("/board/dataset")}
                       key="team_settings"
                     >
                       Board
                     </DropdownItem>
                     <DropdownItem
+                      textValue="Logout"
                       onClick={() => {
                         signOut();
                         dispatch(logout());
@@ -198,7 +205,7 @@ export default function NavbarKQuick() {
                       key="logout"
                       color="danger"
                     >
-                      logout
+                      Logout
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

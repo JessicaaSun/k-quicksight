@@ -10,7 +10,7 @@ import {useRouter} from "next/navigation";
 export default function SampleDataset() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const uuid = useSelector(state => state.dataSetSelected.fileSelect);
-    console.log(uuid)
+
     const router = useRouter();
 
     const handleProceed = () => {

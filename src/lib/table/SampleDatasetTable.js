@@ -7,15 +7,13 @@ import {setSelectFile} from "@/store/features/files/fileSelect";
 
 const SampleDatasetTable = () => {
     const [selectedLKey, setSelectedKey] = React.useState(new Set(["2"]));
-    // console.log(selectedLKey.currentKey)
+    
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setSelectFile(selectedLKey.currentKey))
     }, [dispatch, selectedLKey])
 
-    // const state = useSelector(state => state)
-    // console.log(state)
 
     return (
         <div className="flex flex-col gap-3">

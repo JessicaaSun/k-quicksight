@@ -6,10 +6,7 @@ const MultipleLinear = ({data, headers}) => {
     if (!data || typeof data !== 'object') {
         return <p className={'text-red-400'}>Please input valid columns or click perform button</p>;
     }
-    console.log(data)
-    // else if (!data?.coefficient_summary_table || data?.coefficient_summary_table !== 'object') {
-    //     return <p className={'text-red-400'}>Please input valid columns or click perform button</p>;
-    // }
+    
     const coefficientData = data?.coefficient_summary_table;
     return (
         <div className="overflow-x-scroll">

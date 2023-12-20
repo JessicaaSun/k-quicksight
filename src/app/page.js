@@ -25,7 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
-      console.log("session:", session);
       const fetchData = async () => {
         try {
           const { data } = await loginWithGoogle({

@@ -107,7 +107,7 @@ const VisualContent = ({ onClose, datasetUuid }) => {
 
   const handleAddCard = (text, desc) => {
     const cardData = generateCard(text, desc);
-    console.log("add card", cardData);
+    
     actions.addLayerTree(JSON.parse(cardData.data));
     if (isMobile) {
       onClose();

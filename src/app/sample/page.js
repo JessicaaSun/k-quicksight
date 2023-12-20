@@ -10,9 +10,6 @@ import {FaPlus} from "react-icons/fa";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useRouter} from "next/navigation";
 
-const onChange = (key) => {
-    console.log(key);
-};
 
 const items = [
     {
@@ -57,7 +54,6 @@ const SampleDataset_main = () => {
             <Tabs
                 defaultActiveKey="1"
                 items={items}
-                onChange={onChange}
                 size={'large'}
                 indicatorSize={(origin) => origin - 16}
             />

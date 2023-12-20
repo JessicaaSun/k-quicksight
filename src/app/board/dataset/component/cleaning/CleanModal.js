@@ -39,7 +39,7 @@ export default function CleanModal({filename}) {
             filename: filename
         }
         try {
-            console.log(body)
+            
             const response = await cleanProcess({data: body});
             if (response) {
                 toast.success('success!')

@@ -36,11 +36,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: body
       })
-    })
+    }),
+    changePasswordWithOld: builder.mutation({
+      query: ({body}) => ({
+        url: `accounts/change-password/`,
+        method: 'POST',
+        body: body
+      })
+    }),
   }),
 });
 
 // auto generated hooks for getUser query (GET)
-export const { useGetUserQuery, useUpdateUserMutation, useCheckEmailMutation, useVerifyCodeMutation, useChangePasswordMutation } = userApiSlice;
+export const { useGetUserQuery, useUpdateUserMutation, useCheckEmailMutation, useVerifyCodeMutation, useChangePasswordMutation, useChangePasswordWithOldMutation } = userApiSlice;
 
 

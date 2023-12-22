@@ -69,7 +69,6 @@ export default function NavbarKQuick() {
     error,
   } = useGetUserQuery();
   const state = useSelector((state) => state.image);
-  const userInfo = useSelector((state) => state.userInfo.userInfo);
 
   useEffect(() => {
     if (isSuccess) {

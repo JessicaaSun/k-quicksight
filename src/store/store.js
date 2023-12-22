@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice"
 import imageSlice from "@/store/features/profile_image/imageSlice";
-import userInfo from "@/store/features/user/userInfo";
+import codeInfo from "@/store/features/user/userInfo";
 import allFiles from "@/store/features/files/fileSlice";
 import fileType from "@/store/features/files/fileType";
 import fileSelect from "@/store/features/files/fileSelect";
@@ -18,7 +18,7 @@ const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth : authReducer,
         image: imageSlice,
-        userInfo: userInfo,
+        codeInfo: codeInfo,
         allFiles: allFiles,
         fileType: fileType,
         dataSetSelected: fileSelect,

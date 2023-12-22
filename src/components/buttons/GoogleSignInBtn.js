@@ -40,7 +40,7 @@ const GoogleSignInBtn = () => {
       <Button
         type="submit"
         onClick={handleLoginWithGoogle}
-        className="bg-white px-16 cursor-pointer rounded-3xl text-text-color h-[40px] border-1 border-primary-color font-semibold flex gap-5"
+        className="bg-white px-16 w-full cursor-pointer rounded-3xl text-text-color h-[40px] border-1 border-primary-color font-semibold flex gap-5"
       >
         <Image
           src="/assets/images/google_logo.png"

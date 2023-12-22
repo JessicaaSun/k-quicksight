@@ -23,8 +23,10 @@ import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/da
 import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { BsClipboard2DataFill } from "react-icons/bs";
 import { formatBytes } from "@/utils/convertByte";
+import {useRouter} from "next/navigation";
 
 export default function Profile() {
+  const router = useRouter();
   const { data: user, isLoading } = useGetUserQuery();
   const [fullNameUpdate, setFullNameUpdate] = useState(false);
   const [fullname, setFullname] = useState("");
@@ -67,6 +69,7 @@ export default function Profile() {
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     const response = await imageUpload({ data: file });
+
     setAvatar(response?.data?.filename);
     let data = {
       username: user?.data.username,

@@ -37,12 +37,13 @@ const Dataset = () => {
   const { data: user, isLoading } = useGetUserQuery();
   const [isSample, setSample] = useState(false);
   const filType = useSelector((state) => state.fileType.fileType);
+  const filename = useSelector((state) => state.fileType.filename);
   const {
     data: allFile,
     isLoading: isFileLoading,
   } = useGetAllFilesQuery({
     id: user?.data.id,
-    filename: "",
+    filename: filename,
     type: filType,
   });
   const dispatch = useDispatch();

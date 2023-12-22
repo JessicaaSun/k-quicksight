@@ -9,12 +9,58 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Checkbox, Radio, RadioGroup, cn, CheckboxGroup
+    Checkbox, Radio, RadioGroup, cn, CheckboxGroup, Tooltip
 } from "@nextui-org/react";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
+
+export const option_clean = [
+    {
+        id: 1,
+        value: 'delete_missing_row',
+        label: 'Delete missing row',
+        content: 'Deleting missing rows in data analytics is done to preserve data integrity, ensure statistical analysis accuracy, facilitate model training, address imputation challenges, improve data quality, and manage the sensitivity of certain analyses. It helps maintain reliability by excluding incomplete data, ensuring more robust results in statistical and machine learning processes.'
+    },
+    {
+        id: 2,
+        value: 'delete_duplicate_row',
+        label: 'Delete Duplicate Row',
+        content: 'Deleting duplicate rows in data analytics is crucial for maintaining data accuracy, ensuring consistency, improving efficiency, and enhancing data quality. It helps prevent distortions in analysis, streamlines datasets, and is essential for effective database management.'
+    },
+    {
+        id: 3,
+        value: 'data_type_conversion',
+        label: 'Data type conversion',
+        content: 'Data type conversion is the process of changing the type of data from one format to another. It\'s essential for ensuring compatibility and performing operations.'
+    },
+    {
+        id: 4,
+        value: 'delete_row_outlier',
+        label: 'Delete Row outlier',
+        content: 'Deleting rows with outliers is a common step in data cleaning to enhance analysis accuracy by removing extreme data points that could distort results.'
+    },
+    {
+        id: 5,
+        value: 'impute_by_mean',
+        label: 'Impute by mean',
+        content: 'Imputing by mean is a method of filling missing values in a dataset by replacing them with the mean value of the available data. This approach helps maintain dataset integrity and facilitates statistical analyses.'
+    },
+    {
+        id: 6,
+        value: 'impute_by_mode',
+        label: 'Impute by mode',
+        content: 'Imputing by mode involves filling in missing values with the mode, which is the most frequently occurring value in a dataset. This method is used to address missing categorical data, ensuring a representative and complete dataset for analysis.'
+    },
+    {
+        id: 7,
+        value: 'remove_missing_cell',
+        label: 'Remove missing cell',
+        content: 'Removing missing cells involves eliminating entries in a dataset that have incomplete or null values. This step is taken to enhance data quality and ensure that the remaining information is complete and suitable for analysis.'
+    }
+]
+
 export default function CleanModal({filename}) {
     const router = useRouter();
     const {data:user} = useGetUserQuery();
@@ -88,13 +134,15 @@ export default function CleanModal({filename}) {
                                         value={option}
                                         onValueChange={setOption}
                                     >
-                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_missing_row">delete_missing_row</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_duplicate_row">delete_duplicate_row</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="data_type_conversion">data_type_conversion</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="delete_row_outlier">delete_row_outlier</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="impute_by_mean">impute_by_mean</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="impute_by_mode">impute_by_mode</Checkbox>
-                                        <Checkbox isDisabled={select === 'autoClean' } value="remove_missing_cell">remove_missing_cell</Checkbox>
+                                        {
+                                            option_clean.map((item, index) => (
+                                                <Tooltip className={'w-1/2'} placement={'top'} key={item.id} content={item.content}>
+                                                    <Button className={'flex justify-start'} variant={'light'}>
+                                                        <Checkbox isDisabled={select === 'autoClean' } value={item.value}>{item.label}</Checkbox>
+                                                    </Button>
+                                                </Tooltip>
+                                            ))
+                                        }
                                     </CheckboxGroup>
                                 </div>
 

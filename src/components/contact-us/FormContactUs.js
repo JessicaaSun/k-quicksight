@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {Button, Input, Textarea} from "@nextui-org/react";
 import {useUploadDescriptionMutation} from "@/store/features/contact-us/uploadSlice";
+import {toast} from "react-toastify";
 
 const FormContactUs = () => {
     const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const FormContactUs = () => {
     }, [email]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        toast.success("Contact-Us successfully ")
         // Check if the email is valid before making the API call
         if (!isInvalid) {
             try {

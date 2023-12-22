@@ -72,7 +72,16 @@ const CardDetailDropDown = ({
       thumbnail: previewImage,
     };
     const response = await updateAnalysis({ data: body, uuid: uuid });
-    toast.success("Successfully updated analysis");
+    toast.success('🦄 Successfully updated analysis', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     setTimeout(() => {
       onEditOpenChange(false);
     }, 2000);
@@ -86,7 +95,16 @@ const CardDetailDropDown = ({
       };
       const response = await updateDashboard({ data: body, uuid: uuid });
       if (response) {
-        toast.success("Successfully updated dashboard");
+        toast.success('🦄 Successfully updated dashboard!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setTimeout(() => {
           onEditOpenChange(false);
         }, 2000);

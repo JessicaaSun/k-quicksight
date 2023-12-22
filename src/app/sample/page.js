@@ -10,9 +10,6 @@ import {FaPlus} from "react-icons/fa";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useRouter} from "next/navigation";
 
-const onChange = (key) => {
-    console.log(key);
-};
 
 const items = [
     {
@@ -45,10 +42,10 @@ const SampleDataset_main = () => {
 
 
     return (
-        <div className={'py-40 px-[10%]'}>
+        <div className={'md:py-36 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 md:px-[10%] max-sm:px-8 sm:px-8'}>
             <div className={'lg:flex md:flex block justify-between items-center'}>
                 <div className={'w-full grid gap-4'}>
-                    <h2 className={'text-text-color'}>Sample</h2>
+                    <h1 className={'text-primary-color'}>Sample</h1>
                     <p className={'text-description-color'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
                     <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
                 </div>
@@ -57,7 +54,6 @@ const SampleDataset_main = () => {
             <Tabs
                 defaultActiveKey="1"
                 items={items}
-                onChange={onChange}
                 size={'large'}
                 indicatorSize={(origin) => origin - 16}
             />

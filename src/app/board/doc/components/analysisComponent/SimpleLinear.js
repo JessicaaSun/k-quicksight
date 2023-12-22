@@ -8,7 +8,7 @@ const SimpleLinear = ({data}) => {
     const keys = Object.keys(data);
     const coefficientData = data?.conefficient_summary_table;
 
-    console.log(data)
+    
 
     return (
         <div className="overflow-x-scroll">

@@ -7,7 +7,7 @@ const analysisUUID = createSlice({
     initialState,
     reducers: {
         setUUID: (state, action) => {
-            // console.log(action.payload)
+
             state.uuid = action.payload;
         },
 

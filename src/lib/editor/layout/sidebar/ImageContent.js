@@ -110,7 +110,7 @@ const ImageContent = ({ onClose }) => {
               }}
               onClick={() => {
                 addImage(item.img, item.img);
-                console.log(item.img);
+                
               }}
             >
               <img

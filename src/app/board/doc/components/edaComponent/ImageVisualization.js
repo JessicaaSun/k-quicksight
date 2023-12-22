@@ -4,7 +4,7 @@ import {generateBashURL} from "@/utils/util";
 import {useSelector} from "react-redux";
 
 const ImageVisualization = ({visualizationData, header}) => {
-    console.log(visualizationData, header)
+    
     if (!header) {
         return null; // or return a message or placeholder
     }

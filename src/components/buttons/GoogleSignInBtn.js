@@ -21,7 +21,6 @@ const GoogleSignInBtn = () => {
   const handleLogin = async (email, password) => {
     try {
       const { data } = await login({ email, password }).unwrap();
-      console.log("data: ", data);
       dispatch(setCredentials(data));
       setTimeout(async () => {
         router.push("/");
@@ -29,7 +28,6 @@ const GoogleSignInBtn = () => {
     } catch (error) {
       if (!error.response) {
         alert("No Server Response");
-        console.log(error);
       } else if (error.response.status === 400) {
         alert("Missing email or password");
       } else if (error.response.status === 403) {
@@ -42,7 +40,7 @@ const GoogleSignInBtn = () => {
       <Button
         type="submit"
         onClick={handleLoginWithGoogle}
-        className="bg-white text-text-color h-[46px] border-1 border-primary-color font-semibold flex gap-5"
+        className="bg-white px-16 cursor-pointer rounded-3xl text-text-color h-[40px] border-1 border-primary-color font-semibold flex gap-5"
       >
         <Image
           src="/assets/images/google_logo.png"
@@ -50,7 +48,7 @@ const GoogleSignInBtn = () => {
           width={20}
           height={20}
         />
-        <p className="font-semibold text-text-color">Continue with google</p>
+        <p className="font-medium text-base text-text-color">Continue with google</p>
       </Button>
   );
 };

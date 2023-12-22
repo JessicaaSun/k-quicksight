@@ -45,7 +45,6 @@ export default function UploadImageZone({
   const validationSchema = Yup.object().shape({
     file: Yup.mixed()
       .test("fileSize", "File too large", (value) => {
-        console.log("value", value);
         if (!value) {
           return true;
         }

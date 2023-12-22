@@ -82,7 +82,7 @@ const Analysis = () => {
     }
   }, [resultAnalysis]);
 
-  console.log(resultAnalysis);
+  
 
   return (
     <div className={"grid gap-3"}>

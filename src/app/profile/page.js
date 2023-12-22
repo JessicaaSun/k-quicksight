@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/dashboardApiSlice";
 import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { BsClipboard2DataFill } from "react-icons/bs";
+import { formatBytes } from "@/utils/convertByte";
 
 export default function Profile() {
   const { data: user, isLoading } = useGetUserQuery();
@@ -88,7 +89,7 @@ export default function Profile() {
 
   // dashboard api 
   const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({ uuid: user?.data.uuid })
-  console.log(allDashboard)
+
 
   useEffect(() => {
     setFullname(user?.data.full_name);
@@ -140,7 +141,7 @@ export default function Profile() {
 
   if (user) {
     content = (
-      <div className="flex min-h-screen flex-col items-center justify-start lg:px-[10%] md:px-[5%] px-3 py-48">
+      <div className="flex min-h-screen flex-col items-center justify-start lg:px-[10%] md:px-[5%] px-3 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 md:pt-48 md:mb-48">
         <div
           className={
             "p-5 w-full text-white min-h-[190px] rounded-2xl bg-[#1E2875]"
@@ -450,10 +451,10 @@ export default function Profile() {
                 <p className={"font-semibold text-lg text-text-color"}>Used</p>
                 <div
                   className={
-                    "text-md text-text-color bg-gray-100 px-6 rounded-full py-0.5"
+                    `text-md text-text-color ${user?.data.storage_data < 819200 ? 'bg-red-300' : 'bg-gray-100'} px-6 rounded-full py-0.5`
                   }
                 >
-                  {user?.data.storage_data} KB
+                  {formatBytes(user?.data.storage_data)}
                 </div>
               </div>
             </div>

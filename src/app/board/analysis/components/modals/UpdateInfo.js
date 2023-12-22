@@ -41,7 +41,6 @@ export default function UpdateInfo({ filename, uuid, thumbnailUrl }) {
       title: Analysis_name,
       thumbnail: previewImage,
     };
-    console.log(body);
     const response = await updateInfoAnalysis({ data: body, uuid: uuid });
     toast.success("Updated");
     setTimeout(() => {

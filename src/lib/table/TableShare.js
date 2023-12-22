@@ -22,7 +22,7 @@ import { generateBashURL } from "@/utils/util";
 export default function ShareTable({ file }) {
   const router = useRouter();
 
-  console.log(file)
+  
   return (
     <Table
       removeWrapper

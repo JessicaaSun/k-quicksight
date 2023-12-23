@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import AddNewButton from "./components/NewVersion/ModalAddNew";
 import AnalysisCard from "../components/cards/AnalysisCard";
 import EmptyAnalysis from "../components/cards/emptyAnalysis";
+import DashboardCard from "@/app/board/components/cards/DashboardCard";
 const Page = () => {
   const { data: user } = useGetUserQuery();
   const { data: allAnalysis } = useAllAnalysisFileQuery({
@@ -46,11 +47,11 @@ const Page = () => {
         ) : (
           <div>
             <div
-              className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}
+              className={"grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-5"}
             >
               {allAnalysis?.results.map((item, index) => (
                 <div key={index} className="grid gap-3 shadow-md rounded-2xl">
-                  <AnalysisCard item={item} index={index} />
+                  <DashboardCard item={item} index={index} routeTo={`/board/analysis/${item.file.uuid}/${item.uuid}`} />
                 </div>
               ))}
             </div>

@@ -185,7 +185,7 @@ export default function FormLogin() {
               <button
                 type="button"
                 className="text-sm text-secondary-color hover:underline ml-auto cursor-pointer"
-                onClick={toggleForgotPasswordVisibility}
+                onClick={() => router.push("/auth/forgetPassword")}
               >
                 Forgot Password
               </button>

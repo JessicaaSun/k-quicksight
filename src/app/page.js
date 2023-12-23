@@ -45,12 +45,12 @@ export default function Home() {
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
         <div className="flex flex-col gap-3 w-full">
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
-            <p className="leading-[65px] text-text-color max-sm:leading-normal sm:leading-normal">
+            <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
-              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
+              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent dark:text-third-color">K-QuickSight</span>
             </p>
           </div>
-          <p className="text-description-color text-lg">
+          <p className="text-description-color text-lg dark:text-white">
             Catalyze your data journey with our powerful tools for discovery,
             analysis, and informed decision-making. Explore your data full
             potential and drive success with confidence.
@@ -59,7 +59,7 @@ export default function Home() {
             {!user ? (
               <Button
                 onClick={() => router.push("/auth/login")}
-                className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
+                className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color dark:bg-third-color text-white"
               >
                 Get started
               </Button>
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
-        <h2 className="text-primary-color font-bold text-center">
+        <h2 className="text-primary-color dark:text-white font-bold text-center">
           Getting started with K-QuickSight
         </h2>
         <GetStart_boxs />

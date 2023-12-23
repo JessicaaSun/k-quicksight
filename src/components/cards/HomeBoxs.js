@@ -182,7 +182,7 @@ export function User_base() {
   return (
     <div className="lg:flex md:block w-full block gap-20 justify-between items-center">
       <div className="flex flex-col gap-12 lg:w-1/2 md:w-full w-full">
-        <h2 className="text-primary-color my-8">
+        <h2 className="text-primary-color dark:text-white my-8">
           Empowering a Diverse User Base
         </h2>
         {data.map((item, index) => (
@@ -190,16 +190,16 @@ export function User_base() {
             key={index}
             className={`lg:w-1/2 md:w-2/3 w-full relative p-5 rounded-xl ${
               index === 1 && "text-right"
-            } lg:w-1/2 md:w-full min-w-full bg-background-color border-2 border-primary-color`}
+            } lg:w-1/2 md:w-full min-w-full dark:bg-text-color bg-background-color border-2 border-primary-color dark:border-white`}
           >
             <h3
-              className={`text-primary-color absolute ${
+              className={`text-primary-color dark:text-white absolute ${
                 index === 1 && "-top-5 right-5"
-              } -top-5 bg-background-color px-5`}
+              } -top-5 bg-background-color dark:bg-text-color px-5`}
             >
               {item.title}
             </h3>
-            <p className={`text-description-color font-normal`}>
+            <p className={`text-description-color dark:text-white font-normal`}>
               {item.description}
             </p>
           </div>

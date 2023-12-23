@@ -75,7 +75,7 @@ const Sample_all = () => {
                   {getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}
                 </span>{" "}
               </Link>
-              <p className={"text-sm hover:text-white text-secondary-color"}>
+              <p className={"text-sm hover:text-white"}>
                 Size: {formatBytes(item.size)}
               </p>
             </div>

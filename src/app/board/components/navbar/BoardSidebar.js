@@ -15,7 +15,7 @@ const contentRoute = {
     _name: "Files",
     recent: {
       icon: <IoDocumentText />,
-      name: "Documentary",
+      name: "Relevance",
       route: "/board/doc",
     },
     dataset: {

@@ -12,6 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import {
+  useChangePasswordWithOldMutation,
   useGetUserQuery,
   useUpdateUserMutation,
 } from "@/store/features/user/userApiSlice";
@@ -23,8 +24,11 @@ import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/da
 import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { BsClipboard2DataFill } from "react-icons/bs";
 import { formatBytes } from "@/utils/convertByte";
+import {useRouter} from "next/navigation";
+import {toast} from "react-toastify";
 
 export default function Profile() {
+  const router = useRouter();
   const { data: user, isLoading } = useGetUserQuery();
   const [fullNameUpdate, setFullNameUpdate] = useState(false);
   const [fullname, setFullname] = useState("");
@@ -67,6 +71,7 @@ export default function Profile() {
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     const response = await imageUpload({ data: file });
+
     setAvatar(response?.data?.filename);
     let data = {
       username: user?.data.username,
@@ -87,9 +92,47 @@ export default function Profile() {
     setError(response?.error?.data?.phone_number)
   };
 
+
+
   // dashboard api 
   const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({ uuid: user?.data.uuid })
 
+  const [oldPassword, setOldPassword] = useState('')
+  const [password, setPassword] = useState('')
+  const [con_password, setConPassword] = useState('')
+  const [changePassword] = useChangePasswordWithOldMutation();
+  const handleChangePassword = async () => {
+    let body = {
+      old_password: oldPassword,
+      email: user?.data.email,
+      password: password,
+      confirmed_password: con_password
+    }
+    const changing = await changePassword({body: body});
+    if (changing?.error) {
+      toast.error('🦄 Check your password!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.success('🦄 Password has been changed', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
 
   useEffect(() => {
     setFullname(user?.data.full_name);
@@ -461,7 +504,7 @@ export default function Profile() {
           </div>
           <div
             className={
-              "lg:w-1/2 relative md:w-1/2 w-full mb-5 lg:-mt-20 md:-mt-20 mt-0 rounded-xl flex flex-col"
+              "lg:w-1/2 relative md:w-1/2 w-full lg:-mt-20 md:-mt-20 mt-0 rounded-xl flex flex-col gap-5"
             }
           >
             <div
@@ -495,11 +538,13 @@ export default function Profile() {
             </div>
             <div
               className={
-                "bg-white min-h-[383px] border-2 shadow-md mt-5 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "bg-white min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              Dashboard
-              <div className="w-full grid gap-3 mt-5">
+              <p className={"mb-5 text-lg text-primary-color font-semibold"}>
+                Dashboard
+              </p>
+              <div className="w-full grid gap-3">
                 {
                   allDashboard?.results.map((item, index) => (
                     <Link
@@ -520,6 +565,21 @@ export default function Profile() {
                     </Link>
                   ))
                 }
+              </div>
+            </div>
+            <div
+                className={
+                  "bg-white border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                }
+            >
+              <p className={'text-lg text-primary-color font-semibold'}>Change your password</p>
+              <div className={'w-full grid gap-3'}>
+                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'}/>
+                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} variant={'bordered'} placeholder={'New password'}/>
+                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Confirm your password'}/>
+                <Button variant={'solid'} color={'primary'} onClick={handleChangePassword}>
+                  Change password
+                </Button>
               </div>
             </div>
           </div>

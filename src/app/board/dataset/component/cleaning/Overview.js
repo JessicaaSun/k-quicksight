@@ -59,7 +59,7 @@ export default function Overview() {
                     }
                 }}
             >
-                <ModalContent className={'overflow-y-scroll max-h-[600px]'}>
+                <ModalContent className={'overflow-y-scroll max-h-[700px]'}>
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">

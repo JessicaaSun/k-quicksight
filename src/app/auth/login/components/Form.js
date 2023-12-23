@@ -55,7 +55,16 @@ export default function FormLogin() {
     try {
       const { data } = await login({ email, password }).unwrap();
       dispatch(setCredentials(data));
-      toast.success("Login Success.");
+      toast.success('🦄 Login Success!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setTimeout(() => router.push("/"), 1500);
     } catch (error) {
       if (!error.response) {
@@ -176,7 +185,7 @@ export default function FormLogin() {
               <button
                 type="button"
                 className="text-sm text-secondary-color hover:underline ml-auto cursor-pointer"
-                onClick={toggleForgotPasswordVisibility}
+                onClick={() => router.push("/auth/forgetPassword")}
               >
                 Forgot Password
               </button>
@@ -186,7 +195,7 @@ export default function FormLogin() {
               <button
                 disabled={isSubmitting || (touched.password && errors.password)}
                 type="submit"
-                className="w-auto bg-primary-color justify-center flex primaryButton px-28 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
+                className="w-full bg-primary-color justify-center flex primaryButton px-28 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
               >
                 {isLoading ? (
                   <div className="flex">
@@ -209,7 +218,7 @@ export default function FormLogin() {
       </Formik>
       <div className="flex justify-center items-center flex-col">
         <p className="my-3 text-description-color">OR</p>
-        <div>
+        <div className={'w-full'}>
           <GoogleSignInBtn></GoogleSignInBtn>
         </div>
         <p className="pt-[20px] max-sm:text-center sm:text-center md:text-start text-text-color">

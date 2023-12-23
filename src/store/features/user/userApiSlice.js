@@ -16,10 +16,38 @@ export const userApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
       invalidatesTags: ["User"],
     }),
+    checkEmail: builder.mutation({
+      query: ({email}) => ({
+        url: `accounts/forgot-password/`,
+        method: 'POST',
+        body: email
+      })
+    }),
+    verifyCode: builder.mutation({
+      query: ({code}) => ({
+        url: `accounts/verify-forgot-password/`,
+        method: 'POST',
+        body: code
+      })
+    }),
+    changePassword: builder.mutation({
+      query: ({body}) => ({
+        url: `accounts/change-forgot-password/`,
+        method: 'POST',
+        body: body
+      })
+    }),
+    changePasswordWithOld: builder.mutation({
+      query: ({body}) => ({
+        url: `accounts/change-password/`,
+        method: 'POST',
+        body: body
+      })
+    }),
   }),
 });
 
 // auto generated hooks for getUser query (GET)
-export const { useGetUserQuery, useUpdateUserMutation } = userApiSlice;
+export const { useGetUserQuery, useUpdateUserMutation, useCheckEmailMutation, useVerifyCodeMutation, useChangePasswordMutation, useChangePasswordWithOldMutation } = userApiSlice;
 
 

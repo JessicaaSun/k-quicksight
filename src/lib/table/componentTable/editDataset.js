@@ -48,7 +48,7 @@ export default function EditDataset({ title_dataset, uuid }) {
         className={"text-medium flex gap-3 justify-start items-center"}
       >
         <MdEditDocument />
-        Edit
+        Rename
       </div>
       <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -73,7 +73,7 @@ export default function EditDataset({ title_dataset, uuid }) {
                   Cancel
                 </Button>
                 <Button color="primary" onClick={handleUpdate}>
-                  update filename
+                  Rename
                 </Button>
               </ModalFooter>
             </>

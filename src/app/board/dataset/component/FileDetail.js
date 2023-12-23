@@ -43,7 +43,6 @@ export default function FileDetail({ uuid, showHeader }) {
       {fileDetail !== undefined ? (
         <>
           <Table
-            isHeaderSticky
             className={"max-h-[600px] overflow-y-scroll"}
             aria-label="Example static collection table"
           >

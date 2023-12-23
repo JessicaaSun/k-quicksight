@@ -27,6 +27,7 @@ import Loading from "@/app/loading";
 import logoName from "@assets/logos/name.png";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import { generateBashURL } from "@/utils/util";
+import ThemeSwitcher from "@/components/themeSwitch/themeSwitcher";
 
 export default function NavbarKQuick() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -69,7 +70,6 @@ export default function NavbarKQuick() {
     error,
   } = useGetUserQuery();
   const state = useSelector((state) => state.image);
-  const userInfo = useSelector((state) => state.userInfo.userInfo);
 
   useEffect(() => {
     if (isSuccess) {
@@ -130,6 +130,7 @@ export default function NavbarKQuick() {
               </NavbarBrand>
             </NavbarContent>
             <NavbarMenu className="py-[50px] mt-[50px]">
+              <ThemeSwitcher />
               {menuItems.map((item) => (
                 <Link
                   href={item.path}
@@ -158,8 +159,9 @@ export default function NavbarKQuick() {
           </div>
           {isSuccess ? (
             <Navbar className="w-auto bg-primary-color">
+              <ThemeSwitcher />
               <NavbarContent>
-                <Dropdown placement="bottom-end">
+                <Dropdown placement="bottom-end" className={'dark:text-white dark:bg-text-color bg-white'}>
                   <DropdownTrigger>
                     <Avatar
                       isBordered
@@ -178,7 +180,7 @@ export default function NavbarKQuick() {
                       className="h-14 gap-2"
                     >
                       <p className="font-semibold">Signed in as</p>
-                      <p className="font-semibold text-primary-color">
+                      <p className="font-semibold text-primary-color dark:text-third-color">
                         {user?.data.full_name}
                       </p>
                     </DropdownItem>

@@ -47,6 +47,7 @@ const SignUpForm = () => {
       setCheckBokError(false);
       const register_data = await register({ data: data });
       dispatch(setCurrentEmail(register_data?.data?.email));
+
       router.push("/auth/verify");
     }
     setIsLoading(false);
@@ -245,7 +246,7 @@ const SignUpForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-auto bg-primary-color justify-center flex primaryButton px-24 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
+                className="w-full bg-primary-color justify-center flex primaryButton px-24 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
               >
                 {isLoading ? (
                   <div className="flex justify-center">
@@ -268,7 +269,7 @@ const SignUpForm = () => {
       </Formik>
       <div className="flex justify-center items-center flex-col">
         <p className="my-3 text-description-color">OR</p>
-        <div>
+        <div className={'w-full'}>
           <GoogleSignInBtn></GoogleSignInBtn>
         </div>
         <p className="pt-[20px] max-sm:text-center sm:text-center md:text-start text-text-color">

@@ -16,6 +16,7 @@ import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLin
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import Correlation from "@/app/board/doc/components/analysisComponent/Correlation";
+import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
 
 const Page = ({ params }) => {
   let uuid = params.fileUuid;
@@ -79,22 +80,25 @@ const Page = ({ params }) => {
       </div>
 
       <div className="mt-10">
-        <p className="text-xl mb-7 text-text-color  font-semibold">
+        <p className="text-xl mb-7 text-text-color  font-semibold dark:text-third-color">
           {analysisDetail?.model_name}
         </p>
 
         {analysisDetail?.model_name.includes("simple_linear_regression") ? (
-          <SimpleLinear data={analysisDetail?.analysis_data} />
-        ) : analysisDetail?.model_name.includes(
-            "multiple_linear_regression"
-          ) ? (
-          <MultipleLinear
-            data={analysisDetail?.analysis_data}
-            headers={headers?.header_numeric}
-          />
+            <SimpleLinear data={analysisDetail?.analysis_data} />
+        ) : analysisDetail?.model_name.includes("multiple_linear_regression") ? (
+            <MultipleLinear
+                data={analysisDetail?.analysis_data}
+                headers={headers?.header_numeric}
+            />
         ) : analysisDetail?.model_name.includes("covariance") ||
-          analysisDetail?.model_name.includes("correlation") ? (
-          <Correlation data={analysisDetail?.analysis_data} />
+        analysisDetail?.model_name.includes("correlation") ? (
+            <Correlation data={analysisDetail?.analysis_data} />
+        ) : analysisDetail?.model_name.includes("descriptive") ? (
+            <Descriptive_statistic
+                data={analysisDetail?.descriptive}
+                headers={headers?.header_numeric}
+            />
         ) : null}
       </div>
     </div>

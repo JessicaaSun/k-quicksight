@@ -47,7 +47,7 @@ export default function Home() {
           <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
             <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
-              <span className=" bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent dark:text-third-color">K-QuickSight</span>
+              <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
             </p>
           </div>
           <p className="text-description-color text-lg dark:text-white">
@@ -104,12 +104,12 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className="bg-secondary-color min-w-full px-10 py-20">
+      <section className="bg-secondary-color dark:bg-text-color min-w-full px-10 py-20">
         <h2  className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
         <div>
-        <Card_Why />
+          <Card_Why />
         </div>
       </section>
       <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
@@ -121,7 +121,7 @@ export default function Home() {
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>
-      <section className="bg-secondary-color px-3 flex flex-col justify-center items-center max-sm:py-16 sm:py-16 py-20 w-full">
+      <section className="bg-secondary-color dark:bg-text-color px-3 flex flex-col justify-center items-center max-sm:py-16 sm:py-16 py-20 w-full">
         <h2 className="text-background-color">What Our Users Say</h2>
 
         <p className="text-background-color mb-12 font-normal lg:w-[40%] md:w-2/3 w-full mt-4 text-center">

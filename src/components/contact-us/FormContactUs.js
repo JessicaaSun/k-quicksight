@@ -57,7 +57,7 @@ const FormContactUs = () => {
                 errorMessage={isInvalid && "Please enter a valid email"}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                classNames={fieldNormal}
+                classNames={"block w-full px-4 py-[8px] mt-2 dark:border-white border-gray-200 border-1 dark:text-white text-black bg-white rounded-xl"}
             />
             <Textarea
                 label="Description"
@@ -66,7 +66,7 @@ const FormContactUs = () => {
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                classNames={fieldNormal}
+                className={'dark:text-white'}
             />
             <Button type={"submit"} className="bg-primary-color text-white h-[46px] font-semibold w-40">
                 Send Message

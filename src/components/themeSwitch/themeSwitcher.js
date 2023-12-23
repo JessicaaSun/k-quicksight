@@ -9,7 +9,7 @@ import {Switch} from "@nextui-org/react";
 
 export default function ThemeSwitcher() {
     const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme } = useTheme('light');
 
     const handleSetTheme = () => {
         if (theme === 'light') {

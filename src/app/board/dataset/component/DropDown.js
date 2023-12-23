@@ -20,7 +20,7 @@ export default function FileType() {
     <div className="flex w-full h-[56px] flex-row gap-2 flex-wrap">
       {dataType.map((item, index) => (
         <Button
-          className={`rounded-full ${fileType?.fileType === item.value ? 'bg-primary text-white' : ''}`}
+          className={`rounded-full ${fileType?.fileType === item.value ? 'bg-primary text-white dark:bg-third-color' : ''}`}
           variant={"ghost"}
           color={"primary"}
           key={item.id}

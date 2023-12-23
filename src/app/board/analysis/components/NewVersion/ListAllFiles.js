@@ -32,7 +32,7 @@ export default function ListAllFiles({ file, isFileLoading }) {
                                 <>
                                     {
                                         file?.map((item, index) => (
-                                            <Button onClick={() => handleProcess(item.uuid)} key={item.id} className={'hover:bg-primary-color text-left px-5 py-10 text-medium cursor-pointer hover:text-white transition-all flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm'}>
+                                            <Button onClick={() => handleProcess(item.uuid)} key={item.id} className={'hover:bg-primary-color text-text-color text-left px-5 py-10 text-medium cursor-pointer hover:text-white transition-all flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm'}>
                                                 <div>
                                                     <p>{item.file}</p>
                                                     <p className={'text-sm'}>({item.type}) <span className={'font-medium'}>{!item.is_original ? <span>Cleaned</span> : <span>Original</span>}</span> with {formatBytes(item.size)}</p>

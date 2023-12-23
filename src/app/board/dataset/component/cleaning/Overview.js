@@ -30,7 +30,7 @@ export default function Overview() {
 
     return (
         <>
-            <Button className={'bg-primary-color border-1 border-background-color shadow-md text-md font-normal text-background-color'} onPress={onOpen}>
+            <Button className={'bg-primary-color dark:bg-third-color border-1 border-background-color shadow-md text-md font-normal text-background-color'} onPress={onOpen}>
                 Overview
             </Button>
             <Modal
@@ -62,12 +62,12 @@ export default function Overview() {
                 <ModalContent className={'overflow-y-scroll max-h-[700px]'}>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl">
+                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-2xl dark:text-third-color">
                                 <h2>Data Overview</h2>
                                 <p className={'text-lg font-medium'}>{fileoverview?.file}</p>
                             </ModalHeader>
                             <ModalBody>
-                                <ul className={'list-disc ml-10 leading-8'}>
+                                <ul className={'list-disc ml-10 leading-8 dark:text-white'}>
                                     <li>Number of columns = {fileoverview?.headers?.length ? fileoverview?.headers.length : 0}</li>
                                     <li>Number of rows = {fileoverview?.total}</li>
                                     <li>Duplicate row = {fileoverview?.duplicate_rows?.length? fileoverview.duplicate_rows?.length : 0}</li>
@@ -93,9 +93,9 @@ export default function Overview() {
                                             ))
                                         }]</li>
                                 </ul>
-                                <p className={'text-primary-color font-medium'}>Imputation</p>
+                                <p className={'text-primary-color font-medium dark:text-third-color'}>Imputation</p>
                                 <TableImpute item={fileoverview} />
-                                <p className={'text-primary-color font-medium'}>Missing values</p>
+                                <p className={'text-primary-color font-medium dark:text-third-color'}>Missing values</p>
                                 <TableMissingValue item={fileoverview} />
                             </ModalBody>
                         </>

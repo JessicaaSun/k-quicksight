@@ -33,7 +33,7 @@ const Page = () => {
     <div className="py-10 px-7 ">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-3xl"}>
+          <p className={"text-primary-color font-semibold text-3xl dark:text-third-color"}>
             Analysis
           </p>
         </div>

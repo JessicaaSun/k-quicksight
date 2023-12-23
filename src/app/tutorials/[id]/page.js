@@ -10,7 +10,7 @@ export default function TutorialDetail({params}){
         isSuccess,
     } = useGetTutorialsUUIDQuery({uuid:uuid});
     return (
-        <div className={'py-44 px-[10%]'}>
+        <div className={'py-44 px-[10%] dark:text-white'}>
             <div
                 id="html-content"
                 className="w-7/12 mx-auto "

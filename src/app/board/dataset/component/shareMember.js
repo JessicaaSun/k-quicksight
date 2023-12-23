@@ -57,7 +57,7 @@ export default function ShareMember({filename, fileId, list}) {
             members: userSelected,
             file: fileId,
         }
-        console.log(dataShare)
+
         const share = await shareMember({data: dataShare});
         if (share?.data?.code === 201) {
             toast.success(`${share?.data?.message}`)
@@ -92,11 +92,11 @@ export default function ShareMember({filename, fileId, list}) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-0">
+                            <ModalHeader className="flex flex-col gap-0 bg-white">
                                 Share Dataset
                                 <p className={'text-md font-normal text-description-color'}>{filename} </p>
                             </ModalHeader>
-                            <ModalBody>
+                            <ModalBody className={'bg-white'}>
                             
                                 <div className="flex gap-2 flex-wrap">
                                     {userSelectedFilter?.map((item, index) => (
@@ -114,7 +114,7 @@ export default function ShareMember({filename, fileId, list}) {
                                         </Chip>
                                     ))}
                                 </div>
-                                <input placeholder={'search users ...'} className={'px-4 py-2 rounded-xl border-1 border-primary-color'} value={searchTerm} onChange={handleSearch} size={'40px'} type="email" />
+                                <input placeholder={'search users ...'} className={'px-4 py-2 dark:bg-white rounded-xl border-1 border-primary-color'} value={searchTerm} onChange={handleSearch} size={'40px'} type="email" />
                                 {searchResult?.length > 0 ? (
                                     <ul className={'h-48 overflow-y-scroll transition-all'}>
 
@@ -159,7 +159,7 @@ export default function ShareMember({filename, fileId, list}) {
                                     <p>No results found.</p>
                                 )}
                             </ModalBody>
-                            <ModalFooter>
+                            <ModalFooter className={'bg-white'}>
                                 <Button color="danger" variant="light" onPress={onClose}>
                                     Close
                                 </Button>

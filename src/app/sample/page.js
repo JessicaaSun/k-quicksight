@@ -45,13 +45,14 @@ const SampleDataset_main = () => {
         <div className={'md:py-36 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 md:px-[10%] max-sm:px-8 sm:px-8'}>
             <div className={'lg:flex md:flex block justify-between items-center'}>
                 <div className={'w-full grid gap-4'}>
-                    <h1 className={'text-primary-color'}>Sample</h1>
-                    <p className={'text-description-color'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
+                    <h1 className={'text-primary-color dark:text-third-color'}>Sample</h1>
+                    <p className={'text-description-color dark:text-white/80'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
                     <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
                 </div>
                 <Image className={'bg-transparent'} src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
             </div>
             <Tabs
+
                 defaultActiveKey="1"
                 items={items}
                 size={'large'}

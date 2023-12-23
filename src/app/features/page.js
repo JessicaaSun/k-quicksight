@@ -61,23 +61,22 @@ export default function Feature(){
             </section>
 
             <div className="max-w-lg  mx-auto text-center py-8 my-8 relative">
-                <div className="w-32 border-2 border-blue-800/50 opacity-90 mx-auto absolute -translate-x-1/2 -translate-y-1/2 top-0 left-1/2"/>
-                <h2 className={"text-primary-color mt-10"}>
+                <div className="w-32 border-2 dark:border-third-color/50 rounded-full border-blue-800/50 opacity-90 mx-auto absolute -translate-x-1/2 -translate-y-1/2 top-0 left-1/2"/>
+                <h2 className={"text-primary-color mt-10 dark:text-third-color"}>
                     OUR FEATURE
                 </h2>
             </div>
 
             <section className={"place-content-center flex flex-col gap-20 md:mb-24 max-sm:mb-10 sm:mb-10 lg:px-[10%] md:px-5 sm:px-8 max-sm:px-8"}>
-
                 {
                     feature.map((data,index)=>(
                         <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} md:gap-10 max-sm:gap-6 sm:gap-6`}>
                             <div className="lg:w-2/3 md:1/2 w-full">
-                                <Button size="sm" variant="flat" className={'text-primary-color bg-primary-color/10 mb-6 font-medium rounded-xl'}>
+                                <Button size="sm" variant="flat" className={'text-primary-color dark:text-third-color dark:bg-third-color/10 bg-primary-color/10 mb-6 font-medium rounded-xl'}>
                                     {data.bagde}
                                 </Button>
-                                <h2 className="text-primary-color mb-3">{data.title}</h2>
-                                <p className={"sm:text-lg text-description-color md:text-xl lg:text-xls"}>{data.description}</p>
+                                <h2 className="text-primary-color mb-3 dark:text-third-color">{data.title}</h2>
+                                <p className={"sm:text-lg text-description-color md:text-xl lg:text-xls dark:text-white/80"}>{data.description}</p>
                             </div>
                             <Image src={data.image} unoptimized width={100} height={100} alt={"feature"} className={"lg:w-1/3 md:w-1/2 w-full"} />
                         </div>

@@ -70,11 +70,13 @@ const ExistingDatasetTable = () => {
         size="2xl"
         className="max-h-[400px] min-h-[400px] overflow-auto"
         isOpen={isOpen}
+        onOpenChange={onOpenChange}
+
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex text-xl text-text-color flex-col gap-1">
+              <ModalHeader className="flex text-xl dark:text-white text-text-color flex-col gap-1">
                 Importing dataset
               </ModalHeader>
               <ModalBody>

@@ -12,7 +12,7 @@ import {
     Input
 } from "@nextui-org/react";
 import {useScrapDataMutation} from "@/store/features/files/allFileByuserId";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setFileScrap} from "@/store/features/files/fileSlice";
 import {useRouter} from "next/navigation";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
@@ -25,7 +25,8 @@ export default function App() {
     const [error, setError] = useState('')
     const dispatch = useDispatch();
     const router = useRouter();
-    const [loading, isLoading] = useState(false)
+    const [loading, isLoading] = useState(false);
+    const theme = useSelector(state => state.theme.theme)
 
     const handleScrapping = async () => {
         let data = {
@@ -44,20 +45,20 @@ export default function App() {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Import form Web</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 dark:text-white">Import form Web</ModalHeader>
                             <ModalBody>
-                                <Input color={'primary'} placeholder={'Import URL'} classNames={{
+                                <Input color={theme === 'light' ? 'primary' : 'default'} placeholder={'Import URL'} classNames={{
                                     inputWrapper: [
-                                        'h-[42px]'
+                                        'h-[46px]'
                                     ]
                                 }} value={linkScrap} onValueChange={setLinkScrap} />
                                 <p className={'text-md text-red-400 font-medium'}>{error}</p>
                             </ModalBody>
                             <ModalFooter className={'flex gap-5'}>
-                                <Button className={'bg-white border-1 border-primary-color text-primary-color font-medium'} variant="light" onPress={onClose}>
+                                <Button color={theme === 'light' ? 'danger' : 'default'} className={'font-medium'} variant="light" onPress={onClose}>
                                     Cancel
                                 </Button>
-                                <Button isLoading={loading} className={'bg-primary-color text-white font-medium'} onClick={handleScrapping}>
+                                <Button isLoading={loading} className={'bg-primary-color text-white font-medium dark:bg-third-color'} onClick={handleScrapping}>
                                     Import
                                 </Button>
                             </ModalFooter>

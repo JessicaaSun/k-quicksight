@@ -17,6 +17,8 @@ import ExistingDataset from "./ExistingDataset";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import PerformAnalysisButton from "./PerformAnalysis";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
+import fileImport from '@assets/images/fileimport.png'
+import Image from "next/image";
 
 export default function AddNewButton() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

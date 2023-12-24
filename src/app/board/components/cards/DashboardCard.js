@@ -34,7 +34,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
         src={generateBashURL(item?.thumbnail)}
         alt={item?.title !== null ? item?.title : "Thumbnail"}
         className={
-          "max-w-[245px] max-h-[137px] cursor-pointer rounded-t-xl object-cover"
+          "w-full max-h-[137px] cursor-pointer rounded-t-xl object-cover"
         }
         onClick={handleImageClick}
       />

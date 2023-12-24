@@ -31,7 +31,7 @@ export default function BoardRootLayout({ children }) {
         />
         <p
           className={
-            "lg:text-2xl md:text-xl text-lg text-primary-color font-bold text-center"
+            "lg:text-2xl md:text-xl text-lg dark:text-white text-primary-color font-bold text-center"
           }
         >
           This page has been not authenticated

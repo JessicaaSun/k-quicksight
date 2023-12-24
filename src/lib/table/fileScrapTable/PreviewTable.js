@@ -20,8 +20,8 @@ export default function PreviewTable({detail}) {
     
     return (
         <>
-            <table className="min-w-full border border-gray-300">
-                <thead className="bg-gray-100">
+            <table className="min-w-full border border-gray-300 dark:text-white">
+                <thead className="bg-gray-100 dark:bg-gray-700">
                 <tr>
                     {fileDetail?.headers?.map((item, index) => (
                         <th key={index} className="py-2 px-4 border-b">{item}</th>

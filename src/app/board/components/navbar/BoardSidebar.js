@@ -73,7 +73,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           <p className={"text-primary-color dark:text-third-color truncate w-[130px] text-xl font-semibold"}>
             {user?.data.full_name}
           </p>
-          <p className={"text-description-color dark:dark:text-white text-text-color truncate w-[130px]"}>
+          <p className={"text-description-color dark:dark:text-white truncate w-[130px]"}>
             {user?.data.email}
           </p>
         </div>
@@ -96,7 +96,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
             {contentRoute.file.dataset.name}
           </Link>
           <Link
-              className={`text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
+              className={`text-text-color hover:text-white text-lg pl-5 py-2 hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.shareWithMe.route)
                       ? "bg-primary-color text-white dark:bg-third-color"
                       : "bg-white dark:bg-text-color dark:text-white text-text-color"
@@ -107,7 +107,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
             {contentRoute.file.shareWithMe.name}
           </Link>
           <Link
-              className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
+              className={` text-text-color text-lg pl-5 py-2 hover:text-white hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.recent.route)
                       ? "bg-primary-color text-white dark:bg-third-color"
                       : "bg-white dark:bg-text-color dark:text-white text-text-color"
@@ -130,7 +130,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
             className={`${
               pathname.startsWith(contentRoute.visualization.analysis.route)  ? "bg-primary-color text-white dark:bg-third-color"
                   : "bg-white dark:bg-text-color dark:text-white text-text-color "
-            } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:dark:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+            } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.analysis.route}
           >
             {contentRoute.visualization.analysis.icon}
@@ -140,7 +140,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
             className={`${
               pathname.startsWith(contentRoute.visualization.dashboard.route)  ? "bg-primary-color dark:bg-third-color text-white "
                   : "bg-white dark:bg-text-color dark:text-white text-text-color"
-            } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:dark:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+            } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.dashboard.route}
           >
             {contentRoute.visualization.dashboard.icon}

@@ -20,7 +20,7 @@ export default function UserBoard() {
 
   return (
     <div className={"py-10 px-7"}>
-      <p className={"text-primary-color font-semibold text-xl"}>
+      <p className={"text-primary-color font-semibold text-xl dark:text-third-color"}>
         Documentary of processing data analysis
       </p>
       <StepperProcess />

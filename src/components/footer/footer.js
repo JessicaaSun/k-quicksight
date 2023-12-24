@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <div
       className={
-        "bg-background-color w-full lg:flex md:flex-wrap block justify-between items-start md:px-16 max-sm:px-9 sm:px-9 pt-10"
+        "bg-background-color dark:text-white dark:bg-text-color w-full lg:flex md:flex-wrap block justify-between items-start md:px-16 max-sm:px-9 sm:px-9 pt-10"
       }
     >
       <div className={"flex flex-col gap-5"}>
@@ -79,7 +79,7 @@ export default function Footer() {
           >
             kquicksight@gmail.com
           </a>
-          <p className={"text-description-color font-normal"}>
+          <p className={"text-description-color dark:text-white/70 font-normal"}>
             You can contact us by this email to get more information from us.{" "}
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function Footer() {
           <Link
             href={e.url}
             key={index}
-            className={`font-[400] text-lg text-text-color hover:text-gray-500 transition-all`}
+            className={`font-[400] dark:text-white text-lg text-text-color hover:text-gray-500 transition-all`}
           >
             {e.name}
           </Link>
@@ -100,16 +100,16 @@ export default function Footer() {
           <Link
             href={e.url}
             key={index}
-            className={`font-[400] text-lg text-text-color hover:text-gray-500 transition-all`}
+            className={`font-[400] dark:text-white text-lg text-text-color hover:text-gray-500 transition-all`}
           >
             {e.name}
           </Link>
         ))}
       </div>
       <div className={"lg:w-1/4 md:w-2/3 md:pt-0 max-sm:pt-5 sm:pt-5"}>
-        <span className={"font-[600]  text-text-color max-sm:text-[20px] sm:text-[20px] md:text-[28px]"}>
+        <span className={"font-[600] dark:text-white text-text-color max-sm:text-[20px] sm:text-[20px] md:text-[28px]"}>
           Unlocking Insights, Empowering Decisions with{" "}
-          <span className={"text-primary-color font-bold"}>K-QuickSight</span>
+          <span className={"text-primary-color font-bold dark:text-third-color"}>K-QuickSight</span>
         </span>
       </div>
       <div className={"h-0.5 md:mt-10  max-sm:mt-5 sm:mt-5 w-full bg-description-color"}></div>

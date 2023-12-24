@@ -31,8 +31,8 @@ const Visualization = ({bodyEda}) => {
     const [error, setError] = useState('')
 
     const handleEda = async () => {
-        const response = await edaFile({data: bodyEda})
         isLoading(true)
+        const response = await edaFile({data: bodyEda})
         setResponse(response?.data)
         dispatch(setDetail(response?.data))
     }
@@ -45,12 +45,14 @@ const Visualization = ({bodyEda}) => {
                 isLoading(false)
                 setError('Something when wrong')
             }, 3000)
+        } else {
+            isLoading(true)
         }
     }, [response]);
 
     return (
         <>
-            <Button isLoading={loading} onClick={handleEda} className={'mb-3 text-md w-fit flex gap-4 font-medium text-white'} color={'primary'} ><FaCheck /> Perform EDA</Button>
+            <Button isLoading={loading} onClick={handleEda} className={'mb-3 text-md w-fit flex gap-4 font-medium text-white'} color={'primary'} ><FaCheck /> {loading ? "Performing EDA" : "Perform EDA"}</Button>
             {
                 detailEDAResponse && (
                     <div className={'flex flex-col gap-3'}>

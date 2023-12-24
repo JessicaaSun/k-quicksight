@@ -154,7 +154,7 @@ export default function VerifyCode({ callback, reset, isLoading }) {
         <main className="flex min-h-screen flex-col items-center justify-between py-56">
             <div className={"grid md:grid-cols-2 place-items-center md:gap-16"}>
                 <div className={"grid grid-cols-1 place-items-center px-3 md:px-0"}>
-                    <h1 className={"text-primary-color text-center lg:text-[32px]"}>
+                    <h1 className={"text-primary-color text-center lg:text-[32px] dark:text-white"}>
                         Verify your email address
                     </h1>
                     <div className={"mt-5 text-red-500 font-medium"}>{error}</div>
@@ -180,25 +180,25 @@ export default function VerifyCode({ callback, reset, isLoading }) {
                     </div>
                     <Button
                         radius="md"
-                        className={"w-full text-[18px] bg-primary-color text-white"}
+                        className={"w-full text-[18px] bg-primary-color dark:bg-third-color text-white"}
                         onClick={dataCode}
                     >
                         Register
                     </Button>
                     <div className={"mt-4 flex justify-center items-center"}>
-                        <p className="text-[18px]">or</p>
+                        <p className="text-[18px] dark:text-white">or</p>
                     </div>
                     <Button
                         variant="bordered"
-                        className={"mt-2 w-full text-[18px] text-primary-color"}
+                        className={"mt-2 w-full text-[18px] dark:text-third-color text-primary-color"}
                     >
                         Sign up again
                     </Button>
-                    <div className={"flex mt-4"}>
+                    <div className={"flex mt-4 dark:text-white"}>
                         <p>Already have an account?</p>
                         <p
                             className={
-                                "font-bold cursor-pointer flex text-primary-color ps-1"
+                                "font-bold cursor-pointer flex text-primary-color dark:text-third-color hover:underline ps-1"
                             }
                             onClick={() => router.push("/auth/login")}
                         >

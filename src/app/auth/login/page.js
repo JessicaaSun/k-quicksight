@@ -19,7 +19,7 @@ export default function Login() {
   // }
   return (
     <Outlet>
-      <div className="min-h-screen lg:w-[65%] max-sm:w-full sm:w-full md:w-[80%] md:ms-5 sm:ms-0 flex items-center max-sm:justify-center sm:justify-center md:justify-start  bg-background-color">
+      <div className="min-h-screen lg:w-[65%] max-sm:w-full sm:w-full md:w-[80%] md:ms-5 sm:ms-0 flex items-center max-sm:justify-center sm:justify-center md:justify-start">
         <FormLogin />
 
         <div className="min-h-screen fixed top-0 rounded-l-3xl right-0 z-10 md:flex sm:hidden max-sm:hidden justify-end items-center w-[32%] bg-[#5686EF]">

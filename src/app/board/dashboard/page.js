@@ -68,7 +68,7 @@ const Page = () => {
             {(onClose) => (
               <>
                 <ModalHeader>
-                  <h4>Import Dataset</h4>
+                  <h4 className={'dark:text-white'}>Import Dataset</h4>
                 </ModalHeader>
 
                 <ModalBody>
@@ -86,7 +86,7 @@ const Page = () => {
           </ModalContent>
         </Modal>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-3xl"}>
+          <p className={"text-primary-color font-semibold text-3xl dark:text-third-color"}>
             Dashboard
           </p>
         </div>

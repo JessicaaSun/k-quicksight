@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import { FaRegQuestionCircle } from "react-icons/fa";
 
 export const variableNotMoreThan2 = [
-  "descriptive_statistic",
   "correlation",
   "covariance",
   "simple_linear_regression",
@@ -44,6 +43,7 @@ const Analysis = () => {
 
   const handleSubmitAnalysis = async () => {
     let body_json;
+    isLoading(true);
     if (
       variableNotMoreThan2.some((model_mode) =>
         chosenModel.startsWith(model_mode)
@@ -68,7 +68,7 @@ const Analysis = () => {
     setBody(body_json);
     const responseAnalysis = await analysisPost({ data: body_json });
     setResultAnalysis(responseAnalysis?.data);
-    isLoading(true);
+
   };
 
   useEffect(() => {
@@ -79,6 +79,8 @@ const Analysis = () => {
         isLoading(false);
         toast.error("Something went wrong please try again!");
       }, 5000);
+    } else {
+      isLoading(true)
     }
   }, [resultAnalysis]);
 
@@ -86,12 +88,12 @@ const Analysis = () => {
 
   return (
     <div className={"grid gap-3"}>
-      <h3 className={"text-primary-color"}>Prep the Data for Modelling</h3>
+      <h3 className={"text-primary-color dark:text-third-color"}>Prep the Data for Modelling</h3>
       <div className={"grid gap-2"}>
         {!chosenModel ? (
           <p
             className={
-              "flex justify-start items-center gap-5 text-red-400 text-lg font-medium"
+              "flex dark:text-third-color justify-start items-center gap-5 text-red-400 text-lg font-medium"
             }
           >
             Please, choose the model:
@@ -113,7 +115,7 @@ const Analysis = () => {
         ) : (
           ""
         )}
-        <p className={"text-lg text-primary-color"}>
+        <p className={"text-lg text-primary-color dark:text-third-color"}>
           Choosing model: <span className={"font-semibold"}>{chosenModel}</span>
         </p>
         <Select
@@ -157,78 +159,81 @@ const Analysis = () => {
         />
         <>
           {chosenModel && (
-            <>
-              {variableNotMoreThan2.some((model_mode) =>
-                chosenModel.startsWith(model_mode)
-              ) ? (
-                <div className="grid gap-3">
-                  <div>
-                    <p className="text-description-color text-md">
-                      Select Dependent variable
-                    </p>
-                    <Select
-                      aria-label="Select"
-                      size={"large"}
-                      placeholder={"Selecting model"}
-                      style={{
-                        width: "40%",
-                      }}
-                      value={dependent_variable}
-                      onChange={setDependentVariable}
-                      options={headers?.header_label}
-                    />
-                  </div>
-                  <div>
-                    <p className="text-description-color text-md">
-                      Select Independent variable
-                    </p>
-                    <Select
-                      aria-label="Select"
-                      size={"large"}
-                      placeholder={"Selecting model"}
-                      style={{
-                        width: "40%",
-                      }}
-                      value={independent_variable}
-                      onChange={setIndependentVariable}
-                      options={headers?.header_label}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <p className="text-description-color text-md">
-                    Select Dependent variable
-                  </p>
-                  <div className="flex gap-5">
-                    <Select
-                      aria-label="Select"
-                      size={"large"}
-                      placeholder={"Selecting model"}
-                      style={{
-                        width: "40%",
-                      }}
-                      value={dependent_variable}
-                      onChange={setDependentVariable}
-                      options={headers?.header_label}
-                    />
-                    <Select
-                      aria-label="Select"
-                      size={"large"}
-                      mode="multiple"
-                      placeholder="Independent variable"
-                      value={independent_variables}
-                      onChange={setIndependentVariables}
-                      style={{
-                        width: "40%",
-                      }}
-                      options={headers?.header_label}
-                    />
-                  </div>
-                </div>
-              )}
-            </>
+              <>
+                {variableNotMoreThan2.some((model_mode) =>
+                    chosenModel.startsWith(model_mode)
+                ) ? (
+                    <div className="grid gap-3">
+                      <div>
+                        <p className="text-description-color text-md">
+                          Select Dependent variable
+                        </p>
+                        <Select
+                            aria-label="Select"
+                            size={"large"}
+                            placeholder={"Selecting model"}
+                            style={{
+                              width: "40%",
+                            }}
+                            value={dependent_variable}
+                            onChange={setDependentVariable}
+                            options={headers?.header_label}
+                        />
+                      </div>
+                      <div>
+                        <p className="text-description-color text-md">
+                          Select Independent variable
+                        </p>
+                        <Select
+                            aria-label="Select"
+                            size={"large"}
+                            placeholder={"Selecting model"}
+                            style={{
+                              width: "40%",
+                            }}
+                            value={independent_variable}
+                            onChange={setIndependentVariable}
+                            options={headers?.header_label}
+                        />
+                      </div>
+                    </div>
+                ) : chosenModel.startsWith('descriptive') ? (
+                    <></>
+                ) : (
+                    <div>
+                      <p className="text-description-color text-md">
+                        Select Dependent variable
+                      </p>
+                      <div className="flex gap-5">
+                        <Select
+                            aria-label="Select"
+                            size={"large"}
+                            placeholder={"Selecting model"}
+                            style={{
+                              width: "40%",
+                            }}
+                            value={dependent_variable}
+                            onChange={setDependentVariable}
+                            options={headers?.header_label}
+                        />
+                        <Select
+                            aria-label="Select"
+                            size={"large"}
+                            mode="multiple"
+                            placeholder="Independent variable"
+                            value={independent_variables}
+                            onChange={setIndependentVariables}
+                            style={{
+                              width: "40%",
+                            }}
+                            options={headers?.header_label}
+                        />
+                      </div>
+                    </div>
+                )}
+              </>
           )}
+
           <Button
             disabled={!chosenModel}
             color="primary"

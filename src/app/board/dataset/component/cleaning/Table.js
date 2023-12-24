@@ -4,15 +4,16 @@ import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@
 export default function TableMissingValue({item}) {
     return (
         (
-            <table aria-label="Example static collection table">
-                <tr>
-                    {
-                        item?.headers?.map((item) => (
-                            <th className={'bg-blue-50'} key={item}>{item}</th>
-                        ))
-                    }
-                </tr>
-                <tbody>
+            <div className={'overflow-x-scroll dark:text-text-color'}>
+                <table className={'overflow-x-hidden'} aria-label="Example static collection table">
+                    <tr>
+                        {
+                            item?.headers?.map((item) => (
+                                <th className={'bg-blue-50'} key={item}>{item}</th>
+                            ))
+                        }
+                    </tr>
+                    <tbody>
                     {
                         item?.missing_cell?.map((rowItem, rowIndex) => (
                             <tr key={rowIndex}>
@@ -28,8 +29,9 @@ export default function TableMissingValue({item}) {
                             </tr>
                         ))
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         )
     );
 }

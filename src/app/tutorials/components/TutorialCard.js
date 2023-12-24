@@ -47,7 +47,7 @@ export default function TutorialCard() {
                                         <p className="text-tiny text-white/60">{e.description}</p>
                                     </div>
                                 </div>
-                                <Button onClick={() => handleDetail(e.uuid)} radius="full" size="sm" className={'px-5'}>View details</Button>
+                                <Button onClick={() => handleDetail(e.uuid)} radius="full" size="sm" className={'px-5 dark:bg-third-color dark:text-black'}>View details</Button>
                             </CardFooter>
                         </Card>
 

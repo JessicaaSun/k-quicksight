@@ -214,12 +214,16 @@ export default function NavbarKQuick() {
               </NavbarContent>
             </Navbar>
           ) : (
-            <Button
-              onClick={() => router.push("/auth/login")}
-              className="text-primary-color font-semibold px-7 bg-background-color"
-            >
-              Login
-            </Button>
+
+           <div className={'flex justify-center items-center gap-5'}>
+             <ThemeSwitcher />
+             <Button
+                 onClick={() => router.push("/auth/login")}
+                 className="text-primary-color font-semibold px-7 bg-background-color"
+             >
+               Login
+             </Button>
+           </div>
           )}
         </section>
       </nav>

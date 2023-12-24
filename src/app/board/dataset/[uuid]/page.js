@@ -30,9 +30,9 @@ const DetailDataset = ({params}) => {
 
     return (
         <div className={'p-5'} >
-            <p className={'text-3xl font-medium text-primary-color'}>Detail</p>
+            <p className={'text-3xl font-medium text-primary-color dark:text-third-color'}>Detail</p>
             <div className={'flex justify-start items-center gap-5 mt-3'}>
-                <p className={'text-lg font-medium text-text-color'}>{fileDetail?.file}</p>
+                <p className={'text-lg font-medium text-text-color dark:text-third-color'}>{fileDetail?.file}</p>
                 <ShareMember list={false} filename={fileDetail?.file} fileId={fileDetail?.id} owner={user?.data.id} />
             </div>
             <div className={'flex justify-end items-center w-full gap-5 my-5'}>
@@ -41,7 +41,7 @@ const DetailDataset = ({params}) => {
             </div>
 
             <div className={'flex flex-col gap-3'}>
-                <p className={'text-primary-color font-semibold text-medium'}>Total records: {fileDetail?.total} </p>
+                <p className={'text-primary-color font-semibold text-medium dark:text-third-color'}>Total records: {fileDetail?.total} </p>
                 <FileDetail uuid={uuid} showHeader={true}/>
             </div>
         </div>

@@ -53,7 +53,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
       <Button
         onPress={onOpen}
         className={
-          "min-w-fit bg-transparent hover:text-danger gap-4 inline-flex justify-start h-unit-6 px-unit-0"
+          "min-w-fit bg-transparent dark:bg-white dark:text-danger hover:text-danger gap-4 inline-flex justify-start h-unit-6 px-unit-0"
         }
       >
         <i>
@@ -90,7 +90,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalBody>
+              <ModalBody className={'dark:bg-white'}>
                 <p className={"text-center text-text-color font-normal mt-10"}>
                   Are you sure to delete{" "}
                   <span className={"text-lg font-semibold text-red-500"}>
@@ -107,17 +107,17 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
                   </TableHeader>
                   <TableBody>
                     <TableRow key="1">
-                      <TableCell>{filename}</TableCell>
-                      <TableCell>{type}</TableCell>
-                      <TableCell>
+                      <TableCell className={'dark:text-white'}>{filename}</TableCell>
+                      <TableCell className={'dark:text-white'}>{type}</TableCell>
+                      <TableCell className={'dark:text-white'}>
                         {getTrimIntoColumnOnlyDate(createAt)}
                       </TableCell>
-                      <TableCell>{formatBytes(size)}</TableCell>
+                      <TableCell className={'dark:text-white'}>{formatBytes(size)}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className={'bg-white'}>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cancel
                 </Button>

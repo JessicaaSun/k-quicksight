@@ -5,8 +5,8 @@ const TableImpute = ({item}) => {
     return (
         <div className={'flex justify-between items-center gap-3'}>
             <div className={'w-full'}>
-                <p className={'text-primary-color font-semibold'}>Mean:</p>
-                <table className="border w-full border-blue-500" aria-label="Example static collection table">
+                <p className={'text-primary-color font-semibold dark:text-third-color'}>Mean:</p>
+                <table className="border w-full border-blue-500 dark:text-black" aria-label="Example static collection table">
                     <thead>
                     <tr>
                         <th className="p-2 bg-blue-50 border border-blue-200">Headers</th>
@@ -27,8 +27,8 @@ const TableImpute = ({item}) => {
                 </table>
             </div>
             <div className={'w-full'}>
-                <p className={'text-primary-color font-semibold'}>Mode:</p>
-                <table className="border w-full border-blue-500" aria-label="Example static collection table">
+                <p className={'text-primary-color font-semibold dark:text-third-color'}>Mode:</p>
+                <table className="border w-full border-blue-500 dark:text-text-color" aria-label="Example static collection table">
                     <thead>
                     <tr>
                         <th className="p-2 bg-blue-50 border border-blue-200">Headers</th>

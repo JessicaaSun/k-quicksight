@@ -90,10 +90,10 @@ export default function FormLogin() {
 
   return (
     <div className="md:w-[70%] lg:w-[60%] max-sm:w-full sm:w-full md:ps-10 lg:ps-20 max-sm:px-10 sm:px-10 flex h-full flex-col">
-      <p className="text-description-color text-lg font-medium">
+      <p className="text-description-color dark:text-white/70 text-lg font-medium">
         Welcome back!
       </p>
-      <h2 className="text-primary-color pb-10 pt-2">Login</h2>
+      <h2 className="text-primary-color pb-10 pt-2 dark:text-third-color">Login</h2>
       <Formik
         initialValues={{
           email: "",
@@ -119,7 +119,7 @@ export default function FormLogin() {
             <div className="mb-3">
               <label
                 htmlFor="email"
-                className="block text-base font-medium text-gray-800"
+                className="block dark:text-third-color text-base font-medium text-gray-800"
               >
                 Email
               </label>
@@ -145,7 +145,7 @@ export default function FormLogin() {
             <div className="mb-3">
               <label
                 htmlFor="password"
-                className="block text-base font-medium text-gray-800"
+                className="block dark:text-third-color text-base font-medium text-gray-800"
               >
                 Password
               </label>
@@ -154,7 +154,7 @@ export default function FormLogin() {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   id="password"
-                  placeholder=""
+                  placeholder="Example@#456"
                   className={fieldNormal}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -184,7 +184,7 @@ export default function FormLogin() {
             <div className="flex items-start">
               <button
                 type="button"
-                className="text-sm text-secondary-color hover:underline ml-auto cursor-pointer"
+                className="dark:text-white text-sm text-secondary-color hover:underline ml-auto cursor-pointer"
                 onClick={() => router.push("/auth/forgetPassword")}
               >
                 Forgot Password
@@ -217,15 +217,15 @@ export default function FormLogin() {
         )}
       </Formik>
       <div className="flex justify-center items-center flex-col">
-        <p className="my-3 text-description-color">OR</p>
+        <p className="my-3 text-description-color dark:text-white">OR</p>
         <div className={'w-full'}>
           <GoogleSignInBtn></GoogleSignInBtn>
         </div>
-        <p className="pt-[20px] max-sm:text-center sm:text-center md:text-start text-text-color">
+        <p className="pt-[20px] dark:text-white/70 max-sm:text-center sm:text-center md:text-start text-text-color">
           Don&lsquo;t have an account yet?{" "}
           <Link
             href={"/auth/signup"}
-            className="text-secondary-color font-semibold"
+            className="text-secondary-color dark:text-third-color font-semibold"
           >
             Sign up for free
           </Link>

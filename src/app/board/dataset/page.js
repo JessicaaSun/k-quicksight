@@ -68,7 +68,7 @@ const Dataset = () => {
   return (
     <div className={"py-10 px-7"}>
       <div className={"flex flex-wrap justify-between items-center"}>
-        <p className={"text-primary-color font-semibold text-3xl"}>Dataset</p>
+        <p className={"text-primary-color font-semibold text-3xl dark:text-third-color"}>Dataset</p>
         <div className={"flex justify-center items-center gap-5 lg:mt-0 md:mt-0 mt-5"}>
           <ModalImport />
           <NewDataset isFull={isFull} />
@@ -77,9 +77,9 @@ const Dataset = () => {
       <div className={"mt-14 flex flex-col gap-8"}>
         <div className={"flex justify-between items-center gap-5"}>
           <SearchDataset />
-          <p className={"text-primary-color font-semibold text-lg w-full"}>
+          <p className={"text-primary-color dark:text-third-color font-semibold text-lg w-full"}>
             Used{" "}
-            <span className={"text-secondary-color"}>
+            <span className={"text-secondary-color dark:text-white"}>
               {formatBytes(totalFree)}
             </span>{" "}
             / 1 GB
@@ -91,7 +91,7 @@ const Dataset = () => {
         </div>
         <div
           className={
-            "flex gap-3 justify-start items-center text-xl font-semibold text-primary-color mt-5"
+            "flex dark:text-third-color gap-3 justify-start items-center text-xl font-semibold text-primary-color mt-5"
           }
         >
           <MdOutlineAutoGraph />

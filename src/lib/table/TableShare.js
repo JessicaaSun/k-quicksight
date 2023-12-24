@@ -39,15 +39,15 @@ export default function ShareTable({ file }) {
       <TableBody emptyContent={"None data"}>
         {file?.map((item, index) => (
           <TableRow key={index}>
-            <TableCell>{item.file.file}</TableCell>
-            <TableCell>{item.file.is_original ? 'Original' : 'Cleaned'}</TableCell>
-            <TableCell>{item.file.type}</TableCell>
-            <TableCell>
+            <TableCell className={'dark:text-white'}>{item.file.file}</TableCell>
+            <TableCell className={'dark:text-white'}>{item.file.is_original ? 'Original' : 'Cleaned'}</TableCell>
+            <TableCell className={'dark:text-white'}>{item.file.type}</TableCell>
+            <TableCell className={'dark:text-white'}>
               {getTrimIntoColumnOnlyDate(item.file.created_at)}
             </TableCell>
-            <TableCell>{formatBytes(item.file.size)}</TableCell>
+            <TableCell className={'dark:text-white'}>{formatBytes(item.file.size)}</TableCell>
             <TableCell>
-              <Tooltip showArrow placement="top" content="View">
+              <Tooltip className={'dark:bg-white'} showArrow placement="top" content="View">
                 <div
                   onClick={() =>
                     router.push(`/board/dataset/${item.file.uuid}`)
@@ -63,7 +63,7 @@ export default function ShareTable({ file }) {
               <AvatarGroup isBordered max={5} color={"warning"}>
                 {item.members ? (
                   item.members?.map((e, index) => (
-                    <Tooltip showArrow content={e.username} key={index}>
+                    <Tooltip className={'bg-white dark:bg-white'} showArrow content={e.username} key={index}>
                       <Avatar
                         size="sm"
                         src={
@@ -75,7 +75,7 @@ export default function ShareTable({ file }) {
                     </Tooltip>
                   ))
                 ) : (
-                  <Tooltip showArrow content={item.member.username}>
+                  <Tooltip className={'dark:bg-white'} showArrow content={item.member.username}>
                     <Avatar
                       size="sm"
                       key={index}
@@ -90,7 +90,7 @@ export default function ShareTable({ file }) {
               </AvatarGroup>
             </TableCell>
             <TableCell>
-              <Tooltip showArrow content={item.file.created_by.username}>
+              <Tooltip className={'dark:bg-white'} showArrow content={item.file.created_by.username}>
                 <Avatar
                   isBordered
                   color={"primary"}

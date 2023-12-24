@@ -15,6 +15,7 @@ import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import {useCleansingProcessMutation} from "@/store/features/clean/cleaning";
+import {RiQuestionFill} from "react-icons/ri";
 
 export const option_clean = [
     {
@@ -115,7 +116,7 @@ export default function CleanModal({filename}) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-3xl">Cleansing Options</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1 text-primary-color text-3xl dark:text-third-color">Cleansing Options</ModalHeader>
                             <ModalBody>
                                
                                 <div className={'mt-5'}>
@@ -136,11 +137,16 @@ export default function CleanModal({filename}) {
                                     >
                                         {
                                             option_clean.map((item, index) => (
-                                                <Tooltip className={'w-1/2'} placement={'top'} key={item.id} content={item.content}>
-                                                    <Button className={'flex justify-start'} variant={'light'}>
-                                                        <Checkbox isDisabled={select === 'autoClean' } value={item.value}>{item.label}</Checkbox>
-                                                    </Button>
-                                                </Tooltip>
+                                                <div key={item.id} className={'flex justify-between items-center relative'}>
+                                                    <Checkbox isDisabled={select === 'autoClean' } value={item.value}>{item.label}</Checkbox>
+                                                    <Tooltip showArrow placement={'left'} className={'dark:bg-white'} key={item.id} content={item.content}>
+                                                        <Button className={'flex justify-start bg-transparent'}>
+                                                            <RiQuestionFill />
+                                                        </Button>
+                                                    </Tooltip>
+                                                </div>
+
+
                                             ))
                                         }
                                     </CheckboxGroup>

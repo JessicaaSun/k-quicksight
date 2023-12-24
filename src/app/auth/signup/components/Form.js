@@ -13,8 +13,7 @@ import { useDispatch } from "react-redux";
 import { setCurrentEmail } from "@/store/features/auth/authSlice";
 import Image from "next/image";
 
-export const fieldNormal =
-  "block w-full px-4 py-[8px] mt-2 border-gray-200 border-1  bg-white rounded-xl";
+export const fieldNormal = "block w-full px-4 py-[10px] h-[50px] mt-2 dark:border-white border-gray-200 border-1 dark:text-black text-black bg-white rounded-xl";
 
 const SignUpForm = () => {
   const [showPassword, setPassword] = useState(false);

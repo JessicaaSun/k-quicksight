@@ -41,14 +41,14 @@ export default function TableExistingData({data}) {
                     {
                         data?.map((item, index) => (
                             <TableRow key={item.uuid}>
-                                <TableCell>{item.title || item.file}</TableCell>
-                                <TableCell>
+                                <TableCell className={'dark:text-white'}>{item.title || item.file}</TableCell>
+                                <TableCell className={'dark:text-white'}>
                                     {!item.is_original ? <span>Cleaned</span> : <span>Original</span>}
                                 </TableCell>
-                                <TableCell>{item.type || item.fileType}</TableCell>
-                                <TableCell>{getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}</TableCell>
-                                <TableCell>{formatBytes(item.size)}</TableCell>
-                                <TableCell className="flex gap-5 justify-center">
+                                <TableCell className={'dark:text-white'}>{item.type || item.fileType}</TableCell>
+                                <TableCell className={'dark:text-white'}>{getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}</TableCell>
+                                <TableCell className={'dark:text-white'}>{formatBytes(item.size)}</TableCell>
+                                <TableCell className="flex gap-5 justify-center dark:text-white">
                                     <Dropdown_table
                                         uuid={item.uuid}
                                         filename={item.file || item.filename}

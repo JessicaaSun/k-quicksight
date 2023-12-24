@@ -57,7 +57,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
     <div
       className={`${
         toggleSidebar ? "ml-[-1000px]" : ""
-      } border-r-1 border-gray-200 bg-white transition-all text-description-color z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
+      } border-r-1 dark:bg-text-color border-gray-200 bg-white dark:bg-text-color dark:text-white text-text-color transition-all text-description-color z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <div className={"flex gap-5 items-center"}>
@@ -70,16 +70,16 @@ const BoardSidebar = ({ toggleSidebar }) => {
           alt={"profile"}
         />
         <div>
-          <p className={"text-primary-color truncate w-[130px] text-xl font-semibold"}>
+          <p className={"text-primary-color dark:text-third-color truncate w-[130px] text-xl font-semibold"}>
             {user?.data.full_name}
           </p>
-          <p className={"text-description-color truncate w-[130px]"}>
+          <p className={"text-description-color dark:dark:text-white truncate w-[130px]"}>
             {user?.data.email}
           </p>
         </div>
       </div>
       <div className={"flex mt-4 flex-col gap-3"}>
-        <p className={"text-lg font-semibold text-primary-color text-semibold"}>
+        <p className={"text-lg font-semibold dark:text-third-color text-primary-color text-semibold"}>
           {contentRoute.file._name}
         </p>
         <div className={"flex flex-col gap-2"}>
@@ -87,31 +87,31 @@ const BoardSidebar = ({ toggleSidebar }) => {
           <Link
             className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
               pathname.startsWith(contentRoute.file.dataset.route)
-                ? "bg-primary-color text-white"
-                : "bg-white"
-            } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+                ? "bg-primary-color dark:bg-third-color text-white"
+                : "bg-white dark:bg-text-color dark:text-white text-text-color"
+            } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.file.dataset.route}
           >
             {contentRoute.file.dataset.icon}
             {contentRoute.file.dataset.name}
           </Link>
           <Link
-              className={`text-text-color text-lg  pl-5 py-2 hover:bg-primary-color ${
+              className={`text-text-color hover:text-white text-lg pl-5 py-2 hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.shareWithMe.route)
-                      ? "bg-primary-color text-white"
-                      : "bg-white"
-              } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+                      ? "bg-primary-color text-white dark:bg-third-color"
+                      : "bg-white dark:bg-text-color dark:text-white text-text-color"
+              } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
               href={contentRoute.file.shareWithMe.route}
           >
             {contentRoute.file.shareWithMe.icon}
             {contentRoute.file.shareWithMe.name}
           </Link>
           <Link
-              className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
+              className={` text-text-color text-lg pl-5 py-2 hover:text-white hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.recent.route)
-                      ? "bg-primary-color text-white"
-                      : "bg-white"
-              } hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
+                      ? "bg-primary-color text-white dark:bg-third-color"
+                      : "bg-white dark:bg-text-color dark:text-white text-text-color"
+              } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
               href={contentRoute.file.recent.route}
           >
             {contentRoute.file.recent.icon}
@@ -121,15 +121,15 @@ const BoardSidebar = ({ toggleSidebar }) => {
       </div>
       <div className={"flex flex-col gap-3"}>
         <p
-          className={"text-lg font-semibold text-primary-color text-semi-bold"}
+          className={"text-lg font-semibold dark:text-third-color text-primary-color text-semi-bold"}
         >
           {contentRoute.visualization._name}
         </p>
         <div className={"flex flex-col gap-2"}>
           <Link
             className={`${
-              pathname.startsWith(contentRoute.visualization.analysis.route)  ? "bg-primary-color text-white"
-                  : "bg-white"
+              pathname.startsWith(contentRoute.visualization.analysis.route)  ? "bg-primary-color text-white dark:bg-third-color"
+                  : "bg-white dark:bg-text-color dark:text-white text-text-color "
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.analysis.route}
           >
@@ -138,8 +138,8 @@ const BoardSidebar = ({ toggleSidebar }) => {
           </Link>
           <Link
             className={`${
-              pathname.startsWith(contentRoute.visualization.dashboard.route)  ? "bg-primary-color text-white"
-                  : "bg-white"
+              pathname.startsWith(contentRoute.visualization.dashboard.route)  ? "bg-primary-color dark:bg-third-color text-white "
+                  : "bg-white dark:bg-text-color dark:text-white text-text-color"
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.dashboard.route}
           >

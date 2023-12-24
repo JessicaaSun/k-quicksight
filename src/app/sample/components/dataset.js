@@ -51,7 +51,7 @@ const Sample_all = () => {
         placeholder={"searching"}
       />
       <h4
-        className={"text-primary-color flex justify-start items-center gap-5"}
+        className={"text-primary-color dark:text-third-color flex justify-start items-center gap-5"}
       >
         <FaTableColumns /> Total dataset: {allSampleDataset?.results.length}
       </h4>

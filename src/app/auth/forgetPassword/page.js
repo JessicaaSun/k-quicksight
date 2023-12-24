@@ -6,7 +6,7 @@ import {useCheckEmailMutation} from "@/store/features/user/userApiSlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import {MdMarkEmailUnread, MdNavigateNext} from "react-icons/md";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setCurrentEmail} from "@/store/features/auth/authSlice";
 
 const ForgetPassword = () => {
@@ -17,6 +17,7 @@ const ForgetPassword = () => {
     const [verify, showVerify] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
+    const theme = useSelector(state => state.theme.theme)
     const handleConfirmEmail = async () => {
         let body = {
             email
@@ -58,9 +59,9 @@ const ForgetPassword = () => {
             {
                 verify ? (
                     <div className={'w-1/3 flex flex-col justify-center items-center p-10 shadow-lg rounded-2xl'}>
-                        <MdMarkEmailUnread className={'text-5xl text-primary-color'} />
-                        <p className={'text-3xl text-text-color font-semibold mt-5 mb-7'}>Check your email</p>
-                        <p className={'text-lg text-center text-description-color'}>
+                        <MdMarkEmailUnread className={'text-5xl text-primary-color dark:text-white'} />
+                        <p className={'text-3xl text-text-color font-semibold mt-5 mb-7 dark:text-white'}>Check your email</p>
+                        <p className={'text-lg text-center text-description-color dark:text-white/80'}>
                             We have send verify code to reset your password to <strong>{email}</strong>
                         </p>
                         <Button
@@ -71,12 +72,13 @@ const ForgetPassword = () => {
                     </div>
                 ) : (
                     <div id={'card'} className={'w-1/3'}>
-                        <h2 className={'text-center text-primary-color mb-20'}>Forget password</h2>
+                        <h2 className={'text-center text-primary-color mb-20 dark:text-white'}>Forget password</h2>
                         <Input
+                            className={'dark:text-white'}
                             size={'lg'}
                             placeholder={'example@gmail.com'}
                             variant={'bordered'}
-                            color={'primary'}
+                            color={theme === 'light' ? 'primary' : 'warning'}
                             type={'email'}
                             label={'Enter your email'}
                             labelPlacement={'outside'}
@@ -88,12 +90,12 @@ const ForgetPassword = () => {
                             onClick={handleConfirmEmail}
                             isLoading={loading}
                             variant={'solid'}
-                            size={'lg'} radius={'md'} className={'w-full my-5 bg-primary-color text-white'} >
+                            size={'lg'} radius={'md'} className={'w-full my-5 dark:bg-third-color bg-primary-color text-white'} >
                             Next
                         </Button>
                         <Button
                             onClick={() => router.push('/auth/login')}
-                            color={'primary'}
+                            color={theme === 'light' ? 'primary' : 'warning'}
                             variant={'light'}
                             size={'lg'} radius={'md'} className={'w-full font-semibold'} >
                             Back to login

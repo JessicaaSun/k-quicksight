@@ -200,7 +200,7 @@ export default function Profile() {
         >
           <div
             className={
-              "bg-white dark:bg-text-color border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col"
+              "bg-white dark:bg-dark-bg border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col"
             }
           >
             <div className={"flex justify-center items-center relative"}>
@@ -518,7 +518,7 @@ export default function Profile() {
           >
             <div
               className={
-                "bg-white dark:bg-text-color max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "bg-white dark:bg-dark-bg max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
               <p className={"mb-5 text-lg dark:text-third-color text-primary-color font-semibold"}>
@@ -547,7 +547,7 @@ export default function Profile() {
             </div>
             <div
               className={
-                "bg-white dark:bg-text-color min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "bg-white dark:bg-dark-bg min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
               <p className={"mb-5 dark:text-third-color text-lg text-primary-color font-semibold"}>
@@ -578,7 +578,7 @@ export default function Profile() {
             </div>
             <div
                 className={
-                  "bg-white dark:bg-text-color border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                  "bg-white dark:bg-dark-bg border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
                 }
             >
               <p className={'text-lg dark:text-white text-primary-color font-semibold'}>Change your password</p>

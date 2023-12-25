@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <div
       className={
-        "bg-background-color dark:text-white dark:bg-text-color w-full lg:flex md:flex-wrap block justify-between items-start md:px-16 max-sm:px-9 sm:px-9 pt-10"
+        "bg-background-color dark:text-white dark:bg-dark-bg w-full lg:flex md:flex-wrap block justify-between items-start md:px-16 max-sm:px-9 sm:px-9 pt-10"
       }
     >
       <div className={"flex flex-col gap-5"}>

@@ -161,7 +161,7 @@ export default function NavbarKQuick() {
             <Navbar className="w-auto bg-primary-color">
               <ThemeSwitcher />
               <NavbarContent>
-                <Dropdown placement="bottom-end" className={'dark:text-white dark:bg-text-color bg-white'}>
+                <Dropdown placement="bottom-end" className={'dark:text-white dark:bg-dark-bg bg-white'}>
                   <DropdownTrigger>
                     <Avatar
                       isBordered

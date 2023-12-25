@@ -57,7 +57,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
     <div
       className={`${
         toggleSidebar ? "ml-[-1000px]" : ""
-      } border-r-1 dark:bg-text-color border-gray-200 bg-white dark:bg-text-color dark:text-white text-text-color transition-all text-description-color z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
+      } border-r-1 dark:bg-dark-bg border-gray-200 bg-white dark:bg-dark-bg dark:text-white text-text-color transition-all text-description-color z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <div className={"flex gap-5 items-center"}>
@@ -88,7 +88,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
             className={` text-text-color text-lg pl-5 py-2 hover:bg-primary-color ${
               pathname.startsWith(contentRoute.file.dataset.route)
                 ? "bg-primary-color dark:bg-third-color text-white"
-                : "bg-white dark:bg-text-color dark:text-white text-text-color"
+                : "bg-white dark:bg-dark-bg dark:text-white text-text-color"
             } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.file.dataset.route}
           >
@@ -99,7 +99,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
               className={`text-text-color hover:text-white text-lg pl-5 py-2 hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.shareWithMe.route)
                       ? "bg-primary-color text-white dark:bg-third-color"
-                      : "bg-white dark:bg-text-color dark:text-white text-text-color"
+                      : "bg-white dark:bg-dark-bg dark:text-white text-text-color"
               } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
               href={contentRoute.file.shareWithMe.route}
           >
@@ -110,7 +110,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
               className={` text-text-color text-lg pl-5 py-2 hover:text-white hover:bg-primary-color ${
                   pathname.startsWith(contentRoute.file.recent.route)
                       ? "bg-primary-color text-white dark:bg-third-color"
-                      : "bg-white dark:bg-text-color dark:text-white text-text-color"
+                      : "bg-white dark:bg-dark-bg dark:text-white text-text-color"
               } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
               href={contentRoute.file.recent.route}
           >
@@ -129,7 +129,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           <Link
             className={`${
               pathname.startsWith(contentRoute.visualization.analysis.route)  ? "bg-primary-color text-white dark:bg-third-color"
-                  : "bg-white dark:bg-text-color dark:text-white text-text-color "
+                  : "bg-white dark:bg-dark-bg dark:text-white text-text-color "
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.analysis.route}
           >
@@ -139,7 +139,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
           <Link
             className={`${
               pathname.startsWith(contentRoute.visualization.dashboard.route)  ? "bg-primary-color dark:bg-third-color text-white "
-                  : "bg-white dark:bg-text-color dark:text-white text-text-color"
+                  : "bg-white dark:bg-dark-bg dark:text-white text-text-color"
             } text-text-color text-lg  pl-5 py-2 hover:bg-primary-color hover:text-white transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.visualization.dashboard.route}
           >

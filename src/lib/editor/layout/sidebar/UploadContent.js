@@ -5,20 +5,34 @@ import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
 import { fetchSvgContent } from "@lidojs/utils";
+import { useAsync } from "react-use";
+import { Spinner } from "@nextui-org/react";
+import {
+  useGetImagesEditorQuery,
+  useUploadImageEditorMutation,
+} from "@/store/features/editorImage/EditorImageApiSlice";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import Loading from "@/app/loading";
+import axios from "axios";
 
 const UploadContent = ({ visibility, onClose }) => {
   const inputFileRef = useRef(null);
   const { actions } = useEditor();
+  const [uploadImage] = useUploadImageEditorMutation();
+  const [isLoading, setIsLoading] = useState(true);
+  const { data: user } = useGetUserQuery();
+  const { data: imagesEditor, isLoading: imagesLoading } =
+    useGetImagesEditorQuery({
+      userUuid: user?.data?.uuid,
+    });
 
-  const [images, setImages] = useState([]);
-
-  const addImage = async (url) => {
+  const addImage = async (thumb, url) => {
     const img = new Image();
+
     img.src = url;
-    // img.crossOrigin = "anonymous";
     img.onload = () => {
       actions.addImageLayer(
-        { url, thumb: url },
+        { thumb, url },
         { width: img.naturalWidth, height: img.naturalHeight }
       );
       if (isMobile) {
@@ -40,23 +54,19 @@ const UploadContent = ({ visibility, onClose }) => {
     }
   };
 
-  const handleUpload = (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImages((prevState) => {
-          return prevState.concat([
-            {
-              url: reader.result,
-              type: file.type === "image/svg+xml" ? "svg" : "image",
-            },
-          ]);
-        });
-      };
-      reader.readAsDataURL(file);
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+    try {
+      const response = await uploadImage({
+        data: file,
+        userUuid: user?.data?.uuid,
+      });
+      console.log("res", response);
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <div
       style={{
@@ -106,7 +116,7 @@ const UploadContent = ({ visibility, onClose }) => {
       </div>
       <div
         style={{
-          margin: 16,
+          margin: "16px 16px 0 16px",
           background: "#0346A5",
           borderRadius: 8,
           color: "#fff",
@@ -135,26 +145,34 @@ const UploadContent = ({ visibility, onClose }) => {
             gridGap: 8,
           }}
         >
-          {images.map((item, idx) => (
+          {imagesEditor?.results.map((item, idx) => (
             <div
               key={idx}
-              style={{ cursor: "pointer", position: "relative" }}
-              onClick={() =>
-                item.type === "image" ? addImage(item.url) : addSvg(item.url)
-              }
+              style={{
+                cursor: "pointer",
+                position: "relative",
+                paddingBottom: "100%",
+                width: "100%",
+              }}
+              onClick={() => {
+                addImage(item.img, item.img);
+              }}
             >
-              <div style={{ paddingBottom: "100%", height: 0 }} />
-              <div
+              <img
+                src={item.img}
+                loading="lazy"
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  top: 0,
+                  left: 0,
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "cover",
                 }}
-              >
-                <img alt="image" src={item.url} style={{ maxHeight: "100%" }} />
-              </div>
+                width={100}
+                height={100}
+                alt="Thumbnail"
+              />
             </div>
           ))}
         </div>

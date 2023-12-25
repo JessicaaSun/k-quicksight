@@ -49,7 +49,7 @@ const SampleDataset_main = () => {
                     <p className={'text-description-color dark:text-white/80'}>Explore, analyze, and share quality data. Learn more about data types, creating, and collaborating.</p>
                     <Button onClick={handleRouteAddNewDataset} className={'bg-primary-color text-white w-fit mt-5'} size={'md'}><FaPlus /> New dataset</Button>
                 </div>
-                <Image className={'bg-transparent'} src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
+                <Image data-aos="zoom-in-down" className={'bg-transparent'} src={sampleImage} unoptimized={true} alt={'sample Image'} width={350} height={350} />
             </div>
             <Tabs
 

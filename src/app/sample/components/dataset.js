@@ -35,7 +35,7 @@ const Sample_all = () => {
   }, [dispatch, filename]);
 
   return (
-    <div className={"grid gap-5 w-full"}>
+    <div className={"w-full"}>
       <Input
         startContent={
           <div className={"text-gray-500"}>
@@ -51,7 +51,7 @@ const Sample_all = () => {
         placeholder={"searching"}
       />
       <h4
-        className={"text-primary-color dark:text-third-color flex justify-start items-center gap-5"}
+        className={"text-primary-color dark:text-third-color flex justify-start items-center gap-5 py-3"}
       >
         <FaTableColumns /> Total dataset: {allSampleDataset?.results.length}
       </h4>
@@ -70,14 +70,14 @@ const Sample_all = () => {
                   "text-lg capitalize font-medium hover:underline flex gap-3 items-center flex-wrap"
                 }
               >
-                {item.file} <BsDot />{" "}
-                <span className={"text-sm"}>
-                  {getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}
-                </span>{" "}
+                {item.file}
               </Link>
               <p className={"text-sm hover:text-white"}>
                 Size: {formatBytes(item.size)}
               </p>
+            <span className={"text-sm"}>
+              {getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}
+            </span>
             </div>
           </div>
         ))}

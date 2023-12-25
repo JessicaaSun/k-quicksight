@@ -250,11 +250,11 @@ export function Community_navbar() {
         />
       </svg>
       <div>
-        <Link href={"/"} className="text-primary-color font-semibold">
+        <Link href={"https://t.me/+qB5Xy2CmaJswMzll"} target="_blank" className="text-primary-color font-semibold">
           {" "}
-          Join our community, support{" "}
+          Join our community
         </Link>
-        and Connect with Like-Minded Individuals for Assistance and Guidance.
+        , support and Connect with Like-Minded Individuals for Assistance and Guidance.
       </div>
     </div>
   );

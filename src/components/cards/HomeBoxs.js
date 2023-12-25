@@ -190,12 +190,12 @@ export function User_base() {
             key={index}
             className={`lg:w-1/2 md:w-2/3 w-full relative p-5 rounded-xl ${
               index === 1 && "text-right"
-            } lg:w-1/2 md:w-full min-w-full dark:bg-text-color bg-background-color border-2 border-primary-color dark:border-white`}
+            } lg:w-1/2 md:w-full min-w-full dark:bg-dark-bg bg-background-color border-2 border-primary-color dark:border-white`}
           >
             <h3
               className={`text-primary-color dark:text-white absolute ${
                 index === 1 && "-top-5 right-5"
-              } -top-5 bg-background-color dark:bg-text-color px-5`}
+              } -top-5 bg-background-color dark:bg-dark-bg px-5`}
             >
               {item.title}
             </h3>

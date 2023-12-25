@@ -89,7 +89,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className="bg-secondary-color dark:bg-text-color min-w-full px-10 py-20">
+      <section className="bg-secondary-color dark:bg-dark-bg min-w-full px-10 py-20">
         <h2  className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
@@ -106,7 +106,7 @@ export default function Home() {
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>
-      <section className="bg-secondary-color dark:bg-text-color px-3 flex flex-col justify-center items-center max-sm:py-16 sm:py-16 py-20 w-full">
+      <section className="bg-secondary-color dark:bg-dark-bg px-3 flex flex-col justify-center items-center max-sm:py-16 sm:py-16 py-20 w-full">
         <h2 className="text-background-color">What Our Users Say</h2>
 
         <p className="text-background-color mb-12 font-normal lg:w-[40%] md:w-2/3 w-full mt-4 text-center">

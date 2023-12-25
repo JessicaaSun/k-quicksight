@@ -105,16 +105,24 @@ const TextContent = ({ onClose }) => {
             onKeyDown={handleSetNewLine}
           />
         </div>
+
         <div
-          className="h-[30px] w-full"
+          style={{
+            marginTop: 16,
+            background: "#0346A5",
+            borderRadius: 8,
+            color: "#fff",
+            padding: "8px 16px",
+            cursor: "pointer",
+            textAlign: "center",
+          }}
           onClick={() => {
             handleAddText(JSON.parse(dataText.data));
           }}
         >
-          <button className="h-full w-full mt-3 rounded-lg text-sm font-semibold bg-primary-color text-white">
-            Add Text
-          </button>
+          Add Text
         </div>
+
         <div
           style={{
             flexGrow: 1,

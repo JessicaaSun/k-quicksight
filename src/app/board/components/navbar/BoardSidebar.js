@@ -89,7 +89,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
               pathname.startsWith(contentRoute.file.dataset.route)
                 ? "bg-primary-color dark:bg-third-color text-white"
                 : "bg-white dark:bg-dark-bg dark:text-white text-text-color"
-            } hover:dark:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
+            } hover:dark:text-white hover:text-white text-text-color transition-all rounded-xl flex justify-start items-center gap-5`}
             href={contentRoute.file.dataset.route}
           >
             {contentRoute.file.dataset.icon}

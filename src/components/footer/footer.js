@@ -64,12 +64,12 @@ export default function Footer() {
           <Image
             src={quickSight}
             alt={"quickSight_logo"}
-            className={"w-[73px] border-2 border-primary-color rounded-full"}
+            className={"w-[73px] border-2 dark:bg-white border-primary-color rounded-full"}
           />
           <Image
             src={istad_logo}
             alt={"quickSight_logo"}
-            className={"w-[73px]"}
+            className={"w-[73px] rounded-full dark:bg-white"}
           />
         </div>
         <div className="md:pb-0 max-sm:pb-3 sm:pb-3">

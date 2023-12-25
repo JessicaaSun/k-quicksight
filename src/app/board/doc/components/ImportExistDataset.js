@@ -20,7 +20,7 @@ const ImportExistDataset = () => {
     return (
         <div className={'flex flex-col gap-3'}>
             <div className='flex justify-between flex-wrap items-center'>
-                <p className={'text-primary-color font-semibold w-1/2'}>Select data to execute</p>
+                <p className={'text-primary-color font-semibold w-1/2 dark:text-third-color'}>Select data to execute</p>
                 <div className={'flex gap-5 justify-end items-center w-1/2'}>
                     <Input size={'sm'} className={'w-full'} placeholder={'Search file...'} color={'primary'} variant={'bordered'} value={filename} onValueChange={setFilename} startContent={<SearchIcon />} />
                     <Select

@@ -16,10 +16,10 @@ export default function NotFound() {
         className="lg:w-1/3 md:w-2/3"
         alt="error-notfound-page"
       />
-      <h1 className="lg:text-5xl text-text-color text-center md:text-3xl text-2xl font-bold">
+      <h1 className="lg:text-5xl text-text-color text-center md:text-3xl text-2xl font-bold dark:text-white">
         Something has gone seriously wrong
       </h1>
-      <p className="text-lg text-center mt-4 text-description-color">
+      <p className="text-lg text-center mt-4 text-description-color dark:text-white/80">
         It&apos;s always time for a coffee break. We should be back by the time
         you finish your coffee.
       </p>

@@ -12,6 +12,7 @@ import analysisUUID from "@/store/features/files/analysisuuid";
 import uuidCleanFile from "@/store/features/clean/fileCleanedApiSlice";
 import eda from "@/store/features/ExploreData/edaStore";
 import sampleDataset from "@/store/features/sampleDataset/Dataset";
+import setTheme from "@/store/features/theme/setTheme";
 
 const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
         cleanedFileUUID: uuidCleanFile,
         eda: eda,
         sampleDataset: sampleDataset,
+        theme: setTheme,
     },
     // this need for rtks query to work with cache and other stuff
     middleware: (getDefaultMiddleware) => {

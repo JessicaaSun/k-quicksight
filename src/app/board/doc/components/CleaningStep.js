@@ -57,9 +57,9 @@ const CleaningStep = () => {
             {
                 UUIDFile ? (
                     !overviewLoading ? (
-                        <div className={'flex flex-col gap-3'}>
+                        <div className={'flex flex-col gap-3 dark:text-white'}>
                             <p>File overview</p>
-                            <ul className={'list-disc ml-10 leading-8'}>
+                            <ul className={'list-disc ml-10 leading-8 dark:text-white'}>
                                 <li>Number of columns = {fileOverview?.headers?.length ? fileOverview?.headers.length : 0}</li>
                                 <li>Number of rows = {fileOverview?.total}</li>
                                 <li>Duplicate row = {fileOverview?.duplicate_rows?.length? fileOverview.duplicate_rows?.length : 0}</li>
@@ -67,7 +67,7 @@ const CleaningStep = () => {
                                     Outlier
                                     {
                                         outlier?.map((item, index) => (
-                                            <div className={'flex gap-5 flex-wrap text-primary-color font-medium'} key={index}>Column: {item.column_name} : ( {item.outlier_range[0]}, {item.outlier_range[1]} )
+                                            <div className={'flex gap-5 flex-wrap text-primary-color dark:text-third-color font-medium'} key={index}>Column: {item.column_name} : ( {item.outlier_range[0]}, {item.outlier_range[1]} )
                                                 <p className={'text-text-color font-medium'}>Founded: [
                                                     {
                                                         item.outliers.map((item, index)=> (
@@ -81,16 +81,16 @@ const CleaningStep = () => {
                                 <li className={'flex flex-wrap'}>Label names = [
                                     {
                                         fileOverview?.headers?.map((item, index) => (
-                                            <span key={index} className={'font-medium text-secondary-color'}>{item} , </span>
+                                            <span key={index} className={'font-medium text-secondary-color dark:text-white/80'}>{item} , </span>
                                         ))
                                     }]</li>
                             </ul>
-                            <p className={'text-primary-color font-semibold'}>Imputation</p>
+                            <p className={'text-primary-color font-semibold dark:text-third-color'}>Imputation</p>
                             <TableImpute item={fileOverview} />
-                            <p className={'text-primary-color font-semibold'}>Missing values</p>
+                            <p className={'text-primary-color font-semibold dark:text-third-color'}>Missing values</p>
                             <TableMissingValue item={fileOverview} />
                             <div className={'flex flex-col gap-3'}>
-                                <p className={'my-4 font-semibold text-primary-color text-lg'}>Perform cleaning</p>
+                                <p className={'my-4 font-semibold text-primary-color text-lg dark:text-third-color'}>Perform cleaning</p>
                                 <div className={'mt-5'}>
                                     <RadioGroup
                                         value={select}
@@ -125,13 +125,13 @@ const CleaningStep = () => {
                         </div>
                     )
                 ) : (
-                    <p>Please select the dataset</p>
+                    <p className={'dark:text-white'}>Please select the dataset</p>
                 )
             }
             {
                 showClean && (
                     <div className={'my-10'}>
-                        <p className={'text-primary-color my-3 font-medium'}>Cleaned dataset</p>
+                        <p className={'text-primary-color my-3 font-medium dark:text-third-color'}>Cleaned dataset</p>
                         <FileDetail showHeader={true} uuid={uuidFileCleaned} />
                     </div>
                 )

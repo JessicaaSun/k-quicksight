@@ -58,12 +58,12 @@ const Tutorial = () => {
   return (
     <section
       className={
-        "md:pt-32 md:pb-20 max-sm:pt-40  max-sm:pb-6 sm:pb-6 sm:pt-40 lg:px-[10%] md:px-[7%] max-sm:px-8 sm:px-8"
+        "md:pt-32 md:pb-20 max-sm:pt-40 dark:text-white max-sm:pb-6 sm:pb-6 sm:pt-40 lg:px-[10%] md:px-[7%] max-sm:px-8 sm:px-8"
       }
     >
       <h1
         className={
-          "text-bold text-primary-color pt-10 md:pb-10 max-sm:pb-5 sm:pb-5"
+          "text-bold text-primary-color dark:text-third-color pt-10 md:pb-10 max-sm:pb-5 sm:pb-5"
         }
       >
         Tutorials
@@ -71,7 +71,7 @@ const Tutorial = () => {
       <TutorialCard />
       <h2
         className={
-          "text-primary-color font-bold md:mt-20 max-sm:mt-12 sm:mt-12"
+          "text-primary-color dark:text-third-color font-bold md:mt-20 max-sm:mt-12 sm:mt-12"
         }
       >
         Recommendation learning resources
@@ -102,7 +102,7 @@ const Tutorial = () => {
         </ul>
       </div>
       <div>
-        <h2 className={"text-primary-color font-bold mt-10"}>
+        <h2 className={"text-primary-color font-bold mt-10 dark:text-third-color"}>
           Request Tutorials
         </h2>
         <Formik
@@ -134,12 +134,12 @@ const Tutorial = () => {
               }
             >
               <div>
-                <p className={"text-lg text-text-color font-semibold"}>
+                <p className={"text-lg text-text-color font-semibold dark:text-third-color"}>
                   Subject
                 </p>
                 <Field
                   className={
-                    "block w-full px-4 py-[8px] my-3 border-gray-200 border-1  bg-white rounded-xl"
+                    "block dark:text-black w-full px-4 py-[8px] my-3 border-gray-200 border-1  bg-white rounded-xl"
                   }
                   type={"text"}
                   name={"subject"}
@@ -152,13 +152,13 @@ const Tutorial = () => {
                 />
               </div>
               <div>
-                <p className={"text-lg text-text-color font-semibold"}>
+                <p className={"text-lg text-text-color font-semibold dark:text-third-color"}>
                   Message
                 </p>
                 <Field
                   as={"textarea"}
                   className={
-                    "block w-full px-4 py-[8px] h-[100px] my-3 border-gray-200 border-1  bg-white rounded-xl"
+                    "block w-full dark:text-black px-4 py-[8px] h-[100px] my-3 border-gray-200 border-1  bg-white rounded-xl"
                   }
                   type={"text"}
                   name={"message"}

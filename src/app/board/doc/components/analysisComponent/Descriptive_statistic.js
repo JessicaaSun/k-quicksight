@@ -9,7 +9,7 @@ const Descriptive_statistic = ({ data, headers }) => {
 
     return (
         <div className="overflow-x-scroll">
-            <table className="min-w-full bg-white border border-gray-300">
+            <table className="min-w-full bg-white border border-gray-300 dark:text-black">
                 <thead>
                 <tr className="bg-gray-100">
                     <th>Statistic</th>

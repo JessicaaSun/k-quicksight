@@ -17,6 +17,8 @@ import ExistingDataset from "./ExistingDataset";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import PerformAnalysisButton from "./PerformAnalysis";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
+import fileImport from '@assets/images/fileimport.png'
+import Image from "next/image";
 
 export default function AddNewButton() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -57,7 +59,7 @@ export default function AddNewButton() {
     <>
       <Button
         onPress={onOpen}
-        className="bg-primary-color text-white"
+        className="bg-primary-color text-white dark:bg-third-color"
         variant="solid"
       >
         <FaCirclePlus />
@@ -72,10 +74,10 @@ export default function AddNewButton() {
         <ModalContent >
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 dark:bg-white">
                 Importing dataset
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className={'bg-white'}>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
                     onClick={() => handleChoice("exist")}
@@ -97,7 +99,7 @@ export default function AddNewButton() {
                 ) : (
                   <div className="grid gap-3">
                     <p>{file?.filename || errorMessage}</p>
-                    <input
+                    <Input
                       type="file"
                       name="dataset"
                       accept=".txt, .json, .xlsx, .csv" // Specify allowed file types

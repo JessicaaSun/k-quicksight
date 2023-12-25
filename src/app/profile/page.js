@@ -2,6 +2,7 @@
 import Image from "next/image";
 import authenticated from "@assets/images/403.png";
 import {
+  Avatar,
   avatar,
   Button,
   Input,
@@ -187,10 +188,10 @@ export default function Profile() {
       <div className="flex min-h-screen flex-col items-center justify-start lg:px-[10%] md:px-[5%] px-3 max-sm:pt-48 sm:pt-48 max-sm:pb-6 sm:pb-6 md:pt-48 md:mb-48">
         <div
           className={
-            "p-5 w-full text-white min-h-[190px] rounded-2xl bg-[#1E2875]"
+            "p-5 w-full text-white min-h-[190px] rounded-2xl dark:bg-third-color bg-[#1E2875]"
           }
         >
-          <p className={"text-lg uppercase"}>my profile</p>
+          <p className={"text-lg uppercase dark:text-black"}>my profile</p>
         </div>
         <div
           className={
@@ -199,7 +200,7 @@ export default function Profile() {
         >
           <div
             className={
-              "bg-white border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col"
+              "bg-white dark:bg-text-color border-2 border-gray-300 lg:w-1/2 relative md:w-1/2 w-full mb-5 -mt-20 rounded-xl p-7 flex flex-col"
             }
           >
             <div className={"flex justify-center items-center relative"}>
@@ -212,10 +213,9 @@ export default function Profile() {
                   style={{ display: "none" }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Avatar
                   src={generateBashURL(avatar)}
-                  alt={"profile_image"}
-                  className={"w-[150px] h-[150px] object-cover rounded-full"}
+                  className={"w-[150px] h-[150px] object-cover rounded-full border-2 border-primary-color dark:border-third-color"}
                 />
                 <label
                   htmlFor="upload-input"
@@ -255,19 +255,19 @@ export default function Profile() {
                 <div className={"flex flex-col gap-1 w-full"}>
                   <p
                     className={
-                      "font-medium w-full text-lg text-description-color"
+                      "font-medium dark:text-white w-full text-lg text-description-color"
                     }
                   >
                     Your Name
                   </p>
-                  <p className={"text-md text-primary-color font-medium"}>
+                  <p className={"text-md dark:text-third-color text-primary-color font-medium"}>
                     @{user?.data.username}
                   </p>
                   <div className={"flex justify-between items-center"}>
                     {fullNameUpdate ? (
                       <div
                         className={
-                          "flex gap-2 justify-between items-center w-full"
+                          "flex dark:text-white gap-2 justify-between items-center w-full"
                         }
                       >
                         <Input
@@ -290,7 +290,7 @@ export default function Profile() {
                           "flex gap-2 justify-between items-center w-full"
                         }
                       >
-                        <p className={"text-lg font-medium"}>
+                        <p className={"text-lg font-medium dark:text-white"}>
                           {user?.data.full_name}
                         </p>
                         <button
@@ -308,7 +308,7 @@ export default function Profile() {
                 <div className={"flex flex-col gap-1 w-full"}>
                   <p
                     className={
-                      "font-medium w-full text-lg text-description-color"
+                      "font-medium dark:text-third-color w-full text-lg text-description-color"
                     }
                   >
                     Your Gender
@@ -330,6 +330,15 @@ export default function Profile() {
                           onChange={handleGender}
                           label="Select gender"
                           className="max-w-xs"
+                          classNames={{
+                            listboxWrapper: "dark:bg-white",
+                          }}
+                          popoverProps={{
+                            classNames: {
+                              base: "",
+                              content: "dark:bg-white",
+                            },
+                          }}
                         >
                           <SelectItem key={"Male"} value={"Male"}>
                             Male
@@ -356,7 +365,7 @@ export default function Profile() {
                           "flex gap-2 justify-between items-center w-full"
                         }
                       >
-                        <p className={"text-lg font-medium"}>{gender}</p>
+                        <p className={"text-lg dark:text-white font-medium"}>{gender}</p>
                         <button
                           className={
                             "bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg"
@@ -372,7 +381,7 @@ export default function Profile() {
                 <div className={"flex flex-col gap-1 w-full"}>
                   <p
                     className={
-                      "font-medium w-full text-lg text-description-color"
+                      "font-medium w-full dark:text-third-color text-lg text-description-color"
                     }
                   >
                     Your Email
@@ -382,7 +391,7 @@ export default function Profile() {
                       "flex flex-row justify-between gap-5 w-full items-center "
                     }
                   >
-                    <p className={"text-primary-color text-lg font-semibold"}>
+                    <p className={"text-primary-color dark:text-white text-lg font-semibold"}>
                       {user?.data.email}
                     </p>
                   </div>
@@ -390,7 +399,7 @@ export default function Profile() {
                 <div className={"flex flex-col gap-1 w-full"}>
                   <p
                     className={
-                      "font-medium w-full text-lg text-description-color"
+                      "font-medium dark:text-third-color w-full text-lg text-description-color"
                     }
                   >
                     Your Phone Number
@@ -402,7 +411,7 @@ export default function Profile() {
                   >
                     {!phoneUpdate ? (
                       <>
-                        <p className={"text-lg font-medium"}>{phoneNumber}</p>
+                        <p className={"text-lg font-medium dark:text-white"}>{phoneNumber}</p>
                         <button
                           className={
                             "bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg"
@@ -441,18 +450,18 @@ export default function Profile() {
               }
             >
               <div className={"flex justify-between items-center w-full"}>
-                <h4 className={"text-text-color"}>
-                  About <span className={"text-primary-color"}>{fullname}</span>
+                <h4 className={"text-text-color dark:text-white"}>
+                  About <span className={"text-primary-color dark:text-third-color"}>{fullname}</span>
                 </h4>
                 {!biographyUpdate ? (
                   <button
                     onClick={() => setBiographyUpdate(true)}
-                    className={"text-primary-color"}
+                    className={"text-primary-color dark:text-third-color"}
                   >
                     <FaPencilAlt />
                   </button>
                 ) : (
-                  <button onClick={handleBio}>Done</button>
+                  <button onClick={handleBio} className={'text-text-color dark:text-white'}>Done</button>
                 )}
               </div>
               <div className={"text-md text-text-color mt-5 w-full"}>
@@ -464,24 +473,24 @@ export default function Profile() {
                     onValueChange={setBiography}
                   />
                 ) : (
-                  <p>{biography}</p>
+                  <p className={'dark:text-white'}>{biography}</p>
                 )}
               </div>
             </div>
             <div
               className={
-                "border-1 shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "border-1 dark:text-white text-text-color shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
               <p
                 className={
-                  "text-xl w-full font-bold text-text-color capitalize"
+                  "text-xl w-full font-bold capitalize"
                 }
               >
                 Storage usage
               </p>
               <div className={"w-full flex justify-between items-center mt-5"}>
-                <p className={"font-semibold text-lg text-text-color"}>Free</p>
+                <p className={"font-semibold text-lg"}>Free</p>
                 <div
                   className={
                     "text-md text-text-color bg-green-300 px-6 rounded-full py-0.5"
@@ -491,7 +500,7 @@ export default function Profile() {
                 </div>
               </div>
               <div className={"w-full flex justify-between items-center mt-5"}>
-                <p className={"font-semibold text-lg text-text-color"}>Used</p>
+                <p className={"font-semibold text-lg"}>Used</p>
                 <div
                   className={
                     `text-md text-text-color ${user?.data.storage_data < 819200 ? 'bg-red-300' : 'bg-gray-100'} px-6 rounded-full py-0.5`
@@ -509,10 +518,10 @@ export default function Profile() {
           >
             <div
               className={
-                "bg-white max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "bg-white dark:bg-text-color max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p className={"mb-5 text-lg text-primary-color font-semibold"}>
+              <p className={"mb-5 text-lg dark:text-third-color text-primary-color font-semibold"}>
                 Analysis
               </p>
               <div className={"grid gap-3 w-full"}>
@@ -520,7 +529,7 @@ export default function Profile() {
                   <Link
                     href={`/board/analysis/${item.uuid}`}
                     key={item.id}
-                    className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
+                    className={`border-2 dark:text-white border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
                   >
                     <div
                       style={{ backgroundColor: getRandomColor() }}
@@ -538,10 +547,10 @@ export default function Profile() {
             </div>
             <div
               className={
-                "bg-white min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                "bg-white dark:bg-text-color min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p className={"mb-5 text-lg text-primary-color font-semibold"}>
+              <p className={"mb-5 dark:text-third-color text-lg text-primary-color font-semibold"}>
                 Dashboard
               </p>
               <div className="w-full grid gap-3">
@@ -550,7 +559,7 @@ export default function Profile() {
                     <Link
                       href={`/board/dashboard/${item.uuid}`}
                       key={item.id}
-                      className={`border-2 border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
+                      className={`border-2 dark:text-white border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
                     >
                       <div
                         style={{ backgroundColor: getRandomColor() }}
@@ -569,15 +578,15 @@ export default function Profile() {
             </div>
             <div
                 className={
-                  "bg-white border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+                  "bg-white dark:bg-text-color border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
                 }
             >
-              <p className={'text-lg text-primary-color font-semibold'}>Change your password</p>
+              <p className={'text-lg dark:text-white text-primary-color font-semibold'}>Change your password</p>
               <div className={'w-full grid gap-3'}>
-                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'}/>
-                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} variant={'bordered'} placeholder={'New password'}/>
-                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Confirm your password'}/>
-                <Button variant={'solid'} color={'primary'} onClick={handleChangePassword}>
+                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5 dark:text-white'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'}/>
+                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} className={'dark:text-white'} variant={'bordered'} placeholder={'New password'}/>
+                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} className={'dark:text-white'} placeholder={'Confirm your password'}/>
+                <Button variant={'solid'} className={'bg-primary-color dark:bg-third-color text-white'} onClick={handleChangePassword}>
                   Change password
                 </Button>
               </div>

@@ -68,7 +68,7 @@ export default function NewDataset({ isFull }) {
           <ModalContent>
             {!importLoading ? (
               <div className={"flex p-5 flex-col gap-5"}>
-                <ModalHeader className="flex flex-col gap-1 text-center text-2xl">
+                <ModalHeader className="flex dark:text-white flex-col gap-1 text-center text-2xl">
                   Import Dataset
                 </ModalHeader>
                 <ModalBody className={"flex flex-row gap-5 w-full"}>

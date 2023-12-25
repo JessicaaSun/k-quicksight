@@ -142,10 +142,10 @@ const CardDetailDropDown = ({
         <ModalContent>
           {(onEditClose) => (
             <>
-              <ModalHeader className="flex text-text-color pt-4 pb-0 flex-col">
+              <ModalHeader className="flex text-text-color pt-4 pb-0 flex-col bg-white">
                 Update {filename}
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className={'bg-white'}>
                 <label className="font-semibold">Title</label>
                 <Input
                   size="sm"
@@ -165,7 +165,7 @@ const CardDetailDropDown = ({
                   handleUpload={handleUploadImage}
                 />
               </ModalBody>
-              <ModalFooter className="flex justify-between">
+              <ModalFooter className="grid grid-cols-2 dark:bg-white">
                 <DeleteButtonComponent
                   rounded={"xl"}
                   color={"danger"}
@@ -194,16 +194,16 @@ const CardDetailDropDown = ({
         <ModalContent>
           {(onDeleteClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 bg-white">
                 {filename}
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className={'bg-white'}>
                 <p>
                   Are you sure you want to delete this{" "}
                   {isAnalysis ? "analysis" : "dashboard"}?
                 </p>
               </ModalBody>
-              <ModalFooter className="flex justify-between">
+              <ModalFooter className="grid grid-cols-2 gap-5 bg-white">
                 <SelectButton
                   rounded={"xl"}
                   color={"primary-color"}

@@ -25,6 +25,7 @@ import { logout } from "@/store/features/auth/authSlice";
 import { useSidebar } from "@/context/BoardSideBarContext";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import { generateBashURL } from "@/utils/util";
+import ThemeSwitcher from "@/components/themeSwitch/themeSwitcher";
 
 const Navbar = () => {
   const { data: user, isSuccess, isLoading } = useGetUserQuery();
@@ -63,8 +64,9 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="flex items-center">
-        <Dropdown>
+      <div className="flex items-center gap-5 dark:text-white">
+        <ThemeSwitcher />
+        <Dropdown className={'dark:text-white dark:bg-text-color'}>
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -83,7 +85,7 @@ const Navbar = () => {
               className="h-14 gap-2"
             >
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold text-primary-color">
+              <p className="font-semibold dark:text-third-color text-primary-color">
                 {user?.data.full_name}
               </p>
             </DropdownItem>

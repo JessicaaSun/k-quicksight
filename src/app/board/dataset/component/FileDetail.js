@@ -36,7 +36,7 @@ export default function FileDetail({ uuid, showHeader }) {
   return (
     <div className={"relative rounded-xl w-full overflow-auto"}>
       {showHeader ? (
-        <p className="text-xl text-primary-color font-semibold my-3">Dataset</p>
+        <p className="text-xl text-primary-color font-semibold my-3 dark:text-third-color">Dataset</p>
       ) : (
         ""
       )}
@@ -56,7 +56,7 @@ export default function FileDetail({ uuid, showHeader }) {
               emptyContent={"No rows to display."}
             >
               {fileDetail?.results?.map((row, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} className={'dark:text-white'}>
                   {fileDetail?.headers.map((header, index) => (
                     <TableCell key={index}>{row[header]}</TableCell>
                   ))}
@@ -70,30 +70,30 @@ export default function FileDetail({ uuid, showHeader }) {
               size={"sm"}
               variant={"bordered"}
               defaultSelectedKeys={["100"]}
-              className="w-20"
+              className="w-20 dark:text-white"
               onChange={handleSelectionChange}
             >
               <SelectItem textValue="100" key={100} value={100}>
-                100
+                <span className={'dark:text-white'}>100</span>
               </SelectItem>
               <SelectItem textValue="200" key={200} value={200}>
-                200
+                <span className={'dark:text-white'}>200</span>
               </SelectItem>
               <SelectItem textValue="300" key={300} value={300}>
-                300
+                <span className={'dark:text-white'}>300</span>
               </SelectItem>
               <SelectItem textValue="400" key={400} value={400}>
-                400
+                <span className={'dark:text-white'}>400</span>
               </SelectItem>
               <SelectItem textValue="500" key={500} value={500}>
-                500
+                <span className={'dark:text-white'}>500</span>
               </SelectItem>
               <SelectItem
                 key={fileDetail?.count}
                 textValue={fileDetail?.count}
                 value={fileDetail?.count}
               >
-                {fileDetail?.count}
+                <span className={'dark:text-white'}>{fileDetail?.count}</span>
               </SelectItem>
             </Select>
             <Pagination

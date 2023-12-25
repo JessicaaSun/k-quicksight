@@ -14,6 +14,7 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { toast } from "react-toastify";
 import EyeBold from "@duyank/icons/bold/EyeBold";
 import { FaEye } from "react-icons/fa6";
+import {LuImport} from "react-icons/lu";
 
 const FileScrap = () => {
   const { data: user } = useGetUserQuery();
@@ -49,7 +50,7 @@ const FileScrap = () => {
 
   if (filenames === undefined) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center min-h-screen p-10">
         <p className="text-center my-10 text-primary-color font-semibold text-lg">
           Undefined tables in this link
         </p>
@@ -57,7 +58,7 @@ const FileScrap = () => {
         <Button
           onClick={() => router.back()}
           color="primary"
-          variant="bordered"
+          variant="solid"
           className="mt-10"
         >
           <IoChevronBackCircle /> Back
@@ -66,10 +67,19 @@ const FileScrap = () => {
     );
   } else {
     return (
-      <div>
-        <p className="mt-10 mb-2 text-lg font-semibold text-primary-color">
-          Select files to confirm
-        </p>
+      <div className={'p-10'}>
+        <div className={'flex justify-between items-center'}>
+          <p className="text-lg font-semibold text-primary-color dark:text-third-color">
+            Select files to confirm
+          </p>
+          <Button
+              onClick={handleSave}
+              color="primary"
+              variant="solid"
+          >
+            <LuImport /> Import file(s)
+          </Button>
+        </div>
         <div className="flex flex-col gap-3 w-full">
           <CheckboxGroup
             label="Selecting files ..."
@@ -88,14 +98,7 @@ const FileScrap = () => {
               </div>
             ))}
           </CheckboxGroup>
-          <Button
-            onClick={handleSave}
-            color="primary"
-            variant="bordered"
-            className={"w-[98%] m-auto"}
-          >
-            Import file(s)
-          </Button>
+
         </div>
       </div>
     );

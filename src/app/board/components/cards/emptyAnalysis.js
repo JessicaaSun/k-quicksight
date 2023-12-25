@@ -5,7 +5,7 @@ const EmptyAnalysis = ({ isAnalysis }) => {
   return (
     <div className={"flex flex-col justify-center items-center"}>
       <Image src={boxEmpty} unoptimized={true} alt={""} className={"w-96 "} />
-      <p className={"text-primary-color font-semibold text-2xl"}>
+      <p className={"text-primary-color dark:text-third-color font-semibold text-2xl"}>
         {isAnalysis
           ? `You don't have any analysis,please click on "Create Analysis" button.`
           : `You don't have any visualization dashboard, please click on "Create Dashboard" button.`}

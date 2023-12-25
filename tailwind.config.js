@@ -32,6 +32,7 @@ module.exports = {
         "hover-primary": "#033A87",
         "secondary-color": "#800080",
         "third-color": "#FFA500",
+        "dark-bg": "#10172a",
         "text-color": "#363636",
         "description-color": "#636363",
       },

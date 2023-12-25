@@ -66,7 +66,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-5 dark:text-white">
         <ThemeSwitcher />
-        <Dropdown className={'dark:text-white dark:bg-text-color'}>
+        <Dropdown className={'dark:text-white dark:bg-dark-bg'}>
           <DropdownTrigger>
             <Avatar
               isBordered

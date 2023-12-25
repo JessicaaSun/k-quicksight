@@ -8,6 +8,7 @@ import { getThumbnail } from "../../utils/thumbnail";
 import XIcon from "@duyank/icons/regular/X";
 import { isMobile } from "react-device-detect";
 import { useEditor } from "@lidojs/editor";
+import Loading from "@/app/loading";
 
 const ImageContent = ({ onClose }) => {
   const [images, setImages] = useState([]);
@@ -98,7 +99,7 @@ const ImageContent = ({ onClose }) => {
             gridGap: 8,
           }}
         >
-          {isLoading && <div>Loading...</div>}
+          {isLoading && <div><Loading/></div>}
           {images.map((item, idx) => (
             <div
               key={idx}

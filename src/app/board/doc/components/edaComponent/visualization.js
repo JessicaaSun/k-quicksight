@@ -45,8 +45,6 @@ const Visualization = ({bodyEda}) => {
                 isLoading(false)
                 setError('Something when wrong')
             }, 3000)
-        } else {
-            isLoading(true)
         }
     }, [response]);
 
@@ -60,13 +58,13 @@ const Visualization = ({bodyEda}) => {
                             <p className={'text-lg font-medium mt-10'}>All Headers of dataset</p>
                             {
                                 detailEDAResponse.headers?.map((item, index) => (
-                                    <span key={index} className={'my-5 text-primary-color'}> {item},  </span>
+                                    <span key={index} className={'my-5 dark:text-white font-semibold text-primary-color'}> {item},  </span>
                                 ))
                             }
                         </div>
                         <DataTable header={detailEDAResponse?.number_headers} body={detailEDAResponse?.descriptive_stats} />
                         <CorrelationTable headers={detailEDAResponse?.number_headers} correlationData={detailEDAResponse?.correlation} />
-                        <p className={'text-xl font-semibold text-primary-color'}>Visualization</p>
+                        <p className={'text-xl font-semibold text-primary-color dark:text-white'}>Visualization</p>
                         <ImageVisualization visualizationData={detailEDAResponse?.visualization} header={detailEDAResponse?.number_headers} />
                     </div>
                 )

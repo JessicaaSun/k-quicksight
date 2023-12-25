@@ -127,7 +127,7 @@ export default function Perform({ params }) {
                     <div className="w-1/3"><SelectVisulize /></div>
                     <Visualization bodyEda={bodyEda} />
                   </div>
-                  <p className="uppercase text-xl font-medium text-primary-color mt-10">
+                  <p className="uppercase dark:text-white text-xl font-medium text-primary-color mt-10">
                     Performing analsis with {model}
                   </p>
                   {variableNotMoreThan2.some((model_mode) =>
@@ -135,7 +135,7 @@ export default function Perform({ params }) {
                   ) ? (
                     <div className="grid gap-3">
                       <div>
-                        <p className="text-description-color text-md">
+                        <p className="text-description-color dar:text-white/90 text-md">
                           Select Dependent variable
                         </p>
                         <Select
@@ -151,7 +151,7 @@ export default function Perform({ params }) {
                         />
                       </div>
                       <div>
-                        <p className="text-description-color text-md">
+                        <p className="text-description-color dar:text-white/90 text-md">
                           Select Independent variable
                         </p>
                         <Select
@@ -169,7 +169,7 @@ export default function Perform({ params }) {
                     </div>
                   ) : (
                     <div className={"w-full"}>
-                      <p className="text-description-color text-md">
+                      <p className="text-description-color text-md dark:text-white">
                         Select Dependent variable
                       </p>
                       {fileLoading || headerLoading ? (

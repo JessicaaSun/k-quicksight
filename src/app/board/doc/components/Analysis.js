@@ -79,8 +79,6 @@ const Analysis = () => {
         isLoading(false);
         toast.error("Something went wrong please try again!");
       }, 5000);
-    } else {
-      isLoading(true)
     }
   }, [resultAnalysis]);
 

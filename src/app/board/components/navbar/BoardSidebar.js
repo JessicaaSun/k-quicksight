@@ -31,7 +31,7 @@ const contentRoute = {
   },
 
   visualization: {
-    _name: "visualization",
+    _name: "Visualization",
     analysis: {
       icon: <FaSquarePollVertical />,
       name: "Analysis",

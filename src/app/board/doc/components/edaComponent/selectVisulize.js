@@ -34,7 +34,7 @@ export default function selectVisulize () {
     };
     return (
         <>
-            <p className={'text-primary-color font-semibold text-lg'}>Select Visualization graphics</p>
+            <p className={'text-primary-color font-semibold text-lg dark:text-white'}>Select Visualization graphics</p>
             <Select
                 size={'large'}
                 mode="multiple"

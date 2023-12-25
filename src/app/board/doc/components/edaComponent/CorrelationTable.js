@@ -7,18 +7,18 @@ const CorrelationTable = ({ headers, correlationData }) => {
     }
     return (
         <div>
-            <h4 className={'text-primary-color'}>Correlation Table</h4>
+            <h4 className={'text-primary-color dark:text-white'}>Correlation Table</h4>
             <Table>
                 <TableHeader>
                     {headers.map(header => (
-                        <TableColumn key={header}>{header}</TableColumn>
+                        <TableColumn className={'dark:text-white'} key={header}>{header}</TableColumn>
                     ))}
                 </TableHeader>
                 <TableBody>
                     {Object.keys(correlationData).map(rowKey => (
                         <TableRow key={rowKey}>
                             {Object.keys(correlationData[rowKey]).map(cellKey => (
-                                <TableCell key={cellKey}>{correlationData[rowKey][cellKey]}</TableCell>
+                                <TableCell className={'dark:text-white'} key={cellKey}>{correlationData[rowKey][cellKey]}</TableCell>
                             ))}
                         </TableRow>
                     ))}

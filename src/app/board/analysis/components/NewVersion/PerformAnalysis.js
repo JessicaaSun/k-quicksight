@@ -59,8 +59,8 @@ export default function PerformAnalysisButton({ uuid }) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Choosing model</ModalHeader>
-                            <ModalBody>
+                            <ModalHeader className="flex flex-col gap-1 dark:bg-white">Choosing model</ModalHeader>
+                            <ModalBody className={'dark:bg-white'}>
                                 <div className="flex w-full flex-col gap-2">
                                     <p className="text-small text-default-500">Model selected: {value}</p>
                                     <Select
@@ -69,12 +69,12 @@ export default function PerformAnalysisButton({ uuid }) {
                                         variant="bordered"
                                         placeholder="Select model"
                                         selectedKeys={value}
-                                        className="w-full"
+                                        className="w-full dark:bg-white"
                                         onSelectionChange={setValue}
                                     >
                                         {
                                             models.map((item, index) => (
-                                                <SelectItem key={item.value} value={item.value}>
+                                                <SelectItem className={'dark:bg-white'} key={item.value} value={item.value}>
                                                     {item.label}
                                                 </SelectItem>
                                             ))
@@ -82,7 +82,7 @@ export default function PerformAnalysisButton({ uuid }) {
                                     </Select>
                                 </div>
                             </ModalBody>
-                            <ModalFooter>
+                            <ModalFooter className={'dark:bg-white'}>
                                 <Button onClick={() => {
                                     setLoading(true)
                                     router.push(`/board/analysis/perform/${value?.currentKey}/${uuid}`)

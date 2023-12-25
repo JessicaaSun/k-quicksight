@@ -24,7 +24,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
   return (
     <div
       className={
-        "flex flex-col hover:scale-105  bg-white rounded-xl shadow-sm transition-all"
+        "flex flex-col hover:scale-105 justify-between bg-white rounded-xl shadow-sm transition-all"
       }
     >
       <Image
@@ -38,7 +38,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
         }
         onClick={handleImageClick}
       />
-      <div className="flex py-3 justify-between px-3 items-start">
+      <div className="flex py-3 justify-between px-3 items-end">
         <div
           onClick={() => router.push(routeTo)}
           className={"flex cursor-pointer flex-col"}

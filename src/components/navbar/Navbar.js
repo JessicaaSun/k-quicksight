@@ -161,7 +161,10 @@ export default function NavbarKQuick() {
             <Navbar className="w-auto bg-primary-color">
               <ThemeSwitcher />
               <NavbarContent>
-                <Dropdown placement="bottom-end" className={'dark:text-white dark:bg-dark-bg bg-white'}>
+                <Dropdown
+                  placement="bottom-end"
+                  className={"dark:text-white dark:bg-dark-bg bg-white"}
+                >
                   <DropdownTrigger>
                     <Avatar
                       isBordered
@@ -214,16 +217,15 @@ export default function NavbarKQuick() {
               </NavbarContent>
             </Navbar>
           ) : (
-
-           <div className={'flex justify-center items-center gap-5'}>
-             <ThemeSwitcher />
-             <Button
-                 onClick={() => router.push("/auth/login")}
-                 className="text-primary-color font-semibold px-7 bg-background-color"
-             >
-               Login
-             </Button>
-           </div>
+            <div className={"flex justify-center items-center gap-5"}>
+              <ThemeSwitcher />
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="text-primary-color font-semibold px-7 bg-background-color"
+              >
+                Login
+              </Button>
+            </div>
           )}
         </section>
       </nav>
@@ -252,9 +254,10 @@ export function Community_navbar() {
       <div>
         <Link href={"/"} className="text-primary-color font-semibold">
           {" "}
-          Join our community, support{" "}
+          Join our community
         </Link>
-        and Connect with Like-Minded Individuals for Assistance and Guidance.
+        , support and Connect with Like-Minded Individuals for Assistance and
+        Guidance.
       </div>
     </div>
   );

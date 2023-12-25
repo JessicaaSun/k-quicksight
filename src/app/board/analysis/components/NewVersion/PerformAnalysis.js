@@ -14,7 +14,7 @@ const models = [
     },
     {
         value: 'descriptive_statistic',
-        label: 'descriptive_statistic',
+        label: 'descriptive statistic',
     },
     {
         value: 'correlation',
@@ -26,15 +26,15 @@ const models = [
     },
     {
         value: 'simple_linear_regression',
-        label: 'simple_linear_regression',
+        label: 'simple linear regression',
     },
     {
         value: 'non_linear_regression',
-        label: 'non_linear_regression',
+        label: 'non linear regression',
     },
     {
         value: 'multiple_linear_regression',
-        label: 'multiple_linear_regression',
+        label: 'multiple linear regression',
     },
 ]
 
@@ -74,7 +74,7 @@ export default function PerformAnalysisButton({ uuid }) {
                                     >
                                         {
                                             models.map((item, index) => (
-                                                <SelectItem className={'dark:bg-white'} key={item.value} value={item.value}>
+                                                <SelectItem className={'dark:bg-white capitalize'} key={item.value} value={item.value}>
                                                     {item.label}
                                                 </SelectItem>
                                             ))

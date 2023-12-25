@@ -26,7 +26,6 @@ import Visualization from "@/app/board/doc/components/edaComponent/visualization
 import { setEdaFilename } from "@/store/features/ExploreData/edaStore";
 
 const variableNotMoreThan2 = [
-  "descriptive_statistic",
   "correlation",
   "covariance",
   "simple_linear_regression",
@@ -96,7 +95,7 @@ export default function Perform({ params }) {
       }, 5000);
     }
     dispatch(setEdaFilename(fileDetail?.filename));
-  }, [resultAnalysis, fileDetail]);
+  }, [resultAnalysis, fileDetail, dispatch]);
 
   return (
     <div className="p-3 grid grid-cols-1">
@@ -131,78 +130,85 @@ export default function Perform({ params }) {
                     Performing analsis with {model}
                   </p>
                   {variableNotMoreThan2.some((model_mode) =>
-                    model.startsWith(model_mode)
+                      model.startsWith(model_mode)
                   ) ? (
-                    <div className="grid gap-3">
-                      <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
-                          Select Dependent variable
-                        </p>
-                        <Select
-                          aria-label="Select"
-                          size={"large"}
-                          placeholder={"Selecting model"}
-                          style={{
-                            width: "100%",
-                          }}
-                          value={dependent_variable}
-                          onChange={setDependentVariable}
-                          options={headers?.header_label}
-                        />
-                      </div>
-                      <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
-                          Select Independent variable
-                        </p>
-                        <Select
-                          size={"large"}
-                          aria-label="Select"
-                          placeholder={"Selecting model"}
-                          style={{
-                            width: "100%",
-                          }}
-                          value={independent_variable}
-                          onChange={setIndependentVariable}
-                          options={headers?.header_label}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className={"w-full"}>
-                      <p className="text-description-color text-md dark:text-white">
-                        Select Dependent variable
-                      </p>
-                      {fileLoading || headerLoading ? (
-                        <Spinner size={"md"} label={"loading - variables"} />
-                      ) : (
-                        <div className="flex gap-5 w-full">
+                      <div className="grid gap-3">
+                        <div>
+                          <p className="text-description-color dar:text-white/90 text-md">
+                            Select Dependent variable
+                          </p>
                           <Select
-                            aria-label="Select"
-                            size={"large"}
-                            placeholder={"Selecting model"}
-                            style={{
-                              width: "100%",
-                            }}
-                            value={dependent_variable}
-                            onChange={setDependentVariable}
-                            options={headers?.header_label}
-                          />
-                          <Select
-                            aria-label="Select"
-                            size={"large"}
-                            mode="multiple"
-                            placeholder="Independent variable"
-                            value={independent_variables}
-                            onChange={setIndependentVariables}
-                            style={{
-                              width: "100%",
-                            }}
-                            options={headers?.header_label}
+                              aria-label="Select"
+                              size={"large"}
+                              placeholder={"Selecting model"}
+                              style={{
+                                width: "100%",
+                              }}
+                              value={dependent_variable}
+                              onChange={setDependentVariable}
+                              options={headers?.header_label}
                           />
                         </div>
-                      )}
-                    </div>
+                        <div>
+                          <p className="text-description-color dar:text-white/90 text-md">
+                            Select Independent variable
+                          </p>
+                          <Select
+                              size={"large"}
+                              aria-label="Select"
+                              placeholder={"Selecting model"}
+                              style={{
+                                width: "100%",
+                              }}
+                              value={independent_variable}
+                              onChange={setIndependentVariable}
+                              options={headers?.header_label}
+                          />
+                        </div>
+                      </div>
+                  ) : (
+                      variableNotMoreThan2.some((model_mode) =>
+                          model.startsWith('descriptive_statistic')
+                      ) ? (
+                          <></>
+                      ) : (
+                          <div className={"w-full"}>
+                            <p className="text-description-color text-md dark:text-white">
+                              Select Dependent variable
+                            </p>
+                            {fileLoading || headerLoading ? (
+                                <Spinner size={"md"} label={"loading - variables"} />
+                            ) : (
+                                <div className="flex gap-5 w-full">
+                                  <Select
+                                      aria-label="Select"
+                                      size={"large"}
+                                      placeholder={"Selecting model"}
+                                      style={{
+                                        width: "100%",
+                                      }}
+                                      value={dependent_variable}
+                                      onChange={setDependentVariable}
+                                      options={headers?.header_label}
+                                  />
+                                  <Select
+                                      aria-label="Select"
+                                      size={"large"}
+                                      mode="multiple"
+                                      placeholder="Independent variable"
+                                      value={independent_variables}
+                                      onChange={setIndependentVariables}
+                                      style={{
+                                        width: "100%",
+                                      }}
+                                      options={headers?.header_label}
+                                  />
+                                </div>
+                            )}
+                          </div>
+                      )
                   )}
+
                 </div>
                 <div className="flex gap-3 justify-start items-center">
                   <Button

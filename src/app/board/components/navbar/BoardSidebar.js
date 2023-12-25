@@ -57,7 +57,7 @@ const BoardSidebar = ({ toggleSidebar }) => {
     <div
       className={`${
         toggleSidebar ? "ml-[-1000px]" : ""
-      } border-r-1 dark:bg-dark-bg border-gray-200 bg-white dark:bg-dark-bg dark:text-white text-text-color transition-all text-description-color z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
+      } border-r-1 border-gray-200 bg-white dark:bg-dark-bg dark:text-white text-text-color transition-all z-20 left-0 px-5 pb-10 pt-5 fixed flex flex-col gap-5 top-[64px] lg:overflow-y-hidden md:overflow-y-scroll min-w-[255px] min-h-screen`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <div className={"flex gap-5 items-center"}>

@@ -16,7 +16,7 @@ export const headers = [
         header: "Title",
     },
     {
-      header: "original",
+      header: "Original",
     },
     {
         header: "File Type",

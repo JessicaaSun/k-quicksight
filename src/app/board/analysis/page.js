@@ -125,6 +125,7 @@ const Page = () => {
                     >
                       <DashboardCard
                         item={item}
+                        isAnalysis={true}
                         index={index}
                         routeTo={`/board/analysis/${item.file.uuid}/${item.uuid}`}
                       />

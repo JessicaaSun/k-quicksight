@@ -8,7 +8,7 @@ import { IoEllipsisHorizontal } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import CardDetailDropDown from "./CardDetailDropDown";
 
-const DashboardCard = ({ item, index, routeTo }) => {
+const DashboardCard = ({ item, index, isAnalysis, routeTo }) => {
   const router = useRouter();
   const getTitle = () => {
     if (item?.title !== null) {
@@ -53,7 +53,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
           thumbnailUrl={item?.thumbnail}
           filename={getTitle()}
           uuid={item?.uuid}
-          isAnalysis={false}
+          isAnalysis={isAnalysis}
         />
       </div>
     </div>

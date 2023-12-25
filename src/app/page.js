@@ -44,8 +44,12 @@ export default function Home() {
   return (
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
-        <div className="flex flex-col gap-3 w-full">
-          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
+        <div className="flex flex-col gap-3 w-full"
+             data-aos="fade-down"
+             data-aos-easing="linear"
+             data-aos-duration="1500">
+          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold"
+          >
             <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
               <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
@@ -61,6 +65,7 @@ export default function Home() {
               <Button size={'lg'}
                 onClick={() => router.push("/auth/login")}
                 className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color dark:bg-third-color text-white"
+
               >
                 Get started
               </Button>
@@ -76,7 +81,7 @@ export default function Home() {
 
             <Button
                 className={'font-semibold text-text-color dark:text-white'}
-                onClick={() => router.push("/tutorials")} size={'lg'} variant={'bordered'}><MdOutlineOndemandVideo className={'text-third-color text-xl'} /> Watch Tutorial</Button>
+                onClick={() => router.push("/tutorials")} size={'lg'} variant={'bordered'}><MdOutlineOndemandVideo className={'text-third-color text-xl'}/> Watch Tutorial</Button>
           </div>
         </div>
         <div className="mt-10">

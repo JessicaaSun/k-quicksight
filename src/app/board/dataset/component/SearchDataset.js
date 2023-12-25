@@ -8,6 +8,7 @@ import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { setFiles } from "@/store/features/files/fileSlice";
 import { SearchIcon } from "@/app/board/doc/searchIcons";
+import SearchFieldKQS from "@/components/buttons/SearchField";
 
 const SearchDataset = () => {
   const [searchValue, setValueSearch] = useState("");
@@ -26,17 +27,12 @@ const SearchDataset = () => {
   }, [searchValue, dispatch, setAllFiles]);
 
   return (
-    <Input
-      color={"primary"}
-      startContent={<SearchIcon />}
-      classNames={{
-        inputWrapper: [
-          "h-[50px] w-full bg-white shadow-sm border-1 border-gray-400 rounded-full",
-        ],
-      }}
-      onValueChange={setValueSearch}
-      value={searchValue}
+    <SearchFieldKQS
+      onChange={(e) => setValueSearch(e.target.value)}
       placeholder={"Search"}
+      value={searchValue}
+      width={"100%"}
+      height="45px"
     />
   );
 };

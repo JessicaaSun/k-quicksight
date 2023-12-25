@@ -175,6 +175,7 @@ const Tutorial = () => {
               <div className=" flex justify-end">
                 <SelectButton
                   rounded={"xl"}
+                  height="36px"
                   color={"primary-color"}
                   clickAction={console.log("Please integrate with API")}
                   disabled={isSubmitting}

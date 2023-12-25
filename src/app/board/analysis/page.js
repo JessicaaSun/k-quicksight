@@ -1,8 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
-import { Input, Spinner, useDisclosure } from "@nextui-org/react";
-
+import {
+  Input,
+  Select,
+  SelectItem,
+  Spinner,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useAllAnalysisFileQuery } from "@/store/features/analysis/analysisApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useRouter } from "next/navigation";
@@ -10,10 +15,8 @@ import AddNewButton from "./components/NewVersion/ModalAddNew";
 import AnalysisCard from "../components/cards/AnalysisCard";
 import EmptyAnalysis from "../components/cards/emptyAnalysis";
 import DashboardCard from "@/app/board/components/cards/DashboardCard";
-import { FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Select } from "antd";
-import { AiOutlineSearch } from "react-icons/ai";
+import { SearchIcon } from "../doc/searchIcons";
+import SearchFieldKQS from "@/components/buttons/SearchField";
 const Page = () => {
   const { data: user } = useGetUserQuery();
   const [search, setSearch] = useState("");
@@ -55,53 +58,47 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className={"flex relative gap-5 items-center"}>
-          <div className="absolute z-40 inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <AiOutlineSearch
-              size={20}
-              className="text-gray-400 font-semibold"
-            />
-          </div>
-          <input
-            id="searchQueryInput"
-            type="text"
-            name="searchQueryInput"
-            placeholder="Search"
-            className="w-[40%] h-[35px] bg-slate-50 outline-third-color outline-1  border-[1px] border-gray-300 rounded-3xl px-9 text-base"
-            value={search}
+        <div className={"flex dark:text-white gap-5 items-center"}>
+          <SearchFieldKQS
             onChange={(e) => setSearch(e.target.value)}
+            placeholder={"Search"}
+            value={search}
+            width={"40%"}
+            height="45px"
           />
           <Select
-            labelInValue={"Size filter"}
-            size={"medium"}
-            defaultValue="100"
-            style={{
-              width: 100,
-            }}
+            aria-label={"Size Filter"}
+            size={"sm"}
+            color={"primary"}
+            shadow={false}
+            className={"w-[100px] bg-white dark:text-white shadow-none"}
+            defaultSelectedKeys={["all"]}
             onChange={handleChange}
-            options={[
-              {
-                value: "100000",
-                label: "All",
-              },
-              {
-                value: 1,
-                label: 1,
-              },
-              {
-                value: 10,
-                label: 10,
-              },
-              {
-                value: 300,
-                label: 300,
-              },
-              {
-                value: 400,
-                label: 400,
-              },
-            ]}
-          />
+            variant={"bordered"}
+          >
+            <SelectItem
+              className="dark:text-white"
+              key={"all"}
+              value={1000000}
+            >
+              All
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={1} value={1}>
+              1
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={10} value={10}>
+              10
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={20} value={20}>
+              20
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={50} value={50}>
+              50
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={100} value={100}>
+              100
+            </SelectItem>
+          </Select>
         </div>
         {allAnalysis?.results.length === 0 ? (
           <EmptyAnalysis isAnalysis={true} />

@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/features/auth/authSlice";
 import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
 import Loading from "./loading";
-import {MdOutlineOndemandVideo} from "react-icons/md";
+import { MdOutlineOndemandVideo } from "react-icons/md";
 
 export default function Home() {
   const router = useRouter();
@@ -45,10 +45,12 @@ export default function Home() {
     <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
         <div className="flex flex-col gap-3 w-full">
-          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold">
+          <div className=" lg:text-5xl md:text-4xl text-[28px] font-bold">
             <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
-              <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
+              <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text whitespace-pre text-transparent">
+                K-QuickSight
+              </span>
             </p>
           </div>
           <p className="text-description-color text-lg dark:text-white">
@@ -58,14 +60,16 @@ export default function Home() {
           </p>
           <div className="w-full pt-6 flex max-sm:gap-3 sm:gap-3 gap-5">
             {!user ? (
-              <Button size={'lg'}
+              <Button
+                size={"lg"}
                 onClick={() => router.push("/auth/login")}
                 className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color dark:bg-third-color text-white"
               >
                 Get started
               </Button>
             ) : (
-              <Button size={'lg'}
+              <Button
+                size={"lg"}
                 onClick={() => router.push("/board/dataset")}
                 className="md:w-[184px]  max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
@@ -73,10 +77,15 @@ export default function Home() {
               </Button>
             )}
 
-
             <Button
-                className={'font-semibold text-text-color dark:text-white'}
-                onClick={() => router.push("/tutorials")} size={'lg'} variant={'bordered'}><MdOutlineOndemandVideo className={'text-third-color text-xl'} /> Watch Tutorial</Button>
+              className={"font-semibold text-text-color dark:text-white"}
+              onClick={() => router.push("/tutorials")}
+              size={"lg"}
+              variant={"bordered"}
+            >
+              <MdOutlineOndemandVideo className={"text-third-color text-xl"} />{" "}
+              Watch Tutorial
+            </Button>
           </div>
         </div>
         <div className="mt-10">
@@ -90,7 +99,7 @@ export default function Home() {
         </div>
       </section>
       <section className="bg-secondary-color dark:bg-dark-bg min-w-full px-10 py-20">
-        <h2  className="text-third-color text-center">
+        <h2 className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
         <div>

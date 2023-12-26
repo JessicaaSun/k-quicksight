@@ -55,5 +55,10 @@
     "swiper": "^11.0.3",
     "tailwindcss": "3.3.2",
     "yup": "^1.2.0"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

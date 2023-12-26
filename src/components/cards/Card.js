@@ -110,7 +110,7 @@ export default function Card_Why() {
   ];
 
   return (
-    <div className="lg:flex md:block gap-12 justify-center items-center mt-8">
+    <div className="lg:flex md:block gap-12 justify-center items-center mt-8" data-aos="zoom-in-down" data-aos-duration='1000'>
       {data.map((item) => (
         <div
           key={item.id}

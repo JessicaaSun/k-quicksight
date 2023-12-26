@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import ExistingDatasetTable from "../importData/ExistingDatasetTable";
 import UploadDataSetDashboard from "../importData/UploadDataSet";
 
-const CreateNewDashModal = ({ isOpen, onOpenChange, onClose, size }) => {
+const CreateNewDashModal = ({ isOpen, onOpenChange, onClose, size, isAnalysis }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -25,8 +25,8 @@ const CreateNewDashModal = ({ isOpen, onOpenChange, onClose, size }) => {
                   "flex flex-row mb-12 mt-8 justify-center items-center gap-10"
                 }
               >
-                <UploadDataSetDashboard />
-                <ExistingDatasetTable />
+                <UploadDataSetDashboard isAnalysis={isAnalysis}/>
+                <ExistingDatasetTable isAnalysis={isAnalysis}/>
               </div>
             </ModalBody>
           </>

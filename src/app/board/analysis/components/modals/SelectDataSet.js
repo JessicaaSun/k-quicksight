@@ -80,15 +80,15 @@ const Dataset = () => {
 
     const filesToShow = allFile?.slice(startIdx, endIdx) || [];
     return (
-        <div className={"px-5"}>
-            <div className={" flex flex-col gap-8"}>
+        <div className={"w-full px-5"}>
+            <div className={"w-full flex flex-col gap-8"}>
                 <div className={"flex justify-between items-center"}>
                     <p className={"text-2xl text-text-color font-semibold"}>
                         Pick a dataset to use in your analysis
                     </p>
                 </div>
 
-                <div className={"flex flex-col gap-3"}>
+                <div className={"flex w-full flex-col gap-3"}>
                     <SearchDataset />
                     <DropDown />
                 </div>

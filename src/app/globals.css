@@ -51,6 +51,25 @@ body {
     transform: translateY(-50px)
   }
 }
+/* Light mode styles */
+.ant-tabs .ant-tabs-tab-btn {
+  color: #0346a5;
+}
+
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active {
+  color: darkblue;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .ant-tabs .ant-tabs-tab-btn {
+    color: #ffffff;
+  }
+
+  .ant-tabs .ant-tabs-tab.ant-tabs-tab-active {
+    color: #ffffff;
+  }
+}
 
 
 ::-webkit-scrollbar {

@@ -183,17 +183,11 @@ export default function VerifyCode({ callback, reset, isLoading }) {
                         className={"w-full text-[18px] bg-primary-color dark:bg-third-color text-white"}
                         onClick={dataCode}
                     >
-                        Register
+                        Verify
                     </Button>
                     <div className={"mt-4 flex justify-center items-center"}>
                         <p className="text-[18px] dark:text-white">or</p>
                     </div>
-                    <Button
-                        variant="bordered"
-                        className={"mt-2 w-full text-[18px] dark:text-third-color text-primary-color"}
-                    >
-                        Sign up again
-                    </Button>
                     <div className={"flex mt-4 dark:text-white"}>
                         <p>Already have an account?</p>
                         <p

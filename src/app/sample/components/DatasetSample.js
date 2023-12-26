@@ -7,9 +7,10 @@ import { setSampleFilename } from "@/store/features/sampleDataset/Dataset";
 import FileType from "@/app/board/dataset/component/DropDown";
 import { MdOutlineAutoGraph } from "react-icons/md";
 import TableData from "@/lib/table/Table";
-import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import SearchFieldKQS from "@/components/buttons/SearchField";
+import { useGetAllSampleDataQuery } from "@/store/features/sampleDataset/datasetSampleApiSlice";
+import Loading from "@/app/loading";
 
 const DatasetSample = () => {
   const dispatch = useDispatch();
@@ -17,17 +18,16 @@ const DatasetSample = () => {
   const [isSample, setSample] = useState(false);
   const filType = useSelector((state) => state.fileType.fileType);
   const [filename, setFilename] = useState("");
-  //TODO change to sample dataset once api is ready
-  const { data: allFile, isLoading: isFileLoading } = useGetAllFilesQuery({
-    id: user?.data.id,
-    filename: filename,
-    type: filType,
-  });
+  const { data: allFile, isLoading: isFileLoading } =
+    useGetAllSampleDataQuery();
 
   useEffect(() => {
     dispatch(setSampleFilename(filename));
   }, [dispatch, filename]);
 
+  if (isFileLoading) {
+    return <Loading />;
+  }
   return (
     <div className={"grid gap-5 w-full"}>
       <SearchFieldKQS
@@ -49,7 +49,7 @@ const DatasetSample = () => {
         <MdOutlineAutoGraph />
         Trending dataset
       </div>
-      <TableData file={allFile} />
+      <TableData isSample={true} file={allFile?.results} />
     </div>
   );
 };

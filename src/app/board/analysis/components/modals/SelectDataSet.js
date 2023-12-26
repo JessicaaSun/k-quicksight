@@ -11,6 +11,7 @@ import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import TableDataSet from "@/app/board/analysis/components/tables/TableDataSet";
 import ImportExistDataset from "@/app/board/doc/components/ImportExistDataset";
 import {Pagination, Select, SelectItem} from "@nextui-org/react";
+import { flatten } from "@/lib/siteConfig";
 export const headers = [
     {
         header: "Title",
@@ -94,7 +95,7 @@ const Dataset = () => {
                 </div>
                 <div className={"w-full max-h-[550px] overflow-y-scroll "}>
                     <TableDataSet
-                        isSample={isSample}
+                        isSample={false}
                         file={filesToShow}
                         isFileLoading={isFileLoading}
                         sample_dataset={sample_dataset}

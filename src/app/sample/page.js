@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Tabs } from "antd";
-import sampleImage from "@assets/images/sampleSide.png";
+import sampleImage from "@assets/images/sampleImg.png";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
 import { FaPlus } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useRouter } from "next/navigation";
 import JupyterFiles from "@/app/sample/components/JupyterFiles";
 import DatasetSample from "./components/DatasetSample";
+import AnalysisSample from "./components/AnalysisSample";
 
 const items = [
   {
@@ -25,7 +26,7 @@ const items = [
   {
     key: "3",
     label: "Analysis",
-    children: "Analysis will be latter!",
+    children: <AnalysisSample/>,
   },
   {
     key: "4",
@@ -54,9 +55,11 @@ const SampleDataset_main = () => {
       <div className={"lg:flex md:flex block justify-between items-center"}>
         <div className={"w-full grid gap-4"}>
           <h1 className={"text-primary-color dark:text-third-color"}>Sample</h1>
-          <p className={"text-description-color dark:text-white/80"}>
-            Explore, analyze, and share quality data. Learn more about data
-            types, creating, and collaborating.
+          <p className={"text-description-color md:text-lg max-sm:text-base sm:text-base dark:text-white/80"}>
+            we provide a rich array of resources for data enthusiasts. Explore
+            curated datasets, delve into comprehensive analyses, engaging
+            dashboard and experiment with interactive Jupyter notebooks. Start
+            your data journey with us today!
           </p>
           <Button
             onClick={handleRouteAddNewDataset}

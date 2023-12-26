@@ -27,7 +27,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: '#gettingStart',
+
       title: "Getting started with K-QuickSight",
       description:
         "Gain insights from your data by accessing your step-by-step guide.",
@@ -64,7 +64,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: '/tutorials',
+      url: "/tutorials",
       title: "Guideline",
       description:
         "We will provide document for the you do know insight all of our service.",
@@ -101,7 +101,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: 'https://t.me/+qB5Xy2CmaJswMzll',
+      url: "https://t.me/+qB5Xy2CmaJswMzll",
       title: "Join community",
       description:
         "Become part of a community by joining and connecting with like-minded individuals who share common interests and goals.",
@@ -123,41 +123,95 @@ export default function GetStart_boxs() {
     },
   ];
 
+  const handleScrollToStart = () => {
+    const element = document.getElementById("gettingStart");
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col max-sm:gap-14 sm:gap-14 gap-36">
-      {data.map((item, index) => (
-        <Link href={item.url}
-          key={index}
-          className={`lg:flex md:flex justify-center items-center gap-10 ${
-            index === 1 ? "flex-row-reverse" : ""
-          } hover:scale-105 transition-all`}
-              data-aos="zoom-in-down"
-        >
-          <div className="mb-5">{item.out_number}</div>
-          <div
-            className={`lg:min-w-[980px] relative px-10 py-5 gap-10 bg-primary-color lg:min-h-[183px] ${
-              index === 1 ? " flex-row-reverse text-right" : ""
-            } rounded-3xl lg:flex justify-start items-center`}
+    <div className="lg:px-[10%] md:px-5 px-3 lg:py-20 md:py-8 max-sm:py-5 sm:py-5 flex flex-col max-sm:gap-14 sm:gap-14 gap-36">
+      {data.map((item, index) =>
+        item.url ? (
+          <Link
+            href={item?.url}
+            key={index}
+            className={`lg:flex md:flex justify-center items-center gap-10 ${
+              index === 1 ? "flex-row-reverse" : ""
+            } hover:scale-105 transition-all`}
+            data-aos="zoom-in-down"
           >
+            <div className="mb-5">{item.out_number}</div>
             <div
-              className={`${
-                index === 1
-                  ? "-left-40 top-7 -scale-x-100 w-[420px]"
-                  : index === 0
-                  ? "-right-32 -top-40 w-[420px]"
-                  : "-right-32 top-20 w-[320px]"
-              } lg:absolute md:hidden lg:block hidden`}
+              className={`lg:min-w-[980px] relative px-10 py-5 gap-10 bg-primary-color lg:min-h-[183px] ${
+                index === 1 ? " flex-row-reverse text-right" : ""
+              } rounded-3xl lg:flex justify-start items-center`}
             >
-              <Image src={item.out_image} unoptimized={true} alt={item.out_image} />
+              <div
+                className={`${
+                  index === 1
+                    ? "-left-40 top-7 -scale-x-100 w-[420px]"
+                    : index === 0
+                    ? "-right-32 -top-40 w-[420px]"
+                    : "-right-32 top-20 w-[320px]"
+                } lg:absolute md:hidden lg:block hidden`}
+              >
+                <Image
+                  src={item.out_image}
+                  unoptimized={true}
+                  alt={item.out_image}
+                />
+              </div>
+              <div>{item.svg}</div>
+              <div className="lg:mt-0 md:mt-0 mt-5 flex flex-col gap-2">
+                <h3 className="text-background-color">{item.title}</h3>
+                <p className="text-background-color">{item.description}</p>
+              </div>
             </div>
-            <div>{item.svg}</div>
-            <div className="lg:mt-0 md:mt-0 mt-5 flex flex-col gap-2">
-              <h3 className="text-background-color">{item.title}</h3>
-              <p className="text-background-color">{item.description}</p>
+          </Link>
+        ) : (
+          <div
+            onClick={handleScrollToStart}
+            key={index}
+            className={`lg:flex md:flex justify-center items-center gap-10 ${
+              index === 1 ? "flex-row-reverse" : ""
+            } hover:scale-105 transition-all`}
+            data-aos="zoom-in-down"
+          >
+            <div className="mb-5">{item.out_number}</div>
+            <div
+              className={`lg:min-w-[980px] relative px-10 py-5 gap-10 bg-primary-color lg:min-h-[183px] ${
+                index === 1 ? " flex-row-reverse text-right" : ""
+              } rounded-3xl lg:flex justify-start items-center`}
+            >
+              <div
+                className={`${
+                  index === 1
+                    ? "-left-40 top-7 -scale-x-100 w-[420px]"
+                    : index === 0
+                    ? "-right-32 -top-40 w-[420px]"
+                    : "-right-32 top-20 w-[320px]"
+                } lg:absolute md:hidden lg:block hidden`}
+              >
+                <Image
+                  src={item.out_image}
+                  unoptimized={true}
+                  alt={item.out_image}
+                />
+              </div>
+              <div>{item.svg}</div>
+              <div className="lg:mt-0 md:mt-0 mt-5 flex flex-col gap-2">
+                <h3 className="text-background-color">{item.title}</h3>
+                <p className="text-background-color">{item.description}</p>
+              </div>
             </div>
           </div>
-        </Link>
-      ))}
+        )
+      )}
     </div>
   );
 }

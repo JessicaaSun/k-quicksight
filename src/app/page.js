@@ -15,7 +15,7 @@ import { setCredentials } from "@/store/features/auth/authSlice";
 import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
 import Loading from "./loading";
 import { MdOutlineOndemandVideo } from "react-icons/md";
-import GettingStart from "@/components/gettingStart/GettingStart";
+import GettingStart from "@/components/home/GettingStart";
 
 export default function Home() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function Home() {
     }
   }, [dispatch, loginWithGoogle, session]);
   return (
-    <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
+    <main className="pt-24 flex flex-col lg:gap-20 max-sm:gap-0 sm:gap-0  overflow-x-hidden">
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
         <div
           className="flex flex-col gap-3 w-full"
@@ -112,19 +112,19 @@ export default function Home() {
           <Card_Why />
         </div>
       </section>
-      <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
+      <section className="w-full md:pt-10 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
         <h2 className="text-primary-color dark:text-white font-bold text-center">
-          Beginning with K-QuickSight
+          Begin Your Adventure
         </h2>
-        <p className={'text-description-color font-normal text-center my-3 text-lg'}>Starting with K-QuickSight, the new product of data analytics field. </p>
+        <p className={'text-description-color font-normal text-center dark:text-white my-3 text-lg'}>Starting with K-QuickSight, the new product of data analytics field. </p>
         <GetStart_boxs />
       </section>
 
-      <section id={'gettingStart'} className={'w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8'}>
-        <h2 className={'my-16 text-center text-primary-color'}>Getting start with <span className={'text-secondary-color'}>K-Quicksight</span></h2>
+      <section id={'gettingStart'} className={'w-full'}>
+        <h2 className={'my-16 text-center dark:text-white text-primary-color'}>Getting Started with <span className={'text-secondary-color dark:text-white'}>K-Quicksight</span></h2>
         <GettingStart />
       </section>
-
+        
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>

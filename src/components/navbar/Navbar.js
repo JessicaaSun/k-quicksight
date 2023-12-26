@@ -86,6 +86,13 @@ export default function NavbarKQuick() {
     "/testing",
     "/board",
   ];
+  const handleMenuItemClick = (path) => {
+    setIsMenuOpen(false);
+    console.log(isMenuOpen)
+    setTimeout(() => {
+      router.push(path);
+    }, 100);
+  };
 
   if (validNavPath.some((path) => pathname.startsWith(path))) return null;
   else
@@ -130,15 +137,14 @@ export default function NavbarKQuick() {
               </NavbarBrand>
             </NavbarContent>
             <NavbarMenu className="py-[50px] mt-[50px]">
-              <ThemeSwitcher />
               {menuItems.map((item) => (
-                <Link
-                  href={item.path}
+                <div
                   key={item.id}
-                  className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
+                  onClick={() => handleMenuItemClick(item.path)}
+                  className="hover:text-primary-color dark:hover:text-primary-color dark:text-white font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all cursor-pointer"
                 >
                   {item.page}
-                </Link>
+                </div>
               ))}
             </NavbarMenu>
           </Navbar>

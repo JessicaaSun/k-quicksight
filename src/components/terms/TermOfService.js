@@ -16,7 +16,7 @@ const TermOfService = () => {
           />
           <h1
             className={
-              "flex-col whitespace-nowrap xl:py-20 xl:text-4xl md:py-10 md:text-3xl text-3xl max-sm:py-0 sm:py-0 py-9 text-primary-color"
+              "flex-col whitespace-nowrap dark:text-white xl:py-20 xl:text-4xl md:py-10 md:text-3xl text-3xl max-sm:py-0 sm:py-0 py-9 text-primary-color"
             }
           >
             K-Quick
@@ -30,14 +30,14 @@ const TermOfService = () => {
           </h1>
         </div>
       </div>
-      <div className={"flex md:pt-0 max-sm:pt-7 sm:pt-7 flex-col "}>
-        <h2 className={"text-text-color md:text-3xl text-2xl"}>
+      <div className={"flex md:pt-0 max-sm:pt-7 dark:text-white sm:pt-7 flex-col "}>
+        <h2 className={"text-text-color dark:text-white md:text-3xl text-2xl"}>
           Term of Service and Privacy Policy
         </h2>
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg dark:text-white text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Introduction
         </h5>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           Welcome to K-QuickSight, a cutting-edge online service provided free
           of charge at k-quicksight.com. Our platform empowers users to unleash
           the power of data visualization and analysis through versatile
@@ -45,39 +45,39 @@ const TermOfService = () => {
           to providing an exceptional experience without any associated costs.
         </p>
 
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg dark:text-white text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Account Types
         </h5>
-        <li className={"text-description-color pt-3"}>
+        <li className={"text-description-color dark:text-white pt-3"}>
           Free Accounts: All-encompassing access to the platform&apos;s features
           without any financial commitment.
         </li>
 
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg text-text-color dark:text-white md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Creating an Account
         </h5>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           To register, you must be at least 18 years old, possessing the
           authority and right to use personal or confidential information in
           your projects. It&apos;s your responsibility to ensure eligibility
           before registering. By registering, you confirm meeting these minimum
           criteria.
         </p>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           Provide an accurate, updated email address for registration. You are
           accountable for the information provided and must promptly update
           account details for any changes.
         </p>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           Approval for registration is at our discretion, and we reserve the
           right to decline applications without providing a reason. Upon
           approval, you will receive a notification from us.
         </p>
 
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg text-text-color dark:text-white md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Username and password
         </h5>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           Upon registering for an account, you will be required to create a
           username and password. Safeguard your password confidentially and
           exclusively utilize it for accessing and managing your account,
@@ -90,13 +90,13 @@ const TermOfService = () => {
           you remain obligated to us.
         </p>
 
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg text-text-color dark:text-white md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Our Service
         </h5>
-        <p className={"text-text-color text-[17px] font-medium pt-4"}>
+        <p className={"text-text-color text-[17px] dark:text-white font-medium pt-4"}>
           Creating and Managing Data Insights
         </p>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           To harness the capabilities of K-Quicksight, users can delve into a
           myriad of features tailored for data analysis, visualization in
           dashboards, exploratory data analysis (EDA), data cleansing, and
@@ -104,10 +104,10 @@ const TermOfService = () => {
           K-Quicksight account, granting you access to a suite of powerful tools
           designed to elevate your data-related endeavors.
         </p>
-        <p className={"text-text-color text-[17px] font-medium pt-4"}>
+        <p className={"text-text-color dark:text-white text-[17px] font-medium pt-4"}>
           Analysis and Visualization
         </p>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white  pt-3"}>
           To harness the capabilities of K-Quicksight, users can delve into a
           myriad of features tailored for data analysis, visualization in
           dashboards, exploratory data analysis (EDA), data cleansing, and
@@ -115,10 +115,10 @@ const TermOfService = () => {
           K-Quicksight account, granting you access to a suite of powerful tools
           designed to elevate your data-related endeavors.
         </p>
-        <p className={"text-text-color text-[17px] font-medium pt-4"}>
+        <p className={"text-text-color dark:text-white text-[17px] font-medium pt-4"}>
           Unacceptable content
         </p>
-        <p className={"text-description-color pt-4"}>
+        <p className={"text-description-color dark:text-white pt-4"}>
           By importing a dashboard or creating a dashboard on the Site, you
           confirm that your dashboards or projects do not contain, transmit,
           distribute, link to, or otherwise make available, or advertise or
@@ -148,10 +148,10 @@ const TermOfService = () => {
           </span>
         </p>
 
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg text-text-color dark:text-white md:pt-7 max-sm:pt-3 sm:pt-3"}>
           Intellectual Property
         </h5>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           Any intellectual property you upload to the K-quicksight Site, such as
           data, text, or dashboard you create, remains your property. You agree
           to protect K-quicksight and its affiliates from any losses, damages,
@@ -160,7 +160,7 @@ const TermOfService = () => {
           intellectual property rights or other rights. This includes any fonts
           or other materials you provide to us for uploading.
         </p>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           All intellectual property rights in the Site itself, including text,
           graphics, software, images, videos, sounds, trademarks, and logos, are
           owned by K-quicksight or its licensors. We also own the intellectual
@@ -168,10 +168,10 @@ const TermOfService = () => {
           specifically commissioned and created for private customers, which are
           subject to separate intellectual property agreements.
         </p>
-        <h5 className={"text-lg text-text-color md:pt-7 max-sm:pt-3 sm:pt-3"}>
+        <h5 className={"text-lg text-text-color dark:text-white md:pt-7 max-sm:pt-3 sm:pt-3"}>
           License to Use K-quicksight
         </h5>
-        <p className={"text-description-color pt-3"}>
+        <p className={"text-description-color dark:text-white pt-3"}>
           We grant you a non-exclusive, non-transferable worldwide license to
           use the Site and its contents (including any dashboards we create and
           make available to you) for the duration of your subscription or, for

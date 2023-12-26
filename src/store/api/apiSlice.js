@@ -66,6 +66,7 @@ export const apiSlice = createApi({
     "User",
     "UploadSingle",
     "data",
+    'tutorial',
     "RequestTutorial",
     "dashboard",
     "files",

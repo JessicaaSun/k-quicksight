@@ -228,7 +228,7 @@ const SignUpForm = () => {
               <span>
                 Check and read{" "}
                 <Link
-                  href={"/auth/confirmation"}
+                  href={"/terms"}
                   target={"_blank"}
                   className={
                     "text-secondary-color font-semibold hover:underline"

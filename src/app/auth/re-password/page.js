@@ -8,12 +8,14 @@ import {useSelector} from "react-redux";
 import {MdOutlineResetTv, MdRemoveRedEye} from "react-icons/md";
 import {useChangePasswordMutation} from "@/store/features/user/userApiSlice";
 import {toast} from "react-toastify";
+import { useRouter } from 'next/navigation';
 
 const RePassword = () => {
     const [password, setPassword] = useState();
     const [con_password, setCon_password] = useState();
     const email = useSelector((state) => state.auth.email);
     const token = useSelector((state) => state.codeInfo.codeInfo);
+    const route = useRouter(); 
     const [error, setError] = useState({
         password: '',
         con_password: ''
@@ -39,6 +41,9 @@ const RePassword = () => {
                 }));
             } else {
                 toast.success('Password has been change')
+                setTimeout(() =>{
+                    route.push('/auth/login')
+                }, 2000)
             }
         }
         else if (

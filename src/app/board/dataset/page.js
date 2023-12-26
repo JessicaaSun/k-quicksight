@@ -101,6 +101,7 @@ const Dataset = () => {
           file={allFile}
           isFileLoading={isFileLoading}
           headers={headers}
+          isSample={false}
         />
       </div>
     </div>

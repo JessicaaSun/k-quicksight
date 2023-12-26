@@ -45,11 +45,11 @@ const Dropdown_table = ({
     },
 
     {
-      key: "4",
+      key: "3",
       label: <ShareMember filename={filename} fileId={fileId} list={true} />,
     },
     {
-      key: "5",
+      key: "4",
       label: (
         <a
           href={`${process.env.NEXT_PUBLIC_BASE_URL}files/download/${file}/`}
@@ -75,7 +75,7 @@ const Dropdown_table = ({
       ),
     },
     {
-      key: "3",
+      key: "6",
       label: (
         <DeleteButton
           uuid={uuid}

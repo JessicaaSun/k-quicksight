@@ -14,7 +14,7 @@ const Correlation = ({ data, dependentVariable, independentVariable }) => {
     <div>
       <div>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300">
+          <table className="min-w-full bg-white border border-gray-300 dark:text-black">
             <thead>
             <tr>
               <th className="py-2 px-4 border-b"></th>

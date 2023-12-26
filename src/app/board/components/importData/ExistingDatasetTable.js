@@ -22,8 +22,9 @@ import SelectButton from "@/components/buttons/SelectButton";
 import { toast } from "react-toastify";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useCreateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
+import SearchFieldKQS from "@/components/buttons/SearchField";
 
-const ExistingDatasetTable = () => {
+const ExistingDatasetTable = ({ isAnalysis }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const [datasetName, setDatasets] = useState("");
@@ -39,22 +40,34 @@ const ExistingDatasetTable = () => {
   });
 
   const handleSelectDataSet = async () => {
-    
     try {
-      let body;
-      body = {
+      if (!selectedFileUuid) {
+        toast.error("No file selected.");
+        return;
+      }
+
+      let body = {
         created_by: user?.data?.id,
         file_uuid: selectedFileUuid,
       };
       const responseDashboard = await createDashboard({ data: body });
-      
+
       isLoading(true);
       router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
-    } catch {
+    } catch (error) {
       if (!error.response) {
-        toast.error("No file selected.");
+        toast.error("An error occurred while creating the dashboard.");
       }
     }
+  };
+
+  const handleProcessAnalysis = () => {
+    if (!selectedFileUuid) {
+      toast.error("No file selected.");
+      return;
+    }
+    isLoading(true);
+    router.push(`/board/analysis/new/${selectedFileUuid}`);
   };
 
   return (
@@ -68,41 +81,43 @@ const ExistingDatasetTable = () => {
       </Button>
       <Modal
         size="2xl"
-        className="max-h-[400px] min-h-[400px] overflow-auto"
+        className="max-h-[400px] w-full min-h-[400px] overflow-hidden" // Use overflow-hidden
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex text-xl dark:text-white text-text-color flex-col gap-1">
+              <ModalHeader className="flex w-full text-xl dark:text-white text-text-color flex-col gap-1">
                 Importing dataset
               </ModalHeader>
               <ModalBody>
-                <div className="flex justify-normal mb-2 items-center gap-3">
-                  <input
-                    id="searchQueryInput"
-                    type="text"
-                    name="searchQueryInput"
-                    placeholder="Search"
-                    className="w-full h-[38px] bg-slate-50 outline-hover-primary outline-1 outline-offset-1 border-[1px] border-gray-300 rounded-full px-6 text-base"
-                    value={datasetName}
+                <div className="flex w-full justify-normal mb-2 items-center gap-3 sticky top-0 bg-white z-10">
+                  <SearchFieldKQS
                     onChange={(e) => setDatasets(e.target.value)}
+                    placeholder={"Search dataset..."}
+                    value={datasetName}
+                    height="45px"
                   />
                   <SelectButton
-                    rounded={"full"}
+                    rounded={"lg"}
+                    height="45px"
                     color={"primary-color"}
                     text={"Select"}
                     hover={"hover-primary"}
-                    clickAction={handleSelectDataSet}
+                    clickAction={
+                      isAnalysis ? handleProcessAnalysis : handleSelectDataSet
+                    }
+                    disabled={!selectedFileUuid}
                   />
                 </div>
-                <ListAllFiles
-                  file={allFiles}
-                  isFileLoading={isFileLoading}
-                  onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
-                />
+                <div className="overflow-auto max-h-[350px]">
+                  <ListAllFiles
+                    file={allFiles}
+                    isFileLoading={isFileLoading}
+                    onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
+                  />
+                </div>
               </ModalBody>
             </>
           )}

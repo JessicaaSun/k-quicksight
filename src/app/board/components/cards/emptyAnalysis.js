@@ -7,7 +7,7 @@ const EmptyAnalysis = ({ isAnalysis }) => {
       <Image src={boxEmpty} unoptimized={true} alt={""} className={"w-96 "} />
       <p className={"text-primary-color dark:text-third-color font-semibold text-2xl"}>
         {isAnalysis
-          ? `You don't have any analysis,please click on "Create Analysis" button.`
+          ? `You don't have any analysis, please click on "Create Analysis" button.`
           : `You don't have any visualization dashboard, please click on "Create Dashboard" button.`}
       </p>
     </div>

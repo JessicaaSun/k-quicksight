@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col pt-[107px] justify-center h-screen items-center p-3">
       <Image src={img404} className="lg:w-1/3 md:w-2/3" alt="notfound" />
-      <div className="flex text-center text-text-color  pt-7 flex-col">
+      <div className="flex text-center dark:text-white  text-text-color  pt-7 flex-col">
         <h1 className="pb-5 max-sm:text-[24px]">
           Oppsie! Something&apos;s missing...
         </h1>

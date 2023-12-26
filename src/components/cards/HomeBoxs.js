@@ -101,7 +101,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: 'https://t.me/k_quicksight',
+      url: 'https://t.me/+qB5Xy2CmaJswMzll',
       title: "Join community",
       description:
         "Become part of a community by joining and connecting with like-minded individuals who share common interests and goals.",

@@ -14,7 +14,7 @@ const ShareToOther = () => {
 
     return (
         <div className={'pt-5'}>
-            <h3 className={'text-primary-color dark:text-third-color'}>Files share to other</h3>
+            <h3 className={'text-primary-color dark:text-third-color'}>Files Share to Other</h3>
             <div className={'pt-7'}>
                 <ShareTable file={useShareOther} />
             </div>

@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { logout, setCredentials, setCurrentUser } from "../features/auth/authSlice";
-import { getRefresh,getDecryptedRefresh } from "@/lib/cryptography";
+import {
+  logout,
+  setCredentials,
+  setCurrentUser,
+} from "../features/auth/authSlice";
+import { getRefresh, getDecryptedRefresh } from "@/lib/cryptography";
 
 // create base query with authentication
 const baseQuery = fetchBaseQuery({
@@ -24,8 +28,8 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
         // Try refreshing the token
         const refreshResult = await baseQuery(
           {
-            url: '/accounts/token/refresh/',
-            method: 'POST',
+            url: "/accounts/token/refresh/",
+            method: "POST",
             body: { refresh },
           },
           api,
@@ -58,6 +62,16 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
 // create api slice with custom base query
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["User", "UploadSingle","RequestTutorial","dashboard", "files","visualize", "analysis", "editorImage"], // tagTypes are used for cache invalidation
+  tagTypes: [
+    "User",
+    "UploadSingle",
+    "data",
+    "RequestTutorial",
+    "dashboard",
+    "files",
+    "visualize",
+    "analysis",
+    "editorImage",
+  ], // tagTypes are used for cache invalidation
   endpoints: (builder) => ({}),
 });

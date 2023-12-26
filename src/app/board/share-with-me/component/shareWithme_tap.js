@@ -10,7 +10,7 @@ const ShareWithmeTap = () => {
     const {data:useShareWithMe, refetch: shareMeRefetch} = useShareWithMeQuery({ownerId: user?.data.id});
     return (
         <div className={'pt-5'}>
-            <h3 className={'text-primary-color pb-7 dark:text-third-color'}>Files shared with you</h3>
+            <h3 className={'text-primary-color pb-7 dark:text-third-color'}>Files Shared with You</h3>
             <ShareTable file={useShareWithMe} />
         </div>
     );

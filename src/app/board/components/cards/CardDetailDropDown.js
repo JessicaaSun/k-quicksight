@@ -207,6 +207,7 @@ const CardDetailDropDown = ({
                 <SelectButton
                   rounded={"xl"}
                   color={"primary-color"}
+                  height="36px"
                   text={"Cancel"}
                   hover={"hover-primary"}
                   clickAction={onDeleteClose}

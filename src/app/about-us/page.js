@@ -11,9 +11,9 @@ import SeangLeng from "@assets/teams/seangleng.png";
 import Sophearum from "@assets/teams/phearum.png";
 import Link from "next/link";
 import { Tooltip } from "@nextui-org/react";
-import logo from '@assets/logos/logo.png'
-import {FaFacebook, FaGithub} from "react-icons/fa6";
-import {GrInstagram} from "react-icons/gr";
+import logo from "@assets/logos/logo.png";
+import { FaFacebook, FaGithub } from "react-icons/fa6";
+import { GrInstagram } from "react-icons/gr";
 
 export default function AboutUs() {
   const data = [
@@ -78,8 +78,8 @@ export default function AboutUs() {
         "md:py-32 md:px-0 max-sm:px-8 sm:px-8 max-sm:pt-40 sm:pt-40 flex flex-col items-center"
       }
     >
-      <div className={"flex gap-5 justify-center items-center pt-10"} data-aos="fade-down">
-        <Image width={100} src={logo} alt={'logo'} />
+      <div data-aos="fade-down" className={"flex gap-5 max-sm:flex-col sm:flex-col md:flex-row justify-center items-center md:pt-7 max-sm:pt-7 sm:pt-0"}>
+        <Image width={100} unoptimized={true} height={100} className="md:w-[100px] max-sm:w-[200px] sm:w-[200px] h-auto" src={logo} alt={"logo"} />
         <h1
           className={
             "text-primary-color dark:text-third-color md:text-4xl max-sm:text-3xl sm:text-3xl capitalize"
@@ -94,8 +94,9 @@ export default function AboutUs() {
             "text-description-color dark:text-white/80 text-center mt-5 text-lg lg:w-1/2 md:w-2/3"
           }
         >
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout.
+          A dynamic data analytics platform designed to empower users with
+          powerful tools for data analysis, cleansing, visualization, and
+          decision-making.
         </p>
       </div>
       <Image
@@ -129,10 +130,12 @@ export default function AboutUs() {
               className={"lg:w-1/3 md:w-1/3"}
             />
             <div className={`${index === 1 ? "text-right" : " "} `}>
-              <h2 className={"text-primary-color dark:text-third-color"}>{e.title}</h2>
+              <h2 className={"text-primary-color dark:text-third-color"}>
+                {e.title}
+              </h2>
               <p
                 className={
-                  "mt-4 sm:text-lg dark:text-white/80 text-description-color md:text-xl lg:text-xls"
+                  "mt-4 sm:text-lg max-sm:text-lg dark:text-white/80 text-description-color lg:text-xl"
                 }
               >
                 {e.description}
@@ -151,6 +154,16 @@ export default function AboutUs() {
           Our mentors
         </p>
         <div className={"lg:flex w-full justify-center items-center"}>
+        <p
+            className={
+              "lg:hidden mt-5 text-center dark:text-white/80 text-lg text-description-color"
+            }
+          >
+            Meet the driving force behind our success.{" "}
+            <span className={"font-semibold"}>Our mentors</span> are experts in
+            data analysis and technology. They shape our vision, ensuring we
+            deliver excellence in data analytics
+          </p>
           <div
             className={
               "lg:flex md:flex justify-center items-center gap-5 mt-10"
@@ -159,26 +172,44 @@ export default function AboutUs() {
             <div className={"lg:w-1/3 sm:w-full md:w-2/3"}>
               <Image
                 src={Reksmey}
+                width={200}
+                height={200}
                 unoptimized={true}
+                className="w-full"
                 alt={"instructor RakSmey"}
               />
-              <h3 className={"text-center dark:text-white/80 my-5 text-text-color"}>
+              <h3
+                className={
+                  "text-center dark:text-white/80 my-5 text-text-color"
+                }
+              >
                 Ms. Mom Reksmey
               </h3>
             </div>
             <div className={"lg:w-1/3 sm:w-full md:w-2/3"}>
-              <Image src={tara} unoptimized={true} alt={"instructor Tara"} />
-              <h3 className={"text-center dark:text-white/80 my-5 text-text-color"}>
+              <Image
+                width={200}
+                height={200}
+                src={tara}
+                className="w-full"
+                unoptimized={true}
+                alt={"instructor Tara"}
+              />
+              <h3
+                className={
+                  "text-center dark:text-white/80 my-5 text-text-color"
+                }
+              >
                 Mr. Kit Tara
               </h3>
             </div>
           </div>
           <p
             className={
-              "lg:w-1/2 sm:w-full md:w-2/3 dark:text-white/80 text-lg text-description-color"
+              "lg:w-1/2 lg:block sm:hidden max-sm:hidden dark:text-white/80 text-lg text-description-color"
             }
           >
-            Meet the driving force behind our success.{" "}
+            Meet the driving force behind our success.
             <span className={"font-semibold"}>Our mentors</span> are experts in
             data analysis and technology. They shape our vision, ensuring we
             deliver excellence in data analytics
@@ -217,33 +248,45 @@ export default function AboutUs() {
               <div
                 className={"flex gap-[33px] justify-center items-center mt-5"}
               >
-                <Tooltip className={'bg-white'}  showArrow={true} content={`${e.name} facebook`}>
+                <Tooltip
+                  className={"bg-white"}
+                  showArrow={true}
+                  content={`${e.name} facebook`}
+                >
                   <Link
                     target="_blank"
                     href={e.facebook}
                     className={"hover:scale-110 transition-all dark:text-white"}
                   >
-                    <FaFacebook className={'text-2xl'} />
+                    <FaFacebook className={"text-2xl"} />
                   </Link>
                 </Tooltip>
 
-                <Tooltip className={'bg-white'}  showArrow={true} content={`${e.name} Instagram`}>
+                <Tooltip
+                  className={"bg-white"}
+                  showArrow={true}
+                  content={`${e.name} Instagram`}
+                >
                   <Link
                     target="_blank"
                     href={e.instagram}
                     className={"hover:scale-110 transition-all dark:text-white"}
                   >
-                    <GrInstagram className={'text-2xl'} />
+                    <GrInstagram className={"text-2xl"} />
                   </Link>
                 </Tooltip>
 
-                <Tooltip className={'bg-white'} showArrow={true} content={`${e.name} GitHub`}>
+                <Tooltip
+                  className={"bg-white"}
+                  showArrow={true}
+                  content={`${e.name} GitHub`}
+                >
                   <Link
                     target="_blank"
                     href={e.github}
                     className={"hover:scale-110 transition-all dark:text-white"}
                   >
-                    <FaGithub className={'text-2xl'} />
+                    <FaGithub className={"text-2xl"} />
                   </Link>
                 </Tooltip>
               </div>

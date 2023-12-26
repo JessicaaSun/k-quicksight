@@ -118,7 +118,7 @@ const Page = () => {
           color={"primary"}
           shadow={false}
           defaultSelectedKeys={["all"]}
-          className={"w-[100px] bg-white dark:text-white shadow-none"}
+          className={"w-[100px] dark:text-white shadow-none"}
           onChange={handleChangeSizeDash}
           variant={"bordered"}
         >

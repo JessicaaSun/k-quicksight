@@ -10,32 +10,32 @@ import { data } from "./mockdata";
 import {useRef, useState} from "react";
 
 export default function DeckCard() {
-  const swiperRef = useRef();
-  const [active,setActive] = useState(0)
-  const paginates = []
-  for (let i=0;i<data.length;i++){
-    paginates.push(<li key={i} onClick={() => swiperRef.current.slideTo(i)} className={"h-2 w-2 md:h-3 md:w-3 rounded-full hover:cursor-pointer " + (active===i?"bg-green-400 dark:bg-green-500":"bg-blue-800 dark:bg-blue-600")}></li>)
-  }
+  // const swiperRef = useRef();
+  // const [active,setActive] = useState(0)
+  // const paginates = []
+  // for (let i=0;i<data.length;i++){
+  //   paginates.push(<li key={i} onClick={() => swiperRef.current.slideTo(i)} className={"h-2 w-2 md:h-3 md:w-3 rounded-full hover:cursor-pointer " + (active===i?"bg-green-400 dark:bg-green-500":"bg-blue-800 dark:bg-blue-600")}></li>)
+  // }
   return (
     <Swiper
-      onSwiper={(swiper) => {
-        swiperRef.current = swiper;
-      }}
+      // onSwiper={(swiper) => {
+      //   swiperRef.current = swiper;
+      // }}
       // effect={"cards"}
       // grabCursor={true}
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      loop={true}
-      modules={[EffectCards,Navigation,Autoplay]}
-      // modules={[EffectCards]}
+      // autoplay={{
+      //   delay: 2500,
+      //   disableOnInteraction: false,
+      // }}
+      // loop={true}
+      // modules={[EffectCards,Navigation,Autoplay]}
+      modules={[EffectCards]}
       grabCursor={true}
       className="md:w-[600px] max-sm:w-[290px] sm:w-[400px] h-auto" 
       effect="cards"
-      onSlideChange={(swiper) => {
-        setActive(swiper.activeIndex)
-      }}
+      // onSlideChange={(swiper) => {
+      //   setActive(swiper.activeIndex)
+      // }}
 
     >
       {data.map((feedback, index) => (

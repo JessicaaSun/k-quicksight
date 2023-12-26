@@ -99,7 +99,7 @@ export default function AboutUs() {
         </p>
       </div>
       <Image
-        data-aos="fade-down"
+        data-aos="zoom-in-up"
         src="/assets/images/about-hero.png"
         unoptimized={true}
         width={820}

@@ -78,7 +78,7 @@ export default function AboutUs() {
         "md:py-32 md:px-0 max-sm:px-8 sm:px-8 max-sm:pt-40 sm:pt-40 flex flex-col items-center"
       }
     >
-      <div className={"flex gap-5 max-sm:flex-col sm:flex-col md:flex-row justify-center items-center md:pt-7 max-sm:pt-7 sm:pt-0"}>
+      <div data-aos="fade-down" className={"flex gap-5 max-sm:flex-col sm:flex-col md:flex-row justify-center items-center md:pt-7 max-sm:pt-7 sm:pt-0"}>
         <Image width={100} unoptimized={true} height={100} className="md:w-[100px] max-sm:w-[200px] sm:w-[200px] h-auto" src={logo} alt={"logo"} />
         <h1
           className={
@@ -88,7 +88,7 @@ export default function AboutUs() {
           about k-quicksight
         </h1>
       </div>
-      <div className={"flex justify-center items-center"}>
+      <div className={"flex justify-center items-center"} data-aos="fade-down">
         <p
           className={
             "text-description-color dark:text-white/80 text-center mt-5 text-lg lg:w-1/2 md:w-2/3"
@@ -100,6 +100,7 @@ export default function AboutUs() {
         </p>
       </div>
       <Image
+        data-aos="fade-down"
         src="/assets/images/about-hero.png"
         unoptimized={true}
         width={820}
@@ -117,6 +118,7 @@ export default function AboutUs() {
         {data.map((e, index) => (
           <div
             key={index}
+            data-aos={index % 2 === 0 ? "zoom-out-right" : "zoom-in-left"}
             className={`lg:flex w-full md:flex justify-center gap-16 items-center md:pt-10 lg:pt-0 ${
               index === 1 ? "flex-row-reverse" : ""
             }`}

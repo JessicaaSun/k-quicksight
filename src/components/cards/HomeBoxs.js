@@ -101,7 +101,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: 'https://t.me/k_quicksight',
+      url: 'https://t.me/+qB5Xy2CmaJswMzll',
       title: "Join community",
       description:
         "Become part of a community by joining and connecting with like-minded individuals who share common interests and goals.",
@@ -131,6 +131,7 @@ export default function GetStart_boxs() {
           className={`lg:flex md:flex justify-center items-center gap-10 ${
             index === 1 ? "flex-row-reverse" : ""
           } hover:scale-105 transition-all`}
+              data-aos="zoom-in-down"
         >
           <div className="mb-5">{item.out_number}</div>
           <div
@@ -191,6 +192,7 @@ export function User_base() {
             className={`lg:w-1/2 md:w-2/3 w-full relative p-5 rounded-xl ${
               index === 1 && "text-right"
             } lg:w-1/2 md:w-full min-w-full dark:bg-dark-bg bg-background-color border-2 border-primary-color dark:border-white`}
+            data-aos={index % 2 === 0 ? "zoom-out-right" : "zoom-in-left"}
           >
             <h3
               className={`text-primary-color dark:text-white absolute ${
@@ -209,6 +211,7 @@ export function User_base() {
         src={userbase}
         alt="userbase"
         className="lg:w-1/2 md:lg-w-1/2 w-full mt-10"
+        data-aos="zoom-out-left"
       />
     </div>
   );

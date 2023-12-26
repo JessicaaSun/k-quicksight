@@ -24,7 +24,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useCreateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 import SearchFieldKQS from "@/components/buttons/SearchField";
 
-const ExistingDatasetTable = () => {
+const ExistingDatasetTable = ({ isAnalysis }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const [datasetName, setDatasets] = useState("");
@@ -41,8 +41,12 @@ const ExistingDatasetTable = () => {
 
   const handleSelectDataSet = async () => {
     try {
-      let body;
-      body = {
+      if (!selectedFileUuid) {
+        toast.error("No file selected.");
+        return;
+      }
+
+      let body = {
         created_by: user?.data?.id,
         file_uuid: selectedFileUuid,
       };
@@ -50,11 +54,20 @@ const ExistingDatasetTable = () => {
 
       isLoading(true);
       router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
-    } catch {
+    } catch (error) {
       if (!error.response) {
-        toast.error("No file selected.");
+        toast.error("An error occurred while creating the dashboard.");
       }
     }
+  };
+
+  const handleProcessAnalysis = () => {
+    if (!selectedFileUuid) {
+      toast.error("No file selected.");
+      return;
+    }
+    isLoading(true);
+    router.push(`/board/analysis/new/${selectedFileUuid}`);
   };
 
   return (
@@ -68,7 +81,7 @@ const ExistingDatasetTable = () => {
       </Button>
       <Modal
         size="2xl"
-        className="max-h-[400px] w-full min-h-[400px] overflow-auto"
+        className="max-h-[400px] w-full min-h-[400px] overflow-hidden" // Use overflow-hidden
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
@@ -79,12 +92,11 @@ const ExistingDatasetTable = () => {
                 Importing dataset
               </ModalHeader>
               <ModalBody>
-                <div className="flex w-full justify-normal mb-2 items-center gap-3">
+                <div className="flex w-full justify-normal mb-2 items-center gap-3 sticky top-0 bg-white z-10">
                   <SearchFieldKQS
                     onChange={(e) => setDatasets(e.target.value)}
                     placeholder={"Search dataset..."}
                     value={datasetName}
-                    width="100%"
                     height="45px"
                   />
                   <SelectButton
@@ -93,14 +105,19 @@ const ExistingDatasetTable = () => {
                     color={"primary-color"}
                     text={"Select"}
                     hover={"hover-primary"}
-                    clickAction={handleSelectDataSet}
+                    clickAction={
+                      isAnalysis ? handleProcessAnalysis : handleSelectDataSet
+                    }
+                    disabled={!selectedFileUuid}
                   />
                 </div>
-                <ListAllFiles
-                  file={allFiles}
-                  isFileLoading={isFileLoading}
-                  onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
-                />
+                <div className="overflow-auto max-h-[350px]">
+                  <ListAllFiles
+                    file={allFiles}
+                    isFileLoading={isFileLoading}
+                    onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
+                  />
+                </div>
               </ModalBody>
             </>
           )}

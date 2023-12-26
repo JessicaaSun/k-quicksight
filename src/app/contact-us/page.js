@@ -21,7 +21,10 @@ const Page = () => {
           <FormContactUs />
         </div>
 
-        <div className={"lg:w-1/2 md:w-[60%] flex items-center"}>
+        <div
+          className={"lg:w-1/2 md:w-[60%] flex items-center"}
+          data-aos="zoom-in-up"
+        >
           <Image
             src={contactus}
             alt={"authentication"}

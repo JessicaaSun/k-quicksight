@@ -35,7 +35,6 @@ const ImportExistDataset = () => {
             onChange={(e) => setFilename(e.target.value)}
             placeholder={"Search file..."}
             value={filename}
-            width="100%"
             height="48px"
           />
           <Select

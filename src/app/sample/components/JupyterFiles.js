@@ -2,9 +2,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Chip, Input } from "@nextui-org/react";
-import { FaDatabase, FaSearch } from "react-icons/fa";
-import Filter from "@/app/sample/components/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { GiNotebook } from "react-icons/gi";
 import { setSampleFilename } from "@/store/features/sampleDataset/Dataset";
@@ -37,7 +34,7 @@ const JupyterFiles = () => {
     <div className={"grid gap-5 w-full"}>
       <SearchFieldKQS
         onChange={(e) => setFilename(e.target.value)}
-        placeholder={"Search dataset..."}    
+        placeholder={"Search dataset..."}
         value={filename}
         width="100%"
         height="45px"
@@ -47,8 +44,7 @@ const JupyterFiles = () => {
           "text-primary-color dark:text-third-color flex justify-start items-center gap-5"
         }
       >
-        <GiNotebook /> Total Jupyter Notebook:{" "}
-        {allJupyterFiles?.results.length}
+        <GiNotebook /> Total Jupyter Notebook: {allJupyterFiles?.results.length}
       </h4>
       <div className={"flex flex-col gap-3 w-full"}>
         {allJupyterFiles?.results.map((item, index) => (

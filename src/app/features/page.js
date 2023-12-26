@@ -51,9 +51,12 @@ export default function Feature(){
 
     return(
         <>
-            <section className="bg-center bg-no-repeat bg-[url('/assets/images/feature-bg.jpg')] bg-overlay/40 bg-cover bg-blend-darken">
-                <div className="md:px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[117px]">
-                    <h1 className="mb-4 text-white">K-QuickSight Features</h1>
+            <section className="bg-center bg-no-repeat bg-[url('/assets/images/4.png')] bg-cover bg-gray-400 bg-blend-multiply">
+                <div className="md:px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[250px] "
+                     data-aos="fade-down"
+                     data-aos-easing="linear"
+                >
+                    <h1 className="mb-8 text-white md:text-4xl lg:text-5xl">K-QuickSight Features</h1>
                     <p className="md:mb-8 sm:mb-0 max-sm:mb-0 text-background-color text-xl">
                         Analyze your dataset, and visualize as a perfection.
                     </p>
@@ -71,14 +74,14 @@ export default function Feature(){
                 {
                     feature.map((data,index)=>(
                         <div key={index} className={`lg:flex md:flex justify-center items-center ${index %2 === 1 ? "flex-row-reverse" : ''} md:gap-10 max-sm:gap-6 sm:gap-6`}>
-                            <div className="lg:w-2/3 md:1/2 w-full">
+                            <div className="lg:w-2/3 md:1/2 w-full"  data-aos={index % 2 === 0 ? "zoom-out-right" : "zoom-in-left"}>
                                 <Button size="sm" variant="flat" className={'text-primary-color dark:text-third-color dark:bg-third-color/10 bg-primary-color/10 mb-6 font-medium rounded-xl'}>
                                     {data.bagde}
                                 </Button>
                                 <h2 className="text-primary-color mb-3 dark:text-third-color">{data.title}</h2>
                                 <p className={"sm:text-lg text-description-color md:text-xl lg:text-xls dark:text-white/80"}>{data.description}</p>
                             </div>
-                            <Image src={data.image} unoptimized width={100} height={100} alt={"feature"} className={"lg:w-1/3 md:w-1/2 w-full"} />
+                            <Image src={data.image} unoptimized width={100} height={100} alt={"feature"}  data-aos={index % 2 === 0 ? "zoom-in-left" : "zoom-out-right"} className={"lg:w-1/3 md:w-1/2 w-full"} />
                         </div>
                     ))
                 }

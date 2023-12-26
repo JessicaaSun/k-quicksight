@@ -115,6 +115,9 @@ export default function Card_Why() {
         <div
           key={item.id}
           className="bg-white cursor-pointer lg:w-1/4 md:w-full mt-10 p-8 h-auto rounded-[18px] hover:scale-105 transition-all"
+          data-aos={
+            item.id === 1 ? 'flip-left' : item.id === 2 ? 'flip-up' : item.id === 3 ? 'flip-right' : ''
+          }
         >
           {item.svg}
           <h4 className="text-text-color font-semibold mt-6 mb-[6px] flex-shrink-0">

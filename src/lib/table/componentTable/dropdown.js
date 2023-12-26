@@ -5,10 +5,19 @@ import { useRouter } from "next/navigation";
 import { FaEllipsis, FaEye, FaPen } from "react-icons/fa6";
 import EditDataset from "@/lib/table/componentTable/editDataset";
 import ShareMember from "@/app/board/dataset/component/shareMember";
-import {IoCloudDownload} from "react-icons/io5";
+import { IoCloudDownload } from "react-icons/io5";
+import { DiGoogleAnalytics } from "react-icons/di";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
-const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) => {
+const Dropdown_table = ({
+  uuid,
+  filename,
+  type,
+  createAt,
+  size,
+  fileId,
+  file,
+}) => {
   const router = useRouter();
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
@@ -16,9 +25,7 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) 
   const items = [
     {
       key: "1",
-      label: (
-        <EditDataset title_dataset={filename} uuid={uuid} />
-      ),
+      label: <EditDataset title_dataset={filename} uuid={uuid} />,
     },
     {
       key: "2",
@@ -36,6 +43,37 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) 
         </button>
       ),
     },
+
+    {
+      key: "4",
+      label: <ShareMember filename={filename} fileId={fileId} list={true} />,
+    },
+    {
+      key: "5",
+      label: (
+        <a
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}files/download/${file}/`}
+          className={
+            "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
+          }
+        >
+          <IoCloudDownload /> Download
+        </a>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <a
+          href={`/board/analysis/new/${uuid}`}
+          className={
+            "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
+          }
+        >
+          <DiGoogleAnalytics /> Analyze
+        </a>
+      ),
+    },
     {
       key: "3",
       label: (
@@ -48,18 +86,6 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) 
         />
       ),
     },
-    {
-      key: "4",
-      label: (
-          <ShareMember filename={filename} fileId={fileId} list={true} />
-      )
-    },
-    {
-      key: "5",
-      label: (
-          <a href={`${process.env.NEXT_PUBLIC_BASE_URL}files/download/${file}/`} className={'hover:text-primary-color text-medium flex gap-3 justify-start items-center'}><IoCloudDownload /> Download</a>
-      )
-    }
   ];
   return (
     <Space direction="vertical" className={"border-none"}>
@@ -70,7 +96,7 @@ const Dropdown_table = ({ uuid, filename, type, createAt, size, fileId, file }) 
           }}
           placement="bottomLeft"
         >
-          <Button className={'border-0 hover:text-white dark:text-white'}>
+          <Button className={"border-0 hover:text-white dark:text-white"}>
             <i>
               <FaEllipsis />
             </i>

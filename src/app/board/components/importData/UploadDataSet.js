@@ -7,21 +7,17 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useDispatch } from "react-redux";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
 import { useRouter } from "next/navigation";
-import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 import { setCurrentUser } from "@/store/features/auth/authSlice";
+import { useCreateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 
-const UploadDataSetDashboard = () => {
+const UploadDataSetDashboard = ({ isAnalysis }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { data: user } = useGetUserQuery();
   const dispatch = useDispatch();
-  const [fileInfo, setFileInfo] = useState({});
   const [importFile] = useFileImportMutation();
+  const [createDashboard] = useCreateDashboardMutation();
   const router = useRouter();
-  const {
-    data: allFiles,
-    refetch: refetchAllFiles,
-    isLoading: importLoading,
-  } = useGetAllFilesQuery({ id: user?.data.id, filename: "", type: "" });
+  const [loading, isLoading] = useState(false);
 
   useEffect(() => {
     dispatch(setCurrentUser(user));
@@ -31,25 +27,59 @@ const UploadDataSetDashboard = () => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    router.push("/board/dashboard/editor");
-    const response = await importFile({
-      file: formData,
-      userId: user?.data.id,
-    });
-    onOpenChange(false);
-    refetchAllFiles();
+    try {
+      const response = await importFile({
+        file: formData,
+        userId: user?.data.id,
+      });
+      let body = {
+        created_by: user?.data?.id,
+        file_uuid: response?.data?.uuid,
+      };
+      const responseDashboard = await createDashboard({ data: body });
+
+      isLoading(true);
+      router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleImportFileAnalysis = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await importFile({
+        file: formData,
+        userId: user?.data.id,
+      });
+
+      isLoading(true);
+      router.push(`/board/analysis/new/${response?.data?.uuid}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <Button className={"flex flex-col p-4 justify-center items-center w-full h-full"}>
+      <Button
+        className={
+          "flex flex-col p-4 justify-center items-center w-full h-full"
+        }
+      >
         <input
           type="file"
           accept=".csv, .xlsx, .txt, .json"
-          onChange={handleImportFile}
+          onChange={isAnalysis ? handleImportFileAnalysis : handleImportFile}
           style={{ display: "none" }}
           id="uploadInput"
         />
-        <label className="flex flex-col justify-center items-center" htmlFor="uploadInput">
+        <label
+          className="flex flex-col justify-center items-center"
+          htmlFor="uploadInput"
+        >
           <Image src={UploadData} alt={""} className={"w-28 "} />
           <p className={"font-bold"}>Upload new dataset</p>
         </label>

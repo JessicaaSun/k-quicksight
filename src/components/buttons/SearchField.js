@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchFieldKQS = ({ onChange, value, placeholder, width, height }) => {
   return (
-    <div className={`relative w-[${width}]`}>
+    <div className={`relative ${width ? `w-[${width}]` : "w-full"}`}>
       <div className="absolute w-full z-10 inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <AiOutlineSearch size={20} className="text-gray-400 font-semibold" />
       </div>

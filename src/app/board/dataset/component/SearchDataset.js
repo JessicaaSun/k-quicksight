@@ -31,7 +31,6 @@ const SearchDataset = () => {
       onChange={(e) => setValueSearch(e.target.value)}
       placeholder={"Search"}
       value={searchValue}
-      width={"100%"}
       height="45px"
     />
   );

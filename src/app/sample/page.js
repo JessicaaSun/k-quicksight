@@ -67,6 +67,7 @@ const SampleDataset_main = () => {
           </Button>
         </div>
         <Image
+          data-aos="zoom-in-down"
           className={"bg-transparent"}
           src={sampleImage}
           unoptimized={true}

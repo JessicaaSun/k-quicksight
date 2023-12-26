@@ -44,10 +44,11 @@ const Page = ({ params }) => {
   });
 
   const [recommendation, setRecommendation] = useState(null);
-
+  const [recommendationLoading, setRecommendationLoading] = useState(false);
   useEffect(() => {
     const fetchRecommendation = async () => {
       try {
+        setRecommendationLoading(true);
         const result = await getRecommend({
           uuid: analysisUUID,
         }).unwrap();
@@ -55,6 +56,8 @@ const Page = ({ params }) => {
         setRecommendation(result?.result);
       } catch (error) {
         console.error("Error fetching recommendation:", error);
+      } finally {
+        setRecommendationLoading(false);
       }
     };
 
@@ -125,12 +128,24 @@ const Page = ({ params }) => {
             headers={headers?.header_numeric}
           />
         ) : null}
-        <p className=" dark:text-white mb-4 text-2xl font-medium text-secondary-color mt-10">
-          Recommendation
-        </p>
-        <div className="text-lg dark:text-white font-medium">
-          {recommendation}
-        </div>
+        {recommendationLoading ? (
+          <div className="flex mt-5 justify-center items-center">
+            <Spinner size={"md"} />
+          </div>
+        ) : (
+          <>
+            <p
+              className={
+                "text-2xl mt-5 mb-4 text-secondary-color dark:text-white font-medium"
+              }
+            >
+              Recommendation and Suggestion
+            </p>
+            <div className="text-lg dark:text-white font-medium">
+              {recommendation}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

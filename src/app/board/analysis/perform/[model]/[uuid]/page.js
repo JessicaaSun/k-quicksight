@@ -294,7 +294,7 @@ export default function Perform({ params }) {
                           ""
                         )}
                         <p className=" dark:text-white mb-4 text-2xl font-medium text-secondary-color mt-10">
-                          Recommendation
+                          Recommendation and Suggestion
                         </p>
                         <div className="text-lg dark:text-white font-medium">
                           {recommendResult}

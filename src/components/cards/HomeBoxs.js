@@ -27,7 +27,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: '/board/recent',
+      url: '#gettingStart',
       title: "Getting started with K-QuickSight",
       description:
         "Gain insights from your data by accessing your step-by-step guide.",
@@ -64,7 +64,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: '/document',
+      url: '/tutorials',
       title: "Guideline",
       description:
         "We will provide document for the you do know insight all of our service.",
@@ -101,7 +101,7 @@ export default function GetStart_boxs() {
           />
         </svg>
       ),
-      url: 'https://t.me/k_quicksight',
+      url: 'https://t.me/+qB5Xy2CmaJswMzll',
       title: "Join community",
       description:
         "Become part of a community by joining and connecting with like-minded individuals who share common interests and goals.",
@@ -126,7 +126,7 @@ export default function GetStart_boxs() {
   return (
     <div className="lg:px-[10%] md:px-5 px-3 py-20 flex flex-col max-sm:gap-14 sm:gap-14 gap-36">
       {data.map((item, index) => (
-        <Link target={'_blank'} href={item.url}
+        <Link href={item.url}
           key={index}
           className={`lg:flex md:flex justify-center items-center gap-10 ${
             index === 1 ? "flex-row-reverse" : ""

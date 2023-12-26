@@ -15,6 +15,7 @@ import { setCredentials } from "@/store/features/auth/authSlice";
 import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
 import Loading from "./loading";
 import {MdOutlineOndemandVideo} from "react-icons/md";
+import GettingStart from "@/components/gettingStart/GettingStart";
 
 export default function Home() {
   const router = useRouter();
@@ -99,10 +100,17 @@ export default function Home() {
       </section>
       <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
         <h2 className="text-primary-color dark:text-white font-bold text-center">
-          Getting started with K-QuickSight
+          Beginning with K-QuickSight
         </h2>
+        <p className={'text-description-color font-normal text-center my-3 text-lg'}>Starting with K-QuickSight, the new product of data analytics field. </p>
         <GetStart_boxs />
       </section>
+
+      <section id={'gettingStart'} className={'w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8'}>
+        <h2 className={'my-16 text-center text-primary-color'}>Getting start with <span className={'text-secondary-color'}>K-Quicksight</span></h2>
+        <GettingStart />
+      </section>
+
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>

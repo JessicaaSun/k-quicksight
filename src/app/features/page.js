@@ -71,6 +71,8 @@ export default function Feature() {
         <Image
           src={imageFeature}
           unoptimized={true}
+          width={100}
+          height={100}
           className={
             "w-full relative bg-no-repeat md:top-[107px] sm:top-[147px] max-sm:top-[147px] "
           }

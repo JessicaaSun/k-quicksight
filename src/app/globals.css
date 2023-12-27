@@ -141,7 +141,7 @@ body {
     left: 0;
     width: 100%;
     height: 39px;
-    background-color: #5071CC;
+    background-color: #0346A5;
     color: #fff;
   }
   .buy-process-items {
@@ -172,7 +172,7 @@ body {
   }
   .buy-process-item h4 {
     font-size: 17px;
-    color: #5071CC;
+    color: #0346A5;
     text-transform: uppercase;
     position: absolute;
     width: 100%;
@@ -230,7 +230,7 @@ body {
     bottom: 0;
     left: 50%;
     width: 6px;
-    background-color: #5071CC;
+    background-color: #0346A5;
     transform: translate(-50%, 0);
     -webkit-transform: translate(-50%, 0);
   }
@@ -244,11 +244,11 @@ body {
     font-size: 40px;
     color: #fff;
     border-radius: 50%;
-    background-color: #5071CC;
+    background-color: #0346A5;
   }
   .buy-process-item.featured i {
     background-color: #fff !important;
-    color: #5071CC;
+    color: #0346A5;
     border: 4px solid;
   }
   .buy-process-item:nth-child(odd) i {
@@ -322,7 +322,7 @@ body {
     #wrap .buy-process-item span {
       top: 0px;
       font-size: 150px;
-      color: #5071CC;
+      color: #0346A5;
       opacity: 0.12;
     }
     .buy-process-item {

@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Dropdown, Space } from "antd";
 import DeleteButton from "@/app/board/dataset/component/DeleteButton";
 import { useRouter } from "next/navigation";
-import { FaEllipsis, FaEye, FaPen } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import {
+  FaEllipsis,
+  FaEye,
+  FaMagnifyingGlassChart,
+  FaPen,
+} from "react-icons/fa6";
 import EditDataset from "@/lib/table/componentTable/editDataset";
 import ShareMember from "@/app/board/dataset/component/shareMember";
 import { IoCloudDownload } from "react-icons/io5";
 import { DiGoogleAnalytics } from "react-icons/di";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import { useGetUserQuery } from "@/store/features/user/userApiSlice";
+import { useCreateDashboardMutation } from "@/store/features/dashboard/dashboardApiSlice";
 
 const Dropdown_table = ({
   uuid,
@@ -22,6 +30,28 @@ const Dropdown_table = ({
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
   };
+  const [loading, isLoading] = useState(false);
+  const { data: user } = useGetUserQuery();
+  const [createDashboard] = useCreateDashboardMutation();
+
+  const handleDashboardVisualize = async (uuid) => {
+    try {
+      let body = {
+        created_by: user?.data?.id,
+        file_uuid: uuid,
+      };
+      const responseDashboard = await createDashboard({ data: body });
+
+      isLoading(true);
+      router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
+    } catch (error) {
+      if (!error.response) {
+        console.log("error creating dashboard: ", error)
+        toast.error("An error occurred while creating the dashboard.");
+      }
+    }
+  };
+
   const items = [
     {
       key: "1",
@@ -76,6 +106,22 @@ const Dropdown_table = ({
     },
     {
       key: "6",
+      label: (
+        <button
+          className={
+            "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
+          }
+          onClick={() => handleDashboardVisualize(uuid)}
+        >
+          <i>
+            <FaMagnifyingGlassChart />
+          </i>
+          Visualize
+        </button>
+      ),
+    },
+    {
+      key: "7",
       label: (
         <DeleteButton
           uuid={uuid}

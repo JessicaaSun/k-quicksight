@@ -121,7 +121,7 @@ export default function Home() {
       </section>
 
       <section id={'gettingStart'} className={'w-full'}>
-        <h2 className={'my-16 text-center dark:text-white text-primary-color'}>Getting Started with <span className={'text-secondary-color dark:text-white'}>K-Quicksight</span></h2>
+        <h2 className={'my-16 text-center dark:text-white text-primary-color'}>Getting Started with <span className={'text-secondary-color whitespace-nowrap dark:text-white'}>K-Quicksight</span></h2>
         <GettingStart />
       </section>
         

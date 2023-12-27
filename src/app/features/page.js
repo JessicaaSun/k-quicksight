@@ -74,7 +74,7 @@ export default function Feature() {
           className={
             "w-full relative bg-no-repeat md:top-[107px] sm:top-[147px] max-sm:top-[147px] "
           }
-          alt={""}
+          alt={"Image Feature"}
         />
       </div>
 

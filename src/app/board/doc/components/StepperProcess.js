@@ -31,10 +31,7 @@ const steps = [
         label: 'Analysis',
         description: <Analysis />,
     },
-    {
-        label: 'Interpret or Recommendation',
-        description: 'Interpret or Recommendation',
-    },
+
 ];
 
 export default function StepperProcess() {

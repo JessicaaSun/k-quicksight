@@ -159,7 +159,7 @@ export default function Perform({ params }) {
                   ) ? (
                     <div className="grid gap-4">
                       <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
+                        <p className="text-description-color mb-3 dar:text-white/90 text-md">
                           Select Dependent variable
                         </p>
                         <Select
@@ -175,7 +175,7 @@ export default function Perform({ params }) {
                         />
                       </div>
                       <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
+                        <p className="text-description-color mb-3 dar:text-white/90 text-md">
                           Select Independent variable
                         </p>
                         <Select
@@ -197,7 +197,7 @@ export default function Perform({ params }) {
                     <></>
                   ) : (
                     <div className={"w-full"}>
-                      <p className="text-description-color text-md dark:text-white">
+                      <p className="text-description-color mb-3 text-md dark:text-white">
                         Select Dependent variable
                       </p>
                       {fileLoading || headerLoading ? (

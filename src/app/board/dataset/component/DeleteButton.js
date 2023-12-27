@@ -56,7 +56,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
           "min-w-fit bg-transparent dark:bg-white dark:text-danger hover:text-danger gap-4 inline-flex justify-start h-unit-6 px-unit-0"
         }
       >
-        <i>
+        <i className={"text-gray-500"}>
           <FaTrash />
         </i>
         Delete

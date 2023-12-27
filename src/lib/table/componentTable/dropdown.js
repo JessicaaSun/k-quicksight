@@ -67,7 +67,7 @@ const Dropdown_table = ({
           onClick={() => handleView(uuid)}
         >
           <i>
-            <FaEye />
+            <FaEye className={"text-gray-500"}/>
           </i>
           Detail
         </button>
@@ -87,7 +87,7 @@ const Dropdown_table = ({
             "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
           }
         >
-          <IoCloudDownload /> Download
+          <IoCloudDownload className={"text-gray-500"}/> Download
         </a>
       ),
     },
@@ -100,7 +100,7 @@ const Dropdown_table = ({
             "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
           }
         >
-          <DiGoogleAnalytics /> Analyze
+          <DiGoogleAnalytics className={"text-gray-500"}/> Analyze
         </a>
       ),
     },
@@ -113,7 +113,7 @@ const Dropdown_table = ({
           }
           onClick={() => handleDashboardVisualize(uuid)}
         >
-          <i>
+          <i className={"text-gray-500"}>
             <FaMagnifyingGlassChart />
           </i>
           Visualize

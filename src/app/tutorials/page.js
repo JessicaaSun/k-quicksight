@@ -132,8 +132,11 @@ const Tutorial = () => {
           {({ isSubmitting }) => (
             <Form
               className={
-                "md:pb-6 pt-10 max-sm:pb-0 sm:pb-0 flex flex-col md:gap-10 max-sm:gap-5 sm:gap-5 relative"
+                "md:pb-6 pt-10 max-sm:pb-0 sm:pb-0 flex flex-col md:gap-4 max-sm:gap-5 sm:gap-5 relative"
               }
+              // className={
+              //   "md:pb-6 pt-10 max-sm:pb-0 sm:pb-0 flex flex-col md:gap-10 max-sm:gap-5 sm:gap-5 relative"
+              // }
             >
               <div>
                 <p className={"text-lg text-text-color font-semibold dark:text-third-color"}>
@@ -177,11 +180,11 @@ const Tutorial = () => {
               <div className=" flex justify-end">
                 <SelectButton
                   rounded={"xl"}
-                  height="36px"
+                  height="46px"
                   color={"primary-color"}
                   clickAction={console.log("Please integrate with API")}
                   disabled={isSubmitting}
-                  text="Send"
+                  text="Send Message"
                 />
               </div>
             </Form>

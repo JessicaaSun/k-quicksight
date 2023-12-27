@@ -61,6 +61,7 @@ const FormContactUs = () => {
                 classNames={"block w-full px-4 py-[8px] mt-2 dark:border-white border-gray-200 border-1 dark:text-white text-black bg-white rounded-xl"}
             />
             <Textarea
+                isRequired
                 label="Description"
                 variant="bordered"
                 labelPlacement="outside"

@@ -56,7 +56,7 @@ const SampleDataset_main = () => {
         <div className={"w-full grid gap-4"}>
           <h1 className={"text-primary-color dark:text-third-color"}>Sample</h1>
           <p className={"text-description-color md:text-lg max-sm:text-base sm:text-base dark:text-white/80"}>
-            we provide a rich array of resources for data enthusiasts. Explore
+            We provide a rich array of resources for data enthusiasts. Explore
             curated datasets, delve into comprehensive analyses, engaging
             dashboard and experiment with interactive Jupyter notebooks. Start
             your data journey with us today!

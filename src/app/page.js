@@ -132,7 +132,7 @@ export default function Home() {
           <span
             className={"text-secondary-color whitespace-nowrap dark:text-white"}
           >
-            K-Quicksight
+            K-QuickSight
           </span>
         </h2>
         <GettingStart />

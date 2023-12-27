@@ -586,7 +586,7 @@ export default function Profile() {
                 <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5 dark:text-white'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'}/>
                 <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} className={'dark:text-white'} variant={'bordered'} placeholder={'New password'}/>
                 <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} className={'dark:text-white'} placeholder={'Confirm your password'}/>
-                <Button variant={'solid'} className={'bg-primary-color dark:bg-third-color text-white'} onClick={handleChangePassword}>
+                <Button variant={'solid'} size={'md'} className={'h-[56px] bg-primary-color dark:bg-third-color text-white'} onClick={handleChangePassword}>
                   Change password
                 </Button>
               </div>

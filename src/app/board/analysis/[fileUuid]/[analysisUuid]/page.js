@@ -5,6 +5,7 @@ import {
   useGetFileDetailQuery,
   useGetFileOverviewQuery,
 } from "@/store/features/files/allFileByuserId";
+import { FcIdea } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { setFileAccurate } from "@/store/features/files/filesDetail";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
@@ -20,6 +21,7 @@ import MultipleLinear from "@/app/board/doc/components/analysisComponent/Multipl
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
 import Correlation from "@/app/board/doc/components/analysisComponent/Correlation";
 import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
+import RecommendCard from "@/app/board/components/cards/RecommendCard";
 
 const Page = ({ params }) => {
   let uuid = params.fileUuid;
@@ -134,16 +136,7 @@ const Page = ({ params }) => {
           </div>
         ) : (
           <>
-            <p
-              className={
-                "text-2xl mt-5 mb-4 text-secondary-color dark:text-white font-medium"
-              }
-            >
-              Recommendation and Suggestion
-            </p>
-            <div className="text-lg dark:text-white font-medium">
-              {recommendation}
-            </div>
+            <RecommendCard recommendResult={recommendation} />
           </>
         )}
       </div>

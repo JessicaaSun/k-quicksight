@@ -12,9 +12,10 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
+
+import boxEmpty from "@assets/images/analysis/box-empty.png";
 import { useRouter } from "next/navigation";
-import { useVisualizeFileContext } from "@/context/VisualizeFileContext";
-import { IoMdSearch } from "react-icons/io";
+
 import ListAllFiles from "./ListAllFiles";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
@@ -31,6 +32,7 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
   const [fileType, setFileTypes] = useState("");
   const { data: user } = useGetUserQuery();
   const [createDashboard] = useCreateDashboardMutation();
+  const [selectButtonClicked, setSelectButtonClicked] = useState(false);
   const [loading, isLoading] = useState(false);
   const [selectedFileUuid, setSelectedFileUuid] = useState(null);
   const { data: allFiles, isLoading: isFileLoading } = useGetAllFilesQuery({
@@ -40,12 +42,11 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
   });
 
   const handleSelectDataSet = async () => {
+    if (!selectedFileUuid) {
+      setSelectButtonClicked(true);
+      return;
+    }
     try {
-      if (!selectedFileUuid) {
-        toast.error("No file selected.");
-        return;
-      }
-
       let body = {
         created_by: user?.data?.id,
         file_uuid: selectedFileUuid,
@@ -63,7 +64,7 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
 
   const handleProcessAnalysis = () => {
     if (!selectedFileUuid) {
-      toast.error("No file selected.");
+      setSelectButtonClicked(true);
       return;
     }
     isLoading(true);
@@ -91,6 +92,7 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
               <ModalHeader className="flex w-full text-xl dark:text-white text-text-color flex-col gap-1">
                 Importing dataset
               </ModalHeader>
+
               <ModalBody>
                 <div className="flex w-full justify-normal mb-2 items-center gap-3 sticky top-0 bg-white z-10">
                   <SearchFieldKQS
@@ -108,15 +110,58 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
                     clickAction={
                       isAnalysis ? handleProcessAnalysis : handleSelectDataSet
                     }
-                    disabled={!selectedFileUuid}
+                  //  disabled={!selectedFileUuid} 
                   />
                 </div>
+                {selectButtonClicked && !selectedFileUuid && (
+                  <p className="text-red-500 text-base ml-2">
+                    No dataset selected, please select one!
+                  </p>
+                )}
                 <div className="overflow-auto max-h-[350px]">
-                  <ListAllFiles
-                    file={allFiles}
-                    isFileLoading={isFileLoading}
-                    onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
-                  />
+                  {allFiles && allFiles.length > 0 ? (
+                    <ListAllFiles
+                      file={allFiles}
+                      isFileLoading={isFileLoading}
+                      onRowSelect={(fileUuid) => setSelectedFileUuid(fileUuid)}
+                    />
+                  ) : datasetName && !isFileLoading ? (
+                    <div
+                      className={"flex flex-col justify-center items-center"}
+                    >
+                      <Image
+                        src={boxEmpty}
+                        unoptimized={true}
+                        alt={""}
+                        className={"w-32"}
+                      />
+                      <p
+                        className={
+                          "text-description-color dark:text-third-color font-semibold text-lg"
+                        }
+                      >
+                        No result found for &quot;{datasetName}&quot;.
+                      </p>
+                    </div>
+                  ) : (
+                    <div
+                      className={"flex flex-col justify-center items-center"}
+                    >
+                      <Image
+                        src={boxEmpty}
+                        unoptimized={true}
+                        alt={""}
+                        className={"w-32"}
+                      />
+                      <p
+                        className={
+                          "text-description-color dark:text-third-color font-semibold text-lg"
+                        }
+                      >
+                        You have no dataset imported, please upload.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </ModalBody>
             </>

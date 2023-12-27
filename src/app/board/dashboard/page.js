@@ -27,7 +27,8 @@ const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
   const [sizeDash, setSizeDash] = React.useState(100);
   const handleChangeSizeDash = (value) => {
-    setSizeDash(value.value);
+    const intValue = parseInt(value.target.value, 10); // Use parseInt with base 10
+    setSizeDash(intValue);
   };
   const { data: allDashboard, isLoading: dashboardLoading } =
     useGetDashboardByUserUuidQuery({

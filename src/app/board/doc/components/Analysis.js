@@ -5,6 +5,7 @@ import {
   useAnalysisMutation,
   useCreateRecommendationMutation,
 } from "@/store/features/analysis/analysisApiSlice";
+
 import { Select } from "antd";
 import { Button, Input, Spinner, Tooltip } from "@nextui-org/react";
 import { useSelector } from "react-redux";
@@ -17,6 +18,7 @@ import NonLinear from "@/app/board/doc/components/analysisComponent/NonLinear";
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
 import { toast } from "react-toastify";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import RecommendCard from "../../components/cards/RecommendCard";
 
 export const variableNotMoreThan2 = [
   "correlation",
@@ -280,12 +282,10 @@ const Analysis = () => {
           ) : (
             ""
           )}
-          <p className=" dark:text-white mb-4 text-xl font-medium text-secondary-color mt-5">
-            Recommendation and Suggestion
-          </p>
-          <div className="text-lg dark:text-white font-medium">
-            {recommendResult}
-          </div>
+
+          {resultAnalysis && (
+            <RecommendCard recommendResult={recommendResult} />
+          )}
         </>
       )}
     </div>

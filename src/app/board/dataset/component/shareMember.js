@@ -85,7 +85,7 @@ export default function ShareMember({filename, fileId, list}) {
                         Share
                     </Button>
                 ) : (
-                    <button onClick={onOpen} className={'hover:text-secondary-color text-medium flex gap-3 justify-start items-center'}><FaShareFromSquare /> Share</button>
+                    <button onClick={onOpen} className={'hover:text-secondary-color text-medium flex gap-3 justify-start items-center'}><FaShareFromSquare className={"text-gray-500"}/> Share</button>
                 )
             }
             <Modal backdrop={'blur'} isOpen={isOpen} onClose={onClose}>

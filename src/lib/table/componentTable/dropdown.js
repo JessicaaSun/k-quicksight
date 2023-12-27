@@ -66,7 +66,7 @@ const Dropdown_table = ({
           }
           onClick={() => handleView(uuid)}
         >
-            <i className="text-gray-500 hover:text-primary-color">
+            <i className="text-gray-500">
             <FaEye  />
           </i>
           Detail
@@ -156,7 +156,10 @@ const Dropdown_table = ({
           </Button>
         </Dropdown>
       </Space>
+      
     </Space>
+    
   );
 };
+
 export default Dropdown_table;

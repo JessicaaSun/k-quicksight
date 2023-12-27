@@ -64,6 +64,7 @@ const CardDetailDropDown = ({
 
   const handleDeleteAnalysis = async () => {
     const response = await deleteAnalysisFile({ uuid: uuid });
+    onDeleteClose();
   };
 
   const handleUpdateAnalysis = async () => {

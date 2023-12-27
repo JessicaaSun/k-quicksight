@@ -5,6 +5,7 @@ import {
   useAnalysisMutation,
   useCreateRecommendationMutation,
 } from "@/store/features/analysis/analysisApiSlice";
+import { FcIdea } from "react-icons/fc";
 import { useGetFileDetailQuery } from "@/store/features/files/allFileByuserId";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Image from "next/image";
@@ -27,6 +28,7 @@ import FileDetail from "@/app/board/dataset/component/FileDetail";
 import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisulize";
 import Visualization from "@/app/board/doc/components/edaComponent/visualization";
 import { setEdaFilename } from "@/store/features/ExploreData/edaStore";
+import RecommendCard from "@/app/board/components/cards/RecommendCard";
 
 const variableNotMoreThan2 = [
   "correlation",
@@ -282,12 +284,7 @@ export default function Perform({ params }) {
                         ) : (
                           ""
                         )}
-                        <p className=" dark:text-white mb-4 text-2xl font-medium text-secondary-color mt-10">
-                          Recommendation and Suggestion
-                        </p>
-                        <div className="text-lg dark:text-white font-medium">
-                          {recommendResult}
-                        </div>
+                        <RecommendCard recommendResult={recommendResult} />
                       </>
                     )}
                   </>

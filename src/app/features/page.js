@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {Button} from "@nextui-org/react";
-
+import imageFeature from "@assets/images/feature.png"
 export default function Feature(){
 
     const feature = [
@@ -51,23 +51,29 @@ export default function Feature(){
 
     return(
         <>
-            <section className="bg-center bg-no-repeat bg-[url('/assets/images/4.png')] bg-cover bg-gray-400 bg-blend-multiply">
-                <div className="md:px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[250px] "
-                     data-aos="fade-down"
-                     data-aos-easing="linear"
-                >
-                    <h1 className="mb-8 text-white md:text-4xl lg:text-5xl">K-QuickSight Features</h1>
-                    <p className="md:mb-8 sm:mb-0 max-sm:mb-0 text-background-color text-xl">
-                        Analyze your dataset, and visualize as a perfection.
-                    </p>
-                </div>
-            </section>
+            {/*<section className="bg-center bg-no-repeat bg-[url('/assets/images/4.png')] bg-cover bg-gray-400 bg-blend-multiply">*/}
+            {/*    <div className="md:px-4 mx-auto max-w-screen-xl text-center sm:h-full pt-56 pb-[250px] "*/}
+            {/*         data-aos="fade-down"*/}
+            {/*         data-aos-easing="linear"*/}
+            {/*    >*/}
+            {/*        <h1 className="mb-8 text-white md:text-4xl lg:text-5xl">K-QuickSight Features</h1>*/}
+            {/*        <p className="md:mb-8 sm:mb-0 max-sm:mb-0 text-background-color text-xl">*/}
+            {/*            Analyze your dataset, and visualize as a perfection.*/}
+            {/*        </p>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
+            <div>
+                <Image src={imageFeature} className={"w-full relative bg-no-repeat md:top-[107px] max-sm:top-[147px] "} alt={""}/>
+            </div>
 
-            <div className="max-w-lg  mx-auto text-center py-8 my-8 relative">
+            <div className="max-w-lg  mx-auto text-center md:pt-52 md:pb-20 pt-40 pb-16">
                 <div className="w-32 border-2 dark:border-third-color/50 rounded-full border-blue-800/50 opacity-90 mx-auto absolute -translate-x-1/2 -translate-y-1/2 top-0 left-1/2"/>
-                <h2 className={"text-primary-color mt-10 dark:text-third-color"}>
-                    OUR FEATURE
+                <h2 className={"text-primary-color mt-4 dark:text-third-color md:text-4xl text-2xl"}>
+                    K-QuickSight Features
                 </h2>
+                <p className="text-primary-color md:text-xl text-lg pt-3">
+                    Analyze your dataset, and visualize as a perfection.
+                </p>
             </div>
 
             <section className={"place-content-center flex flex-col gap-20 md:mb-24 max-sm:mb-10 sm:mb-10 lg:px-[10%] md:px-5 sm:px-8 max-sm:px-8"}>

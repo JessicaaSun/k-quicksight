@@ -22,7 +22,8 @@ const Page = () => {
   const [search, setSearch] = useState("");
   const [size, setSize] = React.useState(100);
   const handleChange = (value) => {
-    setSize(value.value);
+    const intValue = parseInt(value.target.value, 10); // Use parseInt with base 10
+    setSize(intValue);
   };
 
   const { data: allAnalysis, isLoading: analysisLoading } =
@@ -71,7 +72,7 @@ const Page = () => {
             size={"sm"}
             color={"primary"}
             shadow={false}
-            className={"w-[100px] bg-white dark:text-white shadow-none"}
+            className={"w-[100px]  dark:text-white shadow-none"}
             defaultSelectedKeys={["all"]}
             onChange={handleChange}
             variant={"bordered"}

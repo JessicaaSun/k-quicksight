@@ -11,11 +11,7 @@ import { FaEye } from "react-icons/fa6";
 import { BsDot } from "react-icons/bs";
 import Link from "next/link";
 
-export default function TableData({
-  file,
-
-  isFileLoading,
-}) {
+export default function TableData({ file, isSample, isFileLoading }) {
   const router = useRouter();
   const handleView = (uuid) => {
     router.push(`/board/dataset/${uuid}`);
@@ -53,7 +49,9 @@ export default function TableData({
                 <p className={"text-sm"}>
                   ({item.type}){" "}
                   <span className={"font-semibold text-third-color"}>
-                    {!item.is_original ? (
+                    {isSample ? (
+                      <span>Sample</span>
+                    ) : !item.is_original ? (
                       <span>Cleaned</span>
                     ) : (
                       <span>Original</span>
@@ -62,15 +60,19 @@ export default function TableData({
                   with {formatBytes(item.size)}
                 </p>
               </div>
-              <Dropdown_table
-                uuid={item.uuid}
-                filename={item.file || item.filename}
-                type={item.type}
-                size={item.size}
-                createAt={item.created_at || item.createAt}
-                fileId={item.id}
-                file={item.filename}
-              />
+              {isSample ? (
+                ""
+              ) : (
+                <Dropdown_table
+                  uuid={item.uuid}
+                  filename={item.file || item.filename}
+                  type={item.type}
+                  size={item.size}
+                  createAt={item.created_at || item.createAt}
+                  fileId={item.id}
+                  file={item.filename}
+                />
+              )}
             </div>
           ))}
         </div>

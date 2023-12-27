@@ -1,7 +1,10 @@
 "use client";
 
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
-import { useAnalysisMutation } from "@/store/features/analysis/analysisApiSlice";
+import {
+  useAnalysisMutation,
+  useCreateRecommendationMutation,
+} from "@/store/features/analysis/analysisApiSlice";
 import { useGetFileDetailQuery } from "@/store/features/files/allFileByuserId";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Image from "next/image";
@@ -40,7 +43,9 @@ export default function Perform({ params }) {
   const [independent_variables, setIndependentVariables] = useState([]);
   const [dependent_variable, setDependentVariable] = useState("");
   const [analysisPost] = useAnalysisMutation();
+  const [getRecommend] = useCreateRecommendationMutation();
   const [disable, setDisabled] = useState(true);
+  const [recommendResult, setRecommendResult] = useState("");
   const { data: fileDetail, isLoading: fileLoading } = useGetFileDetailQuery({
     uuid: uuid,
     size: 1,
@@ -80,9 +85,20 @@ export default function Perform({ params }) {
       };
     }
     setDisabled(false);
-    const responseAnalysis = await analysisPost({ data: body_json });
-    setResultAnalysis(responseAnalysis?.data);
-    isLoading(true);
+    try {
+      isLoading(true); // Set loading to true at the start of the operation
+      const responseAnalysis = await analysisPost({ data: body_json });
+      const recommendation = await getRecommend({
+        uuid: responseAnalysis?.data?.uuid,
+      });
+      setResultAnalysis(responseAnalysis?.data);
+      setRecommendResult(recommendation?.data?.result);
+    } catch (error) {
+      console.error("Error in analysis:", error);
+      toast.error("Something went wrong please try again!");
+    } finally {
+      isLoading(false); // Set loading to false after the operation is completed
+    }
   };
 
   useEffect(() => {
@@ -120,7 +136,11 @@ export default function Perform({ params }) {
               <div>
                 <div>
                   <div className={"flex flex-col gap-3"}>
-                    <p className={"text-xl mt-3 text-secondary-color dark:text-white font-medium"}>
+                    <p
+                      className={
+                        "text-xl mt-3 text-secondary-color dark:text-white font-medium"
+                      }
+                    >
                       Perform EDA
                     </p>
                     <div className="w-1/3 my-3">
@@ -129,14 +149,17 @@ export default function Perform({ params }) {
                     <Visualization bodyEda={bodyEda} />
                   </div>
                   <p className=" dark:text-white mb-4 text-xl font-medium text-secondary-color mt-10">
-                    Performing Analysis with <span className="capitalize">{model.replace(/_/g, " ")}</span>
+                    Performing Analysis with{" "}
+                    <span className="capitalize">
+                      {model.replace(/_/g, " ")}
+                    </span>
                   </p>
                   {variableNotMoreThan2.some((model_mode) =>
                     model.startsWith(model_mode)
                   ) ? (
                     <div className="grid gap-4">
                       <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
+                        <p className="text-description-color mb-3 dar:text-white/90 text-md">
                           Select Dependent variable
                         </p>
                         <Select
@@ -152,7 +175,7 @@ export default function Perform({ params }) {
                         />
                       </div>
                       <div>
-                        <p className="text-description-color dar:text-white/90 text-md">
+                        <p className="text-description-color mb-3 dar:text-white/90 text-md">
                           Select Independent variable
                         </p>
                         <Select
@@ -174,7 +197,7 @@ export default function Perform({ params }) {
                     <></>
                   ) : (
                     <div className={"w-full"}>
-                      <p className="text-description-color text-md dark:text-white">
+                      <p className="text-description-color mb-3 text-md dark:text-white">
                         Select Dependent variable
                       </p>
                       {fileLoading || headerLoading ? (
@@ -209,7 +232,7 @@ export default function Perform({ params }) {
                     </div>
                   )}
                 </div>
-                <div className="flex mt-4 justify-between items-center">
+                <div className="flex mt-4 mb-4 justify-between items-center">
                   <Button
                     color="primary"
                     onClick={handleSubmitAnalysis}
@@ -270,6 +293,12 @@ export default function Perform({ params }) {
                         ) : (
                           ""
                         )}
+                        <p className=" dark:text-white mb-4 text-2xl font-medium text-secondary-color mt-10">
+                          Recommendation and Suggestion
+                        </p>
+                        <div className="text-lg dark:text-white font-medium">
+                          {recommendResult}
+                        </div>
                       </>
                     )}
                   </>

@@ -53,10 +53,10 @@ const Dataset = () => {
 
   useEffect(() => {
     const checkStorage = () => {
-      if (totalFree < 1048576) {
-        setStorage(true);
-      } else {
+      if (totalFree/100000 < 1048576) {
         setStorage(false);
+      } else {
+        setStorage(true);
       }
     };
     checkStorage();
@@ -101,6 +101,7 @@ const Dataset = () => {
           file={allFile}
           isFileLoading={isFileLoading}
           headers={headers}
+          isSample={false}
         />
       </div>
     </div>

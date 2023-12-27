@@ -13,7 +13,7 @@ const FaqsPage = () => {
           >
             Frequently Asked Questions
           </h1>
-          <p className={"md:py-5 dark:text-white py-3"}>
+          <p className={"md:py-5 dark:text-white text-lg text-description-color py-3"}>
             Can&apos;t find the answer you&apos;re looking for? Reach out to our
             support team.
           </p>

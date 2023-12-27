@@ -46,7 +46,7 @@ const GettingStart = () => {
             <div key={index} className="buy-process-item">
               <div className="text-wrap">
                 <h4>
-                  <strong>{step.name}</strong>
+                  <strong className="dark:text-third-color">{step.name}</strong>
                 </h4>
                 <p className="dark:text-white">{step.description}</p>
               </div>

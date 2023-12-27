@@ -11,7 +11,10 @@ import FileDetail from "@/app/board/dataset/component/FileDetail";
 import { Spinner, useDisclosure } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import AnalysisStep3 from "@/app/board/analysis/components/steps/AnalysisStep3";
-import { useAnalysisDetailsQuery } from "@/store/features/analysis/analysisApiSlice";
+import {
+  useAnalysisDetailsQuery,
+  useCreateRecommendationMutation,
+} from "@/store/features/analysis/analysisApiSlice";
 import SimpleLinear from "@/app/board/doc/components/analysisComponent/SimpleLinear";
 import MultipleLinear from "@/app/board/doc/components/analysisComponent/MultipleLinear";
 import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
@@ -22,7 +25,7 @@ const Page = ({ params }) => {
   let uuid = params.fileUuid;
   let analysisUUID = params.analysisUuid;
   const { data: user } = useGetUserQuery();
-
+  const [getRecommend] = useCreateRecommendationMutation();
   const { data: fileDetail, isLoading: detailLoading } = useGetFileDetailQuery({
     uuid: uuid,
     size: 100,
@@ -37,15 +40,38 @@ const Page = ({ params }) => {
     analysisUUID: analysisUUID,
   });
   const { data: headers } = useFindHeaderQuery({
-    filename: analysisDetail?.filename,
+    filename: analysisDetail?.file?.filename,
   });
+
+  const [recommendation, setRecommendation] = useState(null);
+  const [recommendationLoading, setRecommendationLoading] = useState(false);
+  useEffect(() => {
+    const fetchRecommendation = async () => {
+      try {
+        setRecommendationLoading(true);
+        const result = await getRecommend({
+          uuid: analysisUUID,
+        }).unwrap();
+
+        setRecommendation(result?.result);
+      } catch (error) {
+        console.error("Error fetching recommendation:", error);
+      } finally {
+        setRecommendationLoading(false);
+      }
+    };
+
+    if (analysisUUID) {
+      fetchRecommendation();
+    }
+  }, [analysisUUID, getRecommend]);
 
   return (
     <div className="p-10">
       <div className={"flex flex-row w-full justify-between"}>
         <div className={"flex flex-col"}>
           <div className={"flex flex-row"}>
-          <p className={"text-primary-color font-semibold text-3xl"}>
+            <p className={"text-primary-color font-semibold text-3xl"}>
               {analysisDetail?.title || "Untitled Analysis"}
             </p>
           </div>
@@ -80,26 +106,46 @@ const Page = ({ params }) => {
       </div>
 
       <div className="mt-10">
-        <p className="text-xl mb-7 text-text-color  font-semibold dark:text-third-color">
-          {analysisDetail?.model_name}
+        <p className="text-xl mb-7 text-text-color capitalize  font-semibold dark:text-third-color">
+          {analysisDetail?.model_name.replace(/_/g, " ")}
         </p>
 
         {analysisDetail?.model_name.includes("simple_linear_regression") ? (
-            <SimpleLinear data={analysisDetail?.analysis_data} />
-        ) : analysisDetail?.model_name.includes("multiple_linear_regression") ? (
-            <MultipleLinear
-                data={analysisDetail?.analysis_data}
-                headers={headers?.header_numeric}
-            />
+          <SimpleLinear data={analysisDetail?.analysis_data} />
+        ) : analysisDetail?.model_name.includes(
+            "multiple_linear_regression"
+          ) ? (
+          <MultipleLinear
+            data={analysisDetail?.analysis_data}
+            headers={headers?.header_numeric}
+          />
         ) : analysisDetail?.model_name.includes("covariance") ||
-        analysisDetail?.model_name.includes("correlation") ? (
-            <Correlation data={analysisDetail?.analysis_data} />
+          analysisDetail?.model_name.includes("correlation") ? (
+          <Correlation data={analysisDetail?.analysis_data} />
         ) : analysisDetail?.model_name.includes("descriptive") ? (
-            <Descriptive_statistic
-                data={analysisDetail?.descriptive}
-                headers={headers?.header_numeric}
-            />
+          <Descriptive_statistic
+            data={analysisDetail?.analysis_data}
+            headers={headers?.header_numeric}
+          />
         ) : null}
+        {recommendationLoading ? (
+          <div className="flex mt-5 justify-center items-center">
+            <Spinner size={"md"} />
+          </div>
+        ) : (
+          <>
+            <p
+              className={
+                "text-2xl mt-5 mb-4 text-secondary-color dark:text-white font-medium"
+              }
+            >
+              Recommendation and Suggestion
+            </p>
+            <div className="text-lg dark:text-white font-medium">
+              {recommendation}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

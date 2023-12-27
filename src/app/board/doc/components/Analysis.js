@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAnalysisMutation } from "@/store/features/analysis/analysisApiSlice";
+import {
+  useAnalysisMutation,
+  useCreateRecommendationMutation,
+} from "@/store/features/analysis/analysisApiSlice";
 import { Select } from "antd";
 import { Button, Input, Spinner, Tooltip } from "@nextui-org/react";
 import { useSelector } from "react-redux";
@@ -31,7 +34,8 @@ const Analysis = () => {
   const [dependent_variable, setDependentVariable] = useState("");
   const [analysisPost] = useAnalysisMutation();
   const [body, setBody] = useState([]);
-
+  const [getRecommend] = useCreateRecommendationMutation();
+  const [recommendResult, setRecommendResult] = useState("");
   const filename = useSelector((state) => state.eda.filename);
   const { data: headers } = useFindHeaderQuery({ filename: filename });
   const [resultAnalysis, setResultAnalysis] = useState(null);
@@ -67,8 +71,11 @@ const Analysis = () => {
     }
     setBody(body_json);
     const responseAnalysis = await analysisPost({ data: body_json });
+    const recommendation = await getRecommend({
+      uuid: responseAnalysis?.data?.uuid,
+    });
     setResultAnalysis(responseAnalysis?.data);
-
+    setRecommendResult(recommendation?.data?.result);
   };
 
   useEffect(() => {
@@ -82,11 +89,11 @@ const Analysis = () => {
     }
   }, [resultAnalysis]);
 
-  
-
   return (
     <div className={"grid gap-3"}>
-      <h3 className={"text-primary-color dark:text-third-color"}>Prep the Data for Modelling</h3>
+      <h3 className={"text-primary-color dark:text-third-color"}>
+        Prep the Data for Modelling
+      </h3>
       <div className={"grid gap-2"}>
         {!chosenModel ? (
           <p
@@ -131,105 +138,105 @@ const Analysis = () => {
             },
             {
               value: "descriptive_statistic",
-              label: "descriptive_statistic",
+              label: "Descriptive Statistic",
             },
             {
               value: "correlation",
-              label: "correlation",
+              label: "Correlation",
             },
             {
               value: "covariance",
-              label: "covariance",
+              label: "Covariance",
             },
             {
               value: "simple_linear_regression",
-              label: "simple_linear_regression",
+              label: "Simple Linear Regression",
             },
             {
               value: "non_linear_regression",
-              label: "non_linear_regression",
+              label: "Non Linear Regression",
             },
             {
               value: "multiple_linear_regression",
-              label: "multiple_linear_regression",
+              label: "Multiple Linear Regression",
             },
           ]}
         />
         <>
           {chosenModel && (
-              <>
-                {variableNotMoreThan2.some((model_mode) =>
-                    chosenModel.startsWith(model_mode)
-                ) ? (
-                    <div className="grid gap-3">
-                      <div>
-                        <p className="text-description-color text-md">
-                          Select Dependent variable
-                        </p>
-                        <Select
-                            aria-label="Select"
-                            size={"large"}
-                            placeholder={"Selecting model"}
-                            style={{
-                              width: "40%",
-                            }}
-                            value={dependent_variable}
-                            onChange={setDependentVariable}
-                            options={headers?.header_label}
-                        />
-                      </div>
-                      <div>
-                        <p className="text-description-color text-md">
-                          Select Independent variable
-                        </p>
-                        <Select
-                            aria-label="Select"
-                            size={"large"}
-                            placeholder={"Selecting model"}
-                            style={{
-                              width: "40%",
-                            }}
-                            value={independent_variable}
-                            onChange={setIndependentVariable}
-                            options={headers?.header_label}
-                        />
-                      </div>
-                    </div>
-                ) : chosenModel.startsWith('descriptive') ? (
-                    <></>
-                ) : (
-                    <div>
-                      <p className="text-description-color text-md">
-                        Select Dependent variable
-                      </p>
-                      <div className="flex gap-5">
-                        <Select
-                            aria-label="Select"
-                            size={"large"}
-                            placeholder={"Selecting model"}
-                            style={{
-                              width: "40%",
-                            }}
-                            value={dependent_variable}
-                            onChange={setDependentVariable}
-                            options={headers?.header_label}
-                        />
-                        <Select
-                            aria-label="Select"
-                            size={"large"}
-                            mode="multiple"
-                            placeholder="Independent variable"
-                            value={independent_variables}
-                            onChange={setIndependentVariables}
-                            style={{
-                              width: "40%",
-                            }}
-                            options={headers?.header_label}
-                        />
-                      </div>
-                    </div>
-                )}
-              </>
+            <>
+              {variableNotMoreThan2.some((model_mode) =>
+                chosenModel.startsWith(model_mode)
+              ) ? (
+                <div className="grid gap-3">
+                  <div>
+                    <p className="text-description-color mb-3 mt-4 text-md">
+                      Select Dependent variable
+                    </p>
+                    <Select
+                      aria-label="Select"
+                      size={"large"}
+                      placeholder={"Selecting model"}
+                      style={{
+                        width: "40%",
+                      }}
+                      value={dependent_variable}
+                      onChange={setDependentVariable}
+                      options={headers?.header_label}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-description-color mb-3 text-md">
+                      Select Independent variable
+                    </p>
+                    <Select
+                      aria-label="Select"
+                      size={"large"}
+                      placeholder={"Selecting model"}
+                      style={{
+                        width: "40%",
+                      }}
+                      value={independent_variable}
+                      onChange={setIndependentVariable}
+                      options={headers?.header_label}
+                    />
+                  </div>
+                </div>
+              ) : chosenModel.startsWith("descriptive") ? (
+                <></>
+              ) : (
+                <div>
+                  <p className="text-description-color mb-3 text-md">
+                    Select Dependent variable
+                  </p>
+                  <div className="flex gap-5">
+                    <Select
+                      aria-label="Select"
+                      size={"large"}
+                      placeholder={"Selecting model"}
+                      style={{
+                        width: "40%",
+                      }}
+                      value={dependent_variable}
+                      onChange={setDependentVariable}
+                      options={headers?.header_label}
+                    />
+                    <Select
+                      aria-label="Select"
+                      size={"large"}
+                      mode="multiple"
+                      placeholder="Independent variable"
+                      value={independent_variables}
+                      onChange={setIndependentVariables}
+                      style={{
+                        width: "40%",
+                      }}
+                      options={headers?.header_label}
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
           <Button
@@ -273,6 +280,12 @@ const Analysis = () => {
           ) : (
             ""
           )}
+          <p className=" dark:text-white mb-4 text-xl font-medium text-secondary-color mt-5">
+            Recommendation and Suggestion
+          </p>
+          <div className="text-lg dark:text-white font-medium">
+            {recommendResult}
+          </div>
         </>
       )}
     </div>

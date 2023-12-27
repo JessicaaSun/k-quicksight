@@ -51,13 +51,13 @@ export default function Home() {
           data-aos-easing="linear"
           data-aos-duration="1500"
         >
-          <div className=" lg:text-5xl md:text-4xl text-[28px] font-bold">
-            <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
+          <div>
+            <h1 className="lg:text-5xl lg:leading-[65px] max-sm:text-[28px] sm:text-[28px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
               <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text whitespace-nowrap text-transparent">
                 K-QuickSight
               </span>
-            </p>
+            </h1>
           </div>
           <p className="text-description-color text-lg dark:text-white">
             Catalyze your data journey with our powerful tools for discovery,
@@ -116,15 +116,28 @@ export default function Home() {
         <h2 className="text-primary-color dark:text-white font-bold text-center">
           Begin Your Adventure
         </h2>
-        <p className={'text-description-color font-normal text-center dark:text-white my-3 text-lg'}>Starting with K-QuickSight, the new product of data analytics field. </p>
+        <p
+          className={
+            "text-description-color font-normal text-center dark:text-white my-3 text-lg"
+          }
+        >
+          Starting with K-QuickSight, the new product of data analytics field.{" "}
+        </p>
         <GetStart_boxs />
       </section>
 
-      <section id={'gettingStart'} className={'w-full'}>
-        <h2 className={'my-16 text-center dark:text-white text-primary-color'}>Getting Started with <span className={'text-secondary-color dark:text-white'}>K-Quicksight</span></h2>
+      <section id={"gettingStart"} className={"w-full"}>
+        <h2 className={"my-16 text-center dark:text-white text-primary-color"}>
+          Getting Started with{" "}
+          <span
+            className={"text-secondary-color whitespace-nowrap dark:text-white"}
+          >
+            K-Quicksight
+          </span>
+        </h2>
         <GettingStart />
       </section>
-        
+
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>

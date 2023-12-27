@@ -14,7 +14,7 @@ const Page = () => {
           <h1 className={"text-primary-color dark:text-third-color pb-4"}>
             Contact Us
           </h1>
-          <p className={"text-descriptive-color dark:text-white pb-6"}>
+          <p className={"text-description-color dark:text-white pb-6"}>
             Got any issue? Want to send feedback about the beta feature? need
             detail about our business plan? Let us know.
           </p>

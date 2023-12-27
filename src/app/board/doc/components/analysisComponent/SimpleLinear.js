@@ -12,7 +12,7 @@ const SimpleLinear = ({data}) => {
 
     return (
         <div className="overflow-x-scroll">
-            <p className={'text-lg text-primary-color dark:text-third-color'}>Summary simple linear regression</p>
+            <p className={'text-lg text-primary-color dark:text-third-color mb-3'}>Summary simple linear regression</p>
             <table className="w-full border dark:text-white">
                 <tbody>
                     <tr>

@@ -9,6 +9,7 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { toast } from "react-toastify";
 import TutorialCard from "@/app/tutorials/components/TutorialCard";
 import SelectButton from "@/components/buttons/SelectButton";
+import CardTutorial from "@/app/tutorials/components/CardTutorial";
 
 const Tutorial = () => {
   const resources = [
@@ -68,7 +69,8 @@ const Tutorial = () => {
       >
         Tutorials
       </h1>
-      <TutorialCard />
+      {/*<TutorialCard />*/}
+      <CardTutorial/>
       <h2
         className={
           "text-primary-color dark:text-third-color font-bold md:mt-20 max-sm:mt-12 sm:mt-12"

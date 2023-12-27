@@ -120,17 +120,6 @@ export default function Perform({ params }) {
         items={[
           {
             key: "1",
-            label: "Dataset",
-            children: (
-              <div id={"perform eda grid gap-3"}>
-                <div className={"grid gap-3"}>
-                  <FileDetail uuid={uuid} showHeader={true} />
-                </div>
-              </div>
-            ),
-          },
-          {
-            key: "2",
             label: "Performing",
             children: (
               <div>
@@ -141,7 +130,7 @@ export default function Perform({ params }) {
                         "text-xl mt-3 text-secondary-color dark:text-white font-medium"
                       }
                     >
-                      Perform EDA
+                      Perform Exploratory Data Analysis
                     </p>
                     <div className="w-1/3 my-3">
                       <SelectVisulize />
@@ -303,6 +292,17 @@ export default function Perform({ params }) {
                     )}
                   </>
                 )}
+              </div>
+            ),
+          },
+          {
+            key: "2",
+            label: "Dataset",
+            children: (
+              <div id={"perform eda grid gap-3"}>
+                <div className={"grid gap-3"}>
+                  <FileDetail uuid={uuid} showHeader={true} />
+                </div>
               </div>
             ),
           },

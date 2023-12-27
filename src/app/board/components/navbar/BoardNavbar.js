@@ -112,7 +112,7 @@ const Navbar = () => {
               key="logout"
               color="danger"
             >
-              logout
+              Logout
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

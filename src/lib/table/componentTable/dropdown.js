@@ -46,7 +46,7 @@ const Dropdown_table = ({
       router.push(`/board/dashboard/${responseDashboard?.data?.uuid}`);
     } catch (error) {
       if (!error.response) {
-        console.log("error creating dashboard: ", error)
+        console.log("error creating dashboard: ", error);
         toast.error("An error occurred while creating the dashboard.");
       }
     }
@@ -66,8 +66,8 @@ const Dropdown_table = ({
           }
           onClick={() => handleView(uuid)}
         >
-          <i>
-            <FaEye />
+            <i className="text-gray-500 hover:text-primary-color">
+            <FaEye  />
           </i>
           Detail
         </button>
@@ -87,7 +87,11 @@ const Dropdown_table = ({
             "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
           }
         >
-          <IoCloudDownload /> Download
+         
+          <i className="text-gray-500 hover:text-primary-color">
+            <IoCloudDownload  />
+          </i>
+          Download
         </a>
       ),
     },
@@ -100,7 +104,10 @@ const Dropdown_table = ({
             "hover:text-primary-color text-medium flex gap-3 justify-start items-center"
           }
         >
-          <DiGoogleAnalytics /> Analyze
+          <i className="text-gray-500 hover:text-primary-color">
+            <DiGoogleAnalytics />
+          </i>
+          Analyze
         </a>
       ),
     },
@@ -113,7 +120,7 @@ const Dropdown_table = ({
           }
           onClick={() => handleDashboardVisualize(uuid)}
         >
-          <i>
+          <i className="text-gray-500 hover:text-primary-color">
             <FaMagnifyingGlassChart />
           </i>
           Visualize

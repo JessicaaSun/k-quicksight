@@ -31,8 +31,14 @@ const Visualization = ({bodyEda}) => {
     const [error, setError] = useState('')
 
     const handleEda = async () => {
+        const bodyEdaData = {
+            independent_variable: bodyEda?.independent_variable,
+            dependent_variable: bodyEda?.dependent_variable,
+            filename: bodyEda?.filename,
+            visualizes: bodyEda?.visualizes
+        }
         isLoading(true)
-        const response = await edaFile({data: bodyEda})
+        const response = await edaFile({data: bodyEdaData})
         setResponse(response?.data)
         dispatch(setDetail(response?.data))
     }
@@ -46,7 +52,7 @@ const Visualization = ({bodyEda}) => {
                 setError('Something when wrong')
             }, 3000)
         }
-    }, [response]);
+    }, [detailEDAResponse, response]);
 
     return (
         <>

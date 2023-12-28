@@ -1,6 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
+    independent_variable: null,
+    dependent_variable: null,
     filename: null,
     visualizes: []
 }
@@ -17,9 +19,15 @@ const eda = createSlice({
         },
         setDetail: (state, action) => {
             state.detail = action.payload;
-        }
+        },
+        setDependentVariable: (state, action) => {
+            state.dependent_variable = action.payload;
+        },
+        setInDependentVariable: (state, action) => {
+            state.independent_variable = action.payload;
+        },
     }
 })
 
-export const { setEdaFilename, setVisualization, setDetail} = eda.actions;
+export const { setInDependentVariable, setDependentVariable ,setEdaFilename, setVisualization, setDetail} = eda.actions;
 export default eda.reducer;

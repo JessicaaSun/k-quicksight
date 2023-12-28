@@ -20,8 +20,12 @@ export default function UserBoard() {
 
   return (
     <div className={"py-10 px-7"}>
-      <p className={"text-primary-color font-semibold text-xl dark:text-third-color"}>
-        Documentary of processing data analysis
+      <p
+        className={
+          "text-primary-color font-semibold text-xl dark:text-third-color"
+        }
+      >
+        Data Analytic Process
       </p>
       <StepperProcess />
     </div>

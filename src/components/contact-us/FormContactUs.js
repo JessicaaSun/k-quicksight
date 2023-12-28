@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Button, Input, Textarea} from "@nextui-org/react";
 import {useUploadDescriptionMutation} from "@/store/features/contact-us/uploadSlice";
 import { fieldNormal } from '@/app/auth/signup/components/Form';
+import {toast} from "react-toastify";
 
 const FormContactUs = () => {
     const [email, setEmail] = useState("");
@@ -60,6 +61,7 @@ const FormContactUs = () => {
                 classNames={"block w-full px-4 py-[8px] mt-2 dark:border-white border-gray-200 border-1 dark:text-white text-black bg-white rounded-xl"}
             />
             <Textarea
+                isRequired
                 label="Description"
                 variant="bordered"
                 labelPlacement="outside"

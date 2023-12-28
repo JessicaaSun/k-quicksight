@@ -64,6 +64,7 @@ const CardDetailDropDown = ({
 
   const handleDeleteAnalysis = async () => {
     const response = await deleteAnalysisFile({ uuid: uuid });
+    onDeleteClose();
   };
 
   const handleUpdateAnalysis = async () => {
@@ -207,6 +208,7 @@ const CardDetailDropDown = ({
                 <SelectButton
                   rounded={"xl"}
                   color={"primary-color"}
+                  height="36px"
                   text={"Cancel"}
                   hover={"hover-primary"}
                   clickAction={onDeleteClose}

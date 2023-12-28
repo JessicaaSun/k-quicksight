@@ -53,10 +53,10 @@ const Dataset = () => {
 
   useEffect(() => {
     const checkStorage = () => {
-      if (totalFree < 1048576) {
-        setStorage(true);
-      } else {
+      if (totalFree/100000 < 1048576) {
         setStorage(false);
+      } else {
+        setStorage(true);
       }
     };
     checkStorage();
@@ -74,7 +74,7 @@ const Dataset = () => {
           <NewDataset isFull={isFull} />
         </div>
       </div>
-      <div className={"mt-14 flex flex-col gap-8"}>
+      <div className={"mt-8 flex flex-col gap-8"}>
         <div className={"flex justify-between items-center gap-5"}>
           <SearchDataset />
           <p className={"text-primary-color dark:text-third-color font-semibold text-lg w-full"}>
@@ -86,23 +86,22 @@ const Dataset = () => {
           </p>
         </div>
 
-        <div className={"flex flex-col flex-wrap gap-5"}>
+        <div className={"flex flex-col flex-wrap gap-3"}>
           <FileType />
         </div>
         <div
           className={
-            "flex dark:text-third-color gap-3 justify-start items-center text-xl font-semibold text-primary-color mt-5"
+            "flex dark:text-third-color gap-3 justify-start items-center text-xl font-semibold text-primary-color max-sm:mt-2 sm:mt-2 md:mt-0"
           }
         >
           <MdOutlineAutoGraph />
-          Trending dataset
+          Your dataset
         </div>
         <TableData
-          isSample={isSample}
           file={allFile}
           isFileLoading={isFileLoading}
-          sample_dataset={sample_dataset}
           headers={headers}
+          isSample={false}
         />
       </div>
     </div>

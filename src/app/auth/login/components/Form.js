@@ -13,6 +13,7 @@ import { EyeSlashFilledIcon } from "@/components/icons/EyeSlashFilledIcon";
 import GoogleSignInBtn from "@/components/buttons/GoogleSignInBtn";
 import Image from "next/image";
 import { fieldNormal } from "../../signup/components/Form";
+import { Button } from "@nextui-org/react";
 // least 6 characters long, contains at least one uppercase letter, one lowercase letter, and one number
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/;
 
@@ -192,26 +193,14 @@ export default function FormLogin() {
             </div>
             <h6 className="text-red-600 my-3">{invalidMsg}</h6>
             <div className="mt-5 flex flex-col items-center w-full justify-center">
-              <button
-                disabled={isSubmitting || (touched.password && errors.password)}
+              <Button
+                isLoading={isLoading}
                 type="submit"
-                className="w-full bg-primary-color justify-center flex primaryButton px-28 cursor-pointer py-2 tracking-wide text-white transition-colors duration-200 transform bg-gradient-primary rounded-3xl hover:bg-[#033A87] focus:outline-none "
+                className="bg-primary-color text-base text-white font-semibold w-full h-[46px]"
+                radius="full"
               >
-                {isLoading ? (
-                  <div className="flex">
-                    <p className="mr-2">Logging In</p>
-                    <Image
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 animate-spin"
-                      src="https://www.svgrepo.com/show/199956/loading-loader.svg"
-                      alt="Loading icon"
-                    ></Image>
-                  </div>
-                ) : (
-                  "Login"
-                )}
-              </button>
+                Login
+              </Button>
             </div>
           </Form>
         )}
@@ -283,11 +272,10 @@ export default function FormLogin() {
                         name="email"
                         id="email"
                         placeholder="Enter your email address"
-                        className={`block w-full shadow px-4 py-2 mt-2 border-none bg-white rounded-3xl ${
-                          errorMessage
+                        className={`block w-full shadow px-4 py-2 mt-2 border-none bg-white rounded-3xl ${errorMessage
                             ? "bg-red-50 border border-red-500 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
                             : "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                        }`}
+                          }`}
                       />
 
                       <ErrorMessage

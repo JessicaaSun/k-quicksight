@@ -86,6 +86,13 @@ export default function NavbarKQuick() {
     "/testing",
     "/board",
   ];
+  const handleMenuItemClick = (path) => {
+    setIsMenuOpen(false);
+    console.log(isMenuOpen)
+    setTimeout(() => {
+      router.push(path);
+    }, 100);
+  };
 
   if (validNavPath.some((path) => pathname.startsWith(path))) return null;
   else
@@ -130,15 +137,14 @@ export default function NavbarKQuick() {
               </NavbarBrand>
             </NavbarContent>
             <NavbarMenu className="py-[50px] mt-[50px]">
-              <ThemeSwitcher />
               {menuItems.map((item) => (
-                <Link
-                  href={item.path}
+                <div
                   key={item.id}
-                  className="hover:text-primary-color font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all"
+                  onClick={() => handleMenuItemClick(item.path)}
+                  className="hover:text-primary-color dark:hover:text-primary-color dark:text-white font-normal hover:font-semibold hover:bg-blue-300 hover:px-3 hover:py-5 py-3 hover:rounded-lg transition-all cursor-pointer"
                 >
                   {item.page}
-                </Link>
+                </div>
               ))}
             </NavbarMenu>
           </Navbar>
@@ -161,7 +167,10 @@ export default function NavbarKQuick() {
             <Navbar className="w-auto bg-primary-color">
               <ThemeSwitcher />
               <NavbarContent>
-                <Dropdown placement="bottom-end" className={'dark:text-white dark:bg-dark-bg bg-white'}>
+                <Dropdown
+                  placement="bottom-end"
+                  className={"dark:text-white dark:bg-dark-bg bg-white"}
+                >
                   <DropdownTrigger>
                     <Avatar
                       isBordered
@@ -214,16 +223,15 @@ export default function NavbarKQuick() {
               </NavbarContent>
             </Navbar>
           ) : (
-
-           <div className={'flex justify-center items-center gap-5'}>
-             <ThemeSwitcher />
-             <Button
-                 onClick={() => router.push("/auth/login")}
-                 className="text-primary-color font-semibold px-7 bg-background-color"
-             >
-               Login
-             </Button>
-           </div>
+            <div className={"flex justify-center items-center gap-5"}>
+              <ThemeSwitcher />
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="text-primary-color font-semibold px-7 bg-background-color"
+              >
+                Login
+              </Button>
+            </div>
           )}
         </section>
       </nav>
@@ -250,11 +258,16 @@ export function Community_navbar() {
         />
       </svg>
       <div>
-        <Link href={"https://t.me/+qB5Xy2CmaJswMzll"} target="_blank" className="text-primary-color font-semibold">
+        <Link
+          href={"https://t.me/+qB5Xy2CmaJswMzll"}
+          target="_blank"
+          className="text-primary-color font-semibold"
+        >
           {" "}
           Join our community
         </Link>
-        , support and Connect with Like-Minded Individuals for Assistance and Guidance.
+        , support and Connect with Like-Minded Individuals for Assistance and
+        Guidance.
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { IoEllipsisHorizontal } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import CardDetailDropDown from "./CardDetailDropDown";
 
-const DashboardCard = ({ item, index, routeTo }) => {
+const DashboardCard = ({ item, index, isAnalysis, routeTo }) => {
   const router = useRouter();
   const getTitle = () => {
     if (item?.title !== null) {
@@ -24,7 +24,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
   return (
     <div
       className={
-        "flex flex-col hover:scale-105  bg-white rounded-xl shadow-sm transition-all"
+        "flex flex-col hover:scale-105 justify-between bg-white rounded-xl shadow-sm transition-all"
       }
     >
       <Image
@@ -38,7 +38,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
         }
         onClick={handleImageClick}
       />
-      <div className="flex py-3 justify-between px-3 items-start">
+      <div className="flex py-3 justify-between px-3 items-end">
         <div
           onClick={() => router.push(routeTo)}
           className={"flex cursor-pointer flex-col"}
@@ -53,7 +53,7 @@ const DashboardCard = ({ item, index, routeTo }) => {
           thumbnailUrl={item?.thumbnail}
           filename={getTitle()}
           uuid={item?.uuid}
-          isAnalysis={false}
+          isAnalysis={isAnalysis}
         />
       </div>
     </div>

@@ -15,7 +15,7 @@ const ImageVisualization = ({visualizationData, header}) => {
                 const { histogram, boxplot, scatter, line_chart} = data;
                 return (
                     <div key={header} className={'flex flex-col gap-3'}>
-                        <p className={'text-primary-color'}>Column {header}: </p>
+                        <p className={'text-primary-color dark:text-white font-semibold my-5'}>Column {header}: </p>
                         <div className={'grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1'}>
                             {
                                 histogram && (

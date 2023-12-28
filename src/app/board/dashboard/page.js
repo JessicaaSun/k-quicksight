@@ -9,6 +9,8 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
+  Select,
+  SelectItem,
 } from "@nextui-org/react";
 
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
@@ -19,14 +21,20 @@ import { AiOutlineSearch } from "react-icons/ai";
 import UploadDataSetDashboard from "../components/importData/UploadDataSet";
 import AddDashboard from "../components/buttons/AddDashboard";
 import { useGetDashboardByUserUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
+import SearchFieldKQS from "@/components/buttons/SearchField";
 
 const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
+  const [sizeDash, setSizeDash] = React.useState(100);
+  const handleChangeSizeDash = (value) => {
+    const intValue = parseInt(value.target.value, 10); // Use parseInt with base 10
+    setSizeDash(intValue);
+  };
   const { data: allDashboard, isLoading: dashboardLoading } =
     useGetDashboardByUserUuidQuery({
       userUuid: user?.data.uuid,
       page: 1,
-      size: 100,
+      size: sizeDash,
     });
   const [size, setSize] = React.useState("2xl");
   const [dashboardTitle, setDashboardTitle] = useState("");
@@ -38,6 +46,7 @@ const Page = () => {
     setSize(size);
     onOpen();
   };
+
   useEffect(() => {
     if (dashboardTitle.trim() === "") {
       // If the search query is empty, show all dashboards
@@ -68,7 +77,7 @@ const Page = () => {
             {(onClose) => (
               <>
                 <ModalHeader>
-                  <h4 className={'dark:text-white'}>Import Dataset</h4>
+                  <h4 className={"dark:text-white"}>Import Dataset</h4>
                 </ModalHeader>
 
                 <ModalBody>
@@ -86,44 +95,73 @@ const Page = () => {
           </ModalContent>
         </Modal>
         <div className={"flex flex-col"}>
-          <p className={"text-primary-color font-semibold text-3xl dark:text-third-color"}>
+          <p
+            className={
+              "text-primary-color font-semibold text-3xl dark:text-third-color"
+            }
+          >
             Dashboard
           </p>
         </div>
         <AddDashboard onOpen={onOpen} />
       </div>
-      <div className="mb-5 relative">
-        <div className="absolute z-10 inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <AiOutlineSearch size={20} className="text-gray-400 font-semibold" />
-        </div>
-        <input
-          id="searchQueryInput"
-          type="text"
-          name="searchQueryInput"
-          placeholder="Search"
-          className="w-[40%] h-[35px] bg-slate-50 outline-third-color outline-1  border-[1px] border-gray-300 rounded-3xl px-9 text-base"
-          value={dashboardTitle}
+      <div className="mb-5 w-full flex gap-5 ">
+        <SearchFieldKQS
           onChange={(e) => setDashboardTitle(e.target.value)}
+          placeholder={"Search"}
+          value={dashboardTitle}
+          width={"40%"}
+          height="45px"
         />
+        <Select
+          aria-label={"Size Filter"}
+          size={"sm"}
+          color={"primary"}
+          shadow={false}
+          defaultSelectedKeys={["all"]}
+          className={"w-[100px] dark:text-white shadow-none"}
+          onChange={handleChangeSizeDash}
+          variant={"bordered"}
+        >
+          <SelectItem className="dark:text-white" key={"all"} value={1000000}>
+            All
+          </SelectItem>
+          <SelectItem className="dark:text-white" key={1} value={1}>
+            1
+          </SelectItem>
+          <SelectItem className="dark:text-white" key={10} value={10}>
+            10
+          </SelectItem>
+          <SelectItem className="dark:text-white" key={20} value={20}>
+            20
+          </SelectItem>
+          <SelectItem className="dark:text-white" key={50} value={50}>
+            50
+          </SelectItem>
+          <SelectItem className="dark:text-white" key={100} value={100}>
+            100
+          </SelectItem>
+        </Select>
       </div>
       <div>
         {allDashboard && allDashboard?.results.length === 0 ? (
           <EmptyAnalysis isAnalysis={false} />
         ) : (
           <div>
-            <div className={"flex flex-wrap gap-5"}>
+            <div
+              className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}
+            >
               {filteredDashboards?.map((item, index) => {
                 return (
-                  <div key={item.uuid}>
-                    <DashboardCard
-                      isAnalysis={false}
-                      analysisModel={"Correlation"}
-                      fileTitle={"Sale_amazon.csv"}
-                      routeTo={`/board/dashboard/${item.uuid}`}
-                      item={item}
-                      index={index}
-                    />
-                  </div>
+                  <DashboardCard
+                    key={item.uuid}
+                    isAnalysis={false}
+                    analysisModel={"Correlation"}
+                    fileTitle={"Sale_amazon.csv"}
+                    routeTo={`/board/dashboard/${item.uuid}`}
+                    item={item}
+                    index={index}
+                  />
                 );
               })}
             </div>

@@ -6,7 +6,7 @@ const AccordionFaqs = () => {
     const mediumTitleStyle = {
         fontWeight: 500, // Medium font weight
     };    return (
-        <Accordion className={"text-text-color"}>
+        <Accordion className={"text-description-color text-lg dark:text-white"}>
             <AccordionItem
                 key="1"
                 aria-label="Accordion 1"

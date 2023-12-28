@@ -14,7 +14,8 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/features/auth/authSlice";
 import { useLoginWithGoogleMutation } from "@/store/features/auth/authApiSlice";
 import Loading from "./loading";
-import {MdOutlineOndemandVideo} from "react-icons/md";
+import { MdOutlineOndemandVideo } from "react-icons/md";
+import GettingStart from "@/components/home/GettingStart";
 
 export default function Home() {
   const router = useRouter();
@@ -42,18 +43,21 @@ export default function Home() {
     }
   }, [dispatch, loginWithGoogle, session]);
   return (
-    <main className="pt-24 flex flex-col gap-20 max-sm:gap-0 overflow-x-hidden">
+    <main className="pt-24 flex flex-col lg:gap-20 max-sm:gap-0 sm:gap-0  overflow-x-hidden">
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-5 justify-between items-center lg:px-[10%] md:px-[8%] sm:px-8 max-sm:px-8 mt-10 md:pt-10 lg:pt-8 pb-0 lg:pb-0 md:pb-6 xl:pt-0 sm:pt-14 max-sm:pt-14">
-        <div className="flex flex-col gap-3 w-full"
-             data-aos="fade-down"
-             data-aos-easing="linear"
-             data-aos-duration="1500">
-          <div className=" lg:text-5xl md:text-4xl text-3xl font-bold"
-          >
-            <p className="leading-[65px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
+        <div
+          className="flex flex-col gap-3 w-full"
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="1500"
+        >
+          <div>
+            <h1 className="lg:text-5xl lg:leading-[65px] max-sm:text-[28px] sm:text-[28px] text-text-color dark:text-white max-sm:leading-normal sm:leading-normal">
               Discover, Analyze and Decide With{" "}
-              <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text text-transparent">K-QuickSight</span>
-            </p>
+              <span className="dark:bg-gradient-to-r dark:from-third-color dark:to-secondary-color bg-gradient-to-r from-primary-color to-secondary-color bg-clip-text whitespace-nowrap text-transparent">
+                K-QuickSight
+              </span>
+            </h1>
           </div>
           <p className="text-description-color text-lg dark:text-white">
             Catalyze your data journey with our powerful tools for discovery,
@@ -62,15 +66,16 @@ export default function Home() {
           </p>
           <div className="w-full pt-6 flex max-sm:gap-3 sm:gap-3 gap-5">
             {!user ? (
-              <Button size={'lg'}
+              <Button
+                size={"lg"}
                 onClick={() => router.push("/auth/login")}
                 className="md:w-[184px] max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color dark:bg-third-color text-white"
-
               >
                 Get started
               </Button>
             ) : (
-              <Button size={'lg'}
+              <Button
+                size={"lg"}
                 onClick={() => router.push("/board/dataset")}
                 className="md:w-[184px]  max-sm:w-[40%] sm:w-[40%] font-bold bg-primary-color text-white"
               >
@@ -78,10 +83,15 @@ export default function Home() {
               </Button>
             )}
 
-
             <Button
-                className={'font-semibold text-text-color dark:text-white'}
-                onClick={() => router.push("/tutorials")} size={'lg'} variant={'bordered'}><MdOutlineOndemandVideo className={'text-third-color text-xl'}/> Watch Tutorial</Button>
+              className={"font-semibold text-text-color dark:text-white"}
+              onClick={() => router.push("/tutorials")}
+              size={"lg"}
+              variant={"bordered"}
+            >
+              <MdOutlineOndemandVideo className={"text-third-color text-xl"} />{" "}
+              Watch Tutorial
+            </Button>
           </div>
         </div>
         <div className="mt-10">
@@ -95,19 +105,39 @@ export default function Home() {
         </div>
       </section>
       <section className="bg-secondary-color dark:bg-dark-bg min-w-full px-10 py-20">
-        <h2  className="text-third-color text-center">
+        <h2 className="text-third-color text-center">
           Why <span className="text-background-color">K-QuickSight</span>
         </h2>
         <div>
           <Card_Why />
         </div>
       </section>
-      <section className="w-full pt-20 pb-20 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
+      <section className="w-full md:pt-10 max-sm:pt-16 sm:pt-16 max-sm:pb-0 sm:pb-0 md:px-[10%] sm:px-8 max-sm:px-8">
         <h2 className="text-primary-color dark:text-white font-bold text-center">
-          Getting started with K-QuickSight
+          Begin Your Adventure
         </h2>
+        <p
+          className={
+            "text-description-color font-normal text-center dark:text-white my-3 text-lg"
+          }
+        >
+          Starting with K-QuickSight, the new product of data analytics field.{" "}
+        </p>
         <GetStart_boxs />
       </section>
+
+      <section id={"gettingStart"} className={"w-full"}>
+        <h2 className={"my-16 text-center dark:text-white text-primary-color"}>
+          Getting Started with{" "}
+          <span
+            className={"text-secondary-color whitespace-nowrap dark:text-white"}
+          >
+            K-QuickSight
+          </span>
+        </h2>
+        <GettingStart />
+      </section>
+
       <section className="pb-32 max-sm:pb-16 sm:pb-16 w-full md:px-[10%] sm:px-8 max-sm:px-8 px-3">
         <User_base />
       </section>

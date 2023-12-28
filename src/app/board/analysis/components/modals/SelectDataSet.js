@@ -11,12 +11,13 @@ import SearchDataset from "@/app/board/dataset/component/SearchDataset";
 import TableDataSet from "@/app/board/analysis/components/tables/TableDataSet";
 import ImportExistDataset from "@/app/board/doc/components/ImportExistDataset";
 import {Pagination, Select, SelectItem} from "@nextui-org/react";
+import { flatten } from "@/lib/siteConfig";
 export const headers = [
     {
         header: "Title",
     },
     {
-      header: "original",
+      header: "Original",
     },
     {
         header: "File Type",
@@ -80,21 +81,21 @@ const Dataset = () => {
 
     const filesToShow = allFile?.slice(startIdx, endIdx) || [];
     return (
-        <div className={"px-5"}>
-            <div className={" flex flex-col gap-8"}>
+        <div className={"w-full px-5"}>
+            <div className={"w-full flex flex-col gap-8"}>
                 <div className={"flex justify-between items-center"}>
                     <p className={"text-2xl text-text-color font-semibold"}>
                         Pick a dataset to use in your analysis
                     </p>
                 </div>
 
-                <div className={"flex flex-col gap-3"}>
+                <div className={"flex w-full flex-col gap-3"}>
                     <SearchDataset />
                     <DropDown />
                 </div>
                 <div className={"w-full max-h-[550px] overflow-y-scroll "}>
                     <TableDataSet
-                        isSample={isSample}
+                        isSample={false}
                         file={filesToShow}
                         isFileLoading={isFileLoading}
                         sample_dataset={sample_dataset}

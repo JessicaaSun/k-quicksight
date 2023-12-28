@@ -41,7 +41,7 @@ export default function Profile() {
   const [phoneUpdate, setPhoneUpdate] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [imageUpload] = useUploadSingleMutation();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleGender = (e) => {
     setGender(e.target.value);
@@ -90,28 +90,28 @@ export default function Profile() {
       phone_number: phoneNumber,
     };
     const response = await updateInfo({ data: data, id: user?.data.id });
-    setError(response?.error?.data?.phone_number)
+    setError(response?.error?.data?.phone_number);
   };
 
+  // dashboard api
+  const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({
+    uuid: user?.data.uuid,
+  });
 
-
-  // dashboard api 
-  const { data: allDashboard } = useGetAllDashboardByUserUUIDQuery({ uuid: user?.data.uuid })
-
-  const [oldPassword, setOldPassword] = useState('')
-  const [password, setPassword] = useState('')
-  const [con_password, setConPassword] = useState('')
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [con_password, setConPassword] = useState("");
   const [changePassword] = useChangePasswordWithOldMutation();
   const handleChangePassword = async () => {
     let body = {
       old_password: oldPassword,
       email: user?.data.email,
       password: password,
-      confirmed_password: con_password
-    }
+      confirmed_password: con_password,
+    };
     const changing = await changePassword({ body: body });
     if (changing?.error) {
-      toast.error('🦄 Check your password!', {
+      toast.error("🦄 Check your password!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: true,
@@ -122,7 +122,7 @@ export default function Profile() {
         theme: "light",
       });
     } else {
-      toast.success('🦄 Password has been changed', {
+      toast.success("🦄 Password has been changed", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: true,
@@ -133,7 +133,7 @@ export default function Profile() {
         theme: "light",
       });
     }
-  }
+  };
 
   useEffect(() => {
     setFullname(user?.data.full_name);
@@ -217,7 +217,9 @@ export default function Profile() {
                   width={150}
                   height={150}
                   src={generateBashURL(avatar)}
-                  className={"w-[150px] h-[150px] object-cover rounded-full border-2 border-primary-color dark:border-third-color"}
+                  className={
+                    "w-[150px] h-[150px] object-cover rounded-full border-2 border-primary-color dark:border-third-color"
+                  }
                 />
                 <label
                   htmlFor="upload-input"
@@ -262,7 +264,11 @@ export default function Profile() {
                   >
                     Your Name
                   </p>
-                  <p className={"text-md dark:text-third-color text-primary-color font-medium"}>
+                  <p
+                    className={
+                      "text-md dark:text-third-color text-primary-color font-medium"
+                    }
+                  >
                     @{user?.data.username}
                   </p>
                   <div className={"flex justify-between items-center"}>
@@ -367,7 +373,9 @@ export default function Profile() {
                           "flex gap-2 justify-between items-center w-full"
                         }
                       >
-                        <p className={"text-lg dark:text-white font-medium"}>{gender}</p>
+                        <p className={"text-lg dark:text-white font-medium"}>
+                          {gender}
+                        </p>
                         <button
                           className={
                             "bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg"
@@ -393,7 +401,11 @@ export default function Profile() {
                       "flex flex-row justify-between gap-5 w-full items-center "
                     }
                   >
-                    <p className={"text-primary-color dark:text-white text-lg font-semibold"}>
+                    <p
+                      className={
+                        "text-primary-color dark:text-white text-lg font-semibold"
+                      }
+                    >
                       {user?.data.email}
                     </p>
                   </div>
@@ -413,7 +425,9 @@ export default function Profile() {
                   >
                     {!phoneUpdate ? (
                       <>
-                        <p className={"text-lg font-medium dark:text-white"}>{phoneNumber}</p>
+                        <p className={"text-lg font-medium dark:text-white"}>
+                          {phoneNumber}
+                        </p>
                         <button
                           className={
                             "bg-blue-100 hover:bg-blue-200 transition-all p-2 w-14 rounded-lg"
@@ -453,7 +467,10 @@ export default function Profile() {
             >
               <div className={"flex justify-between items-center w-full"}>
                 <h4 className={"text-text-color dark:text-white"}>
-                  About <span className={"text-primary-color dark:text-third-color"}>{fullname}</span>
+                  About{" "}
+                  <span className={"text-primary-color dark:text-third-color"}>
+                    {fullname}
+                  </span>
                 </h4>
                 {!biographyUpdate ? (
                   <button
@@ -463,7 +480,12 @@ export default function Profile() {
                     <FaPencilAlt />
                   </button>
                 ) : (
-                  <button onClick={handleBio} className={'text-text-color dark:text-white'}>Done</button>
+                  <button
+                    onClick={handleBio}
+                    className={"text-text-color dark:text-white"}
+                  >
+                    Done
+                  </button>
                 )}
               </div>
               <div className={"text-md text-text-color mt-5 w-full"}>
@@ -475,7 +497,7 @@ export default function Profile() {
                     onValueChange={setBiography}
                   />
                 ) : (
-                  <p className={'dark:text-white'}>{biography}</p>
+                  <p className={"dark:text-white"}>{biography}</p>
                 )}
               </div>
             </div>
@@ -484,11 +506,7 @@ export default function Profile() {
                 "border-1 dark:text-white text-text-color shadow-md mt-10 rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p
-                className={
-                  "text-xl w-full font-bold capitalize"
-                }
-              >
+              <p className={"text-xl w-full font-bold capitalize"}>
                 Storage usage
               </p>
               <div className={"w-full flex justify-between items-center mt-5"}>
@@ -504,9 +522,11 @@ export default function Profile() {
               <div className={"w-full flex justify-between items-center mt-5"}>
                 <p className={"font-semibold text-lg"}>Used</p>
                 <div
-                  className={
-                    `text-md text-text-color ${user?.data.storage_data < 819200 ? 'bg-red-300' : 'bg-gray-100'} px-6 rounded-full py-0.5`
-                  }
+                  className={`text-md text-text-color ${
+                    user?.data.storage_data < 819200
+                      ? "bg-red-300"
+                      : "bg-gray-100"
+                  } px-6 rounded-full py-0.5`}
                 >
                   {formatBytes(user?.data.storage_data)}
                 </div>
@@ -523,7 +543,11 @@ export default function Profile() {
                 "bg-white dark:bg-dark-bg max-h-[267px] overflow-y-scroll border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p className={"mb-5 text-lg dark:text-third-color text-primary-color font-semibold"}>
+              <p
+                className={
+                  "mb-5 text-lg dark:text-third-color text-primary-color font-semibold"
+                }
+              >
                 Analysis
               </p>
               <div className={"grid gap-3 w-full"}>
@@ -552,30 +576,34 @@ export default function Profile() {
                 "bg-white dark:bg-dark-bg min-h-[383px] border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p className={"mb-5 dark:text-third-color text-lg text-primary-color font-semibold"}>
+              <p
+                className={
+                  "mb-5 dark:text-third-color text-lg text-primary-color font-semibold"
+                }
+              >
                 Dashboard
               </p>
               <div className="w-full grid gap-3">
-                {
-                  allDashboard?.results.map((item, index) => (
-                    <Link
-                      href={`/board/dashboard/${item.uuid}`}
-                      key={item.id}
-                      className={`border-2 dark:text-white border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
+                {allDashboard?.results.map((item, index) => (
+                  <Link
+                    href={`/board/dashboard/${item.uuid}`}
+                    key={item.id}
+                    className={`border-2 dark:text-white border-gray-200 rounded-xl flex justify-start items-center gap-3 shadow-sm w-full hover:bg-primary-color transition-all hover:text-white capitalize text-lg`}
+                  >
+                    <div
+                      style={{ backgroundColor: getRandomColor() }}
+                      className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}
                     >
-                      <div
-                        style={{ backgroundColor: getRandomColor() }}
-                        className={`w-[80px] h-[80px] rounded-s-xl flex justify-center items-center text-white`}
-                      >
-                        <BsClipboard2DataFill className="text-2xl" />
-                      </div>
-                      <div className="grid gap-1">
-                        <p className="text-lg">{item.title}</p>
-                        <p className="text-sm">{getTrimIntoColumnDateAndTime(item.created_at)}</p>
-                      </div>
-                    </Link>
-                  ))
-                }
+                      <BsClipboard2DataFill className="text-2xl" />
+                    </div>
+                    <div className="grid gap-1">
+                      <p className="text-lg">{item.title}</p>
+                      <p className="text-sm">
+                        {getTrimIntoColumnDateAndTime(item.created_at)}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
             <div
@@ -583,12 +611,49 @@ export default function Profile() {
                 "bg-white dark:bg-dark-bg border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
               }
             >
-              <p className={'text-lg dark:text-white text-primary-color font-semibold'}>Change your password</p>
-              <div className={'w-full grid gap-3'}>
-                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5 dark:text-white'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'} />
-                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} className={'dark:text-white'} variant={'bordered'} placeholder={'New password'} />
-                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} className={'dark:text-white'} placeholder={'Confirm your password'} />
-                <Button variant={'solid'} className={'bg-primary-color dark:bg-third-color text-white'} onClick={handleChangePassword}>
+              <p
+                className={
+                  "text-lg dark:text-white text-primary-color font-semibold"
+                }
+              >
+                Change your password
+              </p>
+              <div className={"w-full grid gap-3"}>
+                <Input
+                  value={oldPassword}
+                  onValueChange={setOldPassword}
+                  className={"mt-5 dark:text-white"}
+                  color={"primary"}
+                  size={"md"}
+                  variant={"bordered"}
+                  placeholder={"Your old password"}
+                />
+                <Input
+                  value={password}
+                  onValueChange={setPassword}
+                  color={"primary"}
+                  size={"md"}
+                  className={"dark:text-white"}
+                  variant={"bordered"}
+                  placeholder={"New password"}
+                />
+                <Input
+                  value={con_password}
+                  onValueChange={setConPassword}
+                  color={"primary"}
+                  size={"md"}
+                  variant={"bordered"}
+                  className={"dark:text-white"}
+                  placeholder={"Confirm your password"}
+                />
+                <Button
+                  variant={"solid"}
+                  size={"md"}
+                  className={
+                    "h-[56px] bg-primary-color dark:bg-third-color text-white"
+                  }
+                  onClick={handleChangePassword}
+                >
                   Change password
                 </Button>
               </div>

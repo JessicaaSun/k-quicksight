@@ -196,7 +196,7 @@ export default function FormLogin() {
               <Button
                 isLoading={isLoading}
                 type="submit"
-                className="bg-primary-color text-white font-semibold w-full"
+                className="bg-primary-color text-base text-white font-semibold w-full h-[46px]"
                 radius="full"
               >
                 Login

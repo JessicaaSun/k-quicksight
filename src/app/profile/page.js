@@ -25,8 +25,8 @@ import { useGetAllDashboardByUserUUIDQuery } from "@/store/features/dashboard/da
 import { getTrimIntoColumnDateAndTime } from "@/utils/getTrimDateTIme";
 import { BsClipboard2DataFill } from "react-icons/bs";
 import { formatBytes } from "@/utils/convertByte";
-import {useRouter} from "next/navigation";
-import {toast} from "react-toastify";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const router = useRouter();
@@ -109,7 +109,7 @@ export default function Profile() {
       password: password,
       confirmed_password: con_password
     }
-    const changing = await changePassword({body: body});
+    const changing = await changePassword({ body: body });
     if (changing?.error) {
       toast.error('🦄 Check your password!', {
         position: "top-center",
@@ -213,7 +213,9 @@ export default function Profile() {
                   style={{ display: "none" }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <Avatar
+                <Image
+                  width={150}
+                  height={150}
                   src={generateBashURL(avatar)}
                   className={"w-[150px] h-[150px] object-cover rounded-full border-2 border-primary-color dark:border-third-color"}
                 />
@@ -577,15 +579,15 @@ export default function Profile() {
               </div>
             </div>
             <div
-                className={
-                  "bg-white dark:bg-dark-bg border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
-                }
+              className={
+                "bg-white dark:bg-dark-bg border-2 shadow-md rounded-lg p-5 flex flex-col justify-start items-start border-gray-200"
+              }
             >
               <p className={'text-lg dark:text-white text-primary-color font-semibold'}>Change your password</p>
               <div className={'w-full grid gap-3'}>
-                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5 dark:text-white'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'}/>
-                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} className={'dark:text-white'} variant={'bordered'} placeholder={'New password'}/>
-                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} className={'dark:text-white'} placeholder={'Confirm your password'}/>
+                <Input value={oldPassword} onValueChange={setOldPassword} className={'mt-5 dark:text-white'} color={'primary'} size={'md'} variant={'bordered'} placeholder={'Your old password'} />
+                <Input value={password} onValueChange={setPassword} color={'primary'} size={'md'} className={'dark:text-white'} variant={'bordered'} placeholder={'New password'} />
+                <Input value={con_password} onValueChange={setConPassword} color={'primary'} size={'md'} variant={'bordered'} className={'dark:text-white'} placeholder={'Confirm your password'} />
                 <Button variant={'solid'} className={'bg-primary-color dark:bg-third-color text-white'} onClick={handleChangePassword}>
                   Change password
                 </Button>

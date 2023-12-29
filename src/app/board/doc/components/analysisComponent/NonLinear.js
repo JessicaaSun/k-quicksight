@@ -11,7 +11,7 @@ const NonLinear = ({data, headers}) => {
 
     return (
         <div className="overflow-x-scroll">
-            <p className={'text-lg text-primary-color my-3'}>Descriptive table: </p>
+            <p className={'text-lg text-primary-color my-3 font-semibold'}>Descriptive table: </p>
             <table className="w-full border">
                 <tbody>
                     <tr>
@@ -52,7 +52,7 @@ const NonLinear = ({data, headers}) => {
                     </tr>
                 </tbody>
             </table>
-            <p className={'text-lg my-3 text-primary-color'}>Evauluation model: </p>
+            <p className={'text-lg my-3 text-primary-color font-semibold'}>Evaluation model: </p>
             <table className="w-full border">
                 <tbody>
                     <tr>
@@ -81,7 +81,7 @@ const NonLinear = ({data, headers}) => {
                     </tr>
                 </tbody>
             </table>
-            <p className={'text-lg my-4 text-primary-color'}>Describe statistic: </p>
+            <p className={'text-lg my-4 text-primary-color font-semibold'}>Describe statistic: </p>
             <Descriptive_statistic data={data?.descriptive_statstics} headers={headers} />
             <p className={'text-lg my-4 text-primary-color'}>Conefficient summary table: </p>
             <table className="w-full border" id="coefficientTable">

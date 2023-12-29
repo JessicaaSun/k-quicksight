@@ -12,7 +12,7 @@ const SimpleLinear = ({data}) => {
 
     return (
         <div className="overflow-x-scroll">
-            <p className={'text-lg text-primary-color dark:text-third-color mb-3'}>Summary simple linear regression</p>
+            <p className={'text-lg text-primary-color dark:text-third-color mb-3 font-semibold'}>Summary simple linear regression</p>
             <table className="w-full border dark:text-white">
                 <tbody>
                     <tr>
@@ -53,7 +53,7 @@ const SimpleLinear = ({data}) => {
                     </tr>
                 </tbody>
             </table>
-            <p className={'text-lg my-3 text-primary-color dark:text-third-color'}>Evauluation model: </p>
+            <p className={'text-lg my-3 text-primary-color dark:text-third-color font-semibold'}>Evaluation model: </p>
             <table className="w-full border dark:text-white">
                 <tbody>
                     <tr>
@@ -87,7 +87,7 @@ const SimpleLinear = ({data}) => {
                 </tbody>
             </table>
             <div>
-                <p className={'py-3 mt-5 text-primary-color text-lg dark:text-third-color'}>
+                <p className={'py-3 mt-5 text-primary-color font-semibold text-lg dark:text-third-color'}>
                     Coefficient summary table:
                 </p>
                 <table className="w-full border dark:text-white" id="coefficientTable">

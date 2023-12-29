@@ -134,10 +134,7 @@ const Analysis = () => {
           }}
           onChange={handleChange}
           options={[
-            {
-              value: "",
-              label: "Canceling choosing model",
-            },
+          
             {
               value: "descriptive_statistic",
               label: "Descriptive Statistic",

@@ -119,7 +119,7 @@ const Page = () => {
                   {allAnalysis?.results.map((item, index) => (
                     <div
                       key={index}
-                      className="grid gap-3 shadow-md rounded-2xl"
+                      className="grid gap-3 rounded-2xl"
                     >
                       <DashboardCard
                         item={item}

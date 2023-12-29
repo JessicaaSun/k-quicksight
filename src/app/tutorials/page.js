@@ -7,7 +7,6 @@ import recommend from "@assets/images/recommend.png";
 import { useCreateRequestTutorialMutation } from "@/store/features/request-tutorial/requestTutorialApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { toast } from "react-toastify";
-import TutorialCard from "@/app/tutorials/components/TutorialCard";
 import SelectButton from "@/components/buttons/SelectButton";
 import CardTutorial from "@/app/tutorials/components/CardTutorial";
 
@@ -69,11 +68,13 @@ const Tutorial = () => {
       >
         Tutorials
       </h1>
+
       {/*<TutorialCard />*/}
-      <CardTutorial/>
+      <CardTutorial />
+
       <h2
         className={
-          "text-primary-color dark:text-third-color font-bold md:mt-20 max-sm:mt-12 sm:mt-12"
+          "text-primary-color dark:text-third-color font-bold md:mt-[60px] max-sm:mt-12 sm:mt-12"
         }
       >
         Recommendation learning resources
@@ -104,7 +105,9 @@ const Tutorial = () => {
         </ul>
       </div>
       <div>
-        <h2 className={"text-primary-color font-bold mt-10 dark:text-third-color"}>
+        <h2
+          className={"text-primary-color font-bold mt-10 dark:text-third-color"}
+        >
           Request Tutorials
         </h2>
         <Formik
@@ -139,7 +142,11 @@ const Tutorial = () => {
               // }
             >
               <div>
-                <p className={"text-lg text-text-color font-semibold dark:text-third-color"}>
+                <p
+                  className={
+                    "text-lg text-text-color font-semibold dark:text-third-color"
+                  }
+                >
                   Subject
                 </p>
                 <Field
@@ -157,7 +164,11 @@ const Tutorial = () => {
                 />
               </div>
               <div>
-                <p className={"text-lg text-text-color font-semibold dark:text-third-color"}>
+                <p
+                  className={
+                    "text-lg text-text-color font-semibold dark:text-third-color"
+                  }
+                >
                   Message
                 </p>
                 <Field
@@ -184,7 +195,7 @@ const Tutorial = () => {
                   color={"primary-color"}
                   clickAction={console.log("Please integrate with API")}
                   disabled={isSubmitting}
-                  text="Send Message"
+                  text="Request Tutorial"
                 />
               </div>
             </Form>

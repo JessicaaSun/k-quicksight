@@ -97,22 +97,22 @@ const TermOfService = () => {
           Creating and Managing Data Insights
         </p>
         <p className={"text-description-color dark:text-white pt-3"}>
-          To harness the capabilities of K-Quicksight, users can delve into a
+          To harness the capabilities of K-QuickSight, users can delve into a
           myriad of features tailored for data analysis, visualization in
           dashboards, exploratory data analysis (EDA), data cleansing, and
           recommendation. To get started, simply register and set up your
-          K-Quicksight account, granting you access to a suite of powerful tools
+          K-QuickSight account, granting you access to a suite of powerful tools
           designed to elevate your data-related endeavors.
         </p>
         <p className={"text-text-color dark:text-white text-[17px] font-medium pt-4"}>
           Analysis and Visualization
         </p>
         <p className={"text-description-color dark:text-white  pt-3"}>
-          To harness the capabilities of K-Quicksight, users can delve into a
+          To harness the capabilities of K-QuickSight, users can delve into a
           myriad of features tailored for data analysis, visualization in
           dashboards, exploratory data analysis (EDA), data cleansing, and
           recommendation. To get started, simply register and set up your
-          K-Quicksight account, granting you access to a suite of powerful tools
+          K-QuickSight account, granting you access to a suite of powerful tools
           designed to elevate your data-related endeavors.
         </p>
         <p className={"text-text-color dark:text-white text-[17px] font-medium pt-4"}>

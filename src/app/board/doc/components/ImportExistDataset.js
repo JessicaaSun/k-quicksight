@@ -48,7 +48,7 @@ const ImportExistDataset = () => {
           <Select
             aria-label={"Select file types"}
             size={"sm"}
-            className={"w-[40%] dark:text-white"}
+            className={"lg:w-[40%] max-sm:w-1/2 sm:w-1/2 dark:text-white"}
             placeholder={"Select file type"}
             onChange={handleSelectionChange}
             variant={"bordered"}

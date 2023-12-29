@@ -23,7 +23,7 @@ const CardTutorial = () => {
             {
                 tutorials?.results.map((e, index) => (
                     <div className="cursor-pointer md:pt-0 pt-5" key={index} onClick={()=>router.push(`/tutorials/${e.uuid}`)}>
-                        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-[80%]">
+                        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-[90%]">
                             <div class="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
                                 <Image
                                     width={100}

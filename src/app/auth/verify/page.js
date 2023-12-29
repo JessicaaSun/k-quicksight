@@ -206,6 +206,7 @@ export default function Verify({ callback, reset, isLoading }) {
         <div>
           <Image
             src={"/assets/images/authentication.png"}
+            unoptimized={true}
             alt={"authentication"}
             height={600}
             width={600}

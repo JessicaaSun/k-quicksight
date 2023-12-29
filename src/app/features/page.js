@@ -108,7 +108,7 @@ export default function Feature() {
           >
             <div
               className="lg:w-2/3 md:1/2 w-full"
-              data-aos={index % 2 === 0 ? "zoom-out-right" : "zoom-in-left"}
+              // data-aos={index % 2 === 0 ? "zoom-out-right" : "zoom-in-left"}
             >
               <Button
                 size="sm"
@@ -136,7 +136,7 @@ export default function Feature() {
               width={100}
               height={100}
               alt={"feature"}
-              data-aos={index % 2 === 0 ? "zoom-in-left" : "zoom-out-right"}
+              // data-aos={index % 2 === 0 ? "zoom-in-left" : "zoom-out-right"}
               className={"lg:w-1/3 md:w-1/2 w-full"}
             />
           </div>

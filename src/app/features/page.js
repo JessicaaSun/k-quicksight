@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
-import imageFeature from "@assets/images/feature.png";
+import imageFeature from "@assets/images/K-quicksign-features.jpg";
 export default function Feature() {
   const feature = [
     {
@@ -102,9 +102,8 @@ export default function Feature() {
         {feature.map((data, index) => (
           <div
             key={index}
-            className={`lg:flex md:flex justify-center items-center ${
-              index % 2 === 1 ? "flex-row-reverse" : ""
-            } md:gap-10 max-sm:gap-6 sm:gap-6`}
+            className={`lg:flex md:flex justify-center items-center ${index % 2 === 1 ? "flex-row-reverse" : ""
+              } md:gap-10 max-sm:gap-6 sm:gap-6`}
           >
             <div
               className="lg:w-2/3 md:1/2 w-full"

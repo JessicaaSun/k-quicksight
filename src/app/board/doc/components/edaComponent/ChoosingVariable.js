@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {Select} from "antd";
-import {useFindHeaderQuery} from "@/store/features/ExploreData/ExploreData";
-import {useDispatch, useSelector} from "react-redux";
-import {setDependentVariable, setInDependentVariable, setVariables} from "@/store/features/ExploreData/edaStore";
+import React, { useEffect, useState } from 'react';
+import { Select } from "antd";
+import { useFindHeaderQuery } from "@/store/features/ExploreData/ExploreData";
+import { useDispatch, useSelector } from "react-redux";
+import { setDependentVariable, setInDependentVariable, setVariables } from "@/store/features/ExploreData/edaStore";
 
 const ChoosingVariable = () => {
     const fileCleaned = useSelector(state => state.cleanedFileUUID.filename)
     const eda = useSelector(state => state.eda)
-    const {data:headerLabel} = useFindHeaderQuery({filename: fileCleaned});
+    const { data: headerLabel } = useFindHeaderQuery({ filename: fileCleaned });
     const [variable, setVariable] = useState({
         independent_variable: '',
         dependent_variable: ''
@@ -29,8 +29,8 @@ const ChoosingVariable = () => {
     }, [dispatch, variable, eda]);
 
     return (
-        <div className={'mt-10'}>
-            <div className={'my-5'}>
+        <div className={'mt-5'}>
+            <div className={'mb-5'}>
                 <p className={'text-primary-color font-semibold text-lg'}>Choose the dependent and independent variables for comparing when conducting exploratory data analysis (EDA).</p>
             </div>
             <div className={'flex gap-5 justify-between items-center'}>

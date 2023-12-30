@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     id: null,
@@ -26,5 +26,5 @@ const uuidCleanFile = createSlice({
     }
 })
 
-export const { setId, setUuid, setFilename , setShowDetailCleanData} = uuidCleanFile.actions;
+export const { setId, setUuid, setFilename, setShowDetailCleanData } = uuidCleanFile.actions;
 export default uuidCleanFile.reducer;

@@ -29,6 +29,8 @@ import SelectVisulize from "@/app/board/doc/components/edaComponent/selectVisuli
 import Visualization from "@/app/board/doc/components/edaComponent/visualization";
 import { setEdaFilename } from "@/store/features/ExploreData/edaStore";
 import RecommendCard from "@/app/board/components/cards/RecommendCard";
+import ChoosingVariable from "@/app/board/doc/components/edaComponent/ChoosingVariable";
+import { setFilename } from "@/store/features/clean/fileCleanedApiSlice";
 
 const variableNotMoreThan2 = [
   "correlation",
@@ -58,6 +60,7 @@ export default function Perform({ params }) {
   });
 
   const bodyEda = useSelector((state) => state.eda);
+  const visualization = useSelector(state => state.eda.visualizes)
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -113,6 +116,7 @@ export default function Perform({ params }) {
       }, 5000);
     }
     dispatch(setEdaFilename(fileDetail?.filename));
+    dispatch(setFilename(fileDetail?.filename)); 
   }, [resultAnalysis, fileDetail, dispatch]);
 
   return (
@@ -137,6 +141,11 @@ export default function Perform({ params }) {
                     <div className="w-1/3 my-3">
                       <SelectVisulize />
                     </div>
+                    {
+                      visualization.length > 0 ? (
+                        <ChoosingVariable />
+                      ) : null
+                    }
                     <Visualization bodyEda={bodyEda} />
                   </div>
                   <p className=" dark:text-white mb-4 text-xl font-medium text-secondary-color mt-10">
@@ -183,8 +192,8 @@ export default function Perform({ params }) {
                       </div>
                     </div>
                   ) : variableNotMoreThan2.some((model_mode) =>
-                      model.startsWith("descriptive_statistic")
-                    ) ? (
+                    model.startsWith("descriptive_statistic")
+                  ) ? (
                     <></>
                   ) : (
                     <div className={"w-full"}>

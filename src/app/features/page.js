@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
-import imageFeature from "@assets/images/K-quicksign-features.jpg";
+import imageFeature from "@assets/images/feature.png";
 export default function Feature() {
   const feature = [
     {

@@ -29,14 +29,14 @@ export default function TableData({ file, isSample, isFileLoading }) {
             <div
               key={item.id}
               className={
-                "hover:bg-primary-color cursor-pointer hover:text-white transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
+                "hover:bg-gray-100 cursor-pointer  transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
               }
             >
               <div>
                 <Link
                   href={`/board/dataset/${item.uuid}`}
                   className={
-                    "text-lg font-medium hover:underline flex gap-3 items-center flex-wrap"
+                    "text-lg font-medium flex gap-3 items-center flex-wrap"
                   }
                 >
                   {item.file} <BsDot className="hover:text-white" />{" "}

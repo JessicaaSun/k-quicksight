@@ -13,24 +13,24 @@ const MultipleLinear = ({data, headers}) => {
             <div className="p-4">
                 <p className={'text-lg text-primary-color my-3'}>Descriptive statistic: </p>
                 <Descriptive_statistic headers={headers} data={data?.descriptive_statistics} />
-                <p className={'text-lg text-primary-color my-3'}>Regression statistics: </p>
+                <p className={'text-lg text-primary-color my-3'}>Regression Statistics: </p>
                 <div className="overflow-x-auto">
                     <table className="w-full border">
                         <tbody>
                         <tr>
-                            <td className="text-description-color border p-2">Multiple_r:</td>
+                            <td className="text-description-color border p-2">Multiple R:</td>
                             <td className="border p-2">{data?.regression_statistics.multiple_r}</td>
                         </tr>
                         <tr>
-                            <td className="text-description-color border p-2">Adjusted_r_squared:</td>
+                            <td className="text-description-color border p-2">Adjusted R Squared:</td>
                             <td className="border p-2">{data?.regression_statistics.adjusted_r_squared}</td>
                         </tr>
                         <tr>
-                            <td className="text-description-color border p-2">F_statistic:</td>
+                            <td className="text-description-color border p-2">F Statistic:</td>
                             <td className="border p-2">{data?.regression_statistics.f_statistic}</td>
                         </tr>
                         <tr>
-                            <td className="text-description-color border p-2">P_value:</td>
+                            <td className="text-description-color border p-2">P Value:</td>
                             <td className="border p-2">{data?.regression_statistics.p_value}</td>
                         </tr>
                         <tr>
@@ -38,7 +38,7 @@ const MultipleLinear = ({data, headers}) => {
                             <td className="border p-2">{data?.regression_statistics.observations}</td>
                         </tr>
                         <tr>
-                            <td className="text-description-color border p-2">Standard_error:</td>
+                            <td className="text-description-color border p-2">Standard Error:</td>
                             <td className="border p-2">{data?.regression_statistics.standard_error}</td>
                         </tr>
                         </tbody>
@@ -49,7 +49,7 @@ const MultipleLinear = ({data, headers}) => {
                     {
                         data?.visualizes?.map((item, index) => (
                             // eslint-disable-next-line react/jsx-key
-                            <img src={generateBashURL(item)} alt={'visualize image'} />
+                            <img key={index} src={generateBashURL(item)} alt={'visualize image'} />
                         ))
                     }
                 </div>

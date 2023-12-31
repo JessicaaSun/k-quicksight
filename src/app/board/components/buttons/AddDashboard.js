@@ -6,7 +6,8 @@ const AddDashboard = ({ onOpen, isAnalysis }) => {
     <div className={"text-primary-color "}>
       <Button
         onPress={onOpen}
-        className={"bg-primary-color text-background-color"}
+
+        className={"bg-primary-color md:w-auto max-sm:w-[40px] sm:w-[40px] text-background-color"}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +19,9 @@ const AddDashboard = ({ onOpen, isAnalysis }) => {
             fill="white"
           />
         </svg>
+        <div className="md:block max-sm:hidden sm:hidden">
         {isAnalysis ? "Create Analysis" : "Create Dashboard"}
+        </div>
       </Button>
     </div>
   );

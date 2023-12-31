@@ -2,34 +2,38 @@
 "use client";
 import React, { useState } from "react";
 import {
-  Input,
   Select,
   SelectItem,
   Spinner,
+  Pagination,
   useDisclosure,
 } from "@nextui-org/react";
 import { useAllAnalysisFileQuery } from "@/store/features/analysis/analysisApiSlice";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useRouter } from "next/navigation";
 import AddNewButton from "./components/NewVersion/ModalAddNew";
-import AnalysisCard from "../components/cards/AnalysisCard";
 import EmptyAnalysis from "../components/cards/emptyAnalysis";
 import DashboardCard from "@/app/board/components/cards/DashboardCard";
-import { SearchIcon } from "../doc/searchIcons";
 import SearchFieldKQS from "@/components/buttons/SearchField";
 const Page = () => {
   const { data: user } = useGetUserQuery();
   const [search, setSearch] = useState("");
-  const [size, setSize] = React.useState(100);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(100);
+
   const handleChange = (value) => {
     const intValue = parseInt(value.target.value, 10); // Use parseInt with base 10
     setSize(intValue);
   };
 
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
   const { data: allAnalysis, isLoading: analysisLoading } =
     useAllAnalysisFileQuery({
       userId: user?.data.id,
-      page: 1,
+      page: page,
       size: size,
       title: search,
     });
@@ -59,33 +63,29 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className={"flex dark:text-white gap-5 items-center"}>
-          <SearchFieldKQS
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder={"Search"}
-            value={search}
-            width={"40%"}
-            height="45px"
-          />
+        <div className="mb-5  w-full flex md:gap-5 max-sm:gap-2 sm:gap-2">
+          <div className="md:w-[40%] max-sm:w-[70%] sm:w-[70%]">
+            <SearchFieldKQS
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={"Search analysis"}
+              value={search}
+              height="45px"
+            />
+          </div>
           <Select
             aria-label={"Size Filter"}
             size={"sm"}
             color={"primary"}
             shadow={false}
-            className={"w-[100px]  dark:text-white shadow-none"}
-            defaultSelectedKeys={["all"]}
+            defaultSelectedKeys={["10"]}
+            className={
+              "md:w-[100px] max-sm:w-[30%] sm:w-[30%] dark:text-white shadow-none"
+            }
             onChange={handleChange}
             variant={"bordered"}
           >
-            <SelectItem
-              className="dark:text-white"
-              key={"all"}
-              value={1000000}
-            >
-              All
-            </SelectItem>
-            <SelectItem className="dark:text-white" key={1} value={1}>
-              1
+            <SelectItem className="dark:text-white" key={5} value={5}>
+              5
             </SelectItem>
             <SelectItem className="dark:text-white" key={10} value={10}>
               10
@@ -99,39 +99,52 @@ const Page = () => {
             <SelectItem className="dark:text-white" key={100} value={100}>
               100
             </SelectItem>
+            <SelectItem className="dark:text-white" key={"all"} value={1000000}>
+              All
+            </SelectItem>
           </Select>
         </div>
+
         {allAnalysis?.results.length === 0 ? (
-          <EmptyAnalysis isAnalysis={true} />
+          <EmptyAnalysis isSearchNotFound={false} isAnalysis={true} />
         ) : (
           <div>
-            <div
-              className={
-                "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5 my-5"
-              }
-            >
-              {analysisLoading ? (
-                <div className={"flex justify-center items-center"}>
-                  <Spinner size={"lg"} />
-                </div>
-              ) : (
-                <>
-                  {allAnalysis?.results.map((item, index) => (
-                    <div
-                      key={index}
-                      className="grid gap-3 rounded-2xl"
-                    >
+            {analysisLoading ? (
+              <div className={"flex justify-center items-center"}>
+                <Spinner size={"lg"} />
+              </div>
+            ) : (
+              <div
+                style={{ minHeight: "calc(100vh - 255px)" }}
+                className="flex flex-col justify-between"
+              >
+                <div
+                  className={
+                    "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"
+                  }
+                >
+                  {allAnalysis?.results?.map((item, index) => {
+                    return (
                       <DashboardCard
+                        key={item.uuid}
                         item={item}
                         isAnalysis={true}
                         index={index}
                         routeTo={`/board/analysis/${item.file.uuid}/${item.uuid}`}
                       />
-                    </div>
-                  ))}
-                </>
-              )}
-            </div>
+                    );
+                  })}
+                </div>
+                <Pagination
+                  isCompact
+                  showControls
+                  className="flex justify-end pt-8"
+                  total={allAnalysis?.pages?.length}
+                  initialPage={1}
+                  onChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

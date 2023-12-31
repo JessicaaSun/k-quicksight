@@ -16,22 +16,15 @@ import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useFileImportMutation } from "@/store/features/clean/importFile";
 import UploadDataSetDashboard from "@/app/board/components/importData/UploadDataSet";
 import ExistingDatasetTable from "@/app/board/components/importData/ExistingDatasetTable";
+import AddDashboard from "@/app/board/components/buttons/AddDashboard";
 
 export default function AddNewButton() {
-  const { isOpen, onOpen, onOpenChange , onClose} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { data: user } = useGetUserQuery();
 
   return (
     <>
-      <Button
-        onPress={onOpen}
-        className="bg-primary-color text-white dark:bg-third-color"
-        variant="solid"
-      >
-        <FaCirclePlus />
-        Create Analysis
-      </Button>
-
+      <AddDashboard isAnalysis={true} onOpen={onOpen} />
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}

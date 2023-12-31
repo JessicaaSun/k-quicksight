@@ -2,17 +2,16 @@
 import React, { useEffect, useState } from "react";
 import EmptyAnalysis from "@/app/board/components/cards/emptyAnalysis";
 import {
-  Button,
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
+  Pagination,
   ModalHeader,
   useDisclosure,
   Select,
   SelectItem,
 } from "@nextui-org/react";
-
+import { HiMiniViewColumns } from "react-icons/hi2";
 import ExistingDatasetTable from "../components/importData/ExistingDatasetTable";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import Loading from "@/app/loading";
@@ -22,29 +21,38 @@ import UploadDataSetDashboard from "../components/importData/UploadDataSet";
 import AddDashboard from "../components/buttons/AddDashboard";
 import { useGetDashboardByUserUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
 import SearchFieldKQS from "@/components/buttons/SearchField";
+import { FaList } from "react-icons/fa6";
+import DashboardList from "../components/cards/DashboardListDesign";
 
 const Page = () => {
   const { data: user, isLoading: userLoading, refetch } = useGetUserQuery();
-  const [sizeDash, setSizeDash] = React.useState(100);
-  const handleChangeSizeDash = (value) => {
-    const intValue = parseInt(value.target.value, 10); // Use parseInt with base 10
-    setSizeDash(intValue);
-  };
+  const [size, setSize] = useState(100);
+  const [page, setPage] = useState(1);
+  const [viewMode, setViewMode] = useState("card");
+  const [dashboardTitle, setDashboardTitle] = useState("");
+
   const { data: allDashboard, isLoading: dashboardLoading } =
     useGetDashboardByUserUuidQuery({
       userUuid: user?.data.uuid,
-      page: 1,
-      size: sizeDash,
+      page: page,
+      size: size,
     });
-  const [size, setSize] = React.useState("2xl");
-  const [dashboardTitle, setDashboardTitle] = useState("");
-  const [filteredDashboards, setFilteredDashboards] = useState([]);
+  const [filteredDashboards, setFilteredDashboards] = useState(
+    allDashboard?.results || []
+  );
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const handleOpen = (size) => {
-    setSize(size);
-    onOpen();
+  const handleSelectionChange = (e) => {
+    setSize(e.target.value);
+  };
+
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
+  const toggleViewMode = () => {
+    setViewMode((prevViewMode) => (prevViewMode === "card" ? "list" : "card"));
   };
 
   useEffect(() => {
@@ -65,7 +73,7 @@ const Page = () => {
   }
 
   return (
-    <div className="py-10 px-7">
+    <div className="py-10 pb-0 px-7">
       <div className={"flex flex-row w-full pb-5 justify-between"}>
         <Modal
           isOpen={isOpen}
@@ -103,68 +111,113 @@ const Page = () => {
             Dashboard
           </p>
         </div>
-        <AddDashboard onOpen={onOpen} />
+        <AddDashboard isAnalysis={false} onOpen={onOpen} />
       </div>
-      <div className="mb-5 w-full flex gap-5 ">
-        <SearchFieldKQS
-          onChange={(e) => setDashboardTitle(e.target.value)}
-          placeholder={"Search"}
-          value={dashboardTitle}
-          width={"40%"}
-          height="45px"
-        />
-        <Select
-          aria-label={"Size Filter"}
-          size={"sm"}
-          color={"primary"}
-          shadow={false}
-          defaultSelectedKeys={["all"]}
-          className={"w-[100px] dark:text-white shadow-none"}
-          onChange={handleChangeSizeDash}
-          variant={"bordered"}
+      <div className="flex justify-between">
+        <div className="mb-5  w-full flex md:gap-5 max-sm:gap-2 sm:gap-2">
+          <div className="md:w-[40%] max-sm:w-[70%] sm:w-[70%]">
+            <SearchFieldKQS
+              onChange={(e) => setDashboardTitle(e.target.value)}
+              placeholder={"Search"}
+              value={dashboardTitle}
+              height="45px"
+            />
+          </div>
+          <Select
+            aria-label={"Size Filter"}
+            size={"sm"}
+            color={"primary"}
+            shadow={false}
+            defaultSelectedKeys={["10"]}
+            className={
+              "md:w-[100px] max-sm:w-[30%] sm:w-[30%] dark:text-white shadow-none"
+            }
+            onChange={handleSelectionChange}
+            variant={"bordered"}
+          >
+            <SelectItem className="dark:text-white" key={5} value={5}>
+              5
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={10} value={10}>
+              10
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={20} value={20}>
+              20
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={50} value={50}>
+              50
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={100} value={100}>
+              100
+            </SelectItem>
+            <SelectItem className="dark:text-white" key={"all"} value={1000000}>
+              All
+            </SelectItem>
+          </Select>
+        </div>
+        <div
+          className="text-primary-color font-medium flex justify-center items-center cursor-pointer h-[40px] dark:text-third-color p-2 rounded-lg dark:hover:bg-yellow-100 hover:bg-blue-100"
+          onClick={toggleViewMode}
         >
-          <SelectItem className="dark:text-white" key={"all"} value={1000000}>
-            All
-          </SelectItem>
-          <SelectItem className="dark:text-white" key={1} value={1}>
-            1
-          </SelectItem>
-          <SelectItem className="dark:text-white" key={10} value={10}>
-            10
-          </SelectItem>
-          <SelectItem className="dark:text-white" key={20} value={20}>
-            20
-          </SelectItem>
-          <SelectItem className="dark:text-white" key={50} value={50}>
-            50
-          </SelectItem>
-          <SelectItem className="dark:text-white" key={100} value={100}>
-            100
-          </SelectItem>
-        </Select>
+          {viewMode === "card" ? (
+            <HiMiniViewColumns size={28} />
+          ) : (
+            <FaList size={24} />
+          )}
+        </div>
       </div>
+
       <div>
         {allDashboard && allDashboard?.results.length === 0 ? (
-          <EmptyAnalysis isAnalysis={false} />
+          <EmptyAnalysis isSearchNotFound={false} isAnalysis={false} />
+        ) : filteredDashboards?.length === 0 ? (
+          <EmptyAnalysis isSearchNotFound={true} isAnalysis={false} />
         ) : (
-          <div>
-            <div
-              className={"grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"}
-            >
-              {filteredDashboards?.map((item, index) => {
-                return (
-                  <DashboardCard
+          <div
+            style={{ minHeight: "calc(100vh - 255px)" }}
+            className="flex flex-col justify-between"
+          >
+            {viewMode === "card" ? ( // Render as cards
+              <div
+                className={
+                  "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5"
+                }
+              >
+                {filteredDashboards?.map((item, index) => {
+                  return (
+                    <DashboardCard
+                      key={item.uuid}
+                      isAnalysis={false}
+                      routeTo={`/board/dashboard/${item.uuid}`}
+                      item={item}
+                      index={index}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+            
+              <div className="flex flex-col w-full gap-3">
+                {filteredDashboards?.map((item, index) => (
+                  <DashboardList
                     key={item.uuid}
                     isAnalysis={false}
-                    analysisModel={"Correlation"}
-                    fileTitle={"Sale_amazon.csv"}
                     routeTo={`/board/dashboard/${item.uuid}`}
                     item={item}
                     index={index}
                   />
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            )}
+
+            <Pagination
+              isCompact
+              showControls
+              className="flex justify-end pt-8"
+              total={allDashboard?.pages?.length}
+              initialPage={1}
+              onChange={handlePageChange}
+            />
           </div>
         )}
       </div>

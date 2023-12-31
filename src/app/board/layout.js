@@ -66,7 +66,7 @@ export default function BoardRootLayout({ children }) {
             className={`${
               noMargin
                 ? `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"} pt-[64px]`
-                : `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"}  py-[60px]`
+                : `${isSidebarHidden ? "pl-0" : "lg:pl-[255px]"}  pt-[60px]`
             }  bg-background-color dark:bg-dark-bg min-h-screen`}
           >
             {children}

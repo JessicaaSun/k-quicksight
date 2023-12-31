@@ -139,9 +139,10 @@ export default function CleanModal({filename}) {
                                             option_clean.map((item, index) => (
                                                 <div key={item.id} className={'flex justify-between items-center relative'}>
                                                     <Checkbox isDisabled={select === 'autoClean' } value={item.value}>{item.label}</Checkbox>
-                                                    <Tooltip showArrow placement={'left'} className={'dark:bg-white'} key={item.id} content={item.content}>
-                                                        <Button className={'flex justify-start bg-transparent'}>
-                                                            <RiQuestionFill />
+                                                    
+                                                    <Tooltip showArrow placement={'down'} className={'dark:bg-white w-[300px]'} key={item.id} content={item.content}>
+                                                        <Button className={'w-[20px] flex p-0 text-gray-500 hover:text-gray-400 justify-end bg-transparent'}>
+                                                            <RiQuestionFill size={20}/>
                                                         </Button>
                                                     </Tooltip>
                                                 </div>

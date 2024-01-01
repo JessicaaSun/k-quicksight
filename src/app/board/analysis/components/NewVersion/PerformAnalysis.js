@@ -42,6 +42,31 @@ const models = [
     value: "multiple_linear_regression",
     label: "Multiple linear regression",
   },
+  {
+    value: "one_way_anova",
+    label: "Anova: Single Factor",
+  },
+  {
+    value: "two_way_anova",
+    label: "Anova: Two Factor",
+  },
+  {
+    value: "Exponential Smoothing",
+    label: "exponential_smoothing",
+  },
+  {
+    value: "t-Test: Paired Two Sample",
+    label: "paired_t_test",
+  },
+  {
+    value: "t-Test: One Samples",
+    label: "one_sample_t_test",
+  },
+  {
+    value: "t-Test: Two Sample",
+    label: "two_sample_t_test",
+  },
+  
 ];
 
 export default function PerformAnalysisButton({ uuid }) {
@@ -76,7 +101,7 @@ export default function PerformAnalysisButton({ uuid }) {
                   <p className="text-small text-default-500 capitalize">
                     {" "}
                     Model selected:{" "}
-                    {Array.from(value).join(", ").replace(/_/g, " ")}
+                    {selectedModel}
                   </p>
                   <Select
                     size="sm"
@@ -86,9 +111,11 @@ export default function PerformAnalysisButton({ uuid }) {
                     selectedKeys={value}
                     className="w-full capitalize dark:bg-white"
                     onSelectionChange={(newValue) => {
-                      setSelectedModel(
-                        Array.from(newValue).join(", ").replace(/_/g, " ")
-                      );
+                      const selectedValue = Array.from(newValue)[0]; 
+                      const selectedModel = models.find(model => model.value === selectedValue);
+                      if (selectedModel) {
+                        setSelectedModel(selectedModel.label);
+                      }
                       setValue(newValue);
                     }}
                   >

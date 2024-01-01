@@ -159,6 +159,30 @@ const Analysis = () => {
               value: "multiple_linear_regression",
               label: "Multiple Linear Regression",
             },
+            {
+              value: "one_way_anova",
+              label: "Anova: Single Factor",
+            },
+            {
+              value: "two_way_anova",
+              label: "Anova: Two Factor",
+            },
+            {
+              value: "Exponential Smoothing",
+              label: "exponential_smoothing",
+            },
+            {
+              value: "t-Test: Paired Two Sample",
+              label: "paired_t_test",
+            },
+            {
+              value: "t-Test: One Samples",
+              label: "one_sample_t_test",
+            },
+            {
+              value: "t-Test: Two Sample",
+              label: "two_sample_t_test",
+            },
           ]}
         />
         <>

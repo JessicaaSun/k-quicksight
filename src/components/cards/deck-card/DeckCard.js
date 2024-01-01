@@ -50,6 +50,7 @@ export default function DeckCard() {
                   className="rounded-full w-[78px] h-[78px] object-cover"
                   alt="profile"
                   width={78}
+                  objectFit="cover"
                   height={78}
                 />
               </div>

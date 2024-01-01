@@ -29,14 +29,13 @@ export default function TableData({ file, isSample, isFileLoading }) {
             <div
               key={item.id}
               className={
-                "hover:bg-gray-100 cursor-pointer  transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
+                "hover:bg-gray-100 cursor-pointer hover:text-primary-color transition-all px-3 py-3 flex items-center justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
               }
             >
-              <div>
-                <Link
-                  href={`/board/dataset/${item.uuid}`}
+              <Link href={`/board/dataset/${item.uuid}`}>
+                <div
                   className={
-                    "text-lg font-medium flex gap-3 items-center flex-wrap"
+                    "text-lg   font-medium flex gap-3 items-center flex-wrap"
                   }
                 >
                   {item.file} <BsDot className="hover:text-white" />{" "}
@@ -45,7 +44,7 @@ export default function TableData({ file, isSample, isFileLoading }) {
                       item.created_at || item.createAt
                     )}
                   </span>{" "}
-                </Link>
+                </div>
                 <p className={"text-sm"}>
                   ({item.type}){" "}
                   <span className={"font-semibold text-third-color"}>
@@ -59,7 +58,7 @@ export default function TableData({ file, isSample, isFileLoading }) {
                   </span>{" "}
                   with {formatBytes(item.size)}
                 </p>
-              </div>
+              </Link>
               {isSample ? (
                 ""
               ) : (

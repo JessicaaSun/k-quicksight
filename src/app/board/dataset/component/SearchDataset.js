@@ -18,12 +18,14 @@ const SearchDataset = () => {
   const { data: setAllFiles, isLoading: isFileLoading } = useGetAllFilesQuery({
     id: user?.data.id,
     filename: files?.filename,
+    page:1,
+    size:1000,
     type: files.fileType,
   });
 
   useEffect(() => {
     dispatch(setFileName(searchValue));
-    dispatch(setFiles(setAllFiles));
+    dispatch(setFiles(setAllFiles?.results));
   }, [searchValue, dispatch, setAllFiles]);
 
   return (

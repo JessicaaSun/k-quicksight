@@ -26,6 +26,8 @@ export default function EditDataset({ title_dataset, uuid }) {
   const { data: allFile, refetch: refecthFiles } = useGetAllFilesQuery({
     id: user?.data.id,
     filename: "",
+    page:1,
+    size:1000,
     type: "",
   });
 

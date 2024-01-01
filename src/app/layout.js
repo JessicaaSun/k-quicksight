@@ -17,7 +17,10 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "K-QuickSight",
+  title: {
+    template: "%s | K-QuickSight",
+    default: "K-QuickSight",
+  },
   description:
     "Catalyze your data journey with our powerful tools for discovery, analysis, and informed decision-making. Explore your data's full potential and drive success with confidence.",
 };

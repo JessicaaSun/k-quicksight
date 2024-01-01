@@ -4,9 +4,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GiNotebook } from "react-icons/gi";
-import { setSampleFilename } from "@/store/features/sampleDataset/Dataset";
+import { setSampleFilename } from "@/store/features/sample/Dataset";
 import { useRouter } from "next/navigation";
-import { useGetJupyterFileQuery } from "@/store/features/sampleDataset/Jupyter";
+import { useGetJupyterFileQuery } from "@/store/features/sample/Jupyter";
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
 import Link from "next/link";
@@ -52,13 +52,13 @@ const JupyterFiles = () => {
             href={`/sample/${item.id}`}
             key={item.id}
             className={
-              "hover:bg-primary-color cursor-pointer hover:text-white px-3 py-3 overflow-hidden flex items-center flex-wrap justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
+              "hover:bg-gray-100 cursor-pointer hover:text-primary-color px-3 py-3 overflow-hidden flex items-center flex-wrap justify-between bg-white rounded-lg border-1 border-gray-200 shadow-sm"
             }
           >
             <div>
               <div
                 className={
-                  "text-lg capitalize font-medium hover:underline flex gap-3 items-center flex-wrap"
+                  "text-lg capitalize font-medium  flex gap-3 items-center flex-wrap"
                 }
               >
                 {item.file} <BsDot />{" "}
@@ -66,7 +66,7 @@ const JupyterFiles = () => {
                   {getTrimIntoColumnOnlyDate(item.created_at || item.createAt)}
                 </span>{" "}
               </div>
-              <p className={"text-sm hover:text-white"}>
+              <p className={"text-sm "}>
                 Size: {formatBytes(item.size)}
               </p>
             </div>

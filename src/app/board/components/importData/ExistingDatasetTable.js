@@ -37,6 +37,8 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
   const [selectedFileUuid, setSelectedFileUuid] = useState(null);
   const { data: allFiles, isLoading: isFileLoading } = useGetAllFilesQuery({
     id: user?.data.id,
+    page:1,
+    size:1000,
     filename: datasetName,
     type: fileType,
   });
@@ -119,7 +121,7 @@ const ExistingDatasetTable = ({ isAnalysis }) => {
                   </p>
                 )}
                 <div className="overflow-auto max-h-[350px]">
-                  {allFiles && allFiles.length > 0 ? (
+                  {allFiles && allFiles.count > 0 ? (
                     <ListAllFiles
                       file={allFiles}
                       isFileLoading={isFileLoading}

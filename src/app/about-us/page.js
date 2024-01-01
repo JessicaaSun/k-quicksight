@@ -15,6 +15,13 @@ import logo from "@assets/logos/logo.png";
 import { FaFacebook, FaGithub } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 
+export const metadata = {
+  title: "About Us",
+  description:
+    "Learn about Your Website Name and our mission. Discover our team and the values that drive us.",
+  keywords: ["About Us", "Our Team", "Mission", "Values"],
+};
+
 export default function AboutUs() {
   const data = [
     {
@@ -78,8 +85,20 @@ export default function AboutUs() {
         "md:py-32 md:px-0 max-sm:px-8 sm:px-8 max-sm:pt-40 sm:pt-40 flex flex-col items-center"
       }
     >
-      <div data-aos="fade-down" className={"flex gap-5 max-sm:flex-col sm:flex-col md:flex-row justify-center items-center md:pt-7 max-sm:pt-7 sm:pt-0"}>
-        <Image width={100} unoptimized={true} height={100} className="md:w-[100px] max-sm:w-[200px] sm:w-[200px] h-auto" src={logo} alt={"logo"} />
+      <div
+        data-aos="fade-down"
+        className={
+          "flex gap-5 max-sm:flex-col sm:flex-col md:flex-row justify-center items-center md:pt-7 max-sm:pt-7 sm:pt-0"
+        }
+      >
+        <Image
+          width={100}
+          unoptimized={true}
+          height={100}
+          className="md:w-[100px] max-sm:w-[200px] sm:w-[200px] h-auto"
+          src={logo}
+          alt={"logo"}
+        />
         <h1
           className={
             "text-primary-color dark:text-third-color md:text-4xl max-sm:text-3xl sm:text-3xl capitalize"
@@ -154,7 +173,7 @@ export default function AboutUs() {
           Our mentors
         </p>
         <div className={"lg:flex w-full justify-center items-center"}>
-        <p
+          <p
             className={
               "lg:hidden mt-5 text-center dark:text-white/80 text-lg text-description-color"
             }

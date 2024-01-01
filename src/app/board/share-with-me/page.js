@@ -1,20 +1,20 @@
-'use client'
-import React from 'react';
-import { Tabs } from 'antd';
-import ShareWithmeTap from "@/app/board/share-with-me/component/shareWithme_tap";
-import ShareToOther from "@/app/board/share-with-me/component/ShareToOther";
+import React from "react";
+import SharedDataKQS from "./SharedDataKQS";
 
-const items = [
-    {
-        key: '1',
-        label: 'Share with me',
-        children: <ShareWithmeTap />,
-    },
-    {
-        key: '2',
-        label: 'Share to other',
-        children: <ShareToOther />,
-    },
-];
-const App = () => <div className='pt-5 px-7'><Tabs defaultActiveKey="1" items={items} /></div>;
-export default App;
+export const metadata = {
+  title: "Shared Dataset",
+  description:
+    "Access datasets shared with you and files you've shared with others on K-QuickSight.",
+  keywords: [
+    "Shared Files",
+    "Data Sharing",
+    "Collaboration",
+    "Data Collaboration",
+  ],
+};
+
+const page = () => {
+  return <SharedDataKQS />;
+};
+
+export default page;

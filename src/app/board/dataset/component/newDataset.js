@@ -18,7 +18,7 @@ export default function NewDataset({ isFull }) {
     data: allFiles,
     refetch: refetchAllFiles,
     isLoading: importLoading,
-  } = useGetAllFilesQuery({ id: user?.data.id, filename: "", type: "" });
+  } = useGetAllFilesQuery({ id: user?.data.id, filename: "", type: "", page:1, size:1000});
 
   useEffect(() => {
     dispatch(setCurrentUser(user));

@@ -26,17 +26,11 @@ import RecommendCard from "@/app/board/components/cards/RecommendCard";
 const Page = ({ params }) => {
   let uuid = params.fileUuid;
   let analysisUUID = params.analysisUuid;
-  const { data: user } = useGetUserQuery();
-  const [getRecommend] = useCreateRecommendationMutation();
   const { data: fileDetail, isLoading: detailLoading } = useGetFileDetailQuery({
     uuid: uuid,
     size: 100,
     page: 1,
   });
-
-  const dispatch = useDispatch();
-  const [currentStep, setCurrentStep] = useState(1);
-  const router = useRouter();
 
   const { data: analysisDetail } = useAnalysisDetailsQuery({
     analysisUUID: analysisUUID,
@@ -44,29 +38,6 @@ const Page = ({ params }) => {
   const { data: headers } = useFindHeaderQuery({
     filename: analysisDetail?.file?.filename,
   });
-
-  const [recommendation, setRecommendation] = useState(null);
-  const [recommendationLoading, setRecommendationLoading] = useState(false);
-  useEffect(() => {
-    const fetchRecommendation = async () => {
-      try {
-        setRecommendationLoading(true);
-        const result = await getRecommend({
-          uuid: analysisUUID,
-        }).unwrap();
-
-        setRecommendation(result?.result);
-      } catch (error) {
-        console.error("Error fetching recommendation:", error);
-      } finally {
-        setRecommendationLoading(false);
-      }
-    };
-
-    if (analysisUUID) {
-      fetchRecommendation();
-    }
-  }, [analysisUUID, getRecommend]);
 
   return (
     <div className="p-10">
@@ -108,7 +79,7 @@ const Page = ({ params }) => {
       </div>
 
       <div className="mt-10">
-        <p className="text-xl mb-7 text-text-color capitalize  font-semibold dark:text-third-color">
+        <p className="text-xl text-primary-color capitalize  font-semibold dark:text-third-color">
           {analysisDetail?.model_name.replace(/_/g, " ")}
         </p>
 
@@ -130,15 +101,8 @@ const Page = ({ params }) => {
             headers={headers?.header_numeric}
           />
         ) : null}
-        {recommendationLoading ? (
-          <div className="flex mt-5 justify-center items-center">
-            <Spinner size={"md"} />
-          </div>
-        ) : (
-          <>
-            <RecommendCard recommendResult={recommendation} />
-          </>
-        )}
+
+        <RecommendCard recommendResult={analysisDetail?.recommneded} />
       </div>
     </div>
   );

@@ -38,6 +38,7 @@ export default function selectVisulize () {
             <Select
                 size={'large'}
                 mode="multiple"
+                aria-label={"Select"}
                 allowClear
                 style={{
                     width: '100%',

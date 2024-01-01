@@ -4,7 +4,7 @@ import {Popover, PopoverTrigger, PopoverContent, Button} from "@nextui-org/react
 import {IoFilterSharp} from "react-icons/io5";
 import {dataType} from "@/app/board/mockData/mockData";
 import {useDispatch, useSelector} from "react-redux";
-import {setSampleFilename, setSampleFileType} from "@/store/features/sampleDataset/Dataset";
+import {setSampleFilename, setSampleFileType} from "@/store/features/sample/Dataset";
 
 export default function Filter() {
     const dispatch = useDispatch();

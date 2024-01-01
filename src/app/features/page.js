@@ -1,6 +1,12 @@
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
 import imageFeature from "@assets/images/k-quciksight-feature.png";
+export const metadata = {
+  title: "Features",
+  description: "Explore the powerful features and capabilities of K-QuickSight.",
+  keywords: ["Features", "Capabilities", "Data Analytics Features", "Data Analysis Tools"],
+};
+
 export default function Feature() {
   const feature = [
     {

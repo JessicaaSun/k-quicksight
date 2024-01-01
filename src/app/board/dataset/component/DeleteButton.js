@@ -36,10 +36,12 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
     id: user?.data.id,
     filename: "",
     type: "",
+    page: 1,
+    size: 1000,
   });
   const handleDeleteFile = async (uuid) => {
     await deleteFileById({ uuid: uuid, id: user?.data.id });
-    const updatedFiles = allFiles.filter((file) => file.uuid !== uuid);
+    const updatedFiles = allFiles.results.filter((file) => file.uuid !== uuid);
     dispatch(setFiles(updatedFiles));
     toast.success("deleted success!");
     refetchAllFiles();
@@ -90,7 +92,7 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalBody className={'dark:bg-white'}>
+              <ModalBody className={"dark:bg-white"}>
                 <p className={"text-center text-text-color font-normal mt-10"}>
                   Are you sure to delete{" "}
                   <span className={"text-lg font-semibold text-red-500"}>
@@ -107,17 +109,23 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
                   </TableHeader>
                   <TableBody>
                     <TableRow key="1">
-                      <TableCell className={'dark:text-white'}>{filename}</TableCell>
-                      <TableCell className={'dark:text-white'}>{type}</TableCell>
-                      <TableCell className={'dark:text-white'}>
+                      <TableCell className={"dark:text-white"}>
+                        {filename}
+                      </TableCell>
+                      <TableCell className={"dark:text-white"}>
+                        {type}
+                      </TableCell>
+                      <TableCell className={"dark:text-white"}>
                         {getTrimIntoColumnOnlyDate(createAt)}
                       </TableCell>
-                      <TableCell className={'dark:text-white'}>{formatBytes(size)}</TableCell>
+                      <TableCell className={"dark:text-white"}>
+                        {formatBytes(size)}
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
               </ModalBody>
-              <ModalFooter className={'bg-white'}>
+              <ModalFooter className={"bg-white"}>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cancel
                 </Button>

@@ -1,6 +1,13 @@
 import React from "react";
 import AccordionFaqs from "@/app/faqs/AccordionFaqs";
 
+export const metadata = {
+  title: "FAQ",
+  description: "Find answers to frequently asked questions about K-QuickSight. Get help with common queries.",
+  keywords: ["FAQ", "Frequently Asked Questions", "Help Center", "Support"],
+};
+
+
 const FaqsPage = () => {
   return (
     <div>

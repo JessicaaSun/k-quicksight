@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSampleFilename } from "@/store/features/sampleDataset/Dataset";
+import { setSampleFilename } from "@/store/features/sample/Dataset";
 import FileType from "@/app/board/dataset/component/DropDown";
 import { MdOutlineAutoGraph } from "react-icons/md";
 import TableData from "@/lib/table/Table";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import SearchFieldKQS from "@/components/buttons/SearchField";
-import { useGetAllSampleDataQuery } from "@/store/features/sampleDataset/datasetSampleApiSlice";
+import { useGetAllSampleDataQuery } from "@/store/features/sample/datasetSampleApiSlice";
 import Loading from "@/app/loading";
 
 const AnalysisSample = () => {
@@ -31,7 +31,7 @@ const AnalysisSample = () => {
       <div className={"grid gap-5 w-full"}>
         <SearchFieldKQS
           onChange={(e) => setFilename(e.target.value)}
-          placeholder={"Search dataset..."}
+          placeholder={"Search analysis..."}
           value={filename}
           width="100%"
           height="45px"

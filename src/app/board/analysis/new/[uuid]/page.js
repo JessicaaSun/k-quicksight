@@ -1,8 +1,5 @@
 import React from "react";
-import UploadNewData from "@/app/board/analysis/components/modals/UploadNewData";
 import FileDetail from "@/app/board/dataset/component/FileDetail";
-import HorizontalLinearAlternativeLabelStepper from "../../components/NewVersion/Stepper";
-import { Button } from "@nextui-org/react";
 import PerformAnalysisButton from "../../components/NewVersion/PerformAnalysis";
 
 const NewAnalysis = ({ params }) => {

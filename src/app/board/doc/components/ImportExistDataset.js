@@ -89,7 +89,7 @@ const ImportExistDataset = () => {
           </label>
         </div>
       </div>
-      <TableExistingData data={allExistingFile} />
+      <TableExistingData data={allExistingFile?.results} />
     </div>
   );
 };

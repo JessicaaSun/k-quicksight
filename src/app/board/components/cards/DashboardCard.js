@@ -24,7 +24,7 @@ const DashboardCard = ({ item, index, isAnalysis, routeTo }) => {
   return (
     <div
       className={
-        "flex flex-col hover:scale-105 justify-between bg-white rounded-xl shadow-sm transition-all"
+        "flex flex-col hover:scale-105 justify-between border-1 border-gray-200 bg-white rounded-xl shadow-sm transition-all"
       }
     >
       <Image

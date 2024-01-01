@@ -4,10 +4,10 @@ import "swiper/css/bundle";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "../../../app/globals.css";
-import {Autoplay, EffectCards, Navigation} from "swiper/modules";
+import { Autoplay, EffectCards, Navigation } from "swiper/modules";
 import styles from "./DeckCard.module.css";
 import { data } from "./mockdata";
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 
 export default function DeckCard() {
   // const swiperRef = useRef();
@@ -31,15 +31,14 @@ export default function DeckCard() {
       // modules={[EffectCards,Navigation,Autoplay]}
       modules={[EffectCards]}
       grabCursor={true}
-      className="md:w-[600px] max-sm:w-[290px] sm:w-[400px] h-auto" 
+      className="md:w-[600px] max-sm:w-[290px] sm:w-[400px] h-auto"
       effect="cards"
       // onSlideChange={(swiper) => {
       //   setActive(swiper.activeIndex)
       // }}
-
     >
       {data.map((feedback, index) => (
-        <SwiperSlide key={index} className={styles.swiperSlide} >
+        <SwiperSlide key={index} className={styles.swiperSlide}>
           <div className="p-10 md:h-[260px] sm:h-auto max-sm:h-auto max-sm:p-6 sm:p-6 justify-center flex flex-col gap-10">
             <p className="md:text-[20px] sm:text-[18px] max-sm:text-[18px] font-normal">
               {feedback.feedback}
@@ -51,7 +50,6 @@ export default function DeckCard() {
                   className="rounded-full w-[78px] h-[78px] object-cover"
                   alt="profile"
                   width={78}
-                  objectFit="cover"
                   height={78}
                 />
               </div>

@@ -23,18 +23,17 @@ import Correlation from "@/app/board/doc/components/analysisComponent/Correlatio
 import Descriptive_statistic from "@/app/board/doc/components/analysisComponent/Descriptive_statistic";
 import RecommendCard from "@/app/board/components/cards/RecommendCard";
 
-const Page = ({ params }) => {
-  let uuid = params.fileUuid;
-  let analysisUUID = params.analysisUuid;
+const AnalysisDetailKQS = ({ uuid }) => {
+  const { data: analysisDetail } = useAnalysisDetailsQuery({
+    analysisUUID: uuid,
+  });
+
   const { data: fileDetail, isLoading: detailLoading } = useGetFileDetailQuery({
-    uuid: uuid,
+    uuid: analysisDetail?.file.uuid,
     size: 100,
     page: 1,
   });
 
-  const { data: analysisDetail } = useAnalysisDetailsQuery({
-    analysisUUID: analysisUUID,
-  });
   const { data: headers } = useFindHeaderQuery({
     filename: analysisDetail?.file?.filename,
   });
@@ -62,7 +61,7 @@ const Page = ({ params }) => {
               <FileDetail
                 showHeader={true}
                 dataFile={fileDetail?.results}
-                uuid={uuid}
+                uuid={analysisDetail?.file.uuid}
                 headers={fileDetail?.headers}
                 isLoading={detailLoading}
                 size={30}
@@ -108,4 +107,4 @@ const Page = ({ params }) => {
   );
 };
 
-export default Page;
+export default AnalysisDetailKQS;

@@ -1,35 +1,33 @@
-"use client";
-import { useSidebar } from "@/context/BoardSideBarContext";
-import KQSEditor from "@/lib/editor/Editor";
-import { useGetDashboardDetailByUuidQuery } from "@/store/features/dashboard/dashboardApiSlice";
-import React, { useEffect } from "react";
+import DashboardDetailKQS from "./DashboardDetail";
+
+export async function generateMetadata({ params }) {
+  let uuid = params?.uuid;
+  
+  const dashboard = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}dashboards/detail_by_uuid/${uuid}/`
+  ).then((res) => res.json());
+
+  return {
+    title: dashboard?.title,
+    description:
+      "View and create data dashboard projects on K-QuickSight. Uncover insights from your data.",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_URL}files/${dashboard?.thumbnail}/`,
+    openGraph: {
+      images: `${process.env.NEXT_PUBLIC_BASE_URL}files/${dashboard?.thumbnail}/`,
+      title: dashboard?.title,
+      description:
+        "View and create data dashboard projects on K-QuickSight. Uncover insights from your data.",
+      siteName: "K-QuickSight",
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
 
 const Page = ({ params }) => {
-  const { uuid } = params;
-  const { data: dashboardDetail, isLoading: isDashboardLoading } =
-    useGetDashboardDetailByUuidQuery({
-      uuid: uuid,
-    });
-  useEffect(() => {
-    const unloadCallback = (event) => {
-      event.preventDefault();
-      const message = "Make sure to save your dashboard before leaving or you will lose the changes.";
-      event.returnValue = message; // Standard
-      return message;
-    };
+  let uuid = params.uuid;
 
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, []);
-  const { isSidebarHidden } = useSidebar();
-  return (
-    <div>
-      <KQSEditor
-        dashboardData={dashboardDetail}
-        isSidebarHidden={isSidebarHidden}
-      />
-    </div>
-  );
+  return <DashboardDetailKQS uuid={uuid} />;
 };
 
 export default Page;

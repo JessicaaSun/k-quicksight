@@ -21,11 +21,12 @@ import {
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useDispatch } from "react-redux";
 import { setFiles } from "@/store/features/files/fileSlice";
-import { headers } from "@/app/board/dataset/page";
+
 import { getTrimIntoColumnOnlyDate } from "@/utils/getTrimDateTIme";
 import { formatBytes } from "@/utils/convertByte";
 import { FaTrash } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { headers } from "../DatasetKQS";
 
 export default function DeleteButton({ uuid, filename, type, createAt, size }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

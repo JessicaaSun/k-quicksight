@@ -101,10 +101,10 @@ export default function AboutUs() {
         />
         <h1
           className={
-            "text-primary-color dark:text-third-color md:text-4xl max-sm:text-3xl sm:text-3xl capitalize"
+            "text-primary-color dark:text-third-color md:text-4xl max-sm:text-3xl sm:text-3xl"
           }
         >
-          about k-quicksight
+          About K-QuickSight
         </h1>
       </div>
       <div className={"flex justify-center items-center"} data-aos="fade-down">

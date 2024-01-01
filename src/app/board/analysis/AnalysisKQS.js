@@ -113,7 +113,7 @@ const AnalysisKQS = () => {
                           item={item}
                           isAnalysis={true}
                           index={index}
-                          routeTo={`/board/analysis/${item.file.uuid}/${item.uuid}`}
+                          routeTo={`/board/analysis/${item.uuid}`}
                         />
                       );
                     })}
@@ -124,7 +124,7 @@ const AnalysisKQS = () => {
                       <DashboardList
                         key={item.uuid}
                         isAnalysis={true}
-                        routeTo={`/board/analysis/${item.file.uuid}/${item.uuid}`}
+                        routeTo={`/board/analysis/${item.uuid}`}
                         item={item}
                         index={index}
                       />

@@ -39,7 +39,7 @@ const TermOfService = () => {
         </h5>
         <p className={"text-description-color dark:text-white pt-3"}>
           Welcome to K-QuickSight, a cutting-edge online service provided free
-          of charge at k-quicksight.com. Our platform empowers users to unleash
+          of charge at k-quicksight.istad.co Our platform empowers users to unleash
           the power of data visualization and analysis through versatile
           charts/graphs and machine learning models. K-QuickSight is committed
           to providing an exceptional experience without any associated costs.

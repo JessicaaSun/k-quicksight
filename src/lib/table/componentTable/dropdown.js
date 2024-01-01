@@ -149,7 +149,7 @@ const Dropdown_table = ({
           }}
           placement="bottomLeft"
         >
-          <Button className={"border-0 hover:text-white dark:text-white"}>
+          <Button className={"border-0 cursor-pointer hover:text-purple-700  text-secondary-color"}>
             <i>
               <FaEllipsis />
             </i>

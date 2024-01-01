@@ -71,7 +71,7 @@ const SampleKQS = () => {
         </div>
         <Image
           data-aos="zoom-in-down"
-          className={"bg-transparent"}
+          className={"bg-transparent w-auto h-auto"}
           src={sampleImage}
           unoptimized={true}
           alt={"sample Image"}

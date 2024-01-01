@@ -108,7 +108,7 @@ export default function NavbarKQuick() {
             <NavbarContent>
               <NavbarMenuToggle
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                className="sm:hidden text-white"
+                className="md:hidden text-white"
               />
               <NavbarBrand>
                 <Link

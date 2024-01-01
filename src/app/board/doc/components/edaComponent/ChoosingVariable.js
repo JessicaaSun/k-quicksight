@@ -36,7 +36,7 @@ const ChoosingVariable = () => {
     <div className={"mt-5"}>
       <div className={"mb-5"}>
         <p className={"text-primary-color font-semibold text-lg"}>
-          Choose the dependent and independent variables for comparing when
+          Choose x-axis and y-axis for comparing when
           conducting exploratory data analysis (EDA).
         </p>
       </div>
@@ -44,7 +44,7 @@ const ChoosingVariable = () => {
         <Select
           aria-label={"Select"}
           size={"large"}
-          placeholder={"Input your dependent variable"}
+          placeholder={"Select x-axis"}
           style={{
             width: "50%",
           }}
@@ -53,7 +53,7 @@ const ChoosingVariable = () => {
         />
         <Select
           size={"large"}
-          placeholder={"Input your Independent variable"}
+          placeholder={"Select y-axis"}
           style={{
             width: "50%",
           }}

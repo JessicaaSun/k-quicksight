@@ -1,4 +1,3 @@
-import React from "react";
 import DatasetKQS from "./DatasetKQS";
 
 export const metadata = {

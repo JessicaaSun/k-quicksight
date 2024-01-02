@@ -5,7 +5,7 @@ import UploadData from "@assets/images/analysis/add-task.png";
 import {Button, useDisclosure} from "@nextui-org/react";
 import {useGetUserQuery} from "@/store/features/user/userApiSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {useFileImportMutation} from "@/store/features/clean/importFile";
+import { useFileImportMutation } from "@/store/features/files/allFileByuserId";
 import {useRouter} from "next/navigation";
 import {useGetAllFilesQuery} from "@/store/features/files/allFileByuserId";
 import {setCurrentUser} from "@/store/features/auth/authSlice";

@@ -17,7 +17,7 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 credentials: 'include',
             }),
             keepUnusedDataFor: 5,
-            providesTags: ["files"],
+            invalidatesTags: ["files"],
         }),
         getFileDetail: builder.query({
             query: ({uuid, size, page}) => ({
@@ -32,7 +32,8 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 url: `files/files-detail-dataset/${uuid}/`,
                 method: 'PUT',
                 body: data,
-            })
+            }),
+            invalidatesTags: ["files"],
         }),
         getFileOverview: builder.query({
             query: ({uuid, userId}) => ({
@@ -47,7 +48,19 @@ export const allFileByUserid = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ["files"]
-        })
+        }),
+        fileImport: builder.mutation({
+            query: ({file, userId}) => ({
+                url: `files/file-upload/${userId}/`,
+                method: "POST",
+                body: file,
+                prepareHeaders: (headers) => {
+                    headers.set('Content-Type', `multipart/form-data; boundary=${generateBoundary()}`);
+                    return headers;
+                },
+            }),
+            invalidatesTags: ["files"]
+        }),
     }),
 });
 
@@ -57,7 +70,11 @@ export const {
     useGetFileDetailQuery,
     useUpdateFileNameMutation,
     useGetFileOverviewQuery,
-    useScrapDataMutation
+    useScrapDataMutation,
+    useFileImportMutation
 } = allFileByUserid;
 
-export default allFileByUserid;
+function generateBoundary() {
+    return `----WebKitFormBoundary${Math.random().toString(16).substr(2)}`;
+}
+

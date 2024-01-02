@@ -56,14 +56,15 @@ export default function EditDataset({ title_dataset, uuid }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Edit dataset information
+              <ModalHeader className="flex dark:text-white flex-col gap-1">
+                Edit Dataset Information
               </ModalHeader>
               <ModalBody>
                 <Input
                   labelPlacement="outside"
                   type="text"
                   variant="bordered"
+                  className="dark:text-white"
                   label="Dataset title"
                   onValueChange={setTitle}
                   value={title}

@@ -41,7 +41,9 @@ export default function DeleteButton({ uuid, filename, type, createAt, size }) {
     size: 1000,
   });
   const handleDeleteFile = async (uuid) => {
-    await deleteFileById({ uuid: uuid, id: user?.data.id });
+    const respone = await deleteFileById({ uuid: uuid, id: user?.data.id });
+    console.log(respone);
+
     const updatedFiles = allFiles.results.filter((file) => file.uuid !== uuid);
     dispatch(setFiles(updatedFiles));
     toast.success("deleted success!");

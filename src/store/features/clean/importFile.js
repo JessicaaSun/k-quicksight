@@ -12,7 +12,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                     return headers;
                 },
             }),
-            invalidatesTags: ["User"]
+            invalidatesTags: ["file"]
         }),
     }),
 });

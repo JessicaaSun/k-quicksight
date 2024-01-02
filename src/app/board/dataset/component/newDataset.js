@@ -4,7 +4,8 @@ import { Button, useDisclosure } from "@nextui-org/react";
 import { useGetUserQuery } from "@/store/features/user/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "@/store/features/auth/authSlice";
-import { useFileImportMutation } from "@/store/features/clean/importFile";
+// import { useFileImportMutation } from "@/store/features/clean/importFile";
+import { useFileImportMutation } from "@/store/features/files/allFileByuserId";
 import { useRouter } from "next/navigation";
 import { useGetAllFilesQuery } from "@/store/features/files/allFileByuserId";
 
@@ -32,6 +33,7 @@ export default function NewDataset({ isFull }) {
       file: formData,
       userId: user?.data.id,
     });
+    console.log(response);
 
     refetchAllFiles();
   };
